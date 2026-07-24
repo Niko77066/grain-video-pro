@@ -1,0 +1,8 @@
+{
+  "model": "gpt-image-2",
+  "prompt": "Create a finished editorial paper-collage still for a 9:16 image-to-video B-roll clip. Visual proposition: many scattered small fragments of personal information (chat bubbles, torn form scraps, a fragment of an ID portrait, receipt slivers) being drawn by fine converging threads toward the center and assembling into the clean silhouette of a single human head and shoulders — a system reconstructing one identifiable person out of leaked fragments. Scene: perfectly flat deep-violet paper field (#3B2A57) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs of scattered chat-bubble and form-scrap fragments, a torn portrait piece, fine guiding threads, and a converging human head-and-shoulders silhouette, with selective cream-white and brick-red (#C8451B) colored cardstock accents. Composition: vertical 9:16 locked poster frame; central subject within the middle 70 percent; generous clean color-field negative space; 3 to 6 large separable paper groups suitable for later assemble-from-empty animation. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: the relationship must read instantly — scattered fragments snapping together into one recognizable person. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter.",
+  "quality": "medium",
+  "output_format": "png",
+  "size": "720x1280",
+  "n": 1
+}

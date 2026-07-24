@@ -1,0 +1,8 @@
+{
+  "model": "gpt-image-2",
+  "prompt": "Create a finished editorial paper-collage still for a 9:16 image-to-video B-roll clip. Visual proposition: a tall wall of open server-cabinet filing drawers with chat speech-bubble papers being filed and slotted into the drawers — plaintext conversations archived and kept inside servers. Scene: perfectly flat teal paper field (#1E6B61) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs of a tall server / filing cabinet with several open drawers and multiple speech-bubble document papers sliding into them, with selective cream-white and brick-red colored cardstock accents. Composition: vertical 9:16 locked poster frame; central subject within the middle 70 percent; generous clean color-field negative space; 3 to 6 large separable paper groups suitable for later assemble-from-empty animation. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: the relationship must read instantly — your conversations are being filed away and stored inside the server drawers. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter.",
+  "quality": "medium",
+  "output_format": "png",
+  "size": "720x1280",
+  "n": 1
+}

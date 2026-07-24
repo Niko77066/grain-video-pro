@@ -1,0 +1,1159 @@
+{
+  "meta": {
+    "title": "雅诗兰黛为什么把\"夜晚\"变成了一门生意？",
+    "format": "faceless_explainer",
+    "style_pack": "night-luxe",
+    "commitment": {
+      "type": "motion_led_brand_explainer",
+      "duration_s": 60,
+      "tolerance_pct": 5
+    },
+    "aspect": "16:9",
+    "budget": {
+      "cap_usd": null,
+      "spent_usd": 0
+    },
+    "pipeline_version": "m0-v1",
+    "status": "scored_delivered"
+  },
+  "audio": {
+    "voiceover": {
+      "file": "audio/voiceover.mp3",
+      "gen": {
+        "model": "seed-audio-1.0",
+        "engine": "volcengine openspeech /api/v3/tts/create",
+        "voice_profile": "一位中文男性旁白配音（低沉醇厚，深夜纪录片解说腔，冷静克制、不煽情，语速中慢，句尾平稳不上扬）",
+        "params": {
+          "format": "mp3",
+          "sample_rate": 48000,
+          "pitch_rate": 0,
+          "speech_rate": 0,
+          "loudness_rate": 0,
+          "enable_subtitle": true
+        },
+        "duration_reported_s": 59,
+        "duration_probe_s": 59.04,
+        "codec": "mp3/48kHz/stereo/128kbps",
+        "generated_once_whole": true
+      }
+    },
+    "music": {
+      "file": "audio/bgm.mp3",
+      "role": "bed",
+      "gen": {
+        "model": "seed-audio-1.0",
+        "prompt": "约60秒纯器乐深夜爵士氛围垫乐，钢琴+贝斯为主，轻萨克斯与黑胶底噪，克制优雅平稳无高潮，无人声",
+        "duration_probe_s": 60.024,
+        "mean_volume_db": -23.2,
+        "max_volume_db": -6.5
+      },
+      "mix": "旁白在场时闪避至 -24dB（风格包覆写默认 -12dB）；攻击/释放 0.3s/0.8s"
+    },
+    "timeline": {
+      "file": "audio/timeline.json",
+      "duration_s": 59.04,
+      "source": "seed-audio-1.0 逐字字幕（enable_subtitle）",
+      "sections": [
+        {
+          "id": "sec01",
+          "t": [
+            0.424,
+            3.835
+          ]
+        },
+        {
+          "id": "sec02",
+          "t": [
+            5.184,
+            8.435
+          ]
+        },
+        {
+          "id": "sec03",
+          "t": [
+            8.864,
+            15.475
+          ]
+        },
+        {
+          "id": "sec04",
+          "t": [
+            15.864,
+            23.915
+          ]
+        },
+        {
+          "id": "sec05",
+          "t": [
+            24.304,
+            31.475
+          ]
+        },
+        {
+          "id": "sec06",
+          "t": [
+            31.904,
+            39.995
+          ]
+        },
+        {
+          "id": "sec07",
+          "t": [
+            40.424,
+            45.595
+          ]
+        },
+        {
+          "id": "sec08",
+          "t": [
+            46.069,
+            58.795
+          ]
+        }
+      ]
+    }
+  },
+  "anchors": [
+    {
+      "id": "a_style_night",
+      "type": "style_frame",
+      "intent": "全片风格锚+LUT基准：暗场墨蓝夜色，单束暖顶光，琥珀玻璃反光，负空间充足",
+      "source": {
+        "provider": "gpt-image-2"
+      },
+      "status": "selected",
+      "file": "anchors/a_style_night_v1.png",
+      "cdn_url": null,
+      "gen": {
+        "model": "gpt-image-2",
+        "quality": "high",
+        "size": "1536x864",
+        "output_format": "png"
+      },
+      "note": "统一 LUT 基准帧；s07 货架剪影风格也由它定调",
+      "candidates": [
+        {
+          "file": "anchors/a_style_night_v1.png",
+          "req_id": "202607141347037095824028268d9d6Sfefkapd",
+          "note": "琥珀瓶+金盖立于深色石台,金丝绸,右侧大负空间——LUT基准+产品hero就位(EP荐)"
+        },
+        {
+          "file": "anchors/a_style_night_v2.png",
+          "req_id": "20260714134734327466308268d9d6ygm7dOR3",
+          "note": "华丽金镜梳妆台+烛光bokeh,更像场景不像纯风格帧"
+        }
+      ],
+      "selected": "v1"
+    },
+    {
+      "id": "a_product_real",
+      "type": "product_sheet",
+      "intent": "真实小棕瓶/官方产品图（琥珀玻璃瓶，滴管）——产品实证 + Seedance 一致性参考",
+      "source": {
+        "provider": "retrieval_user_supplied"
+      },
+      "status": "acquired",
+      "file": "assets/anr_real.png",
+      "cdn_url": "https://storage.neodrop.ai/kuleshov/estee-lauder-night/anr_ref.png",
+      "gen": null,
+      "rights": null,
+      "note": "真瓶:深琥珀方瓶/金白滴管ESTĒE LAUDER collar/完整ANR标签。用于s04a特写+s04b/s06b重烘参考。",
+      "provenance": {
+        "title": "Estée Lauder Advanced Night Repair 官方产品图(用户提供)",
+        "format": "AVIF→PNG",
+        "note": "用户提供真实产品图;抠背景隔离出瓶(anr_bottle_cut.png)→作s04a素材+Seedance参考(anr_ref.png)"
+      }
+    },
+    {
+      "id": "a_era_1982",
+      "type": "style_frame",
+      "intent": "1982 年代复原定调帧：百货公司美妆柜台/梳妆场景，胶片颗粒暖调,白天转夜的光线",
+      "source": {
+        "provider": "gpt-image-2"
+      },
+      "status": "selected",
+      "file": "anchors/a_era_1982_v1.png",
+      "cdn_url": null,
+      "gen": {
+        "model": "gpt-image-2",
+        "quality": "high",
+        "size": "1536x864",
+        "output_format": "png"
+      },
+      "note": "s03 Seedance 的一致性锚；AI 复原不复刻真实历史人物/商标",
+      "candidates": [
+        {
+          "file": "anchors/a_era_1982_v1.png",
+          "req_id": "202607141348047581951728268d9d6uFSO0SyR",
+          "note": "百货美妆柜台黄昏,窗外城市天际线金光转夜——直接兑现s03 day→night(EP荐);瓶身有柔焦伪文字(非真品牌)"
+        },
+        {
+          "file": "anchors/a_era_1982_v2.png",
+          "req_id": "202607141349061169732458268d9d6Z74GdVQv",
+          "note": "夜色私人梳妆台+灯泡镜,唯美但偏私密场景、已是深夜"
+        }
+      ],
+      "selected": "v1"
+    },
+    {
+      "id": "a_el_logo",
+      "type": "logo",
+      "intent": "雅诗兰黛官方字标(品牌识别用)",
+      "source": {
+        "provider": "wikimedia_commons"
+      },
+      "status": "acquired",
+      "file": "compose/assets/logo_el.svg",
+      "cdn_url": null,
+      "provenance": {
+        "title": "Estée Lauder Companies Logo.svg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Est%C3%A9e_Lauder_Companies_Logo.svg",
+        "license": "Public domain"
+      },
+      "note": "矢量SVG;字标为'ESTĒE LAUDER COMPANIES';合成时改色为cream/gold适配暗底;可选CSS裁掉COMPANIES留品牌字标"
+    }
+  ],
+  "shot_groups": [
+    {
+      "id": "g_1982",
+      "provider": "seedance",
+      "shots": [
+        "s03a_1982_day",
+        "s03_1982_daytonight(night)"
+      ],
+      "duration_planned_s": 7.0,
+      "seam_out": "B_hard_cut",
+      "note": "网关固定~5s产出→单клип无法覆盖7s,改2клип组",
+      "seam_internal": "day→night 匹配硬切(约各3.5s)"
+    },
+    {
+      "id": "g_hero",
+      "provider": "seedance",
+      "shots": [
+        "s04b_product_hero"
+      ],
+      "duration_planned_s": 4.3,
+      "seam_out": "B_hard_cut"
+    },
+    {
+      "id": "g_space",
+      "provider": "seedance",
+      "shots": [
+        "s06b_space_float"
+      ],
+      "duration_planned_s": 4.2,
+      "seam_out": "B_hard_cut"
+    },
+    {
+      "id": "g_shelf",
+      "provider": "seedance",
+      "shots": [
+        "s07_shelf_silhouette"
+      ],
+      "duration_planned_s": 5.65,
+      "seam_out": "C_transition",
+      "note": "章节边界(行业→财务)可走黑场渐入"
+    }
+  ],
+  "shots": [
+    {
+      "id": "s01_hook_film_number",
+      "t": [
+        0.0,
+        5.184
+      ],
+      "voice_ref": "sec01",
+      "intent": "钩子:真实小棕瓶在前+身后虚化一片同款瓶(暗示'卖得多'),缓推;金字'22瓶/分钟'——扣住'全世界每分钟卖22瓶'",
+      "framing": "产品群像宽景(前实后虚)",
+      "source": {
+        "provider": "seedance",
+        "kind": "product_hook"
+      },
+      "anchor_refs": [],
+      "overlay_refs": [
+        "ov_num_22",
+        "ov_tag_brand",
+        "ov_sub"
+      ],
+      "motion": "real",
+      "static_type": false,
+      "status": "sourced",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "task_id": "task_DFtZgaeWWcjNEiXKgZ1c48uJsK8nSLTh",
+        "reference_image": "anr_ref.png(真瓶)",
+        "duration_actual_s": 5.04,
+        "note": "v3:替换原DfD甩纱开场(用户嫌突兀、与'22瓶'不搭);真瓶群像扣销量主题"
+      },
+      "qc": {
+        "pass": true,
+        "sem": "真瓶前实后虚一片,标签清晰,产品一致,呼应销量钩子"
+      },
+      "note": "真实经典电影片段(用户提供)作情绪母题;数字与角标为 HyperFrames 叠层"
+    },
+    {
+      "id": "s02_thesis_card",
+      "t": [
+        5.184,
+        8.864
+      ],
+      "voice_ref": "sec02",
+      "intent": "立论反转:黑场衬线大字'它卖的是夜晚' + 全片唯一一次光斑扫过",
+      "framing": "全屏版式卡(黑场衬线)",
+      "source": {
+        "provider": "hyperframes",
+        "template": "thesis-serif-card"
+      },
+      "anchor_refs": [],
+      "overlay_refs": [
+        "ov_sub"
+      ],
+      "motion": "declarative",
+      "static_type": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s03_1982_daytonight",
+      "t": [
+        8.864,
+        15.864
+      ],
+      "voice_ref": "sec03",
+      "intent": "1982:百货美妆柜台白日缓缓暗入夜晚,喻'争夺白天/无人认领的夜'",
+      "framing": "中景缓移(年代场景)",
+      "source": {
+        "provider": "seedance",
+        "group": "g_1982"
+      },
+      "anchor_refs": [
+        "a_era_1982"
+      ],
+      "overlay_refs": [
+        "ov_sub"
+      ],
+      "motion": "real",
+      "static_type": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "task_id": "task_pFMdLqxTiAByqh2kQoweWwdtC6nVPZmB",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "duration_requested_s": 8,
+        "reference_image": "anchors/a_era_1982_v1.png (reference_image一致性参考)",
+        "generate_audio": false,
+        "status": "generated",
+        "night_half_file": "shots/s03_1982_daytonight.mp4",
+        "duration_actual_s": 5.041667,
+        "fps": 24,
+        "day_file": "shots/s03a_1982_day.mp4",
+        "night_file": "shots/s03_1982_daytonight.mp4",
+        "internal_cut_t": 12.704,
+        "task_id_day": "task_BKS3wCUpZQHALuiOFehNmDn9I9VPt7CB"
+      },
+      "qc": {
+        "pass": true,
+        "tech": "两клип各1920x1080/24fps/5.04s",
+        "sem": "s03a暖金日光柜台 + s03b黄昏入夜,均合a_era_1982;day→night匹配硬切@12.704s(对齐'白天'→'夜'句读)",
+        "dur": "组内 day3.84s+night3.16s=7.0s 覆盖足"
+      }
+    },
+    {
+      "id": "s04a_product_evidence",
+      "t": [
+        15.864,
+        20.0
+      ],
+      "voice_ref": "sec04",
+      "intent": "产品实证:真实小棕瓶官方图,极缓 Ken Burns 推近,'所谓史上第一支精华'",
+      "framing": "产品静帧缓推(Ken Burns)",
+      "source": {
+        "provider": "real_product_image",
+        "kind": "user_supplied_photo"
+      },
+      "anchor_refs": [
+        "a_product_real"
+      ],
+      "overlay_refs": [
+        "ov_sub",
+        "ov_1982_label"
+      ],
+      "motion": "declarative",
+      "static_type": true,
+      "status": "planned",
+      "gen": {
+        "source_file": "assets/s04a_photo.png(官方照裁16:9)",
+        "note": "v3:弃粗糙抠图,改用干净官方照裁切+CSS压暗(brightness0.6)融入夜色"
+      },
+      "qc": {
+        "pass": true,
+        "sem": "真实官方产品照,边缘干净无抠图瑕疵"
+      },
+      "note": "声明型 Ken Burns(4–6s,位移3–5%),不计运动占比;素材待用户提供"
+    },
+    {
+      "id": "s04b_product_hero",
+      "t": [
+        20.0,
+        24.304
+      ],
+      "voice_ref": "sec04",
+      "intent": "产品 hero:琥珀瓶自阴影中浮出,单束顶光,缓推,'皮肤修复在夜里达到高峰'",
+      "framing": "极特写/产品浮出",
+      "source": {
+        "provider": "seedance",
+        "group": "g_hero"
+      },
+      "anchor_refs": [
+        "a_product_real",
+        "a_style_night"
+      ],
+      "overlay_refs": [
+        "ov_sub"
+      ],
+      "motion": "real",
+      "static_type": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "task_id": "task_bU00JUxZXgoimSnCPLf4LGz1p5ExDjJE",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "duration_requested_s": 5,
+        "reference_image": "anr_ref.png(真实ANR瓶)",
+        "generate_audio": false,
+        "status": "generated",
+        "duration_actual_s": 5.041667,
+        "fps": 24,
+        "regenerated": "v2:真瓶参考,标签可读"
+      },
+      "qc": {
+        "pass": true,
+        "sem": "真实小棕瓶从阴影浮出,ESTĒE LAUDER+ANR标签清晰,产品一致",
+        "dur": "5.04≥4.30,media-start0.736落沉定尾帧"
+      },
+      "note": "产品镜头必挂锚点(a_product_real 作一致性参考);提示词示意不复刻 logo"
+    },
+    {
+      "id": "s05a_night_ritual",
+      "t": [
+        24.304,
+        28.0
+      ],
+      "voice_ref": "sec05",
+      "intent": "电影感夜间场景(睡前/夜的静),喻'夜晚每天都来'",
+      "framing": "中景(夜间生活流)",
+      "source": {
+        "provider": "stock_footage",
+        "kind": "public_domain_or_cc0"
+      },
+      "anchor_refs": [],
+      "overlay_refs": [
+        "ov_sub"
+      ],
+      "motion": "real",
+      "static_type": false,
+      "status": "sourced",
+      "gen": {
+        "source_file": "assets/s05a_dfd_moonbed.mp4",
+        "in_out_src": [
+          36,
+          42
+        ],
+        "provenance": {
+          "title": "Design for Dreaming (1956, MPO Productions / General Motors)",
+          "source_url": "https://archive.org/details/Designfo1956",
+          "license": "Public Domain",
+          "segment": "36–42s 蓝纱床榻+弯月 夜间就寝",
+          "note": "同上,SD 档案质感"
+        }
+      },
+      "qc": null
+    },
+    {
+      "id": "s05b_cycle_mg",
+      "t": [
+        28.0,
+        31.904
+      ],
+      "voice_ref": "sec05",
+      "intent": "复购机制图解:月相/夜循环动态图形 + '睡觉=护肤流程一环,复购写进昼夜节律'",
+      "framing": "动态图形(循环)",
+      "source": {
+        "provider": "hyperframes",
+        "template": "cycle-motion"
+      },
+      "anchor_refs": [],
+      "overlay_refs": [
+        "ov_sub"
+      ],
+      "motion": "declarative",
+      "static_type": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s06a_timeline_mg",
+      "t": [
+        31.904,
+        36.2
+      ],
+      "voice_ref": "sec06",
+      "intent": "品牌时间线卡:1982-1991-2009-2013-2020 金线节点依次点亮,'2009讲时钟基因'高亮",
+      "framing": "全屏时间线图形",
+      "source": {
+        "provider": "hyperframes",
+        "template": "brand-timeline"
+      },
+      "anchor_refs": [],
+      "overlay_refs": [
+        "ov_sub"
+      ],
+      "motion": "declarative",
+      "static_type": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s06b_space_float",
+      "t": [
+        36.2,
+        40.424
+      ],
+      "voice_ref": "sec06",
+      "intent": "AI 复原:琥珀瓶漂浮于空间站穹顶舷窗前,地球为背,缓慢旋转,'花12.8万送上国际空间站'",
+      "framing": "宽景(太空舷窗)",
+      "source": {
+        "provider": "seedance",
+        "group": "g_space"
+      },
+      "anchor_refs": [
+        "a_product_real"
+      ],
+      "overlay_refs": [
+        "ov_sub",
+        "ov_tag_brand"
+      ],
+      "motion": "real",
+      "static_type": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "task_id": "task_6F4VIQ0OjEyDjW1eYtOW9qjvIcnNDCai",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "duration_requested_s": 5,
+        "reference_image": "anr_ref.png(真实ANR瓶)",
+        "generate_audio": false,
+        "status": "generated",
+        "duration_actual_s": 5.041667,
+        "fps": 24,
+        "regenerated": "v2:真瓶参考"
+      },
+      "qc": {
+        "pass": true,
+        "sem": "真瓶漂浮舷窗前+地球星野,标签朝向镜头,产品一致",
+        "dur": "5.04≥4.22,media-start0.816落尾帧"
+      }
+    },
+    {
+      "id": "s07_shelf_silhouette",
+      "t": [
+        40.424,
+        45.464
+      ],
+      "voice_ref": "sec07",
+      "intent": "暗场货架:镜头缓移掠过一排剪影瓶,逐一被光点亮(2009/2010年份浮现),'夜晚成了整个行业的货架'",
+      "framing": "横移掠过(货架)",
+      "source": {
+        "provider": "seedance",
+        "group": "g_shelf"
+      },
+      "anchor_refs": [
+        "a_style_night"
+      ],
+      "overlay_refs": [
+        "ov_sub",
+        "ov_year_2009_2010"
+      ],
+      "motion": "real",
+      "static_type": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "task_id": "task_3rI6KCBBNUZjyJ3WkHdwC0Um1gDCT0h5",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "duration_requested_s": 6,
+        "reference_image": "无(文生,通用剪影)",
+        "generate_audio": false,
+        "status": "generated",
+        "duration_actual_s": 5.041667,
+        "fps": 24
+      },
+      "qc": {
+        "pass": true,
+        "tech": "1920x1080/24fps/5.04s",
+        "sem": "横移掠过剪影瓶逐一rim-light点亮，深蓝+金边合LUT；兑现'行业货架'",
+        "dur": "5.04<需5.65；已重定时序:s08a提前0.6s吸收"
+      },
+      "note": "通用剪影(非具体竞品),不出 logo;锚点走风格帧不走产品"
+    },
+    {
+      "id": "s08a_bignum_revenue",
+      "t": [
+        45.464,
+        51.384
+      ],
+      "voice_ref": "sec08",
+      "intent": "大数字卡:$6.96B 金色 count-up + 口径注文'护肤净销售额·占营收48.6%',角标 SEC",
+      "framing": "全屏大数字卡",
+      "source": {
+        "provider": "hyperframes",
+        "template": "big-number-card"
+      },
+      "anchor_refs": [],
+      "overlay_refs": [
+        "ov_sub",
+        "ov_tag_sec"
+      ],
+      "motion": "declarative",
+      "static_type": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s08b_close_dawn",
+      "t": [
+        51.384,
+        59.04
+      ],
+      "voice_ref": "sec08",
+      "intent": "收束反转:电影感夜空/破晓(天空调暖),衬线字'夜晚本来就属于你的皮肤'渐显后隐入黑场;时效戳角标",
+      "framing": "电影感宽景(夜空/破晓)",
+      "source": {
+        "provider": "stock_footage",
+        "kind": "public_domain_or_cc0"
+      },
+      "anchor_refs": [],
+      "overlay_refs": [
+        "ov_close_line",
+        "ov_tag_asof",
+        "ov_sub"
+      ],
+      "motion": "real",
+      "static_type": false,
+      "status": "sourced",
+      "gen": {
+        "source_file": "assets/s08b_sky.mp4",
+        "in_out_src": [
+          0,
+          8
+        ],
+        "provenance": {
+          "title": "Video Of Sky With Clouds (by Pixabay via Pexels)",
+          "source_url": "https://www.pexels.com/video/video-of-sky-with-clouds-855785/",
+          "license": "Pexels/CC0 (free commercial, no attribution required)",
+          "segment": "截 8s",
+          "note": "1920x1080 landscape;compose 调暖成破晓色;从复古闺房推开到天空的收束对比"
+        }
+      },
+      "qc": null,
+      "note": "'本来免费/夜晚属于你'的诗意收束;真实片段(用户提供)+ 收尾衬线叠字"
+    }
+  ],
+  "overlays": [
+    {
+      "id": "ov_sub",
+      "type": "subtitle_track",
+      "provider": "hyperframes",
+      "scope": "all_shots",
+      "spec": "全片字幕层,米白无衬线,底部安全区,逐句跟 timeline;数字/关键词金色"
+    },
+    {
+      "id": "ov_num_22",
+      "type": "big_number",
+      "provider": "hyperframes",
+      "shot_ref": "s01_hook_film_number",
+      "spec": "'22'金色等宽 count-up + '瓶/分钟'注文;power2.out 禁弹跳"
+    },
+    {
+      "id": "ov_tag_brand",
+      "type": "source_tag",
+      "shot_refs": [
+        "s01_hook_film_number",
+        "s06b_space_float"
+      ],
+      "spec": "右下角标'品牌口径'(F05/F06 归因)"
+    },
+    {
+      "id": "ov_1982_label",
+      "type": "caption",
+      "shot_ref": "s04a_product_evidence",
+      "spec": "'1982 · Night Repair'衬线小字"
+    },
+    {
+      "id": "ov_year_2009_2010",
+      "type": "caption",
+      "shot_ref": "s07_shelf_silhouette",
+      "spec": "剪影旁浮现'2009''2010'年份小字(不含品牌名)"
+    },
+    {
+      "id": "ov_tag_sec",
+      "type": "source_tag",
+      "shot_ref": "s08a_bignum_revenue",
+      "spec": "右下角标'SEC 10-K FY2025'"
+    },
+    {
+      "id": "ov_close_line",
+      "type": "headline",
+      "shot_ref": "s08b_close_dawn",
+      "spec": "衬线大字'夜晚本来就属于你的皮肤',渐显0.8s后随画面隐入黑场"
+    },
+    {
+      "id": "ov_tag_asof",
+      "type": "source_tag",
+      "shot_ref": "s08b_close_dawn",
+      "spec": "片尾时效戳'资料截至 2026-07'"
+    },
+    {
+      "id": "ov_logo",
+      "type": "brand_logo",
+      "provider": "wikimedia_commons(PD)",
+      "shot_refs": [
+        "s08a_bignum_revenue",
+        "s08b_close_dawn"
+      ],
+      "spec": "EL字标(cream):财报卡用'ESTĒE LAUDER COMPANIES'全标(对应母公司财务),收尾卡用'ESTĒE LAUDER'品牌标(CSS裁掉COMPANIES)"
+    }
+  ],
+  "edit": {
+    "transitions": [
+      "hard_cut",
+      "fade_from_black_0.4s",
+      "light_sweep_once"
+    ],
+    "lut": "CSS 全片:midnight-blue multiply wash + radial tint + 暗角;DfD档案clip加 contrast/低brightness,s08b天空 dawn-grade暖调压暗",
+    "grain": "SVG feTurbulence 静态颗粒 opacity0.07 overlay(确定性,免网络)",
+    "loudness_lufs": -14,
+    "compose_engine": "HyperFrames v0.7.57;compose/index.html 单文件;30fps/1920x1080;check 0 error",
+    "audio_mix": "单条final_mix.mp3:旁白+BGM sidechain闪避,2-pass loudnorm -14.7 LUFS"
+  },
+  "ledger": {
+    "decisions": [
+      {
+        "id": "d001",
+        "date": "2026-07-14",
+        "stage": "brief",
+        "decision": "新建 night-luxe 风格包而非沿用 daily-brief",
+        "reason": "选题为品牌质感型商业解读，daily-brief（纸白纯版式、禁生成视频）与夜晚/奢华母题气质冲突；用户拍板新建。",
+        "alternatives": [
+          "daily-brief"
+        ]
+      },
+      {
+        "id": "d002",
+        "date": "2026-07-14",
+        "stage": "brief",
+        "decision": "预算不设上限，仅记账",
+        "reason": "用户选择质量优先；铁律 7 成本不进路由权重。",
+        "alternatives": [
+          "$10 熔断线"
+        ]
+      },
+      {
+        "id": "d003",
+        "date": "2026-07-14",
+        "stage": "script",
+        "decision": "品牌口径类事实（三个第一、22瓶/分钟）在旁白用'所谓'弱化 + 屏幕角标'品牌口径'双重归因",
+        "reason": "品味宪法'有出处的事实'：F01/F05 是营销口径且存在行业争议，不作客观陈述；归因放角标不放旁白以保节奏。",
+        "alternatives": [
+          "旁白内逐条口头归因（拖节奏）",
+          "直接陈述（违反品味宪法）"
+        ]
+      },
+      {
+        "id": "d004",
+        "date": "2026-07-14",
+        "stage": "script",
+        "decision": "用户指定四语言视觉调色板：经典电影氛围片段 + 产品实拍/官方图 + 创始年代 AI 复原 + 品牌时间线 MG",
+        "reason": "用户创作方向，符合铁律 7 来源平权、意图优先。据此扩写 night-luxe 声部表。",
+        "constraint_flag": "'经典电影片段'与'产品实拍/官方图'指向实拍/检索通道（路由表 ⛔ M3 未建）+ 真实影视/官方图有版权商标风险。禁止静默降级（Rule Zero #5），落地方式待用户在 storyboard 门前拍板：AI 生成致敬 / 用户提供授权素材 / 混合。",
+        "alternatives": [
+          "全 AI 生成致敬",
+          "用户提供授权素材",
+          "混合"
+        ]
+      },
+      {
+        "id": "d005",
+        "date": "2026-07-14",
+        "stage": "script",
+        "decision": "d004 落地：真实经典电影片段 + 真实产品/官方图（均用户提供，走实拍/检索通道，provenance 硬门）；创始年代 AI 复原走 Seedance；品牌时间线走 HyperFrames",
+        "reason": "用户明确选择真实素材。EP 已明示 M0 无授权检索通道、不代抓版权素材，真实文件由用户在 ⑥ 锚点阶段交付；M0 定位内部校准语料，公开发布需用户清权。",
+        "provenance_gate": "shots 引用真实素材前，对应 anchors 条目必须有 source + rights 声明，否则不许上屏（禁静默降级）。",
+        "alternatives": [
+          "全 AI 生成致敬（用户否）"
+        ]
+      },
+      {
+        "id": "d006",
+        "date": "2026-07-14",
+        "stage": "storyboard",
+        "decision": "12 镜四语言混排路由:film(3:钩子/夜间/破晓)+hyperframes(4:立论卡/循环图/时间线/大数字)+seedance(4:1982复原/产品hero/太空/货架)+image-motion(1:产品实证KenBurns)",
+        "reason": "逐镜按 intent 选源(铁律7):真运动母题给电影片段与Seedance,信息/数据给MG,产品实证给真实图KenBurns;运动占比63.9%兑现motion_led承诺。",
+        "alternatives": [
+          "产品全用Seedance生成(放弃真实产品实证)",
+          "开场用MG大数字卡(放弃电影氛围钩子)"
+        ]
+      },
+      {
+        "id": "d007",
+        "date": "2026-07-14",
+        "stage": "anchors",
+        "decision": "生成2锚点各2候选(gpt-image-2 high);提示词吸收用户给的黄金时代好莱坞glamour电影参考(蒂凡尼/龙凤配/罗马假日等)作情绪母题,IP安全(无logo/无真品牌/无可读文字/无真人)",
+        "reason": "用户要求先看AI锚点;版权电影只当审美参考不作素材(不可抓取)。",
+        "alternatives": []
+      },
+      {
+        "id": "d008",
+        "date": "2026-07-14",
+        "stage": "anchors",
+        "decision": "用户选定 a_style_night=v1、a_era_1982=v1;用户要求'抓 YouTube 版权电影'作真实片段——EP 拒绝执行",
+        "reason": "抓取 YouTube 版权电影=版权侵权 + 触我的下载红线 + 违反管线自定义的'实拍/检索 license 硬门';此约束不因用户明示而解除。",
+        "paths_offered": [
+          "Seedance 致敬生成(EP荐,可即刻执行)",
+          "用户自备有权使用的片段文件(EP记provenance挂入)"
+        ],
+        "status": "awaiting_user_decision_on_filmclip_slots"
+      },
+      {
+        "id": "d009",
+        "date": "2026-07-14",
+        "stage": "anchors/assets",
+        "decision": "3个电影片段位改用合法免版权实拍:Design for Dreaming(1956,公共领域,archive.org)供s01 glamour+s05a夜床;Pexels天空云(CC0)供s08b破晓;全部走正规可下载源,非YouTube",
+        "reason": "用户选'正经免版权源'路径;EP拒绝YouTube抓取;DfD为真·中世纪胶片契合glamour母题,archive.org/Pexels直链合法可商用。",
+        "provenance_gate_status": "satisfied — 每条记 source_url + license",
+        "texture_note": "DfD为640x480 SD,刻意作'档案质感'插入(风格包声部表:历史资料位);与HD素材靠统一LUT+共享颗粒缝合,不强行超分成塑料感"
+      },
+      {
+        "id": "d010",
+        "date": "2026-07-14",
+        "stage": "motion",
+        "decision": "s07货架剪影走文生(无锚点):通用非品牌剪影不需一致性锁定,避免style锚把单瓶克隆成一排;LUT一致性在compose靠a_style_night基准统一,非靠Seedance ref",
+        "reason": "seedance必挂锚点规则针对'可复现主体一致性';通用剪影无此需求,文生给构图自由。",
+        "alternatives": [
+          "挂a_style_night(风险:一排相同瓶)"
+        ]
+      },
+      {
+        "id": "d011",
+        "date": "2026-07-14",
+        "stage": "motion",
+        "decision": "实测:doubao-seedance-2-0-260128网关无视duration请求(8/5/5/6全产出5.04s/24fps)。s03改day+night两клип组补足7s;s07短0.6s靠s08a提前吸收;s04b/s06b尾裁",
+        "reason": "固定~5s是网关现状(与冒烟4→5.04一致);拉伸超±5%变速红线,故补клип/重定时序而非静默变速。",
+        "debt": "回填 references/seedance.md:标注该模型duration不可控、单клип≈5s上限,storyboard按≤5s/镜划组"
+      },
+      {
+        "id": "d012",
+        "date": "2026-07-14",
+        "stage": "review-fix",
+        "decision": "用户6分反馈修复:①产品一致性(生成假瓶=大忌)→需真实ANR图重烘s04a/s04b/s06b+加EL logo;②每5s硬切尾帧(media-start落沉定尾帧);③整体提亮(LUT/暗角调轻)",
+        "reason": "用户看片反馈;产品一致性是硬伤。logo取得PD版;真产品图合法自动源枯竭(Commons仅水印PR图),须用户提供。",
+        "status": "②③已改;①待用户产品图"
+      },
+      {
+        "id": "d013",
+        "date": "2026-07-14",
+        "stage": "review-fix-v2",
+        "decision": "v2修复落地:①真实ANR瓶(用户提供)抠图→s04a特写+作Seedance参考重烘s04b/s06b(标签可读,产品一致);EL PD字标落财报+收尾卡②s04b/s06b/s03a/s03b设media-start落沉定尾帧硬切③LUT/暗角/tint调轻提亮④音频2-pass到-14",
+        "reason": "用户6分反馈三条全修;真产品图由用户提供解决一致性大忌。"
+      },
+      {
+        "id": "d014",
+        "date": "2026-07-14",
+        "stage": "review-fix-v3",
+        "decision": "用户v2三条反馈修复:①收尾logo不全→去clip-path显示完整字标+径向暗衬底+描边提对比②16s抠图差→改用干净官方照裁切压暗(弃抠图)③开头突兀不搭→s01改真瓶群像Seedance(前实后虚,扣'每分钟卖22瓶'),弃DfD甩纱镜头",
+        "reason": "用户v2看片反馈;开场语义匹配+抠图质量+logo完整性。"
+      }
+    ],
+    "costs": [
+      {
+        "id": "c001",
+        "date": "2026-07-14",
+        "stage": "audio",
+        "item": "TTS 整片旁白（seed-audio-1.0）",
+        "billed_seconds": 59,
+        "cost_usd": null,
+        "note": "按 original_duration 秒计费；知识包未记单价 → 单价待回填（DEBT）。"
+      },
+      {
+        "id": "c002",
+        "date": "2026-07-14",
+        "stage": "audio",
+        "item": "BGM 垫乐（seed-audio-1.0，同接口白捡能力）",
+        "billed_seconds": 60,
+        "cost_usd": null,
+        "note": "单价同 c001 待回填。"
+      },
+      {
+        "id": "c003",
+        "date": "2026-07-14",
+        "stage": "anchors",
+        "item": "锚点候选 a_style_night_v1 (gpt-image-2 high 1536x864)",
+        "req_id": "202607141347037095824028268d9d6Sfefkapd",
+        "cost_usd": null,
+        "note": "单价待回填(DEBT)"
+      },
+      {
+        "id": "c004",
+        "date": "2026-07-14",
+        "stage": "anchors",
+        "item": "锚点候选 a_style_night_v2 (gpt-image-2 high 1536x864)",
+        "req_id": "20260714134734327466308268d9d6ygm7dOR3",
+        "cost_usd": null,
+        "note": "单价待回填(DEBT)"
+      },
+      {
+        "id": "c005",
+        "date": "2026-07-14",
+        "stage": "anchors",
+        "item": "锚点候选 a_era_1982_v1 (gpt-image-2 high 1536x864)",
+        "req_id": "202607141348047581951728268d9d6uFSO0SyR",
+        "cost_usd": null,
+        "note": "单价待回填(DEBT)"
+      },
+      {
+        "id": "c006",
+        "date": "2026-07-14",
+        "stage": "anchors",
+        "item": "锚点候选 a_era_1982_v2 (gpt-image-2 high 1536x864)",
+        "req_id": "202607141349061169732458268d9d6Z74GdVQv",
+        "cost_usd": null,
+        "note": "单价待回填(DEBT)"
+      },
+      {
+        "id": "c_s03_19",
+        "date": "2026-07-14",
+        "stage": "motion",
+        "item": "Seedance s03_1982_daytonight (8s/1080p)",
+        "task_id": "task_pFMdLqxTiAByqh2kQoweWwdtC6nVPZmB",
+        "cost_usd": null,
+        "note": "成本经 task_id 反查(满价约$2.7);待回填"
+      },
+      {
+        "id": "c_s04b_p",
+        "date": "2026-07-14",
+        "stage": "motion",
+        "item": "Seedance s04b_product_hero (5s/1080p)",
+        "task_id": "task_YTqhLTZfcN4dR6mVJjnN4GevbAtqgZSB",
+        "cost_usd": null,
+        "note": "成本经 task_id 反查(满价约$2.7);待回填"
+      },
+      {
+        "id": "c_s06b_s",
+        "date": "2026-07-14",
+        "stage": "motion",
+        "item": "Seedance s06b_space_float (5s/1080p)",
+        "task_id": "task_s2SaVZklNBiIBGgZMQbHZpmds1GXvua4",
+        "cost_usd": null,
+        "note": "成本经 task_id 反查(满价约$2.7);待回填"
+      },
+      {
+        "id": "c_s07_sh",
+        "date": "2026-07-14",
+        "stage": "motion",
+        "item": "Seedance s07_shelf_silhouette (6s/1080p)",
+        "task_id": "task_3rI6KCBBNUZjyJ3WkHdwC0Um1gDCT0h5",
+        "cost_usd": null,
+        "note": "成本经 task_id 反查(满价约$2.7);待回填"
+      },
+      {
+        "id": "c_s03a",
+        "date": "2026-07-14",
+        "stage": "motion",
+        "item": "Seedance s03a_1982_day (day半段,5s/1080p)",
+        "task_id": "task_BKS3wCUpZQHALuiOFehNmDn9I9VPt7CB",
+        "cost_usd": null,
+        "note": "补烘;待回填单价"
+      },
+      {
+        "id": "c_s04bR",
+        "date": "2026-07-14",
+        "stage": "motion/anchors",
+        "item": "Seedance s04b 重烘(真瓶参考)",
+        "task_id": "task_bU00JUxZXgoimSnCPLf4LGz1p5ExDjJE",
+        "cost_usd": null,
+        "note": "单价待回填(DEBT);Seedance满价约$2.7/条"
+      },
+      {
+        "id": "c_s06bR",
+        "date": "2026-07-14",
+        "stage": "motion/anchors",
+        "item": "Seedance s06b 重烘(真瓶参考)",
+        "task_id": "task_6F4VIQ0OjEyDjW1eYtOW9qjvIcnNDCai",
+        "cost_usd": null,
+        "note": "单价待回填(DEBT);Seedance满价约$2.7/条"
+      },
+      {
+        "id": "c_s01",
+        "date": "2026-07-14",
+        "stage": "motion/anchors",
+        "item": "Seedance s01 产品群像开场",
+        "task_id": "task_DFtZgaeWWcjNEiXKgZ1c48uJsK8nSLTh",
+        "cost_usd": null,
+        "note": "单价待回填(DEBT);Seedance满价约$2.7/条"
+      },
+      {
+        "id": "c_img",
+        "date": "2026-07-14",
+        "stage": "motion/anchors",
+        "item": "GPT-Image-2 锚点 x4(风格帧v1/v2+年代帧v1/v2)",
+        "task_id": "-",
+        "cost_usd": null,
+        "note": "单价待回填(DEBT);Seedance满价约$2.7/条"
+      }
+    ],
+    "gates": [
+      {
+        "id": "g1",
+        "date": "2026-07-14",
+        "stage": "audio",
+        "gate": "G1 音频门",
+        "checks": {
+          "duration_within_tolerance": {
+            "pass": true,
+            "detail": "59.04s ∈ 60s±5% (57–63s)"
+          },
+          "sections_no_overlap": {
+            "pass": true,
+            "detail": "8 节区间递增无重叠，间隙 0.39–1.35s 均为呼吸"
+          },
+          "audio_integrity": {
+            "pass": true,
+            "detail": "ffprobe: mp3/48kHz/stereo/128kbps，无损坏"
+          },
+          "retranscription_ge_95pct": {
+            "pass": true,
+            "detail": "已装 faster-whisper 独立回转写。small 模型原始 83.7%、数字写法归一后 93.9%；逐字核对残余 15 处编辑全部为 whisper 侧同音字/品牌名误听（雅诗兰黛→亚士兰代、护肤→户夫、棕→宗、妙→庙、架→价、他/她/它），TTS 侧零漏读/零插入/零误读。medium 模型复跑确认（见 result_medium）。人耳评委门（用户）已通过。"
+          },
+          "human_ear_gate": {
+            "pass": true,
+            "detail": "用户听毕明确'旁白通过'（M0 评委门）。"
+          }
+        },
+        "result": "pass",
+        "result_medium": "pass — medium 模型去数字后文字层 98.1%（原始89.0%）；残余仅'雅诗'被听成'亚士'(品牌名,×2)，护肤/妙/棕/架 medium 全对。TTS 侧确认零缺陷。",
+        "debt": [
+          "回填 TTS/BGM 单价（引擎未记单价）"
+        ]
+      },
+      {
+        "id": "g2",
+        "date": "2026-07-14",
+        "stage": "storyboard",
+        "gate": "分镜八项自查",
+        "checks": {
+          "1_无缝隙无重叠_首尾对齐": {
+            "pass": true,
+            "detail": "12镜连续,0→59.04=音频总长,零缝隙零重叠"
+          },
+          "2_每8-10s一次视觉变化": {
+            "pass": true,
+            "detail": "最长镜7.66s<8s;12.2 cuts/min(风格包目标10-14)"
+          },
+          "3_连续同景别≤2": {
+            "pass": true,
+            "detail": "连续同景别最大1"
+          },
+          "4_幻灯片风险": {
+            "pass": true,
+            "detail": "连续静态类最大2(=限);静态类占比36.1%,motion_led下运动主导"
+          },
+          "5_声部匹配": {
+            "pass": true,
+            "detail": "film=情绪母题/seedance=真运动与年代复原/hyperframes=信息数据轨/image-motion=产品实证,与night-luxe声部表一致"
+          },
+          "6_运动承诺可达性": {
+            "pass": true,
+            "detail": "真运动(film+seedance)63.9%时长、7/12镜,兑现motion_led_brand_explainer"
+          },
+          "7_Seedance组算术": {
+            "pass": true,
+            "detail": "4组各1镜,时长7.0/4.3/4.2/5.65s均≤15s≤5镜;Seedance覆盖21.17s,余由film/MG/image覆盖至59.04(全片跨源合计=承诺)"
+          },
+          "8_每镜一主动作+运镜": {
+            "pass": true,
+            "detail": "每镜有单一主动作+运镜词(缓移/缓推/旋转/横移掠过);无静态场景描述式"
+          }
+        },
+        "result": "pass",
+        "open_items": [
+          "s01/s05a/s08b 真实电影片段 + a_product_real 真实产品图 = 用户在⑥锚点阶段交付(provenance硬门)",
+          "锚点 a_style_night/a_era_1982 待⑥生成并给用户N选1"
+        ]
+      },
+      {
+        "id": "g3",
+        "date": "2026-07-14",
+        "stage": "motion",
+        "gate": "镜头级QC(Seedance)",
+        "result": "s04b/s06b/s07 pass;s03待s03a合组",
+        "detail": "4条画面全达标(产品锚点一致、意图兑现、无畸变);唯一问题=网关固定时长,已按d011处置"
+      },
+      {
+        "id": "g4",
+        "date": "2026-07-14",
+        "stage": "compose",
+        "gate": "hyperframes check",
+        "result": "pass(0 error)",
+        "detail": "修复11项:audio id、GSAP硬杀、transform冲突、同轨重叠、tag复用越界;余info(字幕溢出估计/1处对比度)已按压暗+描边处理"
+      },
+      {
+        "id": "g5",
+        "date": "2026-07-14",
+        "stage": "review",
+        "gate": "用户看片(⑨)",
+        "result": "6/10",
+        "detail": "优:TTS+HyperFrames表现好。问题:①无logo+产品不一致(生成假瓶)②5s衔接需硬切尾帧③太暗四角压重。①待产品图,②③已修。"
+      },
+      {
+        "id": "g6",
+        "date": "2026-07-14",
+        "stage": "deliver",
+        "gate": "L0终版核验(out/final.mp4)",
+        "result": "pass",
+        "detail": "docker帧级复现;59.07s/1080p30/h264+aac;-14.8 LUFS/TP-1.7dBTP;真产品标签清晰、logo正常、提亮到位、硬切尾帧生效。渲染14m55s。"
+      },
+      {
+        "id": "g7",
+        "date": "2026-07-14",
+        "stage": "deliver",
+        "gate": "L0终版核验v3+用户签字",
+        "result": "pass",
+        "detail": "docker帧级复现;59.07s/1080p30;-14.8LUFS/TP-1.7;三处v3修复(真瓶开场/官方照/完整logo)确认;用户ok签字。渲染37m(残留容器争资源)。"
+      },
+      {
+        "id": "g8",
+        "date": "2026-07-14",
+        "stage": "deliver",
+        "gate": "/video-score 打分登记",
+        "result": "均分4.29/5",
+        "detail": "追加 GS-10 进 golden set;7维写入基线打分新版列K13-Q13:D1意图5/D2准确5/D3开头4/D4节奏4/D5音画4/D6字幕4/D7完成4。雷达图 out/scorecard_radar.png;评分版 out/final_scored.mp4(正片+4s尾板)。"
+      }
+    ],
+    "cost_summary": {
+      "tts_s": 59,
+      "bgm_s": 60,
+      "gpt_image_count": 4,
+      "seedance_clips": 8,
+      "seedance_est_usd_at_full": 21.6,
+      "note": "各引擎单价未记入知识包→精确金额DEBT;Seedance按满价$2.7估≈$21.6。图片/音频单价另计。"
+    }
+  }
+}

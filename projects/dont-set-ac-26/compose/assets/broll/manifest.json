@@ -1,0 +1,131 @@
+{
+ "provider": "pexels",
+ "assets": [
+  {
+   "shot": "s03_sweat_room",
+   "file": "s03_sweat_room.mp4",
+   "source": "https://www.pexels.com/video/4804848/",
+   "id": 4804848,
+   "license": "pexels",
+   "section": "sec01",
+   "desc": "夏天闷热屋里、擦汗/不适的人",
+   "dur_s": 8
+  },
+  {
+   "shot": "s06_thermo_q",
+   "file": "s06_thermo_q.mp4",
+   "source": "https://www.pexels.com/video/8319435/",
+   "id": 8319435,
+   "license": "pexels",
+   "section": "sec02",
+   "desc": "空调遥控器/温度显示屏特写",
+   "dur_s": 22,
+   "query_used": "digital thermostat temperature display closeup"
+  },
+  {
+   "shot": "s07_climates",
+   "file": "s07_climates.mp4",
+   "source": "https://www.pexels.com/video/5131099/",
+   "id": 5131099,
+   "license": "pexels",
+   "section": "sec02",
+   "desc": "干热/暑气氛围空镜",
+   "dur_s": 54,
+   "query_used": "hot summer sun bright sky heat"
+  },
+  {
+   "shot": "s09_sweat_sci",
+   "file": "s09_sweat_sci.mp4",
+   "source": "https://www.pexels.com/video/855252/",
+   "id": 855252,
+   "license": "pexels",
+   "section": "sec02",
+   "desc": "皮肤汗珠微距(高湿蒸发不掉)",
+   "dur_s": 40
+  },
+  {
+   "shot": "s10_vulnerable",
+   "file": "s10_vulnerable.mp4",
+   "source": "https://www.pexels.com/video/6972525/",
+   "id": 6972525,
+   "license": "pexels",
+   "section": "sec02",
+   "desc": "居家老人(热脆弱人群)",
+   "dur_s": 10
+  },
+  {
+   "shot": "s12_ac_running",
+   "file": "s12_ac_running.mp4",
+   "source": "https://www.pexels.com/video/5000784/",
+   "id": 5000784,
+   "license": "pexels",
+   "section": "sec03",
+   "desc": "空调出风口运行/百叶",
+   "dur_s": 15,
+   "query_used": "living room interior sofa summer home",
+   "note": "家居室内氛围(空调语境靠旁白+MG角标+邻镜承载)"
+  },
+  {
+   "shot": "s17_public_bldg",
+   "file": "s17_public_bldg.mp4",
+   "source": "https://www.pexels.com/video/10352451/",
+   "id": 10352451,
+   "license": "pexels",
+   "section": "sec04",
+   "desc": "写字楼玻璃幕墙外景(公共建筑)",
+   "dur_s": 7
+  },
+  {
+   "shot": "s19_intro",
+   "file": "s19_intro.mp4",
+   "source": "https://www.pexels.com/video/5901477/",
+   "id": 5901477,
+   "license": "pexels",
+   "section": "sec05",
+   "desc": "伸手拿空调遥控器",
+   "dur_s": 11,
+   "query_used": "hand pointing remote control"
+  },
+  {
+   "shot": "s21_tip_wind",
+   "file": "s21_tip_wind.mp4",
+   "source": "https://www.pexels.com/video/16641477/",
+   "id": 16641477,
+   "license": "pexels",
+   "section": "sec05",
+   "desc": "室内送风/循环(风向tip)",
+   "dur_s": 27
+  },
+  {
+   "shot": "s24_cozy_home",
+   "file": "s24_cozy_home.mp4",
+   "source": "https://www.pexels.com/video/6248216/",
+   "id": 6248216,
+   "license": "pexels",
+   "section": "sec06",
+   "desc": "傍晚居家舒适客厅",
+   "dur_s": 10
+  },
+  {
+   "shot": "s17b_mall",
+   "file": "s17b_mall.mp4",
+   "source": "https://www.pexels.com/video/1338592/",
+   "id": 1338592,
+   "license": "pexels",
+   "section": "sec04",
+   "desc": "商场室内(公共建筑)",
+   "dur_s": 6
+  },
+  {
+   "shot": "s17c_thermostat",
+   "file": "s17c_thermostat.mp4",
+   "source": "https://www.pexels.com/video/7701962/",
+   "id": 7701962,
+   "license": "pexels",
+   "section": "sec04",
+   "desc": "办公楼温控/中央空调",
+   "dur_s": 21
+  }
+ ],
+ "gaps": []
+}

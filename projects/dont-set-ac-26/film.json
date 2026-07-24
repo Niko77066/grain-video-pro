@@ -1,0 +1,868 @@
+{
+  "meta": {
+    "title": "空调别开 26 度，原因不只是费电",
+    "format": "faceless_explainer",
+    "style_pack": "pixel-chronicle",
+    "commitment": {
+      "type": "hybrid",
+      "duration_s": 198.9,
+      "tolerance_pct": 10.0,
+      "note": "时长非硬锁（2026-07-16 去除时长锁）；~2.5–3min 规划值，最终以 audio.timeline 真实戳为准。pixel-chronicle 语速~300字/分。"
+    },
+    "aspect": "16:9",
+    "budget": {
+      "spent_usd": 0.0
+    },
+    "pipeline_version": "m0-v1",
+    "schema_version": "m1-v1",
+    "status": "delivered",
+    "next_action": "✅ v4(2026-07-20):BGM 终定=MiniMax music via fal is_instrumental:true(A马林巴拨奏,科普轻律动),换掉MusicGen-small。成片 out/final.mp4 198.9s/-14.25LUFS。DEBT:①像素风重做(用户暂缓,最大)②s06时码空镜③成本回填。⏸待用户看片→score→合main。",
+    "version": "v5"
+  },
+  "audio": {
+    "voiceover": {
+      "file": "audio/voiceover.wav",
+      "engine": "minimax speech-2.8-hd (new-api网关 single-pass)",
+      "voice": "audiobook_female_1",
+      "speed": 1.1,
+      "emotion": "neutral",
+      "format_master": "48k/stereo/wav (源32k mono)",
+      "duration_s": 185.64,
+      "n_chars_spoken": 846,
+      "note": "中文数字朗读（对齐/字幕用）；阿拉伯数字仅走大字卡/角标。AIGC水印:MiniMax。改一字须整条重生成并重跑对齐全链。"
+    },
+    "music": null,
+    "timeline": {
+      "file": "audio/timeline.json",
+      "duration_s": 185.64,
+      "n_chars": 846,
+      "method": "MiniMax speech-2.8-hd single-pass(audiobook_female_1,1.1,neutral) → wav2vec2-zh forced_align",
+      "sections": [
+        {
+          "id": "sec01",
+          "t": [
+            0.26,
+            21.14
+          ],
+          "n_chars": 101
+        },
+        {
+          "id": "sec02",
+          "t": [
+            21.86,
+            59.24
+          ],
+          "n_chars": 163
+        },
+        {
+          "id": "sec03",
+          "t": [
+            59.94,
+            84.72
+          ],
+          "n_chars": 105
+        },
+        {
+          "id": "sec04",
+          "t": [
+            85.62,
+            128.18
+          ],
+          "n_chars": 216
+        },
+        {
+          "id": "sec05",
+          "t": [
+            128.72,
+            175.0
+          ],
+          "n_chars": 211
+        },
+        {
+          "id": "sec06",
+          "t": [
+            175.9,
+            185.12
+          ],
+          "n_chars": 50
+        }
+      ],
+      "validated": true,
+      "note": "逐字 words[] 在 audio/timeline.json；section text_spoken/text_display 同文件。画面cue由内容词首字戳派生，compose禁手写秒数。"
+    }
+  },
+  "anchors": [
+    {
+      "id": "anc_s01_altar",
+      "type": "collage keyframe(首尾帧)",
+      "for_shot": "s01_altar",
+      "still": "anchors/s01_altar.png",
+      "first_frame": "anchors/s01_altar_first.png",
+      "last_frame": "anchors/s01_altar_last.png",
+      "cdn_first": "https://storage.neodrop.ai/kuleshov/dont-set-ac-26/s01_altar_first.png",
+      "cdn_last": "https://storage.neodrop.ai/kuleshov/dont-set-ac-26/s01_altar_last.png",
+      "gen": {
+        "model": "gpt-image-2",
+        "quality": "medium",
+        "size": "1280x720(产出1672x941,16:9)",
+        "output_format": "png",
+        "request_id": "202607201013237517897968268d9d6YqB6Nlrt",
+        "prompt_gist": "纸拼贴:遥控器按键被供上神坛+halftone朝拜手+光环,深紫场,品牌红点色,无文字数字"
+      }
+    },
+    {
+      "id": "anc_s14_smell",
+      "type": "collage keyframe(首尾帧)",
+      "for_shot": "s14_smell_spread",
+      "still": "anchors/s14_smell.png",
+      "first_frame": "anchors/s14_smell_first.png",
+      "last_frame": "anchors/s14_smell_last.png",
+      "cdn_first": "https://storage.neodrop.ai/kuleshov/dont-set-ac-26/s14_smell_first.png",
+      "cdn_last": "https://storage.neodrop.ai/kuleshov/dont-set-ac-26/s14_smell_last.png",
+      "gen": {
+        "model": "gpt-image-2",
+        "quality": "medium",
+        "size": "1280x720(产出1672x941)",
+        "output_format": "png",
+        "request_id": "202607201014015490360788268d9d6DQWy5gpc",
+        "prompt_gist": "纸拼贴:空调机身向外一圈圈halftone气味波纹扩散填满房间轮廓,橄榄芥末场,品牌红波纹,无文字数字"
+      }
+    }
+  ],
+  "shot_groups": [
+    {
+      "id": "grp_altar",
+      "shots": [
+        "s01_altar"
+      ],
+      "provider": "seedance(collage首尾帧)",
+      "gen_duration_s": 10,
+      "seam": "B硬切(hook独立场景)",
+      "note": "10s慢组装,compose尾对齐mount 5.14s,payoff神坛完成落'最没必要按的一个'"
+    },
+    {
+      "id": "grp_smell",
+      "shots": [
+        "s14_smell_spread"
+      ],
+      "provider": "seedance(collage首尾帧)",
+      "gen_duration_s": 10,
+      "seam": "B硬切",
+      "note": "10s慢组装,mount ~6s,霉味波纹铺满房间;compose尾对齐"
+    }
+  ],
+  "shots": [
+    {
+      "id": "altar",
+      "t": [
+        0.0,
+        5.66
+      ],
+      "kind": "collage",
+      "intent": "hook神坛:被供的26℃键",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "myth",
+      "t": [
+        5.66,
+        8.18
+      ],
+      "kind": "mg",
+      "intent": "传说光环",
+      "source": {
+        "provider": "hyperframes"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s03_sweat",
+      "t": [
+        8.18,
+        13.94
+      ],
+      "kind": "collage",
+      "intent": "闷热扇风的人",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "punch",
+      "t": [
+        13.94,
+        23.04
+      ],
+      "kind": "mg",
+      "intent": "三症状+报题26℃没那么科学+黑场",
+      "source": {
+        "provider": "hyperframes"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s06_thermo",
+      "t": [
+        23.04,
+        28.58
+      ],
+      "kind": "footage",
+      "intent": "温度计/显示屏(⚠timecode空镜偏弱)",
+      "source": {
+        "provider": "footage"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s07_heat",
+      "t": [
+        28.58,
+        37.6
+      ],
+      "kind": "collage",
+      "intent": "暑热烈日(+WHO角标)",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "humid",
+      "t": [
+        37.6,
+        47.02
+      ],
+      "kind": "mg",
+      "intent": "湿度体感对照 signature 27℃50%/80%",
+      "source": {
+        "provider": "hyperframes"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s09_sweat",
+      "t": [
+        47.02,
+        53.04
+      ],
+      "kind": "collage",
+      "intent": "汗蒸发受阻(高湿)",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s10_vuln",
+      "t": [
+        53.04,
+        62.14
+      ],
+      "kind": "collage",
+      "intent": "热脆弱人群 老人小孩(+角标)",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s11_acin",
+      "t": [
+        62.14,
+        69.82
+      ],
+      "kind": "collage",
+      "intent": "空调内部灰尘霉",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s12_acrun",
+      "t": [
+        69.82,
+        76.34
+      ],
+      "kind": "footage",
+      "intent": "空调运行(+怪味角标)",
+      "source": {
+        "provider": "footage"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s13_comp",
+      "t": [
+        76.34,
+        81.7
+      ],
+      "kind": "collage",
+      "intent": "压缩机短循环启停",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s14_smell",
+      "t": [
+        81.7,
+        87.82
+      ],
+      "kind": "collage",
+      "intent": "霉味扩散全屋",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "why",
+      "t": [
+        87.82,
+        97.0
+      ],
+      "kind": "mg",
+      "intent": "设问怎么火遍全国+误会",
+      "source": {
+        "provider": "hyperframes"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "tiers",
+      "t": [
+        97.0,
+        115.34
+      ],
+      "kind": "mg",
+      "intent": "两档温度带 signature 24-26/26-28 折中",
+      "source": {
+        "provider": "hyperframes"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s17a_office",
+      "t": [
+        115.34,
+        120.3
+      ],
+      "kind": "footage",
+      "intent": "写字楼(+42号角标)",
+      "source": {
+        "provider": "footage"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s17b_mall",
+      "t": [
+        120.3,
+        124.8
+      ],
+      "kind": "footage",
+      "intent": "商场",
+      "source": {
+        "provider": "footage"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s17c_thermostat",
+      "t": [
+        124.8,
+        129.76
+      ],
+      "kind": "footage",
+      "intent": "楼宇控制面板",
+      "source": {
+        "provider": "footage"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s18_rkey",
+      "t": [
+        129.76,
+        136.3
+      ],
+      "kind": "collage",
+      "intent": "遥控器加26℃键",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s19_intro",
+      "t": [
+        136.3,
+        139.9
+      ],
+      "kind": "footage",
+      "intent": "够遥控器",
+      "source": {
+        "provider": "footage"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "tday",
+      "t": [
+        139.9,
+        152.64
+      ],
+      "kind": "mg",
+      "intent": "温度tip白天22速降→24-26",
+      "source": {
+        "provider": "hyperframes"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "tnight",
+      "t": [
+        152.64,
+        157.4
+      ],
+      "kind": "mg",
+      "intent": "温度tip夜间+2老幼27",
+      "source": {
+        "provider": "hyperframes"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s21_wind",
+      "t": [
+        157.4,
+        166.4
+      ],
+      "kind": "collage",
+      "intent": "冷气下沉(+风向角标)",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "thum",
+      "t": [
+        166.4,
+        171.98
+      ],
+      "kind": "mg",
+      "intent": "湿度tip>60%除湿",
+      "source": {
+        "provider": "hyperframes"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "tsave",
+      "t": [
+        171.98,
+        187.58
+      ],
+      "kind": "mg",
+      "intent": "省电三招榜单",
+      "source": {
+        "provider": "hyperframes"
+      },
+      "status": "rendered_v2"
+    },
+    {
+      "id": "s06_cozy",
+      "t": [
+        187.58,
+        197.62
+      ],
+      "kind": "collage",
+      "intent": "居家暖场(金句叠层)",
+      "source": {
+        "provider": "collage_broll"
+      },
+      "status": "rendered_v2"
+    }
+  ],
+  "overlays": [
+    {
+      "id": "ov_captions",
+      "type": "字幕层",
+      "source": "由 audio/timeline.json 派生(gen_captions,中文数字=剧本原文)",
+      "note": "底部墨底#2B2118白字粗宋,单行8-16字,距底~10%,关键词不进字幕"
+    },
+    {
+      "id": "ov_badges",
+      "type": "数据角标/大字卡(阿拉伯数字)",
+      "note": "26℃/传说标签/三症状/27℃·50%·80%·30℃/WHO/I级24-26·II级26-28折中/国办发42号2007/22℃·24-26·27/风向↑/除湿/ECO·半月/金句;半透明墨底pill,不整屏,亮黄#FFD21E情绪词·金#C9932B数字"
+    },
+    {
+      "id": "ov_logo",
+      "type": "左上水印",
+      "note": "账号/系列名(生活祛魅系列),恒定左上"
+    }
+  ],
+  "edit": {
+    "transitions": [
+      "硬切（默认，靠纸纹颗粒缝合层无痕）",
+      "黑场（章节闸门：打脸/溯源/正解）",
+      "像素溶解（形态转换，全片≤1次）"
+    ],
+    "lut": "褪色做旧：饱和度压低，统一 MG/collage-pixel/Seedance/检索空镜 多源",
+    "grain": "像素颗粒 + 泛黄做旧纸纹底 #C9A876（全片贯穿缝合层）",
+    "loudness_lufs": -14.0,
+    "palette": {
+      "paper": "#C9A876",
+      "ink": "#2B2118",
+      "accent": "#FFD21E",
+      "gilt": "#C9932B",
+      "mark": "#C0392B"
+    }
+  },
+  "ledger": {
+    "decisions": [
+      {
+        "id": "D00-intake",
+        "stage": "brief",
+        "decision": "源料反爬三通道全挡（WebFetch/应用内浏览器/Jina 均撞'环境异常'验证墙，claude-in-chrome 域名策略封禁 mp.weixin.qq.com），改由用户 Chrome 打开后手工粘贴全文，只读存证 scratchpad/source-article.md。",
+        "why": "Rule Zero 事实需有出处；不可凭猜测开工。",
+        "alt": "OCR 截图（弃：数字保真风险）"
+      },
+      {
+        "id": "D01-register",
+        "stage": "brief",
+        "decision": "沿用 pixel-chronicle 视觉工艺与音色，但 register 从国家志纪录片腔迁移到生活祛魅：旁白平实克制底 + 允许更口语一点点会心的锐（'谁开谁知道'共鸣感），不套厚重腔。",
+        "why": "pixel-chronicle 对标佛得角国家志，本片是生活向科普，厚重腔会压垮题材。TTS 仍恒平、BGM 垫底。",
+        "alt": "完全照搬权威腔（弃：不贴题材）"
+      },
+      {
+        "id": "D02-structure",
+        "stage": "brief",
+        "decision": "放弃'个人叙事+情感蒙太奇'收尾，改'正解落地+金句'收尾；三章递进迁移为祛魅 But/Therefore 链（迷思→打脸×2→溯源→正解）。",
+        "why": "科普 payoff 是让人学会怎么做，不是煽情；情感蒙太奇不适配生活 tips 题。",
+        "alt": "套用原情感蒙太奇模板（弃）"
+      },
+      {
+        "id": "D03-dataviz",
+        "stage": "brief",
+        "decision": "数据实物化守则照搬：禁坐标轴图表——湿度/体感用温度计+水汽+汗滴实物化，tips 用榜单卡。",
+        "why": "pixel-chronicle 反模式一票否决坐标轴。",
+        "alt": null
+      },
+      {
+        "id": "D04-stylepack",
+        "stage": "brief",
+        "decision": "选 pixel-chronicle（现存两包唯一适配 A 线知识科普的；case-file 是 B 线官号竖屏，不适用）。",
+        "why": "A 线首片 uk-argentina-feud 已用此包出厂，方法论沉淀可复用。",
+        "alt": "新建风格包（弃：超纲，M1 先固化两包）"
+      },
+      {
+        "id": "D05-hook",
+        "stage": "script",
+        "decision": "钩子选 H1 反常识型「你家空调遥控器上那个26度的键，可能是最没必要按的一个」。产 4 变体(H1反常识/H2前后对比/H3共情/H4数据)选优。",
+        "why": "H1 最短、承诺最锐、天然勾'为什么'，且封面标题/首3秒画面(手指悬26℃键)/口播首句三面同一承诺。H3/H4 留抖音版备用（抖音前3秒可换 H3 直给痛点）。",
+        "alt": "H2/H3/H4（见 script.md 钩子变体）"
+      },
+      {
+        "id": "D06-voice",
+        "stage": "audio",
+        "decision": "MiniMax speech-2.8-hd 官方音色 audiobook_female_1 @ speed1.1 emotion=neutral，整片single-pass。",
+        "why": "185s>120s 强制 MiniMax single-pass(seed-audio 120s硬上限)；audiobook_female_1 是 A线首片(uk-argentina-feud)已出厂验证音色，干净女声贴生活祛魅 explainer 的 register(D01)；single-pass 无分节声纹漂移、无接缝。",
+        "alt": "Gentle_Senior(纪录片腔，偏老成，弃)；seed-audio(时长超限，弃)"
+      },
+      {
+        "id": "D07-numerals",
+        "stage": "audio",
+        "decision": "TTS输入用中文数字(二十六度)，阿拉伯数字(26℃/50%)仅走大字卡/角标；字幕用中文数字。",
+        "why": "forced_align目标是剧本字符，阿拉伯数字与朗读音节错位会致中段漂移(英阿片v3反例)；中文数字令对齐目标与音频1:1。",
+        "alt": null
+      },
+      {
+        "id": "D08-sourcemix",
+        "stage": "storyboard",
+        "decision": "来源占比 MG56%/实拍38%/collage6%，MG高于承诺≈50%。",
+        "why": "铁律7来源平权意图优先：本片是数据密集祛魅题(温度带/湿度对照/tips榜单/规范条文都必须MG承载数字文字),MG是这个内容的自然语言;每个MG演示有内部2-4s元素进出、与实拍/collage规律交替(MG连续≤2)防幻灯片,非静帧凑数。实拍+collage=42%守住真运动/质感。",
+        "alt": "强行把数据镜改实拍(弃:数字/文字承载不了,反成PPT截图)"
+      },
+      {
+        "id": "D09-collage",
+        "stage": "storyboard",
+        "decision": "2条纸拼贴signature：s01 hook『神化的26℃键』(10s慢组装尾对齐hook落点)+s14『霉味扩散全屋』。",
+        "why": "承载pixel-chronicle纸拼贴身份;这两处是全片最抽象的概念beat(神化/气味),最适合拼贴隐喻;其余概念(汗/脆弱人群)用实拍更接地。",
+        "alt": "全MG(弃:丢风格identity)/更多collage(弃:成本与题材不需)"
+      },
+      {
+        "id": "D10-footageqc",
+        "stage": "motion",
+        "decision": "Pexels 4镜重取:s07(水泥车→棕榈烈日)/s12(气球→红PC风扇→家居室内)/s06(时钟→温控表盘)/s19(手部→手持遥控器)。",
+        "why": "footage QC不贴题必丢;s12两次重取(气球/PC风扇)均更差,止损回落到干净家居室内,空调语境靠旁白+MG角标+邻镜(s11空调剖面/s13压缩机)承载。",
+        "alt": null
+      },
+      {
+        "id": "D11-bgm",
+        "stage": "compose",
+        "decision": "BGM 引擎降级：MiniMax music 网关路由下线(/v1/music_generation→404;/music_generation→HTML;suno→503无渠道)，FAL备用通道路径不明(lingowhale网关)。用户拍板 VO-first 先出，BGM 挂账后补(可后期mux不重渲)。",
+        "why": "禁静默降级(铁律5)→已停下问用户；BGM 是垫底polish非核心，pixel-chronicle情绪主要靠剪辑密度承担，VO-first成片完整可评。",
+        "alt": "深挖FAL通道(用户未选)/永久无BGM(未选)",
+        "debt": "BGM待引擎恢复后生成(纪录片底色+轻chiptune,-30LUFS级,data-volume~0.23)并mux进out/final.mp4"
+      },
+      {
+        "id": "D12-voiceB",
+        "stage": "v2-audio",
+        "decision": "换音色 audiobook_female_1→Chinese (Mandarin)_Gentle_Senior(风格包实证音色,calm/1.0)。",
+        "why": "用户听感A前后不一致(prosody起伏);且我第一轮声纹测法错误(4s窗裸余弦0.703假警报),正确测法(verify_files+整节)A=0.940其实达标、B=0.952更稳。B是风格包§5指定音色,纪录片腔更匀。纠正 D06 擅自换 audiobook 的偏离。",
+        "evidence": "ECAPA verify_files: A 0.940 / B 0.952(门槛0.88)"
+      },
+      {
+        "id": "D13-visualbig",
+        "stage": "v2-storyboard",
+        "decision": "视觉大改:像素/拼贴叙事 6%→~40%(11条纸拼贴collage),MG只留硬数据(26℃报题/湿度对照/两档温度带/tips榜单/设问),footage只留温度计/空调运行/公共建筑/够遥控。",
+        "why": "用户指出拼贴少得可怜、MG一大半有幻灯片感;打脸章节的概念beat(闷热/汗蒸发/脆弱人群/空调内部/压缩机/遥控加键/冷气下沉/居家)全部转纸拼贴,承担叙事richness。",
+        "cost": "11 collage=GPT-Image静帧×9新+Seedance×9新(altar/smell复用v1);死尾检查全过"
+      },
+      {
+        "id": "D14-bgm",
+        "stage": "v2-audio",
+        "decision": "BGM 走 fal fal-ai/minimax-music/v2.6(端点 {FAL_PROXY_BASE}/queue.fal.run/...),生成纪录片底色+轻chiptune,禁人声哼唱+禁鼓点(用户要求);loop到片长+loudnorm -30LUFS,compose data-volume 0.25(~20LU低于旁白)。",
+        "why": "MiniMax music网关路由404不可用;用户给fal通道。",
+        "note": "fal $0.15/次,共2次(首版有人声/鼓点被打回,重生成)"
+      },
+      {
+        "id": "D15-render",
+        "stage": "v2-compose",
+        "decision": "渲染走渲染机(服务端HTTP API,tools/render-remote.sh),设为以后默认([[render-machine-default]])。",
+        "why": "用户指令;compose自带woff2符合字体新规,渲染机双跑一致性已在英阿片验;服务端270s vs 本地docker~13min。",
+        "evidence": "egress东京13.158.136.168;final_v2抽帧与本地snapshot帧级一致"
+      },
+      {
+        "id": "D16-alignbug",
+        "stage": "v3-fix",
+        "decision": "修音画错乱根因:v2 换B音色后 audio/voiceover.wav 更新了,但 compose/assets/voiceover.mp3 没同步(仍v1 A,185.6s),导致渲染用v1 A音频跑v2 B时间轴(198.8s)→完全错乱。已重生 compose voiceover.mp3=B。",
+        "why": "我的疏漏;审查时只测了 audio/voiceover.wav 和 final的回转写(同剧本仍96%过),没测'渲染音频的时间戳是否匹配字幕时间'——教训:换音频后必验 compose/assets 同步 + 音画对齐锚点抽查(切片转写vs该时刻应说的话)。",
+        "evidence": "5锚点切片转写全对齐(你家空调@0.4/先说凉@23/那问题@87.8/那空调@136.3/说到底@187.6)"
+      },
+      {
+        "id": "D17-nologo",
+        "stage": "v3-fix",
+        "decision": "去掉左上角小标题水印'生活祛魅·每天多懂一点'(用户要求)。",
+        "why": "用户不需要。",
+        "alt": null
+      },
+      {
+        "id": "D18-tiers",
+        "stage": "v3-fix",
+        "decision": "温度带卡叠加重叠修复:26℃ pin 缩小卡在两档中缝(不压band文字),'折中数'注移到scale下方独立一行。",
+        "why": "用户指出中间内容叠加、可读性差(pinlab压住'II级·一般标准')。",
+        "alt": null
+      },
+      {
+        "id": "D19-bgm-musicgen",
+        "stage": "v3-fix",
+        "decision": "BGM 从 fal minimax-music(song模型,哼唱)换 本地 MusicGen(facebook/musicgen-small,器乐原生无人声能力)。29.9s→8x交叉淡化loop到199s→-30LUFS垫底。",
+        "why": "用户:BGM不要人声哼唱。学BGM最佳实践(media-use bgm.md):song模型(minimax)会把'[Instrumental]'当旋律哼;fal器乐模型(stable-audio/cassetteai)在网关503不可用;器乐原生MusicGen物理上不产人声=根治哼唱。",
+        "evidence": "MusicGen 器乐,-30.42LUFS"
+      },
+      {
+        "id": "D20-bgm-final",
+        "stage": "v4",
+        "decision": "BGM 终定 MiniMax music via fal(is_instrumental:true,无lyrics,A马林巴拨奏)。",
+        "why": "用户否MusicGen-small(音质弱);fal minimax schema 有 is_instrumental flag(之前哼唱是我漏设+用lyrics)。学到科普BGM=轻快好奇解说律动(pluck/~105BPM/软脉冲)非慢ambient pad。",
+        "alt": "B chiptune(用户选A)"
+      },
+      {
+        "id": "D21-pixel-debt",
+        "stage": "v4",
+        "decision": "像素风重做暂缓(用户拍板)。",
+        "why": "pixel-chronicle签名是16-bit像素画,我误做成halftone纸拼贴(照collage-broll默认美学,漏了改版成像素);用户知情,暂不重做,记DEBT。",
+        "alt": "立即重做(用户暂缓)"
+      },
+      {
+        "id": "D22-bgm-vol",
+        "stage": "v5",
+        "decision": "BGM data-volume 0.25→0.12(−6dB,~26LU低于旁白),re-mux不重渲。",
+        "why": "用户:BGM抢口播,再下调。",
+        "alt": null
+      }
+    ],
+    "costs": [
+      {
+        "stage": "audio",
+        "item": "MiniMax TTS speech-2.8-hd single-pass",
+        "detail": "846字/185.64s + 1次smoke(3.4s)",
+        "cost_usd": null,
+        "note": "单价待回填(挂账，同英阿片惯例)"
+      },
+      {
+        "stage": "anchors",
+        "item": "GPT-Image-2 collage静帧×2",
+        "request_ids": [
+          "...YqB6Nlrt",
+          "...DQWy5gpc"
+        ],
+        "cost_usd": null,
+        "note": "medium/1280x720;单价待回填"
+      },
+      {
+        "stage": "motion",
+        "item": "Seedance首尾帧×2(collage 10s)",
+        "request_ids": [
+          "...tgLJzlKN",
+          "...KV50gwMd"
+        ],
+        "cost_usd": null,
+        "note": "满价~$2.7/条;单价待回填挂账"
+      },
+      {
+        "stage": "motion",
+        "item": "Pexels空镜×10",
+        "cost_usd": 0.0,
+        "note": "免费检索;含4条重取(废弃:水泥车/气球/时钟/游戏手柄?→换)"
+      },
+      {
+        "stage": "deliver",
+        "item": "成本小结",
+        "summary": {
+          "TTS_minimax_speech": "1 smoke(3.4s)+1 full single-pass(957字/185.6s) · 单价待回填",
+          "gpt_image_2": "2 张 collage 静帧(medium 1280x720) · 单价待回填",
+          "seedance_collage": "2 条首尾帧10s(altar/smell) · 满价~$2.7/条≈$5.4 est · 单价待回填",
+          "pexels": "16 次检索(10用+6废重取) · 免费",
+          "minimax_music": "BGM 网关不可用0成片(1次失败调用可能计费) · DEBT",
+          "docker_render": "本地渲染 12m15s · 免算力费",
+          "总计_est": "~$5.4+(TTS/图待回填);预算未设(质量优先)"
+        }
+      }
+    ],
+    "gates": [
+      {
+        "id": "G-script",
+        "stage": "script",
+        "when": "2026-07-20",
+        "checks": {
+          "linter硬查9项": "pass（唯一命中 sec01 破折号已改句号；复核 0 命中）",
+          "字数": "822字（无标点），@300字/分估 ~164.4s，符合 ~2.5-3min '宁可短不可水'",
+          "朗读测试": "pass（长短交错，sec05 tips 段偏密但分段清晰、口语不播报腔）",
+          "金句测试": "pass（唯一金句槽 sec06『先让屋里的人舒服，才是真的会用空调』传信息非求转发，非骈句）",
+          "五维评分": "直接性9/节奏9/信任度9/真实性9/精炼度9 = 45，达出厂线（初稿42→加'我特意翻规范才搞明白'自白+承认复杂'折中不是最优'+trim sec05→45）",
+          "灵魂检查": "pass（观点『最没必要按的键』+反应『我特意翻了才搞明白』+承认复杂『折中数不是最舒服的数』/『没有统一答案』齐备）"
+        },
+        "result": "PASS"
+      },
+      {
+        "id": "G1-audio",
+        "stage": "audio",
+        "when": "2026-07-20",
+        "checks": {
+          "回转写词准确率": "98.5%(去数字格式噪声)/91.3%(原始，差异全为中↔阿数字格式) ≥95% ✅",
+          "锚点切片句首词首现": "6/6 全命中，无中段漂移 ✅",
+          "forced_align帧数": "emission 9281 vs 期望9282，drift 0.02s(<0.5s assert) ✅",
+          "OOV": "846字中4个(黏/憋/秒/黏)邻插值，非载重词 ✅",
+          "时长": "185.64s(~3.09min)，无硬门(时长锁已取消)，只记录、视觉对齐它"
+        },
+        "result": "PASS"
+      },
+      {
+        "id": "G-storyboard",
+        "stage": "storyboard",
+        "when": "2026-07-20",
+        "checks": {
+          "1无缝隙无重叠首尾对齐": "PASS",
+          "2每8-10s视觉变化": "最长单镜 s16_two_tiers 16.2s(MG演示,内部元素2-4s进出);多数<10s PASS",
+          "3连续同版式/景别≤2": "MG最长连续2镜/footage最长连续2镜 ≤2 PASS",
+          "4静态类(MG)连续≤2且占比合承诺": "MG连续≤2 PASS;MG占比56%(承诺≈50%,信息题偏高见D08);非MG44%",
+          "5声部匹配": "MG=信息骨架/数据实物化(温度带/湿度对照/tips榜单);footage=氛围证据(空调/居家/脆弱人群);collage=概念隐喻(神化/霉味) 与风格包声部表一致 PASS",
+          "6运动承诺可达": "hybrid;实拍38%+collage6%=真素材/生成44%,MG演示内部有motion,非静帧充数 PASS",
+          "7Seedance分组算术": "仅2镜走Seedance(collage s01/s14),各成组≤15s(gen10s),非全片Seedance故'组和=总长'不适用;组内mount≤槽位 PASS",
+          "8每镜一主动作+运镜词": "MG有内部进出动效;footage有真运动;collage assemble-from-empty;无静态场景描述式镜头 PASS"
+        },
+        "result": "PASS"
+      },
+      {
+        "id": "G-anchors",
+        "stage": "anchors",
+        "when": "2026-07-20",
+        "checks": {
+          "collage三闸门": "Gate1隐喻(EP自定:神化按键/霉味扩散)→Gate2 GPT-Image静帧×2(已生成并肉眼验隐喻清晰,无文字数字)→Gate3放行",
+          "锚点无文字数字": "两张静帧均无字/数字/logo,'26℃'留给overlay PASS",
+          "16:9适配": "collage模板从9:16改1280x720,产出16:9 PASS"
+        },
+        "result": "PASS"
+      },
+      {
+        "id": "G-motion",
+        "stage": "motion",
+        "when": "2026-07-20",
+        "checks": {
+          "collage死尾检查": "altar/smell 10帧contact逐帧均匀组装到末帧,无>0.8s冻结尾 PASS(宪法禁冻结帧补时长)",
+          "collage语义": "两条assemble兑现intent(神化/霉味扩散),halftone无畸变 PASS",
+          "collage时长": "实产10.04s(计划10s),compose尾对齐mount到槽位(s01 5.14s/s14 6.02s)",
+          "Pexels QC": "10镜抽帧人工看图:废弃4条不贴题(水泥车/气球/时钟/PC风扇)已重取;终版全贴题、一素材一次、无大水印;s06偏暗/s12家居代空调-可接受(旁白+MG角标+邻镜承载语境)",
+          "Pexels五铁律": "一素材全片一次(id去重)✓;尾留0.8s防暗尾(compose执行);时代地点无错位✓"
+        },
+        "result": "PASS"
+      },
+      {
+        "id": "G-compose-lint",
+        "stage": "compose",
+        "when": "2026-07-20",
+        "checks": {
+          "hyperframes check": "PASS(0 errors,4 GSAP警告=tnight无cnum等无害);Layout 0 issues;Motion 0 errors",
+          "对比度": "Contrast 25/25 WCAG AA(修正:--mark→#8A2419/--gilt→#6E4A0C/logo加墨底pill)",
+          "快照验证": "14帧contact sheet人工看过:13个MG场景+2 collage+footage+badges全部有内容渲染,signature(湿度对照/两档温度带)清晰,金句卡到位",
+          "字体纪律": "compose自带6个woff2(SerifSC/SansSC)本地嵌入,符合字体新规"
+        },
+        "result": "PASS"
+      },
+      {
+        "id": "G9-review",
+        "stage": "review",
+        "when": "2026-07-20",
+        "checks": {
+          "L0-容器": "1280x720/30fps h264 + aac 2ch48k, 185.8s(timeline185.64,含尾fade) ✓",
+          "L0-黑帧": "blackdetect 0段 ✓",
+          "L0-冻结": "freezedetect 43段——全部落在MG卡片停留区间(合法幻灯片语法主轨),0段落在footage/collage(逐段分类核对) ✓",
+          "L0-响度": "渲染原始-22.46LUFS→两pass loudnorm→成片-14.06LUFS/TP-1.50dBTP/LRA达标 ✓",
+          "L0-回转写": "独立whisper vs剧本 去数字后97.5% ≥95% ✓",
+          "视觉15项": "素材零重复✓/无暗尾黑闪(仅金句fade)✓/模板味(版式各异)✓/三面开钩一致✓/字幕≤16字无拆词✓/纸纹LUT缝合一致✓/时效词无✓/collage拍点(神坛尾对齐hook·霉味填满)✓",
+          "blemish": "s06(23.3s)『温度计』实拍实为视频timecode显示(LTC/VITC),不贴题弱项——已flag待用户看片裁决(可选5s换镜重渲)"
+        },
+        "result": "PASS(1 minor blemish flagged)"
+      },
+      {
+        "id": "G-v2-review",
+        "stage": "v2-review",
+        "when": "2026-07-20",
+        "checks": {
+          "L0容器": "1280x720/30fps,198.9s,-14.05LUFS/TP-1.49",
+          "黑帧": "0",
+          "冻结": "39段全MG卡停留(collage/footage 0冻结)",
+          "ECAPA声纹": "verify_files整节 MIN 0.952≥0.88 PASS(第一轮跳门已补,B音色稳)",
+          "回转写": "96.8%≥95%",
+          "像素叙事占比": "collage ~40%(11条),达风格包≥40%目标(D08失衡已修)",
+          "渲染机spot-check": "final_v2抽帧25帧与本地compose snapshot一致,字体新规下帧级无漂移"
+        },
+        "result": "PASS"
+      },
+      {
+        "id": "G-v3-review",
+        "stage": "v3-review",
+        "when": "2026-07-20",
+        "checks": {
+          "音画对齐(v2错乱的核心)": "5锚点切片转写全对齐 PASS",
+          "响度": "-14.23LUFS/TP-1.50",
+          "黑帧": "0",
+          "视觉修复": "无logo✓/温度带无叠加重叠✓(渲染抽帧确认)",
+          "BGM": "MusicGen器乐-30垫底,无人声哼唱(器乐模型不产人声)",
+          "渲染机": "服务端渲染,egress东京"
+        },
+        "result": "PASS"
+      }
+    ]
+  }
+}

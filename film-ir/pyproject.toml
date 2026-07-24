@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kuleshov-film-ir"
+version = "0.1.0"
+description = "Kuleshov Film IR API — film.json 的受管读写、G1 硬门与执行入口（M1）"
+requires-python = ">=3.10"
+dependencies = ["pydantic>=2.5", "click>=8.1"]
+
+[project.scripts]
+kuleshov-ir = "film_ir.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

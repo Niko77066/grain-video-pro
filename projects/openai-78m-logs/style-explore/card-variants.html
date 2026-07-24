@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>openai-78m-logs · 版式卡缝合方向 7 选</title>
+<style>
+  @font-face { font-family: "PingFang SC"; src: local("PingFang SC"); }
+  @font-face { font-family: "Songti SC"; src: local("Songti SC"); }
+  @font-face { font-family: "SF Mono"; src: local("SF Mono"); }
+  :root {
+    --paper: #F4F1EA; --cream: #F0E7D2; --ink: #17181C; --red: #C8451B;
+    --brick: #B0452F;
+    --field-orange: #BC5A1E; --field-purple: #3B2A57; --field-teal: #1E6B61; --field-green: #234A38;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #202020; color: #ddd; font-family: "PingFang SC", sans-serif; padding: 48px 40px 120px; }
+  h1 { font-size: 26px; color: #fff; margin-bottom: 8px; }
+  .sub { font-size: 14px; color: #999; line-height: 1.7; max-width: 900px; margin-bottom: 40px; }
+  .sub b { color: #e8c9a0; }
+  .row-label { font-size: 15px; color: #e8c9a0; letter-spacing: 2px; margin: 40px 0 16px; border-left: 3px solid var(--red); padding-left: 10px; }
+  .gallery { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; }
+  .cell { width: 378px; }
+  .cell .cap { margin-top: 12px; }
+  .cell .cap .name { font-size: 16px; color: #fff; font-weight: 700; }
+  .cell .cap .name span { color: var(--red); font-family: "SF Mono", monospace; margin-right: 8px; }
+  .cell .cap .note { font-size: 12.5px; color: #9a9a9a; line-height: 1.65; margin-top: 5px; }
+  .frame { width: 378px; height: 672px; overflow: hidden; border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,.5); }
+  .card { width: 1080px; height: 1920px; transform: scale(0.35); transform-origin: top left; position: relative; overflow: hidden; }
+  .refimg { width: 378px; height: 672px; object-fit: cover; border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,.5); }
+
+  /* ---------- shared collage atoms ---------- */
+  .grain::after { content: ""; position: absolute; inset: 0; background: url("../compose/assets/grain.png"); background-size: 512px 512px; opacity: .09; mix-blend-mode: multiply; pointer-events: none; z-index: 90; }
+  .serif { font-family: "Songti SC", serif; font-weight: 900; }
+  .mono { font-family: "SF Mono", Menlo, monospace; }
+  .halftone { background-image: radial-gradient(circle, rgba(23,24,28,.5) 1.6px, transparent 1.75px); background-size: 9px 9px; }
+
+  /* ============ V0 现状（case-file v2 出厂样式） ============ */
+  .v0 { background: var(--paper); color: var(--ink); }
+  .v0 .kick { position: absolute; top: 200px; left: 96px; font-size: 40px; letter-spacing: 10px; color: #4A4B50; }
+  .v0 .kick::before { content: ""; display: inline-block; width: 46px; height: 8px; background: var(--red); margin-right: 22px; vertical-align: middle; }
+  .v0 .big { position: absolute; top: 800px; left: 96px; right: 96px; font-family: "PingFang SC"; font-weight: 800; font-size: 168px; font-variant-numeric: tabular-nums; letter-spacing: -2px; }
+  .v0 .lead { position: absolute; top: 1030px; left: 96px; font-size: 52px; color: #4A4B50; }
+  .v0 .src { position: absolute; bottom: 140px; left: 96px; font-size: 34px; color: #6B6B67; }
+
+  /* ============ V1 色场同源 · 极简海报 ============ */
+  .v1 { background: var(--field-orange); color: var(--cream); }
+  .v1 .kick { position: absolute; top: 210px; left: 100px; font-size: 42px; letter-spacing: 12px; color: var(--cream); opacity: .92; }
+  .v1 .kick::before { content: ""; display: inline-block; width: 50px; height: 10px; background: var(--ink); margin-right: 24px; vertical-align: middle; }
+  .v1 .big { position: absolute; top: 740px; left: 100px; font-size: 230px; letter-spacing: -4px; color: var(--cream); text-shadow: 10px 12px 0 rgba(23,24,28,.28); }
+  .v1 .lead { position: absolute; top: 1060px; left: 100px; font-size: 54px; color: var(--cream); opacity: .88; }
+  .v1 .rule { position: absolute; top: 990px; left: 100px; width: 320px; height: 12px; background: var(--ink); }
+  .v1 .src { position: absolute; bottom: 150px; left: 100px; font-size: 32px; color: var(--cream); opacity: .6; letter-spacing: 1px; }
+
+  /* ============ V2 剪纸贴纸 ============ */
+  .v2 { background: var(--field-orange); }
+  .v2 .sticker { position: absolute; background: var(--cream); box-shadow: 0 18px 40px rgba(23,24,28,.4); }
+  .v2 .kick { top: 250px; left: 90px; transform: rotate(-2.4deg); padding: 26px 48px; font-size: 44px; letter-spacing: 8px; color: var(--ink);
+    clip-path: polygon(1.5% 8%, 98% 0%, 100% 88%, 2.5% 100%, 0% 60%); }
+  .v2 .numstrip { top: 760px; left: 60px; right: 60px; transform: rotate(1.6deg); padding: 60px 70px 70px;
+    clip-path: polygon(0% 6%, 3% 0%, 97% 2%, 100% 12%, 99% 92%, 95% 100%, 4% 98%, 0% 88%); }
+  .v2 .numstrip .big { font-family: "Songti SC", serif; font-weight: 900; font-size: 208px; letter-spacing: -2px; color: var(--ink); line-height: 1; }
+  .v2 .lead { top: 1160px; left: 130px; transform: rotate(-1.2deg); padding: 30px 50px; font-size: 52px; color: var(--ink);
+    clip-path: polygon(0% 12%, 99% 0%, 100% 90%, 1% 100%); }
+  .v2 .bubble { position: absolute; top: 500px; right: 110px; width: 200px; height: 150px; background: var(--brick); border-radius: 40px;
+    box-shadow: 0 14px 30px rgba(23,24,28,.35); border: 10px solid var(--cream); }
+  .v2 .bubble::after { content: ""; position: absolute; bottom: -42px; left: 30px; border: 22px solid transparent; border-top-color: var(--cream); }
+  .v2 .src { position: absolute; bottom: 140px; left: 90px; background: var(--cream); padding: 18px 36px; font-size: 30px; color: var(--ink);
+    transform: rotate(-1deg); box-shadow: 0 10px 24px rgba(23,24,28,.35); clip-path: polygon(0 15%, 100% 0, 99% 100%, 1% 92%); }
+
+  /* ============ V3 案卷档案 ============ */
+  .v3 { background: var(--field-orange); }
+  .v3 .folder { position: absolute; top: 300px; left: 80px; right: 80px; bottom: 300px; background: #EFE7D2;
+    box-shadow: 0 26px 60px rgba(23,24,28,.45); transform: rotate(-.8deg); }
+  .v3 .tab { position: absolute; top: -64px; left: 60px; background: #EFE7D2; padding: 14px 48px 10px; font-size: 34px; letter-spacing: 4px; color: var(--ink);
+    border-radius: 14px 14px 0 0; }
+  .v3 .inner { position: absolute; inset: 56px; border: 3px solid rgba(23,24,28,.28); padding: 60px 56px; }
+  .v3 .meta { font-size: 32px; color: rgba(23,24,28,.62); letter-spacing: 2px; line-height: 2.1; border-bottom: 2px solid rgba(23,24,28,.22); padding-bottom: 36px; }
+  .v3 .big { margin-top: 120px; font-family: "Songti SC", serif; font-weight: 900; font-size: 152px; letter-spacing: -2px; color: var(--ink); }
+  .v3 .lead { margin-top: 30px; font-size: 50px; color: rgba(23,24,28,.75); }
+  .v3 .stamp { position: absolute; right: 70px; top: 190px; padding: 22px 40px; border: 10px solid var(--red); color: var(--red);
+    font-size: 72px; font-weight: 900; letter-spacing: 14px; transform: rotate(-12deg); opacity: .82; mix-blend-mode: multiply; }
+  .v3 .src { position: absolute; bottom: 50px; left: 56px; font-size: 30px; color: rgba(23,24,28,.55); letter-spacing: 1px; }
+  .v3 .redtape { position: absolute; top: 272px; right: 150px; width: 260px; height: 64px; background: var(--brick); opacity: .88; transform: rotate(3deg);
+    box-shadow: 0 10px 24px rgba(23,24,28,.3); z-index: 5; }
+
+  /* ============ V4 报纸剪贴 ============ */
+  .v4 { background: var(--field-orange); }
+  .v4 .scrap { position: absolute; background: #F6F1E4; box-shadow: 0 20px 44px rgba(23,24,28,.42); }
+  .v4 .head { top: 300px; left: 70px; right: 70px; padding: 70px 64px 60px; transform: rotate(-1.4deg);
+    clip-path: polygon(0% 4%, 2% 0%, 98% 1%, 100% 10%, 99% 95%, 96% 100%, 3% 99%, 0% 90%); }
+  .v4 .head .kicker { font-size: 36px; letter-spacing: 6px; color: rgba(23,24,28,.65); border-bottom: 3px solid var(--ink); padding-bottom: 20px; display: flex; justify-content: space-between; }
+  .v4 .head .big { position: relative; margin-top: 70px; font-family: "Songti SC", serif; font-weight: 900; font-size: 196px; color: var(--ink); letter-spacing: -2px; display: inline-block; }
+  .v4 .circle { position: absolute; inset: -36px -60px -46px -50px; border: 14px solid var(--red); border-radius: 48%; transform: rotate(-3deg); opacity: .85; }
+  .v4 .head .lead { margin-top: 56px; font-size: 48px; color: rgba(23,24,28,.8); line-height: 1.5; }
+  .v4 .head .ht { position: absolute; right: 50px; bottom: 46px; width: 240px; height: 170px; opacity: .8; }
+  .v4 .capstrip { bottom: 260px; left: 150px; padding: 24px 44px; font-size: 32px; color: var(--ink); transform: rotate(1.2deg);
+    clip-path: polygon(0 12%, 100% 0, 99% 100%, 1% 94%); }
+
+  /* ============ V5 纸白缝合（最小改动） ============ */
+  .v5 { background: var(--paper); color: var(--ink); }
+  .v5 .kick { position: absolute; top: 210px; left: 96px; font-size: 42px; letter-spacing: 10px; color: #4A4B50; z-index: 3; }
+  .v5 .tape { position: absolute; top: 196px; left: 60px; width: 340px; height: 90px; background: var(--brick); opacity: .28; transform: rotate(-1.6deg); }
+  .v5 .torn { position: absolute; top: 720px; left: 40px; right: 120px; height: 420px; background: var(--field-orange); transform: rotate(-1.2deg);
+    clip-path: polygon(0% 8%, 2% 2%, 98% 0%, 100% 14%, 99% 88%, 96% 100%, 2% 96%, 0% 82%);
+    box-shadow: 0 20px 44px rgba(23,24,28,.30); }
+  .v5 .big { position: absolute; top: 810px; left: 120px; font-family: "Songti SC", serif; font-weight: 900; font-size: 210px; letter-spacing: -2px; color: var(--cream); z-index: 3; }
+  .v5 .lead { position: absolute; top: 1220px; left: 96px; font-size: 52px; color: #4A4B50; }
+  .v5 .ht { position: absolute; right: 80px; top: 420px; width: 300px; height: 220px; opacity: .55;
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 72%); mask-image: radial-gradient(ellipse at center, #000 40%, transparent 72%); }
+  .v5 .src { position: absolute; bottom: 150px; left: 96px; font-size: 32px; color: #6B6B67; }
+  .v5 .dot { position: absolute; bottom: 138px; right: 120px; width: 70px; height: 70px; border-radius: 50%; background: var(--red); box-shadow: 0 8px 18px rgba(23,24,28,.3); }
+
+  /* ============ V6 双色印刷 riso ============ */
+  .v6 { background: var(--cream); }
+  .v6 .plate { position: absolute; inset: 60px; background: var(--field-orange); }
+  .v6 .plate::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(240,231,210,.16) 2px, transparent 2.2px); background-size: 12px 12px; }
+  .v6 .kick { position: absolute; top: 250px; left: 140px; font-size: 42px; letter-spacing: 12px; color: var(--cream); }
+  .v6 .big-ghost { position: absolute; top: 764px; left: 154px; font-family: "Songti SC", serif; font-weight: 900; font-size: 224px; letter-spacing: -3px; color: var(--ink); opacity: .55; }
+  .v6 .big { position: absolute; top: 750px; left: 140px; font-family: "Songti SC", serif; font-weight: 900; font-size: 224px; letter-spacing: -3px; color: var(--cream); }
+  .v6 .lead { position: absolute; top: 1080px; left: 140px; font-size: 52px; color: var(--cream); opacity: .9; }
+  .v6 .redbar { position: absolute; top: 1020px; left: 140px; width: 280px; height: 14px; background: var(--red); transform: translate(6px, -4px); }
+  .v6 .reg { position: absolute; bottom: 110px; right: 120px; font-size: 34px; color: rgba(23,24,28,.6); font-family: "SF Mono", monospace; letter-spacing: 2px; }
+  .v6 .src { position: absolute; bottom: 150px; left: 140px; font-size: 32px; color: var(--cream); opacity: .65; }
+
+  /* ============ V7 色块拼贴海报 ============ */
+  .v7 { background: var(--paper); }
+  .v7 .blk { position: absolute; box-shadow: 0 18px 40px rgba(23,24,28,.32); }
+  .v7 .b1 { top: 560px; left: -60px; width: 780px; height: 640px; background: var(--field-orange); transform: rotate(-2deg);
+    clip-path: polygon(0 4%, 97% 0, 100% 96%, 2% 100%); }
+  .v7 .b2 { top: 380px; right: -40px; width: 420px; height: 260px; background: var(--field-purple); transform: rotate(2.4deg);
+    clip-path: polygon(2% 6%, 100% 0, 98% 100%, 0 92%); }
+  .v7 .b3 { top: 1140px; right: 60px; width: 520px; height: 180px; background: var(--field-teal); transform: rotate(-1.4deg);
+    clip-path: polygon(0 10%, 99% 0, 100% 90%, 1% 100%); }
+  .v7 .b4 { top: 1290px; left: 100px; width: 300px; height: 120px; background: var(--field-green); transform: rotate(1.8deg);
+    clip-path: polygon(1% 8%, 100% 0, 99% 92%, 0 100%); }
+  .v7 .kick { position: absolute; top: 220px; left: 96px; font-size: 42px; letter-spacing: 10px; color: var(--ink); }
+  .v7 .kick::before { content: ""; display: inline-block; width: 46px; height: 9px; background: var(--red); margin-right: 22px; vertical-align: middle; }
+  .v7 .big { position: absolute; top: 700px; left: 96px; font-family: "Songti SC", serif; font-weight: 900; font-size: 224px; letter-spacing: -3px; color: var(--cream);
+    text-shadow: 8px 10px 0 rgba(23,24,28,.30); z-index: 5; }
+  .v7 .lead { position: absolute; top: 1035px; left: 96px; font-size: 52px; color: var(--cream); z-index: 5; }
+  .v7 .src { position: absolute; bottom: 150px; left: 96px; font-size: 32px; color: #6B6B67; }
+  .v7 .dot { position: absolute; top: 380px; right: 170px; width: 84px; height: 84px; border-radius: 50%; background: var(--red);
+    border: 10px solid var(--cream); box-shadow: 0 10px 24px rgba(23,24,28,.3); z-index: 6; }
+</style>
+</head>
+<body>
+  <h1>版式卡 × 拼贴 b-roll 缝合方向 · 7 选</h1>
+  <p class="sub">
+    观众反馈：版式卡与拼贴割裂（背景色 + 字体质感）。以下 7 个候选方向全部长在拼贴 DNA 上（饱和色场 / 纸颗粒 / 奶油白 keyline / 半调 / 砖红点缀），
+    统一用 <b>s02b「78,000,000」大数字卡</b>的内容做对照。左侧是拼贴锚点原图和 <b>V0 现状</b>，先校准眼睛再看候选。
+    每个方向可独立成全套（9 类模板都能推导），选中后我出整套再重渲染。
+  </p>
+
+  <div class="row-label">校准：拼贴原图 + 现状</div>
+  <div class="gallery">
+    <div class="cell">
+      <img class="refimg" src="../anchors/s02a_collage.png">
+      <div class="cap"><div class="name"><span>REF</span>拼贴锚点 s02a（焦橙场）</div>
+      <div class="note">观众好评的声部：饱和色场、半调剪纸、奶油白 keyline、砖红点缀、纸颗粒。</div></div>
+    </div>
+    <div class="cell">
+      <img class="refimg" src="../anchors/s03c_collage.png">
+      <div class="cap"><div class="name"><span>REF</span>拼贴锚点 s03c（墨绿场）</div>
+      <div class="note">四色场轮换：焦橙 / 深紫 / 青绿 / 墨绿。</div></div>
+    </div>
+    <div class="cell">
+      <div class="frame"><div class="card v0 grain">
+        <div class="kick">起诉文件指控</div>
+        <div class="big">78,000,000</div>
+        <div class="lead">条用户对话，仍在服务器上</div>
+        <div class="src">来源：NYT 起诉文件 · TechCrunch 2026-07-09</div>
+      </div></div>
+      <div class="cap"><div class="name"><span>V0</span>现状（v2 出厂）</div>
+      <div class="note">纸白 #F4F1EA 平底 + 苹方数字。被反馈：与拼贴换台一样割裂。</div></div>
+    </div>
+  </div>
+
+  <div class="row-label">候选方向（V1–V7）</div>
+  <div class="gallery">
+
+    <div class="cell">
+      <div class="frame"><div class="card v1 grain">
+        <div class="kick">起诉文件指控</div>
+        <div class="big serif">78,000,000</div>
+        <div class="rule"></div>
+        <div class="lead">条用户对话，仍在服务器上</div>
+        <div class="src">来源：NYT 起诉文件 · TechCrunch 2026-07-09</div>
+      </div></div>
+      <div class="cap"><div class="name"><span>V1</span>色场同源 · 极简海报</div>
+      <div class="note">卡底直接用拼贴同款色场+颗粒，奶油白宋体大字+印刷投影。改动最小、最克制：只换底色和字色，版式骨架不动。</div></div>
+    </div>
+
+    <div class="cell">
+      <div class="frame"><div class="card v2 grain">
+        <div class="sticker kick">起诉文件指控</div>
+        <div class="bubble"></div>
+        <div class="sticker numstrip"><div class="big">78,000,000</div></div>
+        <div class="sticker lead">条用户对话，仍在服务器上</div>
+        <div class="src">NYT 起诉文件 · TechCrunch 2026-07-09</div>
+      </div></div>
+      <div class="cap"><div class="name"><span>V2</span>剪纸贴纸</div>
+      <div class="note">文字全部贴纸化：奶油白剪纸条+投影+微旋转，和拼贴里的语音气泡完全同一种"纸"。字是贴上去的，不是排上去的。</div></div>
+    </div>
+
+    <div class="cell">
+      <div class="frame"><div class="card v3 grain">
+        <div class="redtape"></div>
+        <div class="folder">
+          <div class="tab">案卷 NO. 2026-078</div>
+          <div class="inner">
+            <div class="meta mono">CASE&nbsp;&nbsp;NYT v. OPENAI<br>SOURCE&nbsp;&nbsp;TECHCRUNCH · 2026-07-09</div>
+            <div class="big">78,000,000</div>
+            <div class="lead">条用户对话，仍在服务器上</div>
+          </div>
+          <div class="stamp">指控</div>
+          <div class="src">来源：NYT 起诉文件</div>
+        </div>
+      </div></div>
+      <div class="cap"><div class="name"><span>V3</span>案卷档案</div>
+      <div class="note">每张卡是一份"物证文件"摆在色场上：卷宗标签+等宽字元数据+红章。最贴 case-file 风格包的叙事身份，信息层级天然清晰。</div></div>
+    </div>
+
+    <div class="cell">
+      <div class="frame"><div class="card v4 grain">
+        <div class="scrap head">
+          <div class="kicker"><span>起诉文件指控</span><span class="mono">A1</span></div>
+          <div class="big">78,000,000<div class="circle"></div></div>
+          <div class="lead">条用户对话，仍在服务器上</div>
+          <div class="ht halftone"></div>
+        </div>
+        <div class="scrap capstrip">NYT 起诉文件 · TechCrunch 2026-07-09</div>
+      </div></div>
+      <div class="cap"><div class="name"><span>V4</span>报纸剪贴</div>
+      <div class="note">撕下来的报纸头版贴在色场上：栏线+宋体标题+红笔圈注+半调网点。新闻感最强，红笔圈注还能当强调动效用。</div></div>
+    </div>
+
+    <div class="cell">
+      <div class="frame"><div class="card v5 grain">
+        <div class="tape"></div>
+        <div class="kick">起诉文件指控</div>
+        <div class="ht halftone"></div>
+        <div class="torn"></div>
+        <div class="big">78,000,000</div>
+        <div class="lead">条用户对话，仍在服务器上</div>
+        <div class="dot"></div>
+        <div class="src">来源：NYT 起诉文件 · TechCrunch 2026-07-09</div>
+      </div></div>
+      <div class="cap"><div class="name"><span>V5</span>纸白缝合（最小改动）</div>
+      <div class="note">保住纸白底，但把拼贴元素请进来：撕边色场块托大字、半调网点、砖红胶带。适合"割裂但别全推翻"的保守解。</div></div>
+    </div>
+
+    <div class="cell">
+      <div class="frame"><div class="card v6 grain">
+        <div class="plate"></div>
+        <div class="kick">起诉文件指控</div>
+        <div class="big-ghost">78,000,000</div>
+        <div class="big">78,000,000</div>
+        <div class="redbar"></div>
+        <div class="lead">条用户对话，仍在服务器上</div>
+        <div class="src">来源：NYT 起诉文件 · TechCrunch 2026-07-09</div>
+        <div class="reg mono">2C RISO ⊕</div>
+      </div></div>
+      <div class="cap"><div class="name"><span>V6</span>双色印刷 riso</div>
+      <div class="note">色场当油墨印在奶油纸上（四边留纸边），大字套印错位+网点，印刷味最重。和拼贴共享"印刷品"的物性，但个性也最强。</div></div>
+    </div>
+
+    <div class="cell">
+      <div class="frame"><div class="card v7 grain">
+        <div class="kick">起诉文件指控</div>
+        <div class="dot"></div>
+        <div class="blk b2"></div>
+        <div class="blk b1"></div>
+        <div class="blk b3"></div>
+        <div class="blk b4"></div>
+        <div class="big">78,000,000</div>
+        <div class="lead">条用户对话，仍在服务器上</div>
+        <div class="src">来源：NYT 起诉文件 · TechCrunch 2026-07-09</div>
+      </div></div>
+      <div class="cap"><div class="name"><span>V7</span>色块拼贴海报</div>
+      <div class="note">纸白底上贴四色场剪纸块，大字骑在色块上。一张卡同时回应四个拼贴色场，转场时色块还能飞入组装（呼应拼贴"从空场组装"）。</div></div>
+    </div>
+
+  </div>
+</body>
+</html>

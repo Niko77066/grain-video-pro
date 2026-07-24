@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AI 现在会自己黑库了 — master（case-file v3 案卷档案）</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      /* woff2 自带字体（渲染机字体纪律：禁 local 系统字体承担正文/标题，本地与渲染机同字形） */
+      @font-face { font-family:"SerifSC"; font-weight:700; src:url("assets/fonts/serif-sc-700-latin.woff2") format("woff2"); unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF; }
+      @font-face { font-family:"SerifSC"; font-weight:700; src:url("assets/fonts/serif-sc-700-cn.woff2") format("woff2"); }
+      @font-face { font-family:"SansSC"; font-weight:700; src:url("assets/fonts/sans-sc-700-latin.woff2") format("woff2"); unicode-range:U+0000-00FF,U+2000-206F; }
+      @font-face { font-family:"SansSC"; font-weight:700; src:url("assets/fonts/sans-sc-700-cn.woff2") format("woff2"); }
+      @font-face { font-family:"SansSC"; font-weight:400; src:url("assets/fonts/sans-sc-400-latin.woff2") format("woff2"); unicode-range:U+0000-00FF,U+2000-206F; }
+      @font-face { font-family:"SansSC"; font-weight:400; src:url("assets/fonts/sans-sc-400-cn.woff2") format("woff2"); }
+      :root {
+        --paper: #F4F1EA; --ink: #17181C; --accent: #C8451B; --rule: #C9C4B8;
+        --ink-soft: #4A4B50; --grey: #6B6B67; --cream: #EFE7D2; --brick: #B0452F;
+        --f-orange: #BC5A1E; --f-purple: #3B2A57; --f-mustard: #B8892A; --f-green: #234A38;
+      }
+      html, body {
+        margin: 0; padding: 0; width: 1080px; height: 1920px;
+        background: var(--paper); overflow: hidden;
+        font-family: "SansSC", sans-serif; color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+      }
+      #master-root { width: 1080px; height: 1920px; position: relative; }
+      #paper-bg { position: absolute; inset: 0; background: var(--paper); z-index: 1; }
+      .serif { font-family: "SerifSC", serif; font-weight: 700; }
+      .mono { font-family: "SF Mono", Menlo, "SansSC", monospace; }
+
+      /* ── V3 案卷档案：色场 + 奶油白卷宗 ── */
+      .filecard { position: absolute; inset: 0; z-index: 10; }
+      .fc-orange { background: var(--f-orange); }
+      .fc-purple { background: var(--f-purple); }
+      .fc-mustard { background: var(--f-mustard); }
+      .fc-green { background: var(--f-green); }
+
+      .folder { position: absolute; left: 60px; right: 60px; top: 170px; bottom: 210px;
+        background: var(--cream); border-radius: 6px; transform: rotate(-0.6deg);
+        box-shadow: 0 30px 70px rgba(23,24,28,0.42); z-index: 11; }
+      .foldertab { position: absolute; top: -54px; left: 70px; background: var(--cream);
+        padding: 14px 44px 10px; font-size: 30px; letter-spacing: 5px; color: var(--ink);
+        border-radius: 12px 12px 0 0; }
+      .docbody { position: absolute; top: 36px; left: 36px; right: 36px; bottom: 84px; border: 3px solid rgba(23,24,28,0.25);
+        padding: 54px 48px; box-sizing: border-box; }
+      .docmeta { font-family: "SF Mono", Menlo, "SansSC", monospace; font-size: 27px; letter-spacing: 2px;
+        color: var(--ink-soft); line-height: 1.9; border-bottom: 2px solid rgba(23,24,28,0.22);
+        padding-bottom: 28px; }
+      .docsrc { position: absolute; bottom: 26px; left: 48px; font-size: 27px; color: var(--ink-soft); letter-spacing: 1px; }
+      .stamp { position: absolute; padding: 18px 34px; border: 9px solid var(--accent); color: var(--accent);
+        font-weight: 700; letter-spacing: 12px; transform: rotate(-12deg); opacity: 0.85; mix-blend-mode: multiply; }
+
+      /* 纸签（金句/标题级） */
+      .slip { position: absolute; left: 90px; right: 90px; top: 50%; transform: translateY(-50%) rotate(-0.7deg);
+        background: var(--cream); padding: 90px 70px; box-sizing: border-box; text-align: center;
+        box-shadow: 0 26px 60px rgba(23,24,28,0.4); }
+      .slip .big { font-family: "SerifSC", serif; font-weight: 700; line-height: 1.3; }
+      .slip .lead { font-size: 46px; color: var(--ink-soft); line-height: 1.5; }
+      .slip .bar { width: 220px; height: 10px; background: var(--accent); margin: 44px auto 0; }
+
+      /* 对比纸页（s03a 攻防天平） */
+      .sheet { position: absolute; top: 50%; width: 430px; height: 560px; margin-top: -280px;
+        background: var(--cream); box-shadow: 0 22px 50px rgba(23,24,28,0.42);
+        display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 40px; padding: 0 24px; box-sizing: border-box; }
+      .sheetL { left: 62px; transform: rotate(-1.2deg); }
+      .sheetR { right: 62px; transform: rotate(1.1deg); }
+      .sheet .lab { font-size: 44px; letter-spacing: 0.08em; color: var(--ink-soft); }
+      .sheet .bigv { font-family: "SerifSC", serif; font-weight: 700; font-size: 84px; line-height: 1.14; text-align: center; }
+      .sheetL .lab, .sheetL .bigv { color: var(--grey); }
+      .sheetR .bigv { color: var(--accent); }
+
+      /* 报道/公文卷宗 */
+      .headline { font-family: "SerifSC", serif; font-weight: 700; font-size: 56px; line-height: 1.24; color: var(--ink); margin-top: 34px; }
+      .bullets { margin-top: 44px; }
+      .bullets .bl { font-size: 40px; color: var(--ink-soft); line-height: 1.5; margin-top: 22px; opacity: 0; }
+      .bullets .bl b { color: var(--ink); font-weight: 800; }
+      .gazette-title { font-family: "SerifSC", serif; font-weight: 700; font-size: 58px; line-height: 1.28; margin: 26px 0 14px; }
+      .quotebig { font-family: "SerifSC", serif; font-weight: 700; font-size: 76px; line-height: 1.24; color: var(--accent); margin-top: 40px; opacity: 0; }
+      .quoteby { font-size: 34px; color: var(--ink-soft); letter-spacing: 1px; margin-top: 24px; opacity: 0; }
+      .article { margin-top: 30px; position: relative; }
+      .article .num { font-weight: 800; font-size: 40px; color: var(--ink); }
+      .article .txt { font-size: 40px; color: var(--ink-soft); line-height: 1.5; margin-top: 12px; }
+      .hl-wash { position: absolute; background: rgba(200,69,27,0.14); border-radius: 6px; opacity: 0; }
+      .hl-bar { position: absolute; height: 6px; background: var(--accent); border-radius: 3px; transform-origin: left center; }
+      .lawpunch { font-family: "SerifSC", serif; font-weight: 700; font-size: 48px; line-height: 1.3; color: var(--ink); margin-top: 46px; opacity: 0; }
+      .lawpunch b { color: var(--accent); }
+
+      /* 拼贴 clip */
+      .collage { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; z-index: 12; }
+
+      /* 拼贴叠层标签 */
+      .ovlabel { position: absolute; z-index: 30; background: var(--cream); box-shadow: 0 18px 44px rgba(23,24,28,0.45); }
+      #ov-s02a { left: 66px; top: 120px; padding: 34px 46px 38px; transform: rotate(-1.2deg); }
+      #ov-s02a .l1 { font-family: "SerifSC", serif; font-weight: 700; font-size: 66px; line-height: 1.1; color: var(--ink); white-space: nowrap; }
+      #ov-s02a .l2 { font-size: 38px; margin-top: 16px; color: var(--ink-soft); white-space: nowrap; }
+      #ov-s02a .l2::before { content: ""; display: inline-block; width: 34px; height: 8px; background: var(--accent); margin-right: 18px; vertical-align: middle; }
+      #ov-s03b { left: 70px; bottom: 150px; padding: 26px 40px; transform: rotate(-1deg); }
+      #ov-s03b .l1 { font-family: "SerifSC", serif; font-weight: 700; font-size: 56px; color: var(--ink); white-space: nowrap; }
+      #ov-s03b .l1 b { color: var(--accent); }
+      #ov-s03c-note { left: 70px; right: 70px; bottom: 120px; padding: 24px 36px; transform: rotate(-0.6deg); text-align: center; }
+      #ov-s03c-note .l1 { font-size: 40px; color: var(--ink-soft); white-space: nowrap; }
+      #ov-s03c-note .l1 b { color: var(--accent); font-weight: 800; }
+      #ov-s04d { right: 70px; top: 150px; padding: 26px 40px; transform: rotate(1deg); }
+      #ov-s04d .l1 { font-family: "SerifSC", serif; font-weight: 700; font-size: 54px; color: var(--ink); white-space: nowrap; }
+      #ov-s04d .l1 b { color: var(--accent); }
+
+      #brand { position: absolute; right: 60px; bottom: 60px; z-index: 40; width: 150px; opacity: 0.5; mix-blend-mode: multiply; }
+      .sweep { position: absolute; inset: 0; z-index: 45; background: var(--accent); }
+      #whiteflash { position: absolute; inset: 0; z-index: 47; background: #FFFFFF; }
+      #grain { position: absolute; inset: 0; z-index: 61; pointer-events: none; background: url("assets/grain.png"); background-size: 512px 512px; opacity: 0.05; mix-blend-mode: multiply; }
+    </style>
+  </head>
+  <body>
+    <div id="master-root" data-composition-id="master" data-width="1080" data-height="1920" data-start="0" data-duration="81.936">
+      <div id="paper-bg" class="clip" data-start="0" data-duration="81.936" data-track-index="1"></div>
+
+      <!-- s01 钩子（案卷封面 · 焦橙） 0–5.353 -->
+      <div id="s01" class="filecard fc-orange clip" data-start="0" data-duration="5.353" data-track-index="10">
+        <div class="folder" id="s01-folder">
+          <div class="foldertab">AI 安全观察 · 07/20</div>
+          <div class="docbody" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:46px;">
+            <div class="lead" id="s01-lead" style="font-size:44px;color:var(--ink-soft);line-height:1.6;">偷一个数据库，<br>以前得靠顶尖黑客。</div>
+            <div class="big serif" style="font-size:118px;line-height:1.16;">现在 AI<br>自己<span style="color:var(--accent)">就能干</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- doc-hf 报道卷宗（s02b · 焦橙） 11.313–17.953 -->
+      <div id="doc-hf-bg" class="filecard fc-orange clip" data-start="11.313" data-duration="6.64" data-track-index="9"></div>
+      <div id="doc-hf" class="folder clip" data-start="11.313" data-duration="6.64" data-track-index="10">
+        <div class="foldertab">证据 A · 官方披露</div>
+        <div class="docbody">
+          <div class="docmeta">CASE&nbsp;&nbsp;&nbsp;Hugging Face 安全事件<br>SOURCE&nbsp;huggingface.co · 官方披露 2026-07</div>
+          <div class="headline">动手的不是人，<br>是一套全自动 AI 智能体</div>
+          <div class="bullets">
+            <div class="bl" id="hf-b1">· 自己<b>拿到内部凭据</b></div>
+            <div class="bl" id="hf-b2">· 摸进<b>多个内部系统</b></div>
+            <div class="bl" id="hf-b3">· 全程<b>由 AI 智能体驱动</b></div>
+          </div>
+        </div>
+        <div class="stamp" id="stamp-hf" style="right:56px;top:210px;font-size:50px;">被攻破</div>
+        <div class="docsrc">来源：Hugging Face 官方安全披露</div>
+      </div>
+
+      <!-- doc-isc 定调卷宗（s02c+s02d · 焦橙） 17.953–30.793 -->
+      <div id="doc-isc-bg" class="filecard fc-orange clip" data-start="17.953" data-duration="12.84" data-track-index="9"></div>
+      <div id="doc-isc" class="folder clip" data-start="17.953" data-duration="12.84" data-track-index="10">
+        <div class="foldertab">定调 · 互联网安全大会</div>
+        <div class="docbody">
+          <div class="docmeta">会议&nbsp;&nbsp;&nbsp;第十四届互联网安全大会 ISC 2026<br>SOURCE&nbsp;科技日报 · 2026-07-20</div>
+          <div class="gazette-title">主题：智能体 · 颠覆安全</div>
+          <div class="quotebig" id="isc-quote">这是 AI 时代的<br>「网络核武器」</div>
+          <div class="quoteby" id="isc-by">—— 周鸿祎 · 360 创始人</div>
+        </div>
+        <div class="docsrc">来源：科技日报 2026-07-20</div>
+      </div>
+
+      <!-- s03a 攻防天平对比（深紫） 30.793–38.073 -->
+      <div id="s03a" class="filecard fc-purple clip" data-start="30.793" data-duration="7.28" data-track-index="10">
+        <div class="sheet sheetL"><div class="lab">过去</div><div class="bigv">漏洞<br>难找</div></div>
+        <div class="sheet sheetR"><div class="lab">现在 · AI</div><div class="bigv">又快<br>又便宜</div></div>
+      </div>
+
+      <!-- s03d 安全提醒（引言纸签 · 芥末黄） 52.153–56.513 -->
+      <div id="s03d" class="filecard fc-mustard clip" data-start="52.153" data-duration="4.36" data-track-index="10">
+        <div class="slip">
+          <div class="big" style="font-size:78px;line-height:1.28;">别把敏感信息，<br><span style="color:var(--accent)">随手喂给 AI。</span></div>
+          <div class="bar"></div>
+          <div class="lead" style="font-size:36px;margin-top:30px;">—— 赵春江 · 中国工程院院士</div>
+        </div>
+      </div>
+
+      <!-- doc-law 公文卷宗（s04a+s04b · 墨绿） 56.513–64.953 -->
+      <div id="doc-law-bg" class="filecard fc-green clip" data-start="56.513" data-duration="8.44" data-track-index="9"></div>
+      <div id="doc-law" class="folder clip" data-start="56.513" data-duration="8.44" data-track-index="10">
+        <div class="foldertab">法规 · 全国人大</div>
+        <div class="docbody">
+          <div class="docmeta">SOURCE&nbsp;个人信息保护法<br>条款&nbsp;&nbsp;&nbsp;第五十一条 · 安全技术措施</div>
+          <div class="gazette-title">《个人信息保护法》<br>第五十一条</div>
+          <div class="article" id="art51">
+            <div class="txt">应当采取<span style="position:relative;">相应的加密<span class="hl-wash" id="w51" style="left:-6px;right:-6px;top:-4px;bottom:-4px;"></span></span>、去标识化等安全技术措施。</div>
+            <div class="hl-bar" id="b51" style="left:0;bottom:-10px;width:300px;"></div>
+          </div>
+          <div class="lawpunch" id="law-punch">加密不是加分项，<br>是<b>法定义务</b>。</div>
+        </div>
+        <div class="docsrc">来源：全国人大 · 个人信息保护法</div>
+      </div>
+
+      <!-- s04c 密态计算（标题纸签 · 墨绿） 64.953–67.433 -->
+      <div id="s04c" class="filecard fc-green clip" data-start="64.953" data-duration="2.48" data-track-index="10">
+        <div class="slip">
+          <div class="lead" style="font-size:48px;">更彻底的做法</div>
+          <div class="big" style="font-size:158px;margin-top:30px;">密态计算</div>
+          <div class="bar"></div>
+        </div>
+      </div>
+
+      <!-- s04e 收尾（纸签金句 · 墨绿） 75.113–81.936 -->
+      <div id="s04e" class="filecard fc-green clip" data-start="75.113" data-duration="6.823" data-track-index="10">
+        <div class="slip">
+          <div class="lead" id="s04e-lead" style="font-size:42px;">这就是荆华密算在做的事</div>
+          <div class="big" id="s04e-l1" style="font-size:70px;margin-top:34px;line-height:1.34;">你的数据，也该有一层</div>
+          <div class="big" id="s04e-l2" style="font-size:70px;color:var(--accent);margin-top:14px;">它看不懂的保护。</div>
+        </div>
+      </div>
+
+      <!-- 拼贴叠层标签 -->
+      <div id="ov-s02a" class="ovlabel clip" data-start="5.353" data-duration="5.96" data-track-index="30">
+        <div class="l1">Hugging&nbsp;Face</div>
+        <div class="l2">承认被攻破</div>
+      </div>
+      <div id="ov-s03b" class="ovlabel clip" data-start="38.073" data-duration="6.84" data-track-index="30">
+        <div class="l1">一句回答，<b>反推出你</b></div>
+      </div>
+      <div id="ov-s03c-note" class="ovlabel clip" data-start="44.913" data-duration="7.24" data-track-index="30">
+        <div class="l1">病历 · 征信 · 对话：<b>好摘的果子</b></div>
+      </div>
+      <div id="ov-s04d" class="ovlabel clip" data-start="67.433" data-duration="7.68" data-track-index="30">
+        <div class="l1">服务商，只看得到<b>乱码</b></div>
+      </div>
+
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const enter = (sel, at, y) => tl.from(sel, { opacity: 0, y: (y ?? 34), duration: 0.42, ease: "power4.out", immediateRender: false }, at);
+        const pop = (sel, at, y) => tl.fromTo(sel, { opacity: 0, y: (y ?? 24) }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out", immediateRender: false }, at);
+
+        // s01 案卷封面
+        tl.from("#s01-folder", { y: 70, opacity: 0, duration: 0.5, ease: "power3.out", immediateRender: false }, 0.1);
+        enter("#s01-lead", 0.4); enter("#s01 .big", 0.7, 40);
+
+        // doc-hf 报道卷宗：入场 + 红章 + 3 bullet 随旁白
+        tl.from("#doc-hf", { opacity: 0, y: 60, duration: 0.5, ease: "power3.out", immediateRender: false }, 11.313);
+        tl.fromTo("#stamp-hf", { opacity: 0, scale: 1.7, rotation: -12 }, { opacity: 0.85, scale: 1, rotation: -12, duration: 0.26, ease: "power3.in", immediateRender: false }, 12.4);
+        pop("#hf-b1", 13.0); pop("#hf-b2", 14.4); pop("#hf-b3", 15.7);
+
+        // doc-isc 定调卷宗：入场 + 主题 + 核武器 quote 后置
+        tl.from("#doc-isc", { opacity: 0, y: 60, duration: 0.5, ease: "power3.out", immediateRender: false }, 17.953);
+        pop("#isc-quote", 24.5, 30); pop("#isc-by", 25.4, 18);
+
+        // s03a 攻防天平：左右滑入
+        tl.from("#s03a .sheetL", { xPercent: -26, opacity: 0, duration: 0.45, ease: "power3.out", immediateRender: false }, 30.9);
+        tl.from("#s03a .sheetR", { xPercent: 26, opacity: 0, duration: 0.45, ease: "power3.out", immediateRender: false }, 31.6);
+
+        // s03d 安全提醒纸签
+        tl.from("#s03d .slip", { y: 60, opacity: 0, duration: 0.4, ease: "power3.out", immediateRender: false }, 52.2);
+        enter("#s03d .big", 52.35, 34); enter("#s03d .lead", 52.7, 20);
+
+        // doc-law 公文卷宗：入场 + 加密同步高亮 + 法定义务 punch
+        tl.from("#doc-law", { opacity: 0, y: 60, duration: 0.5, ease: "power3.out", immediateRender: false }, 56.513);
+        tl.to("#w51", { opacity: 1, duration: 0.25, immediateRender: false }, 60.4);
+        tl.fromTo("#b51", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power4.out" }, 60.4);
+        pop("#law-punch", 62.4, 24);
+
+        // s04c 密态计算标题
+        tl.from("#s04c .slip", { y: 60, opacity: 0, duration: 0.4, ease: "power3.out", immediateRender: false }, 65.02);
+        enter("#s04c .lead", 65.15); enter("#s04c .big", 65.35, 44);
+
+        // s04e 收尾金句
+        tl.from("#s04e .slip", { y: 50, opacity: 0, duration: 0.4, ease: "power3.out", immediateRender: false }, 75.2);
+        enter("#s04e-lead", 75.35, 20); enter("#s04e-l1", 75.7, 34); enter("#s04e-l2", 76.1, 34);
+        tl.to("#brand", { scale: 1.9, opacity: 0.85, duration: 0.6, ease: "power3.out", transformOrigin: "right bottom", immediateRender: false }, 78.2);
+
+        // 拼贴叠层标签：贴上去
+        tl.fromTo("#ov-s02a", { opacity: 0, y: -30, rotation: -5 }, { opacity: 1, y: 0, rotation: -1.2, duration: 0.45, ease: "power3.out", immediateRender: false }, 5.6);
+        tl.fromTo("#ov-s03b", { opacity: 0, y: 24, rotation: -4 }, { opacity: 1, y: 0, rotation: -1, duration: 0.4, ease: "power3.out", immediateRender: false }, 40.0);
+        tl.fromTo("#ov-s03c-note", { opacity: 0, y: 22 }, { opacity: 1, y: 0, rotation: -0.6, duration: 0.4, ease: "power3.out", immediateRender: false }, 48.6);
+        tl.fromTo("#ov-s04d", { opacity: 0, y: -22, rotation: 4 }, { opacity: 1, y: 0, rotation: 1, duration: 0.4, ease: "power3.out", immediateRender: false }, 69.6);
+
+        // 章节色块横扫（三段边界）
+        tl.fromTo("#sweep1", { xPercent: -110 }, { xPercent: 110, duration: 0.5, ease: "power2.inOut", immediateRender: false }, 5.2);
+        tl.fromTo("#sweep2", { xPercent: -110 }, { xPercent: 110, duration: 0.5, ease: "power2.inOut", immediateRender: false }, 30.6);
+        tl.fromTo("#sweep3", { xPercent: -110 }, { xPercent: 110, duration: 0.5, ease: "power2.inOut", immediateRender: false }, 56.3);
+
+        window.__timelines["master"] = tl;
+      </script>
+    </div>
+
+    <!-- 拼贴 clip（尾对齐裁到槽位，保住组装 payoff；QC 后置入 assets/） -->
+    <video id="v-s02a" class="collage clip" src="assets/s02a.mp4" muted playsinline data-start="5.353" data-duration="5.96" data-track-index="12"></video>
+    <video id="v-s03b" class="collage clip" src="assets/s03b.mp4" muted playsinline data-start="38.073" data-duration="6.84" data-track-index="12"></video>
+    <video id="v-s03c" class="collage clip" src="assets/s03c.mp4" muted playsinline data-start="44.913" data-duration="7.24" data-track-index="12"></video>
+    <video id="v-s04d" class="collage clip" src="assets/s04d.mp4" muted playsinline data-start="67.433" data-duration="7.68" data-track-index="12"></video>
+
+    <div id="sweep1" class="sweep clip" data-start="5.2" data-duration="0.5" data-track-index="45"></div>
+    <div id="sweep2" class="sweep clip" data-start="30.6" data-duration="0.5" data-track-index="45"></div>
+    <div id="sweep3" class="sweep clip" data-start="56.3" data-duration="0.5" data-track-index="45"></div>
+    <div id="whiteflash" class="clip" data-start="75.113" data-duration="0.067" data-track-index="47"></div>
+    <img id="brand" class="clip" src="assets/jinghua-logo.jpg" data-start="5.353" data-duration="76.583" data-track-index="40" />
+    <div id="grain" class="clip" data-start="0" data-duration="81.936" data-track-index="61"></div>
+    <audio id="voiceover" src="assets/voiceover.mp3" data-start="0" data-duration="81.936" data-track-index="0" data-volume="1"></audio>
+  </body>
+</html>

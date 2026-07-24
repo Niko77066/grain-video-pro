@@ -1,0 +1,393 @@
+{
+ "generated": "2026-07-17",
+ "note": "broll3 素材重构：Pexels/Pixabay 只承担纯空镜氛围；叙事素材来自公有领域档案(archive.org/Wikimedia Commons)与 APIhub 新闻下载。全部 1280x720 h264 g12 无声，统一 eq=saturation=0.8 微暖，与 broll2 _g 调色一致。broadcast-risk 条目建议只用 ≤3s 闪切。",
+ "items": [
+  {
+   "file": "arg_flag_g.mp4",
+   "source": "https://www.pexels.com/search/videos/argentina%20flag/",
+   "license": "pexels",
+   "section": "sec01",
+   "desc": "阿根廷国旗蓝天下迎风飘扬",
+   "dur_s": 6.63
+  },
+  {
+   "file": "fans_stadium_night_g.mp4",
+   "source": "https://www.pexels.com/video/34605094/",
+   "license": "pexels",
+   "section": "sec01",
+   "desc": "夜场球场看台球迷人群空镜",
+   "dur_s": 7.0
+  },
+  {
+   "file": "wc_banner_fans_g.mp4",
+   "source": "https://www.youtube.com/watch?v=1OB-H88jNKI",
+   "license": "broadcast-risk",
+   "section": "sec01",
+   "desc": "看台阿根廷球迷与球员横幅同框欢呼（Sky News，建议≤3s闪切）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "wc_banner_players_g.mp4",
+   "source": "https://www.youtube.com/watch?v=1OB-H88jNKI",
+   "license": "broadcast-risk",
+   "section": "sec01",
+   "desc": "阿根廷球员赛后在球场拉开“LAS MALVINAS SON ARGENTINAS”横幅（Sky News，建议≤3s闪切）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "wc_fans_banner2_g.mp4",
+   "source": "https://www.youtube.com/watch?v=bclOz-WWvyg",
+   "license": "broadcast-risk",
+   "section": "sec01",
+   "desc": "阿根廷球员持横幅特写与看台球迷（AP，建议≤3s闪切）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "wc_goal_action_g.mp4",
+   "source": "https://www.youtube.com/watch?v=bclOz-WWvyg",
+   "license": "broadcast-risk",
+   "section": "sec01",
+   "desc": "2026半决赛门前进球瞬间比赛画面（AP/FIFA，建议≤3s闪切）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "atlantic_storm_g.mp4",
+   "source": "https://www.pexels.com/video/1879456/",
+   "license": "pexels",
+   "section": "sec02",
+   "desc": "狂风暴雨的大西洋海面巨浪",
+   "dur_s": 8.0
+  },
+  {
+   "file": "island_coast_aerial_g.mp4",
+   "source": "https://www.pexels.com/video/5055983/",
+   "license": "pexels",
+   "section": "sec02",
+   "desc": "航拍孤岛海岸线",
+   "dur_s": 7.0
+  },
+  {
+   "file": "ba_street_1920s_g.mp4",
+   "source": "https://archive.org/details/0943_People_Who_Live_on_a_Great_Plain_A_Film_Lesson_in_World_Geograp_00_33_36_27",
+   "license": "public-domain",
+   "section": "sec03",
+   "desc": "1920年代布宜诺斯艾利斯港口谷物码头与市区街景（1928纪录片）",
+   "dur_s": 7.0
+  },
+  {
+   "file": "cattle_herd_aerial_g.mp4",
+   "source": "https://www.pexels.com/video/18924890/",
+   "license": "pexels",
+   "section": "sec03",
+   "desc": "航拍草原赶牛群长队",
+   "dur_s": 8.0
+  },
+  {
+   "file": "invasion_1806_painting_g.mp4",
+   "source": "https://commons.wikimedia.org/wiki/File:Museo_del_Bicentenario_-_%22Ataque_por_los_ingleses_a_Buenos_Aires%22.jpg",
+   "license": "public-domain",
+   "section": "sec03",
+   "desc": "1806-07年英军进攻布宜诺斯艾利斯历史版画（缓推）",
+   "dur_s": 5.0
+  },
+  {
+   "file": "london_bank_1920_g.mp4",
+   "source": "https://archive.org/details/SeeingLo1920",
+   "license": "public-domain",
+   "section": "sec03",
+   "desc": "1920年伦敦银行区街景（英格兰银行门前马车与双层巴士）",
+   "dur_s": 7.97
+  },
+  {
+   "file": "pampas_harvest_1928_g.mp4",
+   "source": "https://archive.org/details/0943_People_Who_Live_on_a_Great_Plain_A_Film_Lesson_in_World_Geograp_00_33_36_27",
+   "license": "public-domain",
+   "section": "sec03",
+   "desc": "1928年阿根廷谷物收割纪录影像",
+   "dur_s": 8.0
+  },
+  {
+   "file": "pampas_oxcart_1928_g.mp4",
+   "source": "https://archive.org/details/0943_People_Who_Live_on_a_Great_Plain_A_Film_Lesson_in_World_Geograp_00_33_36_27",
+   "license": "public-domain",
+   "section": "sec03",
+   "desc": "1928年潘帕斯牛车队纪录影像",
+   "dur_s": 7.97
+  },
+  {
+   "file": "steam_train_g.mp4",
+   "source": "https://www.pexels.com/video/5702029/",
+   "license": "pexels",
+   "section": "sec03",
+   "desc": "蒸汽机车喷汽驶来（铁路资本叙事氛围位）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "wheat_field_g.mp4",
+   "source": "https://www.pexels.com/video/11355346/",
+   "license": "pexels",
+   "section": "sec03",
+   "desc": "金色麦浪特写",
+   "dur_s": 8.0
+  },
+  {
+   "file": "ap_islanders_1982_g.mp4",
+   "source": "https://www.youtube.com/watch?v=bclOz-WWvyg",
+   "license": "broadcast-risk",
+   "section": "sec04",
+   "desc": "1982马岛档案：岛民街头与阿军伪装炮位（AP，建议≤3s闪切）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "belgrano_still_g.mp4",
+   "source": "https://commons.wikimedia.org/wiki/File:ARA_General_Belgrano_underway.jpg",
+   "license": "public-domain",
+   "section": "sec04",
+   "desc": "贝尔格拉诺将军号巡洋舰海上航行黑白照（缓推）",
+   "dur_s": 5.0
+  },
+  {
+   "file": "bleak_island_g.mp4",
+   "source": "https://www.pexels.com/video/11206060/",
+   "license": "pexels",
+   "section": "sec04",
+   "desc": "荒芜风蚀礁岩海岸（福克兰质感空镜）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "hermes_taskforce_still_g.mp4",
+   "source": "https://commons.wikimedia.org/wiki/File:HMS_Broadsword_and_Hermes,_1982_(IWM).jpg",
+   "license": "CC",
+   "section": "sec04",
+   "desc": "1982竞技神号航母与宽剑号护卫舰南大西洋编队（IWM/OGL，缓推）",
+   "dur_s": 5.0
+  },
+  {
+   "file": "monumento_malvinas_still_g.mp4",
+   "source": "https://commons.wikimedia.org/wiki/File:Monumento_Caidos_Malvinas_II.jpg",
+   "license": "public-domain",
+   "section": "sec04",
+   "desc": "布宜诺斯艾利斯马岛阵亡将士纪念碑与英国塔同框（缓推）",
+   "dur_s": 5.0
+  },
+  {
+   "file": "moor_windswept_g.mp4",
+   "source": "https://www.pexels.com/search/videos/moorland/",
+   "license": "pexels",
+   "section": "sec04",
+   "desc": "阴天风蚀荒原（福克兰质感空镜）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "navy_deck_grey_g.mp4",
+   "source": "https://www.pexels.com/search/videos/navy%20frigate/",
+   "license": "pexels",
+   "section": "sec04",
+   "desc": "军舰船头视角破灰浪航行",
+   "dur_s": 8.0
+  },
+  {
+   "file": "sheffield_still_g.mp4",
+   "source": "https://commons.wikimedia.org/wiki/File:HMS_Sheffield_(D80).jpg",
+   "license": "CC",
+   "section": "sec04",
+   "desc": "谢菲尔德号驱逐舰海上航行照（CC BY 3.0，缓推）",
+   "dur_s": 5.0
+  },
+  {
+   "file": "stanley_1982_still_g.mp4",
+   "source": "https://commons.wikimedia.org/wiki/File:Port_Stanley_-_Falklands_1982.jpg",
+   "license": "CC",
+   "section": "sec04",
+   "desc": "1982年斯坦利港英军与舰船（CC BY-SA 4.0，缓推）",
+   "dur_s": 5.0
+  },
+  {
+   "file": "sur_apostadero_g.mp4",
+   "source": "https://archive.org/details/thefalklandswar-part2",
+   "license": "broadcast-risk",
+   "section": "sec04",
+   "desc": "1982斯坦利港阿军火炮与 Apostadero Naval Malvinas 驻地士兵（建议≤3s闪切）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "sur_artillery_sil_g.mp4",
+   "source": "https://archive.org/details/thefalklandswar-part2",
+   "license": "broadcast-risk",
+   "section": "sec04",
+   "desc": "马岛战场火炮天际剪影（建议≤3s闪切）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "tf_dock_farewell_g.mp4",
+   "source": "https://archive.org/details/thefalklandswar-part2",
+   "license": "broadcast-risk",
+   "section": "sec04",
+   "desc": "1982英国码头人群挥别特混舰队出港（英国国旗）（建议≤3s闪切）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "tf_harrier_deck_g.mp4",
+   "source": "https://archive.org/details/thefalklandswar-part2",
+   "license": "broadcast-risk",
+   "section": "sec04",
+   "desc": "1982航母甲板鹞式战机与人群（建议≤3s闪切）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "azteca_aerial_g.mp4",
+   "source": "https://www.pexels.com/video/36689839/",
+   "license": "pexels",
+   "section": "sec05",
+   "desc": "阿兹特克体育场航拍",
+   "dur_s": 8.0
+  },
+  {
+   "file": "grass_closeup_g.mp4",
+   "source": "https://www.pexels.com/video/31522780/",
+   "license": "pexels",
+   "section": "sec05",
+   "desc": "复古足球停在草皮特写",
+   "dur_s": 5.0
+  },
+  {
+   "file": "qf1966_argument_g.mp4",
+   "source": "https://archive.org/details/england-vs-argentina-1966-world-cup-quarter-final",
+   "license": "broadcast-risk",
+   "section": "sec05",
+   "desc": "1966世界杯1/4决赛拉廷被罚下场边争执（建议≤3s闪切，右上有SPORTMANIA台标）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "qf1966_crowd_g.mp4",
+   "source": "https://archive.org/details/england-vs-argentina-1966-world-cup-quarter-final",
+   "license": "broadcast-risk",
+   "section": "sec05",
+   "desc": "1966老温布利看台人海（建议≤3s闪切，右上有SPORTMANIA台标）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "ba_congress_night_g.mp4",
+   "source": "https://www.pexels.com/search/videos/buenos%20aires%20night/",
+   "license": "pexels",
+   "section": "sec06",
+   "desc": "布宜诺斯艾利斯国会广场夜景（两会纪念碑与城市天际线）",
+   "dur_s": 8.0
+  },
+  {
+   "file": "obelisco_day_g.mp4",
+   "source": "https://www.pexels.com/video/31563866/",
+   "license": "pexels",
+   "section": "sec06",
+   "desc": "布宜诺斯艾利斯方尖碑与七月九日大道",
+   "dur_s": 8.0
+  },
+  {
+   "file": "puerto_madero_dusk_g.mp4",
+   "source": "https://pixabay.com/videos/",
+   "license": "pixabay",
+   "section": "sec06",
+   "desc": "布宜诺斯艾利斯妇女桥黄昏航拍",
+   "dur_s": 8.0
+  }
+ ],
+ "keep_from_broll2": [
+  {
+   "file": "city1_g.mp4",
+   "section": "sec06",
+   "reason": "Puerto Madero 布宜诺斯艾利斯航拍黄昏，真地标"
+  },
+  {
+   "file": "flag1_g.mp4",
+   "section": "sec01",
+   "reason": "阿根廷国旗特写（织物纹理），贴题"
+  },
+  {
+   "file": "grain1_g.mp4",
+   "section": "sec03",
+   "reason": "麦穗特写，谷物出口叙事"
+  },
+  {
+   "file": "greysea1_g.mp4",
+   "section": "sec04",
+   "reason": "灰蓝海浪，南大西洋质感"
+  },
+  {
+   "file": "island1_g.mp4",
+   "section": "sec04",
+   "reason": "黑色礁岩海岸航拍，福克兰质感"
+  },
+  {
+   "file": "london1_g.mp4",
+   "section": "sec04",
+   "reason": "伦敦雨夜街头，撒切尔伦敦端氛围（不用于1900s段）"
+  },
+  {
+   "file": "london2_g.mp4",
+   "section": "sec04",
+   "reason": "伦敦泰晤士航拍"
+  },
+  {
+   "file": "ocean1_g.mp4",
+   "section": "sec02",
+   "reason": "海浪俯拍空镜"
+  },
+  {
+   "file": "ocean2_g.mp4",
+   "section": "sec02",
+   "reason": "风暴海乌云空镜"
+  },
+  {
+   "file": "warship1_g.mp4",
+   "section": "sec04",
+   "reason": "灰海远处舰影剪影"
+  }
+ ],
+ "dropped_from_broll2": [
+  {
+   "file": "airport1_g.mp4",
+   "reason": "机场到达厅与本片无关"
+  },
+  {
+   "file": "building1_g.mp4",
+   "reason": "哥伦比亚殖民风建筑冒充布市，错位"
+  },
+  {
+   "file": "building2_g.mp4",
+   "reason": "法兰克福德式老城广场冒充布市，用户点名反例"
+  },
+  {
+   "file": "cargo1_g.mp4",
+   "reason": "现代集装箱船冒充1900s贸易，用户点名反例"
+  },
+  {
+   "file": "cattle1_g.mp4",
+   "reason": "法国夏洛莱白牛特写，非潘帕斯"
+  },
+  {
+   "file": "city2_g.mp4",
+   "reason": "哥伦比亚红瓦小镇航拍，非布市"
+  },
+  {
+   "file": "crowd1_g.mp4",
+   "reason": "基辅大道阅兵人海，城市错位"
+  },
+  {
+   "file": "memorial1_g.mp4",
+   "reason": "比利时一战公墓，非马岛纪念碑"
+  },
+  {
+   "file": "train1_g.mp4",
+   "reason": "欧洲村庄窄轨车站，非阿根廷铁路"
+  }
+ ],
+ "gaps": [
+  "Pixabay 检索 malvinas/falkland 零结果；马岛战争纪念碑视频素材缺，仅有 Commons 静帧(monumento_malvinas_still)",
+  "Pexels 无真实军舰海上机动视频（检索多返回博物馆舰/货船），军舰动态只有 navy_deck_grey(甲板视角)与 broll2 warship1 剪影；1982 舰队动态全靠 broadcast-risk 档案片",
+  "未找到可下载的 2026-07-16 电视新闻整段（archive.org GBN/LRT 条目 access-restricted 仅可流看）；新闻画面用 Sky News/AP YouTube 官方频道下载替代，均标 broadcast-risk",
+  "阿根廷球迷街头庆祝（布宜诺斯艾利斯方尖碑夜景人群）无贴题素材：Pexels 检索返回巴西/土耳其球迷，弃用；现有 fans_stadium_night 为球场看台泛用空镜",
+  "1966 拉廷'坐红毯'具体瞬间未在档案转播中定位到，取被罚下争执段+看台人海替代；SPORTMANIA 台标已被 16:9 裁切基本裁掉",
+  "1900s 阿根廷蒸汽火车行驶影像未找到（1928 纪录片无火车段），铁路叙事用现代蒸汽火车空镜(steam_train)兜底",
+  "temperley/老温布利 1966 彩色档案与阿兹特克 1986 相关素材按裁决不采（1986 一帧不用）"
+ ]
+}

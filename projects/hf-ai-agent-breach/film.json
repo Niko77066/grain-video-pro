@@ -1,0 +1,953 @@
+{
+  "meta": {
+    "title": "AI 现在会自己黑库了（暂名）",
+    "format": "faceless_news_recap",
+    "style_pack": "case-file 案卷档案 v3（沿用首片 openai-78m-logs 首考通过风格包）：版式卡=拼贴色场上的奶油白卷宗（标签+等宽字元数据+红章），色场随相邻拼贴章节轮换；三声部=HyperFrames 案卷卡 + AI 纸拼贴 b-roll + 大数字",
+    "commitment": {
+      "type": "typography_led + collage_broll",
+      "duration_s": 81.936,
+      "tolerance_pct": 5.0,
+      "duration_policy": "no-lock（用户拍板去除时长锁）：时长由音频/内容自然定，只记录、不设硬门，不为凑数拉长/砍内容或偷偷变速；守『宁可短不可水』。估 ~65-80s，待音频定稿回填。",
+      "duration_actual_s": 82.1
+    },
+    "aspect": "9:16（企业号双平台竖屏，沿用首片用户拍板）",
+    "budget": {
+      "spent_usd": 0.0,
+      "note": "未设上限（质量优先，只记账；铁律7不惜成本）"
+    },
+    "pipeline_version": "m0-v1",
+    "schema_version": "m1-v1",
+    "status": "review",
+    "brand": {
+      "name_cn": "荆华密算",
+      "name_en": "JINGHUA",
+      "logo": "brand/jinghua-logo.jpg（单色，沿用首片）",
+      "palette": "case-file：纸白#F4F1EA/墨黑#17181C/印刷红#C8451B/细线#C9C4B8；拼贴 b-roll 各色场靠半调+奶油白keyline+印刷红点色+纸颗粒缝合",
+      "voice": "温柔年轻女声（沿用首片品牌嗓）",
+      "captions": "不加通屏字幕（版式卡即大字，沿用首片）"
+    },
+    "series": "《AI 隐私风险解读》第 2 集（承接首片『你删掉的对话平台还存着』）",
+    "next_action": "⏸ 用户看 v3(docsrc 修复+纹理 BGM)校准 → 合 main。48h 窗口最晚 7/22"
+  },
+  "audio": {
+    "voiceover": {
+      "file": "audio/voiceover.mp3",
+      "voice_profile": "一位年轻女性，普通话，声音温柔亲切、有温度，像给朋友讲故事一样娓娓道来，语速自然平缓（沿用首片品牌嗓）",
+      "gen": {
+        "model": "火山 seed-audio-1.0",
+        "params": {
+          "format": "mp3",
+          "sample_rate": 48000,
+          "speech_rate": 0,
+          "enable_subtitle": true
+        },
+        "refs": [],
+        "payload": "audio/voiceover_payload.json",
+        "response": "audio/tts_response.json"
+      },
+      "duration_s": 81.936,
+      "selected_take": 1,
+      "note": "整片一次生成(≤120s 单次音色一致)；自带逐字 subtitle 直接建 timeline，全文含 Hugging Face/周鸿祎/赵春江/密态计算/荆华密算均正确解析"
+    },
+    "music": {
+      "file": "audio/bgm_bed.mp3",
+      "provider": "fal-ai/minimax-music/v2.6 (灵鲸网关, 用户指定接口)",
+      "prompt_file": "audio/bgm_payload.json",
+      "request_id": "task_1Ld5rQefjP2ta7ib1bEKrAaszUOxly2l",
+      "raw": "audio/bgm_raw.mp3(144s)",
+      "bed": "audio/bgm_bed.mp3(裁6-88s,82.1s,2s淡入/3s淡出)",
+      "mount": "post-mix volume≈0.073→BGM 置旁白下 ~22LU；amix normalize=0→loudnorm I=-14。最终 -14.11 LUFS/-0.95 dBTP",
+      "note": "v2 按 media-use/audio/references/bgm.md 最佳实践重做：床是纹理非旋律——软 sustained pad+低 ambient drone、无主旋律/无鼓/无节拍、平淡低动态、loop-friendly。修 v1『钟摆tick+glitch+ominous』过于有性格抢戏(用户反馈影响观感)"
+    },
+    "timeline": {
+      "file": "audio/timeline.json",
+      "duration_s": 81.936,
+      "sections": [
+        {
+          "id": "sec01",
+          "t": [
+            0.273,
+            5.306
+          ]
+        },
+        {
+          "id": "sec02",
+          "t": [
+            5.353,
+            30.706
+          ]
+        },
+        {
+          "id": "sec03",
+          "t": [
+            30.793,
+            56.306
+          ]
+        },
+        {
+          "id": "sec04",
+          "t": [
+            56.513,
+            81.902
+          ]
+        }
+      ]
+    }
+  },
+  "anchors": [
+    {
+      "id": "a_s02a_hack",
+      "type": "collage_still",
+      "status": "planned",
+      "used_by": [
+        "s02a_hack"
+      ],
+      "candidates": [],
+      "gen": {
+        "model": "gpt-image-2 medium",
+        "prompt_file": "anchors/a_s02a_hack_still_payload.json",
+        "params": {
+          "size": "720x1280",
+          "quality": "medium",
+          "output_format": "png"
+        },
+        "refs": [],
+        "note": "Gate2 静帧,EP 目检通过",
+        "reqid": "202607201042276619952098268d9d6Hl7tDvJV"
+      },
+      "note": "焦橙场(威胁/紧迫):电路碎片拼成的手从明文档案柜抽走档案",
+      "field_hex": "#BC5A1E",
+      "still": "anchors/a_s02a_hack_collage.png"
+    },
+    {
+      "id": "a_s03b_reinfer",
+      "type": "collage_still",
+      "status": "planned",
+      "used_by": [
+        "s03b_reinfer"
+      ],
+      "candidates": [],
+      "gen": {
+        "model": "gpt-image-2 medium",
+        "prompt_file": "anchors/a_s03b_reinfer_still_payload_v2.json",
+        "params": {
+          "size": "720x1280",
+          "quality": "medium"
+        },
+        "refs": [],
+        "note": "v2 静帧,EP 目检通过(AI气泡→反推箭头→档案)"
+      },
+      "note": "深紫场(v2):AI回答气泡→红色反推箭头+线→拽开个人档案(表格记录+剪影chip),表意『从AI输出反推隐私』",
+      "field_hex": "#3B2A57",
+      "still": "anchors/a_s03b_reinfer_collage.png"
+    },
+    {
+      "id": "a_s03c_harvest",
+      "type": "collage_still",
+      "status": "planned",
+      "used_by": [
+        "s03c_harvest"
+      ],
+      "candidates": [],
+      "gen": {
+        "model": "gpt-image-2 medium",
+        "prompt_file": "anchors/a_s03c_harvest_still_payload.json",
+        "params": {
+          "size": "720x1280",
+          "quality": "medium",
+          "output_format": "png"
+        },
+        "refs": [],
+        "note": "Gate2 静帧,EP 目检通过",
+        "reqid": "20260720104605993376958268d9d6ccA98wSd"
+      },
+      "note": "芥末黄场(警示):贴病历/征信/对话标签的果实垂低,一只手轻松摘下",
+      "field_hex": "#B8892A",
+      "still": "anchors/a_s03c_harvest_collage.png"
+    },
+    {
+      "id": "a_s04d_cipher",
+      "type": "collage_still",
+      "status": "planned",
+      "used_by": [
+        "s04d_cipher"
+      ],
+      "candidates": [],
+      "gen": {
+        "model": "gpt-image-2 medium",
+        "prompt_file": "anchors/a_s04d_cipher_still_payload.json",
+        "params": {
+          "size": "720x1280",
+          "quality": "medium",
+          "output_format": "png"
+        },
+        "refs": [],
+        "note": "Gate2 静帧,EP 目检通过",
+        "reqid": "202607201046543851638638268d9d6V3NdgdKT"
+      },
+      "note": "墨绿场(系统/加密):对话档案锁进保险盒,服务商舷窗只见乱码碎纸",
+      "field_hex": "#234A38",
+      "still": "anchors/a_s04d_cipher_collage.png"
+    }
+  ],
+  "shot_groups": [
+    {
+      "id": "g_s02a",
+      "shots": [
+        "s02a_hack"
+      ],
+      "provider": "seedance",
+      "engine": "seedance collage 首尾帧",
+      "seam_prev": "色块横扫(段1入)",
+      "seam_next": "B 硬切",
+      "duration_target_s": 6,
+      "clip": "compose/assets/s02a.mp4",
+      "duration_actual_s": 10.042,
+      "trim_to_s": 5.96
+    },
+    {
+      "id": "g_s03b",
+      "shots": [
+        "s03b_reinfer"
+      ],
+      "provider": "seedance",
+      "note": "v2 clip;尾对齐裁 6.84s",
+      "engine": "seedance collage 首尾帧",
+      "seam_prev": "B 硬切",
+      "seam_next": "B 硬切",
+      "duration_target_s": 7,
+      "clip": "compose/assets/s03b.mp4",
+      "duration_actual_s": 10.042,
+      "trim_to_s": 6.84
+    },
+    {
+      "id": "g_s03c",
+      "shots": [
+        "s03c_harvest"
+      ],
+      "provider": "seedance",
+      "engine": "seedance collage 首尾帧",
+      "seam_prev": "B 硬切",
+      "seam_next": "B 硬切",
+      "duration_target_s": 8,
+      "clip": "compose/assets/s03c.mp4",
+      "duration_actual_s": 10.042,
+      "trim_to_s": 7.24
+    },
+    {
+      "id": "g_s04d",
+      "shots": [
+        "s04d_cipher"
+      ],
+      "provider": "seedance",
+      "engine": "seedance collage 首尾帧",
+      "seam_prev": "B 硬切",
+      "seam_next": "B 硬切",
+      "duration_target_s": 8,
+      "clip": "compose/assets/s04d.mp4",
+      "duration_actual_s": 10.042,
+      "trim_to_s": 7.68
+    }
+  ],
+  "shots": [
+    {
+      "id": "s01_hook",
+      "t": [
+        0.0,
+        5.353
+      ],
+      "voice_ref": "sec01",
+      "intent": "钩子:偷库以前靠顶尖黑客,现在AI自己就能干",
+      "framing": "开场刊头卡",
+      "motion": "色块横扫入 + 大字『AI 学会了自己动手』+ 栏目名/日期戳 2026-07",
+      "source": {
+        "provider": "hyperframes",
+        "template": "masthead",
+        "params": {}
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "planned",
+      "source_note": "F06"
+    },
+    {
+      "id": "s02a_hack",
+      "t": [
+        5.353,
+        11.313
+      ],
+      "voice_ref": "sec02",
+      "intent": "HF 被攻破:AI 当黑客(隐喻)",
+      "framing": "拼贴 b-roll(电路碎片拼成的手从明文档案柜抽走档案)+ 文字叠层",
+      "motion": "焦橙场从空场组装:成排明文卷宗档案柜→一只由电路碎片拼成的手滑入→抽走一叠档案→档案化作数据碎片",
+      "source": {
+        "provider": "collage_broll",
+        "params": {
+          "origin_provider": "collage-broll"
+        },
+        "anchor": "a_s02a_hack",
+        "overlay": "hyperframes text"
+      },
+      "anchor_refs": [],
+      "group_ref": "g_s02a",
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "gpt-image-2(静帧) + doubao-seedance-2-0-260128(首尾帧)",
+        "params": {
+          "resolution": "720p",
+          "ratio": "9:16",
+          "duration": 10,
+          "generate_audio": false
+        },
+        "refs": [
+          "anchor:a_s02a_hack"
+        ],
+        "task_id": "task_d3mzsslRRVEO55JAEwUJO8NNdFWlpGJ9",
+        "duration_actual_s": 10.042,
+        "file": "shots/s02a_hack_collage.mp4",
+        "video_payload": "shots/s02a_hack_seedance_payload.json",
+        "reqid": "202607201053131719172608268d9d6ZzA1WDEC",
+        "trim_window_s": [
+          3.04,
+          9.0
+        ],
+        "trim_to_s": 5.96,
+        "asset": "compose/assets/s02a.mp4"
+      },
+      "qc": {
+        "result": "pass",
+        "note": "Gate3 视频QA(contact sheet 目检+YDIF):assemble-from-empty 连续组装、payoff 落窗尾;尾对齐裁 [3.04, 9.0]→5.96s;1080x1920/30fps;无畸变/假字/logo"
+      },
+      "source_note": "F01/F02/F03 HF 官方披露"
+    },
+    {
+      "id": "s02b_hfdetail",
+      "t": [
+        11.313,
+        17.953
+      ],
+      "voice_ref": "sec02",
+      "intent": "HF 细节:全自动 AI 智能体、自己拿凭据摸进内部系统",
+      "framing": "案卷卡(实证)",
+      "motion": "案卷标签贴入『Hugging Face · 被攻破』→ 要点逐条高亮:全自动 AI 智能体 / 自己拿到凭据 / 摸进内部系统",
+      "source": {
+        "provider": "hyperframes",
+        "template": "case-card",
+        "params": {}
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "planned",
+      "source_note": "F01/F02 HF blog 2026-07-16"
+    },
+    {
+      "id": "s02c_isc",
+      "t": [
+        17.953,
+        24.353
+      ],
+      "voice_ref": "sec02",
+      "intent": "国内定调:ISC 2026 主题 智能体颠覆安全",
+      "framing": "案卷卡 + 出处角标",
+      "motion": "大字『智能体 · 颠覆安全』+ 角标 第十四届互联网安全大会 ISC 2026 · 科技日报",
+      "source": {
+        "provider": "hyperframes",
+        "template": "case-card",
+        "params": {}
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "planned",
+      "source_note": "F05 科技日报/人民网 2026-07-20"
+    },
+    {
+      "id": "s02d_nuke",
+      "t": [
+        24.353,
+        30.793
+      ],
+      "voice_ref": "sec02",
+      "intent": "周鸿祎:AI 自动找漏洞写攻击代码=网络核武器",
+      "framing": "引言卡(印刷红色条)",
+      "motion": "印刷红色条顿入 → 引言『AI 时代的网络核武器』大字 + 归属 周鸿祎 · 360",
+      "source": {
+        "provider": "hyperframes",
+        "template": "pullquote",
+        "params": {}
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "planned",
+      "source_note": "F06 周鸿祎 ISC 2026"
+    },
+    {
+      "id": "s03a_flip",
+      "t": [
+        30.793,
+        38.073
+      ],
+      "voice_ref": "sec03",
+      "intent": "攻防天平:漏洞难找→AI 让它又快又便宜",
+      "framing": "前后对比卡",
+      "motion": "色块横扫入(段2:对你意味着)→ 左『过去:漏洞难找』灰 → 右『现在:又快 · 又便宜』印刷红,天平右倾",
+      "source": {
+        "provider": "hyperframes",
+        "template": "split-compare",
+        "params": {}
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "planned",
+      "source_note": "F09/F06"
+    },
+    {
+      "id": "s03b_reinfer",
+      "t": [
+        38.073,
+        44.913
+      ],
+      "voice_ref": "sec03",
+      "intent": "隐私反推:碎片信息被 AI 反推聚成一个人",
+      "framing": "拼贴 b-roll(散落信息碎片被吸聚成人形轮廓)+ 轻文字叠层",
+      "motion": "深紫场从空场组装:零散纸片(对话气泡/表单/头像残片)四散→被线索牵引向中心聚拢→拼成人形剪影,最后一片落定五官",
+      "source": {
+        "provider": "collage_broll",
+        "params": {
+          "origin_provider": "collage-broll"
+        },
+        "anchor": "a_s03b_reinfer",
+        "overlay": "hyperframes text"
+      },
+      "anchor_refs": [],
+      "group_ref": "g_s03b",
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "gpt-image-2(静帧v2) + doubao-seedance-2-0-260128(首尾帧v2)",
+        "params": {
+          "resolution": "720p",
+          "ratio": "9:16",
+          "duration": 10,
+          "generate_audio": false
+        },
+        "refs": [
+          "anchor:a_s03b_reinfer"
+        ],
+        "task_id": "task_xZWRqXmTRhkZVmrjZnZuSwMPziJJQY5I",
+        "duration_actual_s": 10.042,
+        "file": "shots/s03b_reinfer_collage.mp4",
+        "note": "v2 重做:弃v1『碎片聚成具体男性人脸』(概念漂到重识别+标签一个你与陌生脸不搭)；改『AI回答气泡→红色反推箭头→拽开个人档案(记录+剪影chip)』,贴合赵春江『从AI输出反推训练数据隐私』。v1 归档 anchors/_v1_archive、shots/_v1_archive",
+        "video_payload": "shots/s03b_reinfer_seedance_payload_v2.json",
+        "reqid": "202607201248266054707618268d9d6yvihsUWU",
+        "trim_window_s": [
+          2.16,
+          9.0
+        ],
+        "trim_to_s": 6.84,
+        "asset": "compose/assets/s03b.mp4"
+      },
+      "qc": {
+        "result": "pass",
+        "note": "Gate3 v2 QA:contact sheet 连续组装(气泡→点→线→反推箭头→档案开+记录填,payoff~t9),尾对齐裁[2.16-9.0]→6.84s;无畸变/可读字/真人脸;1080x1920/30fps"
+      },
+      "source_note": "F07 赵春江 隐私反推"
+    },
+    {
+      "id": "s03c_harvest",
+      "t": [
+        44.913,
+        52.153
+      ],
+      "voice_ref": "sec03",
+      "intent": "六场景举例:病历/征信/对话 从难啃的骨头变好摘的果子(结构性风险)",
+      "framing": "拼贴 b-roll(贴着病历/征信/对话标签的果实垂在低处,一只手轻松摘下)+ 文字叠层",
+      "motion": "芥末黄场从空场组装:一株枝条长出三枚果实,果皮分别是病历/征信/对话纸片纹理→枝条垂低→一只手滑入,轻轻摘下最低那颗",
+      "source": {
+        "provider": "collage_broll",
+        "params": {
+          "origin_provider": "collage-broll"
+        },
+        "anchor": "a_s03c_harvest",
+        "overlay": "hyperframes text"
+      },
+      "anchor_refs": [],
+      "group_ref": "g_s03c",
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "gpt-image-2(静帧) + doubao-seedance-2-0-260128(首尾帧)",
+        "params": {
+          "resolution": "720p",
+          "ratio": "9:16",
+          "duration": 10,
+          "generate_audio": false
+        },
+        "refs": [
+          "anchor:a_s03c_harvest"
+        ],
+        "task_id": "task_k8OlKys73acQiUV8GnuFYNV4CzDM9Utx",
+        "duration_actual_s": 10.042,
+        "file": "shots/s03c_harvest_collage.mp4",
+        "video_payload": "shots/s03c_harvest_seedance_payload.json",
+        "reqid": "202607201053236977382058268d9d6WI0SJ6Hs",
+        "trim_window_s": [
+          1.76,
+          9.0
+        ],
+        "trim_to_s": 7.24,
+        "asset": "compose/assets/s03c.mp4"
+      },
+      "qc": {
+        "result": "pass",
+        "note": "Gate3 视频QA(contact sheet 目检+YDIF):assemble-from-empty 连续组装、payoff 落窗尾;尾对齐裁 [1.76, 9.0]→7.24s;1080x1920/30fps;无畸变/假字/logo"
+      },
+      "source_note": "F09 结构性风险举例(合规:非个案建议)"
+    },
+    {
+      "id": "s03d_advice",
+      "t": [
+        52.153,
+        56.513
+      ],
+      "voice_ref": "sec03",
+      "intent": "安全提醒:别把敏感信息随手喂给 AI",
+      "framing": "引言卡",
+      "motion": "『别把敏感信息,随手喂给 AI』大字顿入 + 归属 赵春江 · 中国工程院院士",
+      "source": {
+        "provider": "hyperframes",
+        "template": "pullquote",
+        "params": {}
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "planned",
+      "source_note": "F07 赵春江 零信任建议"
+    },
+    {
+      "id": "s04a_law",
+      "t": [
+        56.513,
+        60.393
+      ],
+      "voice_ref": "sec04",
+      "intent": "制度:个保法第五十一条(名头+出处)",
+      "framing": "法规名头卡",
+      "motion": "色块横扫入(段3:怎么防)→《中华人民共和国个人信息保护法》第五十一条 + 角标 cac.gov.cn",
+      "source": {
+        "provider": "hyperframes",
+        "template": "law-header",
+        "params": {}
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "planned",
+      "source_note": "F10 个保法第51条"
+    },
+    {
+      "id": "s04b_encrypt",
+      "t": [
+        60.393,
+        64.953
+      ],
+      "voice_ref": "sec04",
+      "intent": "第51条:加密=法定安全措施不是加分项",
+      "framing": "条文摘句卡",
+      "motion": "『加密、去标识化』条文摘句高亮 →『加分项』划除 →『法定安全措施』印刷红标定",
+      "source": {
+        "provider": "hyperframes",
+        "template": "article-quote",
+        "params": {}
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "planned",
+      "source_note": "F10 个保法第51条(三)"
+    },
+    {
+      "id": "s04c_mimetitle",
+      "t": [
+        64.953,
+        67.433
+      ],
+      "voice_ref": "sec04",
+      "intent": "密态计算登场",
+      "framing": "标题卡",
+      "motion": "『更彻底的做法』→『密态计算』大字揭出",
+      "source": {
+        "provider": "hyperframes",
+        "template": "title-card",
+        "params": {}
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "planned",
+      "source_note": "F11"
+    },
+    {
+      "id": "s04d_cipher",
+      "t": [
+        67.433,
+        75.113
+      ],
+      "voice_ref": "sec04",
+      "intent": "密态计算:数据全程密文,服务商只见乱码,库被扒也反推不出",
+      "framing": "拼贴 b-roll(对话/档案锁进密文保险盒,服务商舷窗只见乱码碎纸)+ 轻文字叠层",
+      "motion": "墨绿场从空场组装:对话纸页/档案滑入保险盒→红锁扣合上→右侧舷窗(服务商视角)填满打乱的碎纸密文,拼不回原文",
+      "source": {
+        "provider": "collage_broll",
+        "params": {
+          "origin_provider": "collage-broll"
+        },
+        "anchor": "a_s04d_cipher",
+        "overlay": "hyperframes text"
+      },
+      "anchor_refs": [],
+      "group_ref": "g_s04d",
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "gpt-image-2(静帧) + doubao-seedance-2-0-260128(首尾帧)",
+        "params": {
+          "resolution": "720p",
+          "ratio": "9:16",
+          "duration": 10,
+          "generate_audio": false
+        },
+        "refs": [
+          "anchor:a_s04d_cipher"
+        ],
+        "task_id": "task_U6KjgrbIuc2AXFvrYkTqpZqP1RDyWiFs",
+        "duration_actual_s": 10.042,
+        "file": "shots/s04d_cipher_collage.mp4",
+        "video_payload": "shots/s04d_cipher_seedance_payload.json",
+        "reqid": "202607201053281216674908268d9d6ajFCIzQr",
+        "trim_window_s": [
+          1.32,
+          9.0
+        ],
+        "trim_to_s": 7.68,
+        "asset": "compose/assets/s04d.mp4"
+      },
+      "qc": {
+        "result": "pass",
+        "note": "Gate3 视频QA(contact sheet 目检+YDIF):assemble-from-empty 连续组装、payoff 落窗尾;尾对齐裁 [1.32, 9.0]→7.68s;1080x1920/30fps;无畸变/假字/logo"
+      },
+      "source_note": "F11 密态计算(产品价值落点,合规:无绝对化)"
+    },
+    {
+      "id": "s04e_outro",
+      "t": [
+        75.113,
+        81.936
+      ],
+      "voice_ref": "sec04",
+      "intent": "产品落点+情感收尾+品牌落款",
+      "framing": "收尾卡",
+      "motion": "白帧2帧 →『这就是荆华密算在做的事』→ 金句『你的数据,也该有一层,它看不懂的保护』+ JINGHUA 角标放大 + 时效戳 2026-07",
+      "source": {
+        "provider": "hyperframes",
+        "template": "endcard",
+        "params": {}
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "planned",
+      "source_note": "F11 产品指名1句≤1/5"
+    }
+  ],
+  "overlays": [
+    {
+      "id": "ov_brand",
+      "type": "logo_corner",
+      "note": "右下角低透明品牌角标;收尾卡放大",
+      "file": "brand/jinghua-logo.jpg",
+      "shots": "s02a_hack..s04e_outro"
+    },
+    {
+      "id": "ov_s02a_text",
+      "type": "label_over_collage",
+      "note": "奶油白案卷标签(顶部安全区 y<370,单行不折):Hugging Face · 承认被攻破。按锚点静帧量主体边界避让机械手",
+      "on_shot": "s02a_hack"
+    },
+    {
+      "id": "ov_s03b_text",
+      "type": "label_over_collage",
+      "note": "v2 轻标签『一句回答，反推出你』(反推出你 印刷红);对齐新隐喻(回答→反推→底档),替代 v1『碎片，拼出一个你』",
+      "on_shot": "s03b_reinfer"
+    },
+    {
+      "id": "ov_s03c_text",
+      "type": "label_over_collage",
+      "note": "三枚小标签贴果实:病历/征信/对话;底部轻注 从难啃的骨头,到好摘的果子。安全区避让手与果实",
+      "on_shot": "s03c_harvest"
+    },
+    {
+      "id": "ov_s04d_text",
+      "type": "label_over_collage",
+      "note": "轻标签:服务商只看得到乱码。置于舷窗侧,避让保险盒",
+      "on_shot": "s04d_cipher"
+    }
+  ],
+  "edit": {
+    "transitions": [
+      "硬切(默认;拼贴 b-roll 与版式卡之间 seam B)",
+      "色块横扫(三段边界:段1入 s02a、段2入 s03a、段3入 s04a)",
+      "白帧2帧(收尾前 s04e)"
+    ],
+    "lut": "以拼贴静帧色场为基准统一 LUT；渲染机 woff2 出片",
+    "grain": "全片统一细颗粒(拼贴自带纸颗粒为基准,版式卡叠同款颗粒缝合)",
+    "loudness_lufs": -14.0,
+    "transitions_detail": [
+      {
+        "type": "硬切",
+        "usage": "默认;拼贴 b-roll 与版式卡之间(seam B)"
+      },
+      {
+        "type": "色块横扫",
+        "usage": "三段框架边界:段1(发生)入 s02a、段2(意味)入 s03a、段3(怎么防)入 s04a——同时视觉打断卡片连跑"
+      },
+      {
+        "type": "白帧2帧",
+        "usage": "收尾前(s04e)"
+      }
+    ]
+  },
+  "ledger": {
+    "decisions": [
+      {
+        "id": "dec01",
+        "date": "2026-07-20",
+        "decision": "选题拍板：《AI 现在会自己黑库了》——48h 热点『智能体颠覆安全』。国际锚=Hugging Face 被全自动 AI 智能体端到端攻破(官方 blog 7/16 披露，7/16-20 持续放大)；国内权威定调=第十四届互联网安全大会 ISC2026(科技日报/人民网 2026-07-20)，360周鸿祎『AI 网络核武器』、院士赵春江『数据泄露与隐私反推已成现实威胁』。三段框架：AI 从工具变攻击者 → 明文数据成低成本猎物(六场景风险举例) → 密态计算让数据全程密文(产品价值≤1/5)。",
+        "stage": "brief",
+        "why": "APIhub 三票筛(话题热度×六场景贴合度×可解读深度)胜出：①ISC2026 是 7/20 当日国内权威热点(48h 硬锚)②HF 是已证实的 landmark 实证事件、可视化强③与首片(留存/重识别)主题不重叠、互补(本片=AI攻击者使明文数据成软肋、密态计算是防线)④六场景可承载⑤合规最低档(复述已披露事件+权威警示，不指名指控)。",
+        "by": "EP（用户授权自主选题）",
+        "options_considered": [
+          "Grok Build CLI 静默上传用户整库(SSH密钥/密码库/照片/.env)至云——视觉更具消费者冲击、产品桥更干净，但事件峰值 7/14-15(超 48h 严格窗)、且开发者向偏窄；作备选/系列后续",
+          "Suno 被 Shai-Hulud 蠕虫攻破+训练数据抓取曝光(7/15-16)——偏 IP/训练数据争议，非个人隐私、超窗",
+          "谷歌隐私政策静默更新用户上传用于AI训练(如何关闭)——消费者可行动强，但非明确 48h 事件、且与首片留存主题近"
+        ]
+      },
+      {
+        "id": "d01",
+        "date": "2026-07-20",
+        "decision": "修订门控字段: meta.commitment",
+        "stage": "audio",
+        "why": "audio timeline 定稿，回填真实时长 81.936s（no-lock：由音频/内容自然定长，估 77s→实 81.9s，未变速未凑数）"
+      },
+      {
+        "id": "d02",
+        "date": "2026-07-20",
+        "decision": "修订门控字段: meta.commitment",
+        "stage": "review",
+        "why": "duration_actual_s 81.936→82.1(成片含loudnorm容器,no-lock只记录)"
+      },
+      {
+        "id": "dec02",
+        "date": "2026-07-20",
+        "decision": "s03b 重做(用户看片反馈):v1『碎片拼成具体男性人脸』概念漂到重识别、标签『一个你』与陌生脸不搭；v2 改『AI回答气泡→反推箭头→拽开个人档案』+标签『一句回答，反推出你』,贴合赵春江原意",
+        "stage": "motion/compose",
+        "why": "用户指出与口播(隐私反推)不搭；单镜手术,新静帧+新Seedance,其余镜不动",
+        "by": "用户→EP"
+      },
+      {
+        "id": "dec03",
+        "date": "2026-07-20",
+        "decision": "compose 迁 woff2 自带字体(SansSC/SerifSC 替 local PingFang/Songti;font-weight 900→700 避 faux-bold 本地/机器差异);上渲染机出片并切服务器渲染为默认,本地docker降兜底",
+        "stage": "compose/render",
+        "why": "用户问『为什么不走渲染机』;根因=我沿用首片系统字体踩渲染机字体纪律红线。双跑验收(gate10)pass 后达切默认门",
+        "by": "用户→EP",
+        "options_considered": [
+          "继续本地docker(否:没engage用户渲染机,且未做woff2双跑)"
+        ]
+      },
+      {
+        "id": "dec04",
+        "date": "2026-07-20",
+        "decision": "加 BGM(用户指定 fal-ai/minimax-music/v2.6 接口):克制器乐床,post-mix 置旁白下~20LU;取消发布包设计(用户:没什么用,运营端自理)",
+        "stage": "audio/deliver",
+        "why": "首片默认无BGM我未主动提(缺口);用户点接口补。发布包已删 out/publish 并改 CLAUDE.md+rednote SKILL",
+        "by": "用户→EP"
+      },
+      {
+        "id": "dec05",
+        "date": "2026-07-20",
+        "decision": "两处修复(用户第二轮反馈):①MG卡 docsrc『来源』脚注压内框线(每张卷宗卡都有,我漏查)→docbody bottom 36px→84px 让内框收在脚注之上;②BGM 按 bgm.md 最佳实践重做:床=纹理非旋律(软pad+低drone,无主旋律/节拍),置旁白下~22LU,替代 v1 过于有性格的『钟摆tick+glitch+ominous』",
+        "stage": "compose/audio",
+        "why": "用户:边框重合『你一直没发现』+『BGM不合适影响观感,先学最佳实践』。已读 media-use/audio/references/bgm.md",
+        "by": "用户→EP"
+      }
+    ],
+    "costs": [
+      {
+        "id": "cost00",
+        "date": "2026-07-20",
+        "stage": "research",
+        "item": "APIhub 检索(serper/twitter/parse_web_fetch ×约10次)",
+        "note": "单次 serper≈0.007 CNY、parse≈0.001 CNY；选题+research 阶段检索总量微额，汇总出厂回填"
+      },
+      {
+        "id": "cost01",
+        "date": "2026-07-20",
+        "stage": "audio",
+        "item": "TTS 整片(火山 seed-audio-1.0, 1 take)",
+        "note": "按 original_duration=81.9s 计费；一次过，无多余 take",
+        "billed_s": 81.9
+      },
+      {
+        "id": "cost02",
+        "date": "2026-07-20",
+        "stage": "audio",
+        "item": "whisper 回转写(faster-whisper medium, 本地CPU)",
+        "note": "本地推理无API费；whisperx因torch2.6失败改用faster-whisper(DEBT:环境whisperx VAD weights_only)"
+      },
+      {
+        "id": "cost03",
+        "date": "2026-07-20",
+        "stage": "anchors/collage",
+        "item": "GPT-Image-2 拼贴静帧 ×4(quality medium, 720x1280)",
+        "note": "reqid 见 anchors[].gen.reqid;费率未回填(gateway 计费)"
+      },
+      {
+        "id": "cost04",
+        "date": "2026-07-20",
+        "stage": "motion/collage",
+        "item": "Seedance 首尾帧视频 ×4(doubao-seedance-2-0-260128, 720p/10s)",
+        "note": "满价约$2.7×4≈$10.8;task_id/reqid 见 shots[].gen;一次过无重生"
+      },
+      {
+        "id": "cost05",
+        "date": "2026-07-20",
+        "stage": "compose",
+        "item": "HyperFrames docker render 0.7.64 (1080x1920/30fps/82.1s/high)",
+        "note": "本地docker无API费;render 6m59s;+loudnorm 2-pass音频重编码"
+      },
+      {
+        "id": "cost06",
+        "date": "2026-07-20",
+        "stage": "motion(s03b v2)",
+        "item": "GPT-Image-2 静帧×1 + Seedance 首尾帧×1(s03b 重做)",
+        "note": "reqid/ task_id 见 shots[s03b_reinfer].gen/anchors"
+      },
+      {
+        "id": "cost07",
+        "date": "2026-07-20",
+        "stage": "audio(BGM)",
+        "item": "fal minimax-music/v2.6 ×至多3次($0.15/次)",
+        "note": "1)test短prompt(可能计费) 2)真prompt580字超限被拒(应不计费) 3)真prompt242字成功。合计计费约$0.15-0.30"
+      },
+      {
+        "id": "cost08",
+        "date": "2026-07-20",
+        "stage": "render",
+        "item": "渲染机 render-remote ×2成功(v1 189s+v2 177s,+若干503重试) + 本地docker ×2(双跑/兜底)",
+        "note": "渲染机=团队基建按调用;本地docker无API费"
+      },
+      {
+        "id": "cost09",
+        "date": "2026-07-20",
+        "stage": "audio(BGM v2)",
+        "item": "fal minimax-music/v2.6 ×1(纹理床重做)",
+        "note": "$0.15;req task_1Ld5..."
+      }
+    ],
+    "gates": [
+      {
+        "id": "gate01",
+        "date": "2026-07-20",
+        "stage": "script",
+        "check": "narration-voice 出厂自查五步 + 合规判定框",
+        "result": "pass",
+        "notes": "linter 硬查 0 命中；五维 45/50(直9节9信9真9精9)；结尾金句仅1处；灵魂检查过。合规:HF复述官方口径不指名指控、周鸿祎/赵春江引述忠实、六场景风险举例无个案建议、密态计算无绝对化、产品指名1句≤1/5。v3≈354CJK≈77s(按首片4.73syl/s校准)。"
+      },
+      {
+        "id": "gate02",
+        "date": "2026-07-20",
+        "stage": "audio",
+        "check": "G1 独立回转写词准确率(时长门已取消)",
+        "result": "pass",
+        "notes": "faster-whisper medium 独立回转写(whisperx VAD 触 torch2.6 weights_only 报错→改 faster-whisper 直转,记 DEBT)；繁→简(zhconv)+中文数字归一后 char accuracy=0.9896(edit_dist 4/383)，残差仅3处同音字(鸿祎→洪一/这→着/荆→精)属转写噪声、无吞字漏读；Hugging Face/AI/周鸿祎/赵春江/密态计算/荆华密算 发音均正确。总长81.936s 只记录不设门(no-lock)。"
+      },
+      {
+        "id": "gate03",
+        "date": "2026-07-20",
+        "stage": "storyboard",
+        "check": "storyboard 自查八项",
+        "result": "pass",
+        "notes": "①14镜区间连续无缝无重叠,首尾对齐音频81.936s ②每镜≤7.68s,每8-10s有视觉变化 ③连续同版式≤2(max同模板run=2) ④静态类max run=4(=首片precedent):case-file卡每张带入场动效(色块横扫/count-up/高亮/划除/标签贴入),两处4-run在中点被段2/段3色块横扫章节切视觉打断,4拼贴锚定各段——documented relaxation ⑤声部匹配:4拼贴=概念隐喻间奏(HF黑手/反推聚人/数据果子/密文保险箱),案卷卡/引言卡/法规卡=实证与论点 ⑥承诺typography_led+collage非motion_led,4拼贴提供真运动 ⑦Seedance4组各≤15s(6/7/8/8) ⑧每镜1主动作+运镜/动效词,无静态场景式镜头"
+      },
+      {
+        "id": "gate04",
+        "date": "2026-07-20",
+        "stage": "anchors/collage",
+        "check": "拼贴 Gate2 静帧 QA(隐喻一眼懂/无假字数字logo/同设计语言)",
+        "result": "PASS(4/4)",
+        "notes": "EP 目检4张:a_s02a电路手从明文档案柜抽档案(焦橙)、a_s03b碎片+线索聚成人形肖像(深紫)、a_s03c病历/征信/对话纹理果实被手轻摘(芥末黄)、a_s04d对话档案锁进保险盒·舷窗只见碎纸密文(墨绿)。均半调B&W剪贴+奶油白keyline+印刷红#C8451B点色+纸颗粒,同一设计语言;隐喻一眼懂;无可读文字/数字/logo(表单纹理为不可读花纹)。Gate1隐喻+Gate2静帧 EP 自主确认(用户授权端到端)。"
+      },
+      {
+        "id": "gate05",
+        "date": "2026-07-20",
+        "stage": "motion/collage",
+        "check": "拼贴 Gate3 视频 QA(死尾 YDIF + contact sheet 目检 + 尾对齐裁切)",
+        "result": "PASS(4/4)",
+        "notes": "4 条 Seedance 首尾帧均 10.04s/720p/24fps 落地。contact sheet 目检:s02a 档案柜组装→电路手抽档案+碎片爆(payoff t7-9)、s03b 碎片+线索→人形肖像逐块填满(t3空壳→t9完整,YDIF低但contact证实连续组装非死hold)、s03c 枝条→三果实→手摘(payoff t7-9)、s04d 纸页流入保险盒→红锁→舷窗填碎纸密文(payoff t6-9)。均无畸变/假字/logo。尾对齐裁到槽位保payoff:s02a[3.04-9.0]5.96s/s03b[2.16-9.0]6.84s/s03c[1.76-9.0]7.24s/s04d[1.32-9.0]7.68s,scale1080x1920+30fps+g12重编码入 compose/assets/。无重生(0/4 fail)。"
+      },
+      {
+        "id": "gate06",
+        "date": "2026-07-20",
+        "stage": "compose",
+        "check": "hyperframes check(v0.7.64) + snapshot 12帧目检",
+        "result": "PASS",
+        "notes": "check 全绿:lint 0err(warn:track10密度8/track30密度4=既有DEBT、grain pointer-events、Menlo→JetBrains Mono mono替换)/runtime0/layout0/motion0/contrast 18/18 WCAG AA。12帧目检:12元素排版整洁、无孤字无溢出;色场arc焦橙→深紫→芥末黄→墨绿缝合;红章/加密高亮/金句/JINGHUA放大均正常;4拼贴挂载payoff落窗尾;标签安全区避让主体。"
+      },
+      {
+        "id": "gate07",
+        "date": "2026-07-20",
+        "stage": "compose+review",
+        "check": "⑨ L0 手动仪器 + 视觉出厂自查15项 + 承诺复验",
+        "result": "PASS",
+        "notes": "render --docker hyperframes@0.7.64(CLI+镜像版本匹配,帧可复现,优于首片0.7.60 fallback,6m59s);1080x1920/30fps/h264+aac/82.1s(音频81.936s,no-lock只记录);blackdetect无黑帧;freezedetect 4拼贴窗内0冻结(全live),长hold均落版式静态卡(typography本征exempt);loudnorm 2-pass -14.10LUFS/-0.95dBTP(raw -17.72,video流copy);G1回转写98.96%沿用。视觉15项逐项过(项5静态连跑4=首片case-file precedent,段色块横扫+4拼贴打断;documented);五维版式4/层级4/实证5/动静5/缝合4。成片抽帧确认CJK docker渲染正常+4拼贴baked in+品牌/高亮/标签正常。证据见 review.md。⏸待用户看片。"
+      },
+      {
+        "id": "gate08",
+        "date": "2026-07-20",
+        "stage": "review(EP provisional)",
+        "check": "9维评分卡 EP 预打分(待用户看片校准)",
+        "result": "provisional",
+        "notes": "EP 逐维预打分(非用户评委门,待用户亲自看片校准):D1意图5/D2准确5/D3开头5/D4节奏4/D5音画4/D6字幕版式5/D7完成5/D8创意5/D9网感4=均分4.67(对照首片基线4.44)。理由:D8创意=4条新拼贴隐喻(电路手扒库/碎片反推聚人/文件果实被摘/密文保险箱)非模板;D3开头=反常识钩三面一致;D4/D9略保留=企业号信息密+静态卡连跑4(case-file relaxation)。⏸ 未做用户看片,不标 delivered。"
+      },
+      {
+        "id": "gate09",
+        "date": "2026-07-20",
+        "stage": "motion(s03b v2)",
+        "check": "s03b 重做 Gate2静帧+Gate3视频 QA",
+        "result": "PASS",
+        "notes": "v2 静帧EP目检(AI气泡→反推箭头→档案,无真人脸/可读字);视频 contact sheet 连续组装 payoff~t9,尾裁6.84s;成片42s抽帧确认新隐喻+新标签『一句回答，反推出你』woff2渲染正常"
+      },
+      {
+        "id": "gate10",
+        "date": "2026-07-20",
+        "stage": "render(双跑验收)",
+        "check": "woff2 本地docker vs 渲染机 双跑帧级一致(切默认门)",
+        "result": "PASS",
+        "notes": "全片SSIM All=0.9803/PSNR avg37.76(残差集中在4拼贴视频h264重编码:卡片段SSIM 0.9857>拼贴段0.9700);关键版式帧目检:个保法卡 local vs server 换行/字形/安全区『逐像素级一致』(单帧SSIM 0.966残差=chromium光栅AA非内容),首片系统字体的长标题换行漂移已消除。→达切默认门,渲染机切默认、本地降兜底。渲染机503并发满重试5次成功(177s)"
+      },
+      {
+        "id": "gate11",
+        "date": "2026-07-20",
+        "stage": "review(final v2)",
+        "check": "⑨ L0 复检(s03b重做+woff2机渲+BGM版)",
+        "result": "PASS",
+        "notes": "final.mp4=渲染机woff2片(视频流copy)+旁白+BGM混音。blackdetect无黑帧;freezedetect 4拼贴窗0死尾;loudnorm 2要素:-14.12 LUFS/-0.99 dBTP(含BGM床~-34LUFS/旁白下~20LU);82.0s;成片抽帧确认woff2 CJK+4拼贴(含新s03b)+标签+品牌正常"
+      },
+      {
+        "id": "gate12",
+        "date": "2026-07-20",
+        "stage": "review(v3 修复)",
+        "check": "docsrc 边框重合修复 + BGM 最佳实践重做 复检",
+        "result": "PASS",
+        "notes": "docsrc:重渲后 doc-hf 14s 抽帧确认内框线收在『来源』脚注之上、footnote 落清爽下边距、无重合(doc-isc/doc-law 同源修复)。check layout 0 err(内容未溢出)。BGM:纹理床(软pad+低drone无旋律无节拍),~22LU under voice,终混 -14.11 LUFS/-0.95 dBTP;blackdetect 无黑帧。渲染机出片(185s,一次过)"
+      }
+    ]
+  }
+}

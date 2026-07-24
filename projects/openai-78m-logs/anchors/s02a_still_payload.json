@@ -1,0 +1,8 @@
+{
+  "model": "gpt-image-2",
+  "prompt": "Create a finished editorial paper-collage still for a 9:16 image-to-video B-roll clip. Visual proposition: a courtroom scales-of-justice where one pan is weighed down by a tall stack of document folders and the other pan holds a single oversized chat speech-bubble, a judge's gavel resting beside it — a large AI company put on trial. Scene: perfectly flat burnt-orange paper field (#BC5A1E) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs of the balance scales, stacked document folders, wooden gavel and one large speech-bubble, with selective cream-white and brick-red colored cardstock accents. Composition: vertical 9:16 locked poster frame; central subject within the middle 70 percent; generous clean color-field negative space; 3 to 6 large separable paper groups suitable for later assemble-from-empty animation. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: the relationship must read instantly — a heavy stack of documents pitted against a single AI conversation on the scales of justice. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter.",
+  "quality": "medium",
+  "output_format": "png",
+  "size": "720x1280",
+  "n": 1
+}

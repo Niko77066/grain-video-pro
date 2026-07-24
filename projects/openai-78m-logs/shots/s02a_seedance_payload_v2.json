@@ -1,0 +1,11 @@
+{
+ "model": "doubao-seedance-2-0-260128",
+ "prompt": "Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat burnt-orange paper field) and Image 2 as the exact completed last frame. One continuous locked-off vertical shot, no camera movement, PACED EVENLY ACROSS THE ENTIRE SIX SECONDS: keep adding pieces continuously through the whole shot, do NOT finish early and do NOT hold a static frame. Open on the empty burnt-orange field; the balance-scale central post and beam slide in and lock, the two pans drop onto their chains; then halftone document folders pile onto the left pan ONE BY ONE, the stack growing taller and the left pan sinking lower with each added folder, continuing steadily across the whole shot, while a single large speech-bubble settles onto the right pan; the wooden gavel snaps into place at lower right only in the final second to complete Image 2. Preserve the 9:16 framing, burnt-orange color field, cream keylines, brick-red cardstock accents, uncoated paper grain, halftone dots, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound.",
+ "metadata": {
+  "content": [
+   { "type": "image_url", "image_url": { "url": "https://storage.neodrop.ai/kuleshov/assets/s02a_first.png" }, "role": "first_frame" },
+   { "type": "image_url", "image_url": { "url": "https://storage.neodrop.ai/kuleshov/assets/s02a_last.png" }, "role": "last_frame" }
+  ],
+  "resolution": "720p", "ratio": "9:16", "generate_audio": false, "duration": 6
+ }
+}

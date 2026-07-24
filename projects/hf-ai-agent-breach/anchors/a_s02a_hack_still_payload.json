@@ -1,0 +1,8 @@
+{
+  "model": "gpt-image-2",
+  "prompt": "Create a finished editorial paper-collage still for a 9:16 image-to-video B-roll clip. Visual proposition: a robotic hand assembled from circuit-board fragments reaching into a wall of open filing cabinets stuffed with plain document folders and pulling out a thick stack of files, the pulled files breaking apart into scattered data fragments — an autonomous AI agent breaking into a store of unencrypted records. Scene: perfectly flat burnt-orange paper field (#BC5A1E) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs of a circuit-fragment robotic hand, rows of open filing cabinets, thick stacks of document folders, and a spray of scattering paper fragments, with selective cream-white and brick-red (#C8451B) colored cardstock accents. Composition: vertical 9:16 locked poster frame; central subject within the middle 70 percent; generous clean color-field negative space; 3 to 6 large separable paper groups suitable for later assemble-from-empty animation. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: the relationship must read instantly — a machine hand raiding a wall of plaintext files. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter.",
+  "quality": "medium",
+  "output_format": "png",
+  "size": "720x1280",
+  "n": 1
+}

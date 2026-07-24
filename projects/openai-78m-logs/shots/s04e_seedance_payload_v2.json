@@ -1,0 +1,11 @@
+{
+ "model": "doubao-seedance-2-0-260128",
+ "prompt": "Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat dark-green paper field) and Image 2 as the exact completed last frame. One continuous locked-off vertical shot, no camera movement, PACED EVENLY ACROSS THE ENTIRE FOUR SECONDS: keep pieces arriving continuously, do NOT finish early and do NOT hold a static frame. Open on the empty dark-green field; the halftone strongbox slides in and opens, chat-conversation papers fold and drop into it one after another, the brick-red padlock snaps shut on the front of the box, and the round riveted provider window on the right fills with scrambled shredded-paper ciphertext strips. Make sure BOTH the padlock closing and the ciphertext window fully filling happen and are clearly visible by the final second to complete Image 2. Preserve the 9:16 framing, dark-green color field, cream keylines, brick-red padlock accent, uncoated paper grain, halftone dots, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound.",
+ "metadata": {
+  "content": [
+   { "type": "image_url", "image_url": { "url": "https://storage.neodrop.ai/kuleshov/assets/s04e_first.png" }, "role": "first_frame" },
+   { "type": "image_url", "image_url": { "url": "https://storage.neodrop.ai/kuleshov/assets/s04e_last.png" }, "role": "last_frame" }
+  ],
+  "resolution": "720p", "ratio": "9:16", "generate_audio": false, "duration": 4
+ }
+}

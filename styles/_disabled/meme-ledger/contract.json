@@ -1,0 +1,95 @@
+{
+  "schema": "style-contract@1",
+  "style_pack": "meme-ledger",
+  "source": "playbook.md §0–§7 散文→机器合同编译（2026-07-23）。候选包：以高密度商业机制拆解为内容主线，以已清权/原创 meme 为反应与转场声部；不得把 meme 当作事实证据。",
+  "denominators": "所有时长份额的分母 = audio.timeline.duration_s（真实旁白总时长）。每个镜头只计一个 provider；声部通过 shots[].source.params.voice 声明，供 storyboard 门校验。",
+  "amend_policy": "数值仅可在各自 amend 带宽内调整：IR patch 写 meta.contract_amendments[\"<dotted.path>\"]，并在 ledger 记明原因。越界即合同违约；本文件生产期只读。",
+  "plan": {
+    "voices": {
+      "evidence": {
+        "role": "事实锚——原始网页、公告、数据表、实拍或自制信息图；每个关键事实至少有一个可追溯画面落点",
+        "providers": [
+          "hyperframes",
+          "footage",
+          "image_motion"
+        ],
+        "declared_as": "evidence",
+        "min_shots": {
+          "value": 3,
+          "amend": [
+            2,
+            8
+          ]
+        }
+      },
+      "meme_reaction": {
+        "role": "情绪标点——反应、荒诞升级、论点反转；只注释观点，绝不充当证据",
+        "providers": [
+          "footage",
+          "image_motion",
+          "hyperframes"
+        ],
+        "declared_as": "meme_reaction",
+        "min_shots": {
+          "value": 6,
+          "amend": [
+            4,
+            18
+          ]
+        }
+      },
+      "thesis_card": {
+        "role": "论点钉子——开场、机制揭示与结尾的极简大字卡，给快速 meme 流一个可记住的判断",
+        "providers": [
+          "hyperframes"
+        ],
+        "declared_as": "thesis_card",
+        "min_shots": {
+          "value": 2,
+          "amend": [
+            2,
+            5
+          ]
+        }
+      }
+    },
+    "graphics_run_max_s": {
+      "value": 12,
+      "amend": [
+        8,
+        16
+      ],
+      "basis": "大字卡只负责钉论点；连续图形超过一句话会把快节奏视频做成 PPT。"
+    }
+  },
+  "render": {
+    "static_hold_ratio_max": {
+      "value": 0.4,
+      "amend": [
+        0.32,
+        0.48
+      ],
+      "basis": "meme 反应需有真实运动或镜内动态；冻结帧只能作为 0.4–1.2 秒 punchline 的载体。"
+    },
+    "min_video_elements": {
+      "value": 6,
+      "amend": [
+        4,
+        99
+      ],
+      "basis": "反应声部应有实际运动素材，不能用纯静态表情包或文字卡冒充快剪。"
+    }
+  },
+  "inviolable": [
+    "meme 不得充当事实来源；所有事实主张必须在 research 中可回链",
+    "不得下载、转载或拼接未获授权的影视、动画、网红或参考视频片段；只使用原创、获许可、公共领域或平台条款明确可商用的素材",
+    "不得使用未获同步授权的商业录音；BGM 必须有项目对应的同步权/母带授权或为可商用原创/授权替代曲",
+    "用户要求结构移植时，TTS 前必须有主母稿、两个被排除母稿、逐段映射、事实槽位与主动偏离说明；不得用通用短模板或上一期母稿替代本期的叙事发动机",
+    "结构移植不得将完整母稿压缩成主题摘要后以通用解释文补齐；必须保留逐段的具体材料—裂缝—下一段接力关系，并通过 references/f-of-x-transplant-design.md §5 的 Anti-Smooth Gate。G08 另须满足其角色、动作、关系图与回环材料的先验条件，否则拒绝该母稿",
+    "G08 结构移植还必须通过 references/g08-surface-prose-profile.md §4 的表层行文门：高风险 AI 胶水句式须有材料解锁事实；删除专名后可复用于任意商业稿的句子必须重写；不得用中立解释、对称结论或生活比喻库替代原文的具体态度与材料转弯",
+    "文案必须通过 references/human-speech-engine.md §6 的‘人话’六问复核；任意两问无答案即不得进入 TTS",
+    "文案必须按 references/golden-mother-index.json 的 Golden 评分通过 21/25，且任何单维不低于 3/5；评分证据写入项目 ledger",
+    "playbook.md §7 的反模式一票否决清单不可由 agent 解释豁免",
+    "自报字段（static_class 等）与 evidence/render-metrics.json 实测矛盾时，以实测为准"
+  ]
+}

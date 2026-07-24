@@ -1,0 +1,8 @@
+{
+  "model": "gpt-image-2",
+  "prompt": "Create a finished editorial paper-collage still for a 9:16 image-to-video B-roll clip. Visual proposition: chat-bubble papers and document folders sliding into a sturdy strongbox that snaps shut under a bright red padlock, while to the right a round porthole window (the service-provider viewpoint) fills up with shredded scrambled paper confetti that can never be reassembled — data sealed as ciphertext where the provider sees only scrambled noise. Scene: perfectly flat ink-green paper field (#234A38) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs of a sturdy strongbox, chat-bubble papers and document folders entering it, a bright red padlock, and a round porthole window packed with shredded scrambled paper confetti, with selective cream-white and brick-red (#C8451B) colored cardstock accents. Composition: vertical 9:16 locked poster frame; central subject within the middle 70 percent; generous clean color-field negative space; 3 to 6 large separable paper groups suitable for later assemble-from-empty animation. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: the relationship must read instantly — real documents locked into a box while the outside window shows only unreadable shredded scraps. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter.",
+  "quality": "medium",
+  "output_format": "png",
+  "size": "720x1280",
+  "n": 1
+}

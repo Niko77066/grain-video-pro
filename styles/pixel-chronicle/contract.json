@@ -1,0 +1,86 @@
+{
+  "schema": "style-contract@1",
+  "style_pack": "pixel-chronicle",
+  "source": "playbook.md §0/§5/§6/§9 散文→机器合同编译（2026-07-21 升级计划 P0-2）。比例分母歧义修债见 denominators（2026-07-21 拍板 #4，此前 MG≈50%/实拍≈40%/像素≥40%/AI≤20% 四比例分母未定义、数学上可互相冲突）。",
+  "denominators": "一切份额分母 = audio.timeline.duration_s（真实音频总长）。① provider 份额：按镜头区间时长分区求和，每镜恰一 provider、互斥（MG≈50% / 实拍≈40% 的散文口径由此闭合为带宽，二者之和 ≤1，余量归 seedance/collage/image_motion）。② trait 份额：按镜头标记求和，可跨 provider 重叠——像素叙事可同时落在 seedance 镜与像素 MG 镜上，故 trait 份额与 provider 份额不要求相加 = 1，四比例自此无冲突。",
+  "amend_policy": "数值仅可在各自 amend 带宽内调整：ir patch 写 meta.contract_amendments[\"<dotted.path>\"]（自动记 ledger，评委与用户看片时可见）。声部/trait 下限不可击穿带宽；越出带宽 = 合同违约——只能改片，或带 contract_violation 标记出厂（禁 delivered、禁合 main）。本文件生产期内对生产 agent 只读（守卫钩拦截）。",
+  "plan": {
+    "provider_share": {
+      "hyperframes": {
+        "min": {
+          "value": 0.25,
+          "amend": [
+            0.2,
+            0.35
+          ]
+        },
+        "max": {
+          "value": 0.6,
+          "amend": [
+            0.5,
+            0.65
+          ]
+        },
+        "basis": "Golden 实测 28%（英阿）/ 47%（空调）；播册散文 ≈50% 是未兑现口径"
+      },
+      "_footage_note": "播册『实拍≈40%』经 Golden 实测证伪（英阿 0%、空调 16%）——实拍下限暂不立门，待 _iteration 棘轮用下部 A 线片重新校准"
+    },
+    "traits": {
+      "pixel_narrative": {
+        "share_min": {
+          "value": 0.15,
+          "amend": [
+            0.1,
+            0.5
+          ]
+        },
+        "declared_as": "shots[].source.params.pixel_narrative = true",
+        "fallback": "未声明的 seedance 镜默认计入（声部表：Seedance = 像素叙事主力）；HyperFrames 像素 MG 须显式声明才计入",
+        "note": "像素叙事 = 画面主体是像素角色/场景/重演的叙事镜头。纸纹 + 编年史配色 + 褪色 LUT 不算像素叙事——Claude（空调片 DEBT）与 Codex（ac-26c）两家都栽过的同一个坑。",
+        "aspiration": "播册目标 ≥40%（像素叙事主体化）+ 拼贴→16-bit 像素 DEBT（空调片，用户暂缓）尚未兑现：Golden 英阿实测仅 16%。地板 0.15 按实测立（Codex ac-26c 的 0% 仍然红）；抬到 0.40 须走 _iteration.md 棘轮：还清像素 DEBT 的下部 A 线片过盲评后由作者拍板。"
+      },
+      "ai_nonpixel_stylization": {
+        "share_max": {
+          "value": 0.2,
+          "amend": [
+            0.15,
+            0.25
+          ]
+        },
+        "declared_as": "shots[].source.params.ai_stylized = true",
+        "fallback": "全片无声明时跳过并 warn（m1-v2 起 storyboard 必声明）"
+      }
+    },
+    "graphics_run_max_s": {
+      "value": 26,
+      "amend": [
+        22,
+        34
+      ],
+      "basis": "声明型图形（hyperframes/image_motion）连续时长上限。对标《佛得角》最长 MG 段 S1 = 22s；Codex ac-26c s14–s18 五连 MG ≈36s 是反例。MG 段与实拍段交替本身就是节奏（playbook §7 硬规则的可码判投影）。"
+    }
+  },
+  "render": {
+    "static_hold_ratio_max": {
+      "value": 0.35,
+      "amend": [
+        0.3,
+        0.4
+      ],
+      "basis": "measure-render@0.0015 阈值实测：Claude 空调片 0.303（绿）；Codex ac-26c 0.422（带宽顶 0.40 仍红）。MG 段内部元素进出频繁，知识科普横屏持有应显著低于案卷竖屏。"
+    },
+    "min_video_elements": {
+      "value": 4,
+      "amend": [
+        3,
+        99
+      ],
+      "basis": "实拍 ≈40% + Seedance 像素叙事的物理存在证明（compose 内 <video> 计数）"
+    }
+  },
+  "inviolable": [
+    "像素叙事 trait 下限不可击穿带宽——像素是叙事主体不是表层 LUT，这是本包立身之本",
+    "playbook §6 反模式一票否决清单不可由 agent 解释豁免",
+    "自报字段（static_class 等）与 evidence/render-metrics.json 实测矛盾时，以实测为准"
+  ]
+}

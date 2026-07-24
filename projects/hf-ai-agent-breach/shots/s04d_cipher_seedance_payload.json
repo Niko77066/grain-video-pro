@@ -1,0 +1,26 @@
+{
+  "model": "doubao-seedance-2-0-260128",
+  "prompt": "Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat ink-green paper field) and Image 2 as the exact completed last frame. One continuous locked-off vertical shot, no camera movement. Open on the empty ink-green paper field, then assemble the scene piece by piece with crisp physical stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: pieces keep sliding in and snapping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; a sturdy strongbox slides in at the bottom, then chat-bubble papers and document folders stream down one by one and drop into it, a bright red padlock swings up and snaps shut on the box, and on the right a round porthole window fills up with shredded scrambled paper confetti in the last second. Preserve the 9:16 framing, #234A38 color field, cream-white cardstock and brick-red accents, uncoated paper grain, halftone dots, cream keylines, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound.",
+  "metadata": {
+    "content": [
+      {
+        "type": "image_url",
+        "image_url": {
+          "url": "https://storage.neodrop.ai/kuleshov/hfbreach/a_s04d_cipher_first.png"
+        },
+        "role": "first_frame"
+      },
+      {
+        "type": "image_url",
+        "image_url": {
+          "url": "https://storage.neodrop.ai/kuleshov/hfbreach/a_s04d_cipher_last.png"
+        },
+        "role": "last_frame"
+      }
+    ],
+    "resolution": "720p",
+    "ratio": "9:16",
+    "generate_audio": false,
+    "duration": 10
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "model": "gpt-image-2",
+  "prompt": "Create a finished editorial paper-collage still for a 9:16 image-to-video B-roll clip. Visual proposition: scattered fragments of anonymous chat conversations converging and assembling into one recognizable human head-and-shoulders silhouette. Scene: perfectly flat deep-violet paper field (#3B2A57) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs of torn speech-bubble shapes and text-block fragments (no readable letters), converging inward, with selective cream-white and muted brick-red colored cardstock accents; the fragments coalesce into a single frontal human silhouette centered in frame. Composition: vertical 9:16 locked poster frame; central subject within the middle 70 percent; generous clean color-field negative space; 3 to 6 large separable paper groups suitable for later assemble-from-empty animation. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. The relationship must read instantly: many anonymous fragments become one identifiable person. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter.",
+  "quality": "medium",
+  "output_format": "png",
+  "size": "720x1280",
+  "n": 1
+}

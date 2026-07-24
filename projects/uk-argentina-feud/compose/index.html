@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh" data-resolution="landscape" data-fps="30">
+<head><meta charset="UTF-8"><title>英国和阿根廷：什么仇什么怨 — Kuleshov</title>
+<script src="assets/gsap.min.js"></script><script src="assets/captions_data.js"></script>
+<style>@font-face { font-family:"SerifSC"; font-weight:700; src:url("assets/fonts/serif-sc-700-latin.woff2") format("woff2"); unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF; }
+@font-face { font-family:"SerifSC"; font-weight:700; src:url("assets/fonts/serif-sc-700-cn.woff2") format("woff2"); }
+@font-face { font-family:"SansSC"; font-weight:700; src:url("assets/fonts/sans-sc-700-latin.woff2") format("woff2"); unicode-range:U+0000-00FF,U+2000-206F; }
+@font-face { font-family:"SansSC"; font-weight:700; src:url("assets/fonts/sans-sc-700-cn.woff2") format("woff2"); }
+@font-face { font-family:"SansSC"; font-weight:400; src:url("assets/fonts/sans-sc-400-cn.woff2") format("woff2"); }
+:root{ --paper:#C9A876; --ink:#2B2118; --cream:#F5EAD0; --accent:#FFD21E; --gilt:#C9932B; --mark:#C0392B; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+body,html{ width:1280px; height:720px; overflow:hidden; background:var(--ink); font-family:"SansSC",sans-serif; }
+#main-composition{ position:relative; width:1280px; height:720px; overflow:hidden; background:var(--ink); }
+.fullframe{ position:absolute; inset:0; width:1280px; height:720px; object-fit:cover; }
+.real{ filter:sepia(0.3) saturate(0.82) contrast(1.06) brightness(0.95); }
+.mg{ position:absolute; inset:0; width:1280px; height:720px; background:var(--ink); overflow:hidden; }
+.ctr{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.chap .zh{ font-family:"SerifSC"; font-weight:700; font-size:118px; color:var(--cream); letter-spacing:8px; opacity:0; }
+.chap .zh::before{content:"『";color:var(--gilt);} .chap .zh::after{content:"』";color:var(--gilt);}
+.chap .rule{ width:0; height:2px; background:var(--gilt); margin:24px auto 0; }
+.big1982{ font-family:"SerifSC"; font-weight:700; font-size:150px; color:var(--cream); letter-spacing:6px; opacity:0; }
+.badge{ position:absolute; opacity:0; background:rgba(43,33,24,0.72); border:1px solid rgba(201,147,43,0.5); border-radius:10px; padding:12px 22px; }
+.badge .t1{ font-family:"SansSC"; font-weight:700; color:var(--cream); font-size:30px; line-height:1.35; }
+.badge .t1 b{ color:var(--accent); } .badge .t1 .r{ color:var(--mark); }
+.badge .big{ font-family:"SerifSC"; font-weight:700; font-size:56px; color:var(--accent); line-height:1; }
+.badge.tl{ left:52px; top:60px; } .badge.tr{ right:52px; top:60px; text-align:right; } .badge.bl{ left:52px; bottom:150px; }
+.badge.score{ left:50%; top:56px; transform:translateX(-50%); text-align:center; }
+.badge.score .sc{ font-family:"SerifSC"; font-weight:700; font-size:50px; color:var(--cream); } .badge.score .sc b{ color:var(--accent); font-size:60px; }
+.badge.score .m{ color:var(--mark); font-size:26px; font-family:"SansSC"; margin-top:4px; }
+.badge.report{ left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; background:none; border:none; }
+.badge.report .big{ font-family:"SerifSC"; font-weight:700; font-size:80px; color:#fff; letter-spacing:3px; text-shadow:0 3px 16px rgba(0,0,0,0.85); }
+.badge.report .big .g{ color:var(--accent); }
+.badge.report .sub{ font-family:"SansSC"; font-weight:700; font-size:32px; color:#fff; margin-top:14px; text-shadow:0 2px 10px rgba(0,0,0,0.9); }
+.badge.revenge{ left:50%; bottom:145px; transform:translateX(-50%); max-width:1000px; text-align:center; }
+.badge.revenge .q{ font-family:"SerifSC"; font-weight:700; font-size:44px; color:var(--cream); } .badge.revenge .q .hl{ color:var(--mark); }
+.badge.gold{ left:50%; top:50%; transform:translate(-50%,-50%); max-width:1040px; text-align:center; background:rgba(43,33,24,0.55); border:none; }
+.badge.gold .g{ font-family:"SerifSC"; font-weight:700; font-size:50px; color:#fff; line-height:1.55; } .badge.gold .g b{ color:var(--accent); }
+#capbox{ position:absolute; left:50%; transform:translateX(-50%); bottom:40px; max-width:1040px; display:inline-block; background:rgba(43,33,24,0.72); padding:8px 26px; border-radius:8px; font-family:"SerifSC"; font-weight:700; color:#fff; font-size:33px; line-height:1.3; text-align:center; text-shadow:0 2px 8px rgba(0,0,0,0.9); opacity:0; }
+#lut{ position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(201,168,118,0.10),transparent 42%,rgba(43,33,24,0.16)); mix-blend-mode:multiply; }
+#scan{ position:absolute; inset:0; pointer-events:none; opacity:0.07; background:repeating-linear-gradient(0deg,rgba(0,0,0,0.6) 0 1px,transparent 1px 3px); }
+#grain{ position:absolute; inset:0; pointer-events:none; opacity:0.08; mix-blend-mode:overlay; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+#vig{ position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 150px 8px rgba(43,33,24,0.4); }
+
+#fade{background:#000;opacity:0;}</style></head>
+<body>
+<div id="main-composition" data-composition-id="main-video" data-width="1280" data-height="720" data-start="0" data-duration="255.65" data-fps="30">
+  <audio id="vo" class="clip" src="assets/voiceover.mp3" data-start="0" data-duration="254.25" data-track-index="0" data-volume="1" data-has-audio="true"></audio>
+  <audio id="bgm" class="clip" src="assets/bgm_v5.mp3" data-start="0" data-duration="253.7" data-track-index="4" data-volume="0.23" data-has-audio="true"></audio>
+      <video id="b1" class="clip fullframe real" src="assets/broll3/fans_stadium_night_g.mp4" muted data-start="0.0" data-duration="5.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b2" class="clip fullframe real" src="assets/broll3/wc_banner_fans_g.mp4" muted data-start="5.0" data-duration="2.58" data-media-start="0.2" data-track-index="1"></video>
+      <video id="banner" class="clip fullframe" src="assets/s01_banner_s.mp4" muted data-start="7.58" data-duration="8.69" data-media-start="1.34" data-track-index="1"></video>
+      <video id="b3" class="clip fullframe real" src="assets/broll3/arg_flag_g.mp4" muted data-start="16.27" data-duration="2.83" data-media-start="0.2" data-track-index="1"></video>
+      <video id="account" class="clip fullframe" src="assets/s01_1806_s.mp4" muted data-start="19.1" data-duration="3.68" data-media-start="6.35" data-track-index="1"></video>
+      <video id="b4" class="clip fullframe real" src="assets/broll3/atlantic_storm_g.mp4" muted data-start="22.78" data-duration="4.2" data-media-start="0.2" data-track-index="1"></video>
+      <video id="map02" class="clip fullframe" src="assets/s02_map_s.mp4" muted data-start="26.98" data-duration="4.44" data-media-start="5.59" data-track-index="1"></video>
+      <video id="b5" class="clip fullframe real" src="assets/broll3/invasion_1806_painting_g.mp4" muted data-start="32.92" data-duration="4.2" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b6" class="clip fullframe real" src="assets/broll3/cattle_herd_aerial_g.mp4" muted data-start="37.12" data-duration="5.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b7" class="clip fullframe real" src="assets/broll3/pampas_harvest_1928_g.mp4" muted data-start="42.12" data-duration="4.39" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b8" class="clip fullframe real" src="assets/broll3/pampas_oxcart_1928_g.mp4" muted data-start="46.51" data-duration="2.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="invade" class="clip fullframe" src="assets/s03_invade_s.mp4" muted data-start="48.51" data-duration="10.03" data-media-start="0.0" data-track-index="1"></video>
+      <video id="b9" class="clip fullframe real" src="assets/broll3/steam_train_g.mp4" muted data-start="58.54" data-duration="5.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b10" class="clip fullframe real" src="assets/broll3/wheat_field_g.mp4" muted data-start="63.54" data-duration="3.38" data-media-start="0.2" data-track-index="1"></video>
+      <video id="trade" class="clip fullframe" src="assets/s03_trade_s.mp4" muted data-start="66.92" data-duration="10.03" data-media-start="0.0" data-track-index="1"></video>
+      <video id="b11" class="clip fullframe real" src="assets/broll3/london_bank_1920_g.mp4" muted data-start="76.95" data-duration="5.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b12" class="clip fullframe real" src="assets/broll3/ba_street_1920s_g.mp4" muted data-start="81.95" data-duration="3.95" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b13" class="clip fullframe real" src="assets/broll2/grain1_g.mp4" muted data-start="85.9" data-duration="2.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b14" class="clip fullframe real" src="assets/broll3/ap_islanders_1982_g.mp4" muted data-start="90.9" data-duration="5.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b15" class="clip fullframe real" src="assets/broll3/sur_apostadero_g.mp4" muted data-start="95.9" data-duration="3.43" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b16" class="clip fullframe real" src="assets/broll3/bleak_island_g.mp4" muted data-start="99.33" data-duration="2.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="ruler" class="clip fullframe" src="assets/s04_ruler_s.mp4" muted data-start="101.33" data-duration="10.03" data-media-start="0.0" data-track-index="1"></video>
+      <video id="b17" class="clip fullframe real" src="assets/broll3/tf_dock_farewell_g.mp4" muted data-start="111.36" data-duration="3.6" data-media-start="0.2" data-track-index="1"></video>
+      <video id="belgrano" class="clip fullframe" src="assets/s04_belgrano_s.mp4" muted data-start="114.96" data-duration="7.0" data-media-start="0.0" data-track-index="1"></video>
+      <video id="b18" class="clip fullframe real" src="assets/broll3/navy_deck_grey_g.mp4" muted data-start="121.96" data-duration="3.3" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b19" class="clip fullframe real" src="assets/broll3/sur_artillery_sil_g.mp4" muted data-start="125.26" data-duration="2.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="sheffield" class="clip fullframe" src="assets/s04_sheffield_s.mp4" muted data-start="127.26" data-duration="9.04" data-media-start="0.99" data-track-index="1"></video>
+      <video id="b20" class="clip fullframe real" src="assets/broll3/stanley_1982_still_g.mp4" muted data-start="136.3" data-duration="4.2" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b21" class="clip fullframe real" src="assets/broll3/monumento_malvinas_still_g.mp4" muted data-start="140.5" data-duration="3.7" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b22" class="clip fullframe real" src="assets/broll3/belgrano_still_g.mp4" muted data-start="144.2" data-duration="2.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b23" class="clip fullframe real" src="assets/broll2/london1_g.mp4" muted data-start="146.2" data-duration="3.2" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b24" class="clip fullframe real" src="assets/broll2/london2_g.mp4" muted data-start="149.4" data-duration="3.2" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b25" class="clip fullframe real" src="assets/broll3/hermes_taskforce_still_g.mp4" muted data-start="152.6" data-duration="3.54" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b26" class="clip fullframe real" src="assets/broll3/moor_windswept_g.mp4" muted data-start="156.14" data-duration="2.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b27" class="clip fullframe real" src="assets/broll3/qf1966_crowd_g.mp4" muted data-start="158.14" data-duration="5.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b28" class="clip fullframe real" src="assets/broll3/qf1966_argument_g.mp4" muted data-start="163.14" data-duration="3.55" data-media-start="0.2" data-track-index="1"></video>
+      <video id="rattin" class="clip fullframe" src="assets/s05_rattin_s.mp4" muted data-start="166.69" data-duration="10.03" data-media-start="0.0" data-track-index="1"></video>
+      <video id="b29" class="clip fullframe real" src="assets/broll3/grass_closeup_g.mp4" muted data-start="176.72" data-duration="4.2" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b30" class="clip fullframe real" src="assets/broll3/obelisco_day_g.mp4" muted data-start="180.92" data-duration="5.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b31" class="clip fullframe real" src="assets/broll2/city1_g.mp4" muted data-start="185.92" data-duration="2.3" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b32" class="clip fullframe real" src="assets/broll3/azteca_aerial_g.mp4" muted data-start="188.22" data-duration="3.82" data-media-start="0.2" data-track-index="1"></video>
+      <video id="hand" class="clip fullframe" src="assets/s05_hand_s.mp4" muted data-start="192.04" data-duration="5.32" data-media-start="4.71" data-track-index="1"></video>
+      <video id="goal" class="clip fullframe" src="assets/s05_goal_s.mp4" muted data-start="197.36" data-duration="6.56" data-media-start="3.47" data-track-index="1"></video>
+      <video id="b33" class="clip fullframe real" src="assets/broll3/island_coast_aerial_g.mp4" muted data-start="203.92" data-duration="5.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b34" class="clip fullframe real" src="assets/broll3/sheffield_still_g.mp4" muted data-start="208.92" data-duration="4.2" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b35" class="clip fullframe real" src="assets/broll3/tf_harrier_deck_g.mp4" muted data-start="213.12" data-duration="2.9" data-media-start="0.2" data-track-index="1"></video>
+      <video id="n9802" class="clip fullframe" src="assets/s05_9802_s.mp4" muted data-start="216.02" data-duration="9.04" data-media-start="0.99" data-track-index="1"></video>
+      <video id="b36" class="clip fullframe real" src="assets/broll3/wc_fans_banner2_g.mp4" muted data-start="225.06" data-duration="5.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b37" class="clip fullframe real" src="assets/broll3/wc_goal_action_g.mp4" muted data-start="230.06" data-duration="3.46" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b38" class="clip fullframe real" src="assets/broll2/flag1_g.mp4" muted data-start="233.52" data-duration="2.0" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b39" class="clip fullframe real" src="assets/broll3/wc_banner_players_g.mp4" muted data-start="244.42" data-duration="3.2" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b40" class="clip fullframe real" src="assets/broll3/ba_congress_night_g.mp4" muted data-start="247.62" data-duration="4.83" data-media-start="0.2" data-track-index="1"></video>
+      <video id="b41" class="clip fullframe real" src="assets/broll3/puerto_madero_dusk_g.mp4" muted data-start="252.45" data-duration="2.0" data-media-start="0.2" data-track-index="1"></video>
+      <img id="photo" class="clip fullframe" src="assets/s06_photo.png" data-start="235.52" data-duration="8.9" data-track-index="1" />
+      <div id="chap0" class="clip mg chap" data-start="31.42" data-duration="1.5" data-track-index="2"><div class="ctr"><div class="zh">钱</div><div class="rule"></div></div></div>
+      <div id="s1982" class="clip mg" data-start="87.9" data-duration="3.0" data-track-index="2"><div class="ctr"><div class="big1982">1982</div></div></div>
+      <div id="bScore" class="clip badge score" data-start="0.3" data-duration="6.98" data-track-index="3"><div class="sc">阿根廷 <b>2</b> - 1 英格兰</div><div class="m">补时 90'+2 绝杀</div></div>
+      <div id="b44" class="clip badge tr" data-start="12.5" data-duration="3.77" data-track-index="3"><div class="big">44<span style="font-size:30px">年前的战争</span></div></div>
+      <div id="bRep" class="clip badge report" data-start="22.78" data-duration="8.34" data-track-index="3"><div class="big"><span class="g">什么仇</span>什么怨</div><div class="sub">英国 · 阿根廷 — 掰了两百二十年手腕</div></div>
+      <div id="bRail" class="clip badge bl" data-start="71.22" data-duration="5.73" data-track-index="3"><div class="t1"><b>2/3</b> 铁路是英国资本 · <b>四成</b>出口卖到英国</div></div>
+      <div id="bWealth" class="clip badge bl" data-start="83.16" data-duration="4.54" data-track-index="3"><div class="t1">1913 人均收入 · 阿根廷 <b>&gt;</b> 法国 <b>&gt;</b> 德国</div></div>
+      <div id="bDist" class="clip badge bl" data-start="99.76" data-duration="11.6" data-track-index="3"><div class="t1">马岛 · 离阿根廷 <b>480km</b> · 离英国 <span class="r">12,700km</span></div></div>
+      <div id="bToll" class="clip badge tl" data-start="139.56" data-duration="6.64" data-track-index="3"><div class="t1">七十四天，没能回家</div><div class="t1"><span class="r">649</span> 阿 · <span class="r">255</span> 英 · <span class="r">3</span> 岛民</div></div>
+      <div id="bFate" class="clip badge tr" data-start="146.7" data-duration="8.58" data-track-index="3"><div class="t1">加尔铁里 <span class="r">下台</span> · 撒切尔 <b>连任</b></div></div>
+      <div id="bCard" class="clip badge tr" data-start="183.1" data-duration="4.42" data-track-index="3"><div class="t1">红黄牌 · 这场混乱之后才发明</div></div>
+      <div id="bRev" class="clip badge revenge" data-start="213.02" data-duration="3.5" data-track-index="3"><div class="q">他说，<span class="hl">这就是复仇。</span></div></div>
+      <div id="b9802" class="clip badge bl" data-start="217.22" data-duration="7.84" data-track-index="3"><div class="t1">1998 阿点球淘汰 · 2002 贝克汉姆复仇</div></div>
+      <div id="bMessi" class="clip badge tl" data-start="232.72" data-duration="3.8" data-track-index="3"><div class="t1">三十九岁的梅西 · <b>两次助攻</b></div></div>
+      <div id="bGold" class="clip badge gold" data-start="250.12" data-duration="4.33" data-track-index="3"><div class="g">阿根廷人踢的，一直是<b>那七十四天的加时赛</b>。</div></div>
+  <div id="capbox" class="clip" data-start="0" data-duration="255.65" data-track-index="5"></div>
+  <div id="lut" class="clip" data-start="0" data-duration="255.65" data-track-index="100"></div>
+  <div id="scan" class="clip" data-start="0" data-duration="255.65" data-track-index="101"></div>
+  <div id="grain" class="clip" data-start="0" data-duration="255.65" data-track-index="102"></div>
+  <div id="vig" class="clip" data-start="0" data-duration="255.65" data-track-index="103"></div>
+  <div id="fade" class="clip" data-start="0" data-duration="255.65" data-track-index="104"></div>
+  <script>
+    const tl=gsap.timeline({paused:true}); const q=(s)=>document.querySelector(s);
+    gsap.set("#photo",{transformOrigin:"50% 42%"}); tl.fromTo("#photo",{scale:1.03},{scale:1.12,duration:8.9,ease:"none"},235.52);
+    tl.fromTo("#s1982 .big1982",{opacity:0,scale:1.15},{opacity:1,scale:1,duration:0.5,ease:"power2.out"},87.9); tl.to("#s1982 .big1982",{opacity:0,duration:0.3},90.6); tl.set("#s1982 .big1982",{opacity:0},90.9);
+    gsap.utils.toArray(".chap").forEach(el=>{const s=parseFloat(el.dataset.start);tl.fromTo(el.querySelector(".zh"),{opacity:0},{opacity:1,duration:0.4},s+0.1);tl.fromTo(el.querySelector(".rule"),{width:0},{width:200,duration:0.5},s+0.2);});
+    [["#bScore",0.3,7.28],["#b44",12.5,16.27],["#bRep",22.78,31.12],["#bRail",71.22,76.95],["#bWealth",83.16,87.7],["#bDist",99.76,111.36],["#bToll",139.56,146.2],["#bFate",146.7,155.28],["#bCard",183.1,187.52],["#bRev",213.02,216.52],["#b9802",217.22,225.06],["#bMessi",232.72,236.52],["#bGold",250.12,254.45]].forEach(([id,s,e])=>{tl.to(id,{opacity:1,duration:0.4,ease:"power2.out"},s);tl.to(id,{opacity:0,duration:0.3,ease:"power2.in"},e-0.35);tl.set(id,{opacity:0},e);});
+    const box=q("#capbox");
+    (window.__captions||[]).forEach((c)=>{tl.to(box,{opacity:1,duration:0.1,onStart:()=>{box.textContent=c.text;}},c.start);tl.to(box,{opacity:0,duration:0.1},c.end);});
+    tl.set(box,{opacity:0},255.55);
+    tl.to("#fade",{opacity:1,duration:1.4,ease:"none"},254.15);
+    window.__timelines=window.__timelines||{}; window.__timelines["main-video"]=tl;
+  </script>
+</div></body></html>

@@ -1,0 +1,183 @@
+{
+  "date": "2026-07-17",
+  "note": "backfill v4：4 条 Seedance 像素镜头，duration 10s（用户反馈 5s 组装太快）。API 一次通过 10s，无需降级。Seedance 响应无计价字段，cost 记 null，x-oneapi-request-id 留作成本反查。轮询注意：urllib 默认 UA 被网关 403，须走 curl。",
+  "clips": [
+    {
+      "id": "s03_trade",
+      "model": "doubao-seedance-2-0-260128",
+      "prompt": "Retro 16-bit PIXEL-ART paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat aged-yellow #C9A876 paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal 16:9 shot, no camera movement. Open on the empty paper field, then assemble the scene piece by piece with crisp pixel stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: chunky pixel-art groups keep sliding and popping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the dock and sea slide in, then the steamship, then the steam train with cargo, then the cattle and stacked wheat sacks snap into place in the last second to complete Image 2. Preserve the 16:9 framing, #C9A876 paper grain, pixel dithering, cream keylines, chunky pixels and soft shadows. Restrained tactile 2D pixel paper-craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no sound.",
+      "first_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/first_paper.png",
+      "last_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/s03_trade_last.png",
+      "duration_req": 10,
+      "duration_actual_s": 10.0417,
+      "resolution": "1280x720",
+      "fps": 24,
+      "cost_usd": null,
+      "x_oneapi_request_id": "202607171140258354173158268d9d6xQNCAfm6",
+      "task_id": "task_lhCuGR7bxWNb40TjLaDggQURzkznVCtM",
+      "attempts": {
+        "anchor_image": 0,
+        "seedance": 1
+      },
+      "qc": {
+        "dead_tail_s": 0.0,
+        "freeze_ge_1s": false,
+        "text_garbling": false,
+        "style": "一致(#C9A876纸底/像素颗粒/奶油描线)",
+        "verdict": "pass",
+        "note": "组装节奏均匀：码头→铁轨→货船→火车→牛群/麦袋；无死尾(trailing YDIF<0.05 = 0帧)；无文字乱码；风格与既有镜头一致"
+      },
+      "file": "shots/s03_trade.mp4",
+      "contact_sheet": "shots/s03_trade_contact.jpg"
+    },
+    {
+      "id": "s02_map",
+      "model": "doubao-seedance-2-0-260128",
+      "prompt": "Retro 16-bit PIXEL-ART paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat aged-yellow #C9A876 paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal 16:9 shot, no camera movement. Open on the empty paper field, then assemble the scene piece by piece with crisp pixel stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: chunky pixel-art groups keep sliding and popping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the pixel sea-wave texture slides in across the middle, then the lower-left landmass with the sky-blue-and-white highlighted country snaps into place, then the upper-right landmasses with the red-and-blue highlighted isles snap into place, and finally the cream dashed route line extends dash by dash across the ocean from lower-left to upper-right, connecting them in the last second to complete Image 2. Preserve the 16:9 framing, #C9A876 paper grain, pixel dithering, cream keylines, chunky pixels and soft shadows. Restrained tactile 2D pixel paper-craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no sound.",
+      "first_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/first_paper.png",
+      "last_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/s02_map_last.png",
+      "duration_req": 10,
+      "duration_actual_s": 10.0417,
+      "resolution": "1280x720",
+      "fps": 24,
+      "cost_usd": null,
+      "x_oneapi_request_id": "202607171141001086069058268d9d6kA0rXK4p",
+      "task_id": "task_my7Ahy54Aqfprh7Ij0fdCzbjzSmHfk4n",
+      "attempts": {
+        "anchor_image": 1,
+        "seedance": 1
+      },
+      "qc": {
+        "dead_tail_s": 0.0,
+        "freeze_ge_1s": false,
+        "text_garbling": false,
+        "style": "一致(#C9A876纸底/像素颗粒/奶油描线)",
+        "verdict": "pass",
+        "note": "海面纹理滑入→南美(阿根廷天蓝白高亮)→欧非陆块→不列颠群岛红蓝点亮→虚线航线逐段延伸连通；无死尾；画面内零文字数字"
+      },
+      "file": "shots/s02_map.mp4",
+      "contact_sheet": "shots/s02_map_contact.jpg"
+    },
+    {
+      "id": "s04_ruler",
+      "model": "doubao-seedance-2-0-260128",
+      "prompt": "Retro 16-bit PIXEL-ART paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat aged-yellow #C9A876 paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal 16:9 shot, no camera movement. Open on the empty paper field, then assemble the scene piece by piece with crisp pixel stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: chunky pixel-art groups keep sliding and popping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the big green continent landmass and the tiny two-island cluster assemble piece by piece, then the very short solid cream arc draws quickly from the mainland coast to the small islands, and then the extremely long cream dashed arc slowly extends dash by dash from the islands toward the upper-right corner until it runs off the edge of the frame in the last second to complete Image 2. Preserve the 16:9 framing, #C9A876 paper grain, pixel dithering, cream keylines, chunky pixels and soft shadows. Restrained tactile 2D pixel paper-craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no sound.",
+      "first_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/first_paper.png",
+      "last_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/s04_ruler_last.png",
+      "duration_req": 10,
+      "duration_actual_s": 10.0417,
+      "resolution": "1280x720",
+      "fps": 24,
+      "cost_usd": null,
+      "x_oneapi_request_id": "202607171141042483390138268d9d6e8wI7VRC",
+      "task_id": "task_mnkYkJSr2S6DjQNYVQL98BiZe6TOtTch",
+      "attempts": {
+        "anchor_image": 1,
+        "seedance": 1
+      },
+      "qc": {
+        "dead_tail_s": 0.0,
+        "freeze_ge_1s": false,
+        "text_garbling": false,
+        "style": "一致(#C9A876纸底/像素颗粒/奶油描线)",
+        "verdict": "pass",
+        "note": "大陆拼合→马岛小群岛→短测距线快速画完→长虚线缓慢延伸出画(右上)；两线粗细一致长短对比强；无死尾；零文字数字"
+      },
+      "file": "shots/s04_ruler.mp4",
+      "contact_sheet": "shots/s04_ruler_contact.jpg"
+    },
+    {
+      "id": "s05_9802",
+      "model": "doubao-seedance-2-0-260128",
+      "prompt": "Retro 16-bit PIXEL-ART paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat aged-yellow #C9A876 paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal 16:9 shot, no camera movement. Open on the empty paper field, then assemble the scene piece by piece with crisp pixel stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: chunky pixel-art groups keep sliding and popping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the green pitch and the white goal frame with the crowd wall slide in, then the red goalkeeper and the sky-blue-and-white striped shooter slide into place, and in the final second the shooter kicks and the ball streaks with a pixel afterimage trail into the far top corner while the keeper dives the other way, completing Image 2. Preserve the 16:9 framing, #C9A876 paper grain, pixel dithering, cream keylines, chunky pixels and soft shadows. Restrained tactile 2D pixel paper-craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no sound.",
+      "first_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/first_paper.png",
+      "last_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/s05_9802_last.png",
+      "duration_req": 10,
+      "duration_actual_s": 10.0417,
+      "resolution": "1280x720",
+      "fps": 24,
+      "cost_usd": null,
+      "x_oneapi_request_id": "202607171141424491793128268d9d60XeuLc5z",
+      "task_id": "task_6n2x3I8cyMvprJjf2ChkYcIRFh8AhWzC",
+      "attempts": {
+        "anchor_image": 1,
+        "seedance": 1
+      },
+      "qc": {
+        "dead_tail_s": 0.0,
+        "freeze_ge_1s": false,
+        "text_garbling": false,
+        "style": "一致(#C9A876纸底/像素颗粒/奶油描线)",
+        "verdict": "pass",
+        "note": "球门/草皮/看台拼合→蓝白条纹球员带球助跑→射门、红衣门将反向扑救、球带像素拖影入死角；无死尾；球衣无号码零文字"
+      },
+      "file": "shots/s05_9802.mp4",
+      "contact_sheet": "shots/s05_9802_contact.jpg"
+    }
+  ],
+  "anchors_new": {
+    "s02_map": {
+      "payload": "anchors/imgpayload_s02_map.json",
+      "raw": "anchors/s02_map_raw.png",
+      "last_1280x720": "anchors/s02_map_last.png",
+      "model": "gpt-image-2",
+      "usage_tokens": {
+        "input_tokens": 301,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 301
+        },
+        "output_tokens": 1158,
+        "output_tokens_details": {
+          "image_tokens": 1158,
+          "text_tokens": 0
+        },
+        "total_tokens": 1459
+      },
+      "attempts": 1,
+      "qc": "pass(风格一致/零文字，首轮过)"
+    },
+    "s04_ruler": {
+      "payload": "anchors/imgpayload_s04_ruler.json",
+      "raw": "anchors/s04_ruler_raw.png",
+      "last_1280x720": "anchors/s04_ruler_last.png",
+      "model": "gpt-image-2",
+      "usage_tokens": {
+        "input_tokens": 336,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 336
+        },
+        "output_tokens": 1158,
+        "output_tokens_details": {
+          "image_tokens": 1158,
+          "text_tokens": 0
+        },
+        "total_tokens": 1494
+      },
+      "attempts": 1,
+      "qc": "pass(风格一致/零文字，首轮过)"
+    },
+    "s05_9802": {
+      "payload": "anchors/imgpayload_s05_9802.json",
+      "raw": "anchors/s05_9802_raw.png",
+      "last_1280x720": "anchors/s05_9802_last.png",
+      "model": "gpt-image-2",
+      "usage_tokens": {
+        "input_tokens": 303,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 303
+        },
+        "output_tokens": 1158,
+        "output_tokens_details": {
+          "image_tokens": 1158,
+          "text_tokens": 0
+        },
+        "total_tokens": 1461
+      },
+      "attempts": 1,
+      "qc": "pass(风格一致/零文字，首轮过)"
+    }
+  }
+}

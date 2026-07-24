@@ -1,0 +1,22 @@
+{
+  "schema": "golden-source-library@1",
+  "status": "user_provided_full_text_assets_mirrored_in_style_pack",
+  "source_note": "用户于 2026-07-23 提供。完整文本已镜像到 styles/meme-ledger/references/licensed-golden-fulltexts/；文本为公开视频音轨的 ASR 原文，专名、数字、英文与同音字可能存在识别误差；用于内部 few-shot 分析与结构对齐，不可直接复用独特句子。",
+  "usage": {
+    "read_before_drafting": "Read the complete selected source text after selecting its Golden card and before writing the event mapping.",
+    "read_all_when": "Only when comparing, revising the style system, or the user explicitly asks for cross-template analysis.",
+    "generation_boundary": "Use narrative program, paragraph proportions, rhetorical placement, emotional curve and fine-grained expression patterns as internal reference; generate independent wording and event facts."
+  },
+  "assets": [
+    {"id": "G01", "path": "licensed-golden-fulltexts/01_营养工厂，暴打保健品_口播ASR原文.txt", "sha256": "1d344c2675c599fab052e8a2dee36cede58468f8e7176b7de477224ce46a10c2", "cjk_chars": 3025},
+    {"id": "G02", "path": "licensed-golden-fulltexts/02_活着就是熬着，活下去就是一切_口播ASR原文.txt", "sha256": "25f92400190c3269f490e73a27316581ba7c3fc3a36016454e6e6c9f12c622da", "cjk_chars": 4571},
+    {"id": "G03", "path": "licensed-golden-fulltexts/03_瑞幸咖啡是如何暴打资本主义的_口播ASR原文.txt", "sha256": "36aaebce6855a7c0806905c9bc176e1d822a004ee49cd13e8dcf708becc4947b", "cjk_chars": 5456},
+    {"id": "G04", "path": "licensed-golden-fulltexts/04_5本让你怀疑世界的好书_口播ASR原文.txt", "sha256": "baeba61fa078de9eada0e2ae1b78c38090aa424d7726c8fccaedb7b832e587d1", "cjk_chars": 3853},
+    {"id": "G05", "path": "licensed-golden-fulltexts/05_你知道奶茶加盟到底有多坑人吗_口播ASR原文.txt", "sha256": "85ca17bbe86267442c9311d90fcfc6093496aadad8f51a94da57fdf7b2b37e65", "cjk_chars": 6769},
+    {"id": "G06", "path": "licensed-golden-fulltexts/06_买不起奢侈品就是穷人吗，不，是聪明人_口播ASR原文.txt", "sha256": "af397587827473363f6869b4ee13dd3fcac4eea65577453986bc706ebc5b65f7", "cjk_chars": 7113},
+    {"id": "G07", "path": "licensed-golden-fulltexts/07_为何川普漠视美国人命_口播ASR原文.txt", "sha256": "f661d0d79069c380fc0462f08f01500c7785cf652c12ed7d3c3174712ef77375", "cjk_chars": 4696},
+    {"id": "G08", "path": "licensed-golden-fulltexts/08_肖战事件谁是大赢家_口播ASR原文.txt", "sha256": "59fde976a40e190fc0accb6e371821b6cdef0177509f8c9990fb5b79afdafe52", "cjk_chars": 3499},
+    {"id": "G09", "path": "licensed-golden-fulltexts/09_为什么渣女总是屡屡得手_口播ASR原文.txt", "sha256": "5b6319a007027287839c08625fdfba1d104d4115a6c9e64ce6d6f0087dd1c7f6", "cjk_chars": 5679},
+    {"id": "G10", "path": "licensed-golden-fulltexts/10_东方众神暴打华尔街韭菜_口播ASR原文.txt", "sha256": "f757b55e09f006caece0e8b88d89ab920aab2594aae0b403e0510f1ac9664d29", "cjk_chars": 7264}
+  ]
+}

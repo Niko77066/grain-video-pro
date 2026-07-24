@@ -1,0 +1,26 @@
+{
+  "model": "doubao-seedance-2-0-260128",
+  "prompt": "Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat burnt-orange paper field) and Image 2 as the exact completed last frame. One continuous locked-off vertical shot, no camera movement. Open on the empty burnt-orange paper field, then assemble the scene piece by piece with crisp physical stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: pieces keep sliding in and snapping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; the rows of filing cabinets slide in and stack on the right and their drawers open filled with plain document folders, then a robotic hand made of circuit-board fragments slides in from the left and reaches into an open drawer, and in the final second it pulls a folder out while a burst of paper and data fragments scatters upward. Preserve the 9:16 framing, #BC5A1E color field, cream-white cardstock and brick-red accents, uncoated paper grain, halftone dots, cream keylines, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound.",
+  "metadata": {
+    "content": [
+      {
+        "type": "image_url",
+        "image_url": {
+          "url": "https://storage.neodrop.ai/kuleshov/hfbreach/a_s02a_hack_first.png"
+        },
+        "role": "first_frame"
+      },
+      {
+        "type": "image_url",
+        "image_url": {
+          "url": "https://storage.neodrop.ai/kuleshov/hfbreach/a_s02a_hack_last.png"
+        },
+        "role": "last_frame"
+      }
+    ],
+    "resolution": "720p",
+    "ratio": "9:16",
+    "generate_audio": false,
+    "duration": 10
+  }
+}

@@ -1,0 +1,40 @@
+# 密钥永不入库
+.env
+
+# Generated provider responses can contain expiring signed media URLs.
+projects/**/shots/*result*.json
+projects/**/shots/*status*.json
+
+# 重媒体产物不进 git;留痕(film.json/md/prompt)与锚点图必须进
+projects/**/*.mp4
+projects/**/*.mov
+projects/**/*.wav
+projects/**/*.mp3
+node_modules/
+.DS_Store
+
+# 工作残渣不进 git（2026-07-21 清库新规）：抢救转储 / 原始 API 报文（gen 留痕在 film.json）
+projects/**/recovered/
+projects/**/anchors/*_response.json
+projects/**/audio/payload*.json
+projects/**/audio/response*.json
+projects/**/audio/mm_*.json
+
+# compose 中间产物(可由脚本复现)
+projects/**/compose/bake_frames/
+projects/**/compose/snapshots/
+projects/**/compose/snap3d/
+projects/**/compose/snapv2/
+projects/**/shots/frames*/
+projects/**/review_frames/
+projects/**/compose/.hyperframes/
+projects/**/shots/*-res.json
+
+# film-ir（Python 包）
+film-ir/.venv/
+film-ir/**/__pycache__/
+film-ir/**/*.egg-info/
+film-ir/.pytest_cache/
+
+# Film IR 锁文件
+projects/**/film.json.lock

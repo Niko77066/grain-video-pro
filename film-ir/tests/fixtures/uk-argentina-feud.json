@@ -1,0 +1,1459 @@
+{
+ "meta": {
+  "title": "英国和阿根廷：什么仇什么怨",
+  "format": "faceless_explainer",
+  "style_pack": "pixel-chronicle",
+  "commitment": {
+   "type": "hybrid",
+   "duration_s": 245,
+   "tolerance_pct": 10,
+   "note": "用户 2026-07-16 裁决允许放宽（原承诺 220s）；pixel-chronicle 实测语速 ~300 字/分，最终以 audio.timeline 真实时间戳为准"
+  },
+  "aspect": "16:9",
+  "budget": {
+   "cap_usd": null,
+   "spent_usd": 0.4985
+  },
+  "pipeline_version": "m0-v1",
+  "status": "delivered",
+  "next_action": "成片已交付：out/final.mp4（255.7s，1280x720/30fps，-13.9 LUFS/TP -1.5，hyperframes 0.7.57 -q high --strict 本地渲染=与验收draft同引擎；docker通道网络超时降级已记ledger）。后续：/video-score 登记 + 双平台发布包（rednote-mentor）+ 成本单价回填（Seedance/GPT-Image x-oneapi-request-id 反查）。broadcast-risk 素材 9 条已按 ≤3s 闪切使用，发布前需用户对 manifest.json 的 broadcast-risk 清单最终拍板。"
+ },
+ "audio": {
+  "voiceover": {
+   "engine": "minimax speech-2.8-hd (new-api网关)",
+   "endpoint": "https://openspeech.bytedance.com/api/v3/tts/create",
+   "voice_profile": "一位中文年轻女性讲述者，二十多岁，声音清亮里带一点气泡音的轻微沙质感，慵懒而自然、有记忆点，冷静克制、平实零表演腔，语速平稳从容",
+   "voice_profile_note": "用户 2026-07-16 音色 gate 定稿：4 候选中选 B『气泡音个性』（最有辨识度）；语速较候选版放慢（描述『明快偏快』→『平稳从容』+ speech_rate 下调）。守冷静克制零表演腔。跨节复用，首片确认后回填 pixel-chronicle playbook。",
+   "target_wpm_cn": null,
+   "total_chars": 1215,
+   "status": "generated",
+   "sections": [
+    {
+     "id": "sec01",
+     "slot": "S1",
+     "t_planned": [
+      0.0,
+      24.0
+     ],
+     "rate": "normal",
+     "speech_rate": 0,
+     "perf": "平叙开局；『马岛，是阿根廷的』放慢一字一顿；『这么说吧』贴近闲聊",
+     "text": "前两天凌晨，阿根廷把英格兰踢出了世界杯，补时第二分钟绝杀。但真正上热搜的，是庆祝时拉开的那条横幅：马岛，是阿根廷的。一场四十四年前的战争，被举到了半决赛的球场上。这两个国家到底多大仇？这么说吧，这本账，比阿根廷建国还要老。",
+     "status": "generated",
+     "gen": {
+      "engine": "minimax speech-2.8-hd",
+      "voice": "audiobook_female_1",
+      "speed": 1.1,
+      "duration_actual_s": 20.251,
+      "rate_cpm": 325.9,
+      "file": "audio/sec01.mp3"
+     }
+    },
+    {
+     "id": "sec02",
+     "slot": "S2",
+     "t_planned": [
+      24.0,
+      33.0
+     ],
+     "rate": "normal",
+     "speech_rate": 0,
+     "perf": "口号句读做闸门感；报题后 0.5s 静默进黑场",
+     "text": "什么仇什么怨。今天，英国和阿根廷。隔着一万两千公里的大西洋，掰了两百二十年的手腕。",
+     "status": "generated",
+     "gen": {
+      "engine": "minimax speech-2.8-hd",
+      "voice": "audiobook_female_1",
+      "speed": 1.1,
+      "duration_actual_s": 8.371,
+      "rate_cpm": 293.9,
+      "file": "audio/sec02.mp3"
+     }
+    },
+    {
+     "id": "sec03",
+     "slot": "S3-S4",
+     "t_planned": [
+      33.0,
+      86.0
+     ],
+     "rate": "normal",
+     "speech_rate": 0,
+     "perf": "『那会儿还没有阿根廷这个国家』放慢；『做到什么份上？』自问自答口气；末句『一九八二年到了』压低",
+     "text": "故事得从一八〇六年说起。那会儿还没有阿根廷这个国家，这块地归西班牙管。英国军队来了两次。第一次一千六百人，直接占了布宜诺斯艾利斯，西班牙总督卷着国库跑了，最后是当地民兵把城夺回来的。第二年英国人带着七千人卷土重来，市民爬上屋顶往下泼火力，把他们打到无条件投降。就这两仗，打出了阿根廷人的民族认同。国家还没建，仇先记下了。不过往后一百年，两家主要在做生意。做到什么份上？阿根廷三分之二的铁路是英国资本修的；四成的出口，牛肉、谷物，全卖到英国。历史学家管这种关系叫“非正式帝国”。靠这套买卖，一九一三年的阿根廷，比法国和德国都富。然后，一九八二年到了。",
+     "status": "generated",
+     "gen": {
+      "engine": "minimax speech-2.8-hd",
+      "voice": "audiobook_female_1",
+      "speed": 1.1,
+      "duration_actual_s": 53.587,
+      "rate_cpm": 306.8,
+      "file": "audio/sec03.mp3"
+     }
+    },
+    {
+     "id": "sec04",
+     "slot": "S5-S6",
+     "t_planned": [
+      86.0,
+      150.0
+     ],
+     "rate": "normal",
+     "speech_rate": 0,
+     "perf": "全段克制低沉；『撒切尔真把舰队派来了』单句独立、带一点『没想到』；伤亡数字逐个念清不渲染；末两句短促收住",
+     "text": "那年四月二日，阿根廷军政府出兵占了马岛。这片群岛，阿根廷叫马尔维纳斯，英国叫福克兰。它离阿根廷本土四百八十公里，离英国一万两千七百公里。军政府当时通胀失控，国内到处是抗议，他们赌的就是这个距离：英国不会为几座荒岛跑半个地球。撒切尔真把舰队派来了。五月二日，英国核潜艇击沉巡洋舰贝尔格拉诺将军号，三百二十三人沉进南大西洋。阿根廷整场战争阵亡六百四十九人，一半折在这一艘船上。两天后阿根廷还了一击，飞鱼导弹打中谢菲尔德号，二十人死亡，那是二战之后英国头一回有军舰被击沉。七十四天后，阿军投降。六百四十九个阿根廷人、二百五十五个英国人、三个岛民，没能回家。战败第三天，加尔铁里下台，军政府垮了。伦敦那头，撒切尔的支持率一路涨，第二年大选轻松连任。仗打完了。账没算完。",
+     "status": "generated",
+     "gen": {
+      "engine": "minimax speech-2.8-hd",
+      "voice": "audiobook_female_1",
+      "speed": 1.1,
+      "duration_actual_s": 65.503,
+      "rate_cpm": 302.3,
+      "file": "audio/sec04.mp3"
+     }
+    },
+    {
+     "id": "sec05",
+     "slot": "S8-S9",
+     "t_planned": [
+      150.0,
+      208.0
+     ],
+     "rate": "fast",
+     "speech_rate": 0,
+     "perf": "节奏加密（紧迫/breaking 覆写：语速 +10%）；『顺便说一句』松一口气旁枝；自传引文降速贴近耳语；『他说，这就是复仇』平实陈述不做戏剧停顿",
+     "text": "一九六六年世界杯，温布利。阿根廷队长拉廷被罚下场。裁判是个德国人，听不懂西班牙语，却认定拉廷说了脏话。拉廷不服，在场上杵了快十分钟，下场的时候，一屁股坐上了女王专用的红毯。赛后英格兰主帅骂阿根廷人是动物，阿根廷人管这场球叫世纪劫案。顺便说一句，足球的红黄牌，就是这场混乱之后才发明的。二十年后，墨西哥城，马岛战争刚过去四年。马拉多纳四分钟进了两个球。第一个是用手拍进去的，上帝之手；第二个从中场连过五人，后来被评为世纪进球。很多年后他在自传里承认：赛前大家都说足球归足球、战争归战争，可我们心里清楚，他们在那边杀了很多阿根廷孩子。他说，这就是复仇。之后还有两笔账。九八年，贝克汉姆红牌，阿根廷点球淘汰英格兰；〇二年，还是贝克汉姆，一记点球扳回一城。",
+     "status": "generated",
+     "gen": {
+      "engine": "minimax speech-2.8-hd",
+      "voice": "audiobook_female_1",
+      "speed": 1.1,
+      "duration_actual_s": 63.847,
+      "rate_cpm": 304.5,
+      "file": "audio/sec05.mp3"
+     }
+    },
+    {
+     "id": "sec06",
+     "slot": "S10-S11",
+     "t_planned": [
+      208.0,
+      236.0
+     ],
+     "rate": "slow",
+     "speech_rate": 0,
+     "perf": "回到全片最低语速；拉廷两句之间留 0.5s 静默；末句逐字落下，收在『加时赛』后 1s 静默进音乐",
+     "text": "然后就是前两天。英格兰先进球，第八十五分钟被扳平，补时被绝杀。三十九岁的梅西，送了两次助攻。有个人没能看到这场球。拉廷，六十年前坐上红毯的那位队长，上礼拜刚刚去世，八十九岁。横幅在亚特兰大的夜里拉开。对英格兰，这是一场输掉的半决赛；而阿根廷人踢的，一直是那七十四天的加时赛。",
+     "status": "generated",
+     "gen": {
+      "engine": "minimax speech-2.8-hd",
+      "voice": "audiobook_female_1",
+      "speed": 1.1,
+      "duration_actual_s": 26.731,
+      "rate_cpm": 305.3,
+      "file": "audio/sec06.mp3"
+     }
+    }
+   ],
+   "chosen_candidate": "B-气泡音个性",
+   "file": "audio/voiceover_v5.mp3",
+   "voice": "Chinese (Mandarin)_Gentle_Senior",
+   "speed": 1.0,
+   "mode": "single-pass(整条一次生成)",
+   "duration_actual_s": 256.68,
+   "note": "v5: 用户要求试官方音色ID。grain minimax-voices-zh.tsv 拉6候选(纪录片/播客向女声)→韵律初筛(停顿/音高动态)→决赛2条整轨声纹：Laid_BackGirl 0.804出局(表现力=漂移)，Gentle_Senior 0.889/0.908入选(官方Documentary标签)。shaonv版(audio/vo_mmC.mp3 0.904)留档备退",
+   "emotion": "calm"
+  },
+  "music": null,
+  "timeline": {
+   "file": "audio/timeline_fa.json",
+   "method": "forced-align wav2vec2-zh (torchaudio.forced_align, 剧本1:1逐字真实戳)",
+   "n_chars": 1076,
+   "validated": "silencedetect 交叉验证中段零漂移(39.02/45.56/48.34s 三处吻合)",
+   "note": "v5修正: 分块emission每缝重复125帧+均匀缩放→中段偏早(字幕略快根因)。改核心区精确平铺+固定20ms帧距；6锚点切片转写全片零偏验证"
+  },
+  "bgm": {
+   "file": "compose/assets/bgm_v5.mp3",
+   "source": "minimax music-2.6 (new-api网关) 生成82.6s→交叉淡化循环拼243s",
+   "integrated_lufs": -29.7,
+   "mount_volume": 0.23,
+   "meta": "compose/assets/bgm_meta.json",
+   "note": "加长到256.2s(0-239.5 + 中段15-35 交叉淡化3s + 尾3s淡出)匹配新音轨"
+  }
+ },
+ "anchors": [
+  {
+   "id": "anc_s01_banner",
+   "type": "pixel-collage still (Gate2)",
+   "for_shot": "s01_banner",
+   "file": "anchors/s01_banner.png",
+   "payload": "anchors/imgpayload_s01_banner.json",
+   "response": "anchors/imgresp_s01_banner.json",
+   "gen": {
+    "model": "gpt-image-2",
+    "quality": "medium",
+    "size": "1280x720→1672x941",
+    "cost_usd": null
+   },
+   "note": "像素人群举蓝白横幅(留白，字走overlay)"
+  },
+  {
+   "id": "anc_s01_1806",
+   "type": "pixel-collage still (Gate2)",
+   "for_shot": "s01_1806",
+   "file": "anchors/s01_1806.png",
+   "payload": "anchors/imgpayload_s01_1806.json",
+   "response": "anchors/imgresp_s01_1806.json",
+   "gen": {
+    "model": "gpt-image-2",
+    "quality": "medium",
+    "size": "1280x720→1672x941",
+    "cost_usd": null
+   },
+   "note": "古账本+羽毛笔墨水(『这本账』隐喻)"
+  },
+  {
+   "id": "anc_s03_invade",
+   "type": "pixel-collage still (Gate2)",
+   "for_shot": "s03_invade",
+   "file": "anchors/s03_invade.png",
+   "payload": "anchors/imgpayload_s03_invade.json",
+   "response": "anchors/imgresp_s03_invade.json",
+   "gen": {
+    "model": "gpt-image-2",
+    "quality": "medium",
+    "size": "1280x720→1672x941",
+    "cost_usd": null
+   },
+   "note": "1806英军红衣攻城/屋顶泼火力(无血腥)"
+  },
+  {
+   "id": "anc_s03_trade",
+   "type": "pixel-collage still (Gate2)",
+   "for_shot": "s03_trade",
+   "file": "anchors/s03_trade.png",
+   "payload": "anchors/imgpayload_s03_trade.json",
+   "response": "anchors/imgresp_s03_trade.json",
+   "gen": {
+    "model": "gpt-image-2",
+    "quality": "medium",
+    "size": "1280x720→1672x941",
+    "cost_usd": null
+   },
+   "note": "蒸汽货船+火车+牛+麦袋货箱(非正式帝国)"
+  },
+  {
+   "id": "anc_s04_belgrano",
+   "type": "pixel-collage still (Gate2)",
+   "for_shot": "s04_belgrano",
+   "file": "anchors/s04_belgrano.png",
+   "payload": "anchors/imgpayload_s04_belgrano.json",
+   "response": "anchors/imgresp_s04_belgrano.json",
+   "gen": {
+    "model": "gpt-image-2",
+    "quality": "medium",
+    "size": "1280x720→1672x941",
+    "cost_usd": null
+   },
+   "note": "军舰剪影+潜望镜航迹(克制/禁残骸)"
+  },
+  {
+   "id": "anc_s04_sheffield",
+   "type": "pixel-collage still (Gate2)",
+   "for_shot": "s04_sheffield",
+   "file": "anchors/s04_sheffield.png",
+   "payload": "anchors/imgpayload_s04_sheffield.json",
+   "response": "anchors/imgresp_s04_sheffield.json",
+   "gen": {
+    "model": "gpt-image-2",
+    "quality": "medium",
+    "size": "1280x720→1672x941",
+    "cost_usd": null
+   },
+   "note": "飞鱼导弹掠海扑向军舰(克制)"
+  },
+  {
+   "id": "anc_s05_rattin",
+   "type": "pixel-collage still (Gate2)",
+   "for_shot": "s05_rattin",
+   "file": "anchors/s05_rattin.png",
+   "payload": "anchors/imgpayload_s05_rattin.json",
+   "response": "anchors/imgresp_s05_rattin.json",
+   "gen": {
+    "model": "gpt-image-2",
+    "quality": "medium",
+    "size": "1280x720→1672x941",
+    "cost_usd": null
+   },
+   "note": "蓝白条纹球员坐红毯+两官员"
+  },
+  {
+   "id": "anc_s05_hand",
+   "type": "pixel-collage still (Gate2)",
+   "for_shot": "s05_hand",
+   "file": "anchors/s05_hand.png",
+   "payload": "anchors/imgpayload_s05_hand.json",
+   "response": "anchors/imgresp_s05_hand.json",
+   "gen": {
+    "model": "gpt-image-2",
+    "quality": "medium",
+    "size": "1280x720→1672x941",
+    "cost_usd": null
+   },
+   "note": "上帝之手：深蓝球员手球入网(hero，深蓝已改)"
+  },
+  {
+   "id": "anc_s05_goal",
+   "type": "pixel-collage still (Gate2)",
+   "for_shot": "s05_goal",
+   "file": "anchors/s05_goal.png",
+   "payload": "anchors/imgpayload_s05_goal.json",
+   "response": "anchors/imgresp_s05_goal.json",
+   "gen": {
+    "model": "gpt-image-2",
+    "quality": "medium",
+    "size": "1280x720→1672x941",
+    "cost_usd": null
+   },
+   "note": "深蓝球员连过5白衣防守+像素残影"
+  },
+  {
+   "id": "anc_s02_atlantic",
+   "type": "pixel still (image-motion)",
+   "for_shot": "s02_atlantic",
+   "file": "anchors/s02_atlantic.png",
+   "payload": "anchors/imgpayload_s02_atlantic.json",
+   "gen": {
+    "model": "gpt-image-2",
+    "quality": "medium",
+    "cost_usd": null
+   },
+   "note": "像素大西洋海面全屏，compose 用 Ken Burns 缓推给准运动"
+  }
+ ],
+ "shot_groups": [],
+ "shots": [
+  {
+   "id": "s01_score",
+   "t": [
+    0.0,
+    5.0
+   ],
+   "voice_ref": "sec01",
+   "intent": "记分牌 2-1 补时第二分钟绝杀跳字",
+   "framing": "全屏记分牌",
+   "source": {
+    "provider": "hyperframes",
+    "note": "MG 信息骨架"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s01_banner",
+   "t": [
+    5.0,
+    11.0
+   ],
+   "voice_ref": "sec01",
+   "intent": "『马岛是阿根廷的』横幅在看台拉开",
+   "framing": "中景横幅",
+   "source": {
+    "provider": "collage-broll-pixel",
+    "note": "像素拼贴事件/氛围 b-roll（halftone→16-bit pixel 改版）",
+    "pipeline": "三闸门：隐喻→GPT-Image-2静帧(16:9)→Seedance首尾帧assemble；每条≤5s，长槽位拆多条/接MG"
+   },
+   "anchor_refs": [
+    "anc_s01_banner"
+   ],
+   "status": "qc_pass",
+   "gen": {
+    "engine": "seedance doubao-seedance-2-0-260128",
+    "first_frame": "anchors/_first_paper.png",
+    "last_frame": "anchors/s01_banner_last.png",
+    "file": "shots/s01_banner.mp4",
+    "duration_actual_s": 5.04,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null
+   },
+   "qc": {
+    "assemble": "空场→看台逐排组装→蓝白横幅末尾展开",
+    "pixel": "统一/无畸变",
+    "verdict": "pass(个别末段compose尾裁)"
+   }
+  },
+  {
+   "id": "s01_44yr",
+   "t": [
+    11.0,
+    14.5
+   ],
+   "voice_ref": "sec01",
+   "intent": "「44 年」金色大字砸出",
+   "framing": "全屏大字卡",
+   "source": {
+    "provider": "hyperframes",
+    "note": "MG 信息骨架"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s01_1806",
+   "t": [
+    14.5,
+    20.25
+   ],
+   "voice_ref": "sec01",
+   "intent": "泛黄账本翻回 1806（比建国还老）",
+   "framing": "道具特写",
+   "source": {
+    "provider": "collage-broll-pixel",
+    "note": "像素拼贴事件/氛围 b-roll（halftone→16-bit pixel 改版）",
+    "pipeline": "三闸门：隐喻→GPT-Image-2静帧(16:9)→Seedance首尾帧assemble；每条≤5s，长槽位拆多条/接MG"
+   },
+   "anchor_refs": [
+    "anc_s01_1806"
+   ],
+   "status": "qc_pass",
+   "gen": {
+    "engine": "seedance doubao-seedance-2-0-260128",
+    "first_frame": "anchors/_first_paper.png",
+    "last_frame": "anchors/s01_1806_last.png",
+    "file": "shots/s01_1806.mp4",
+    "duration_actual_s": 5.04,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null
+   },
+   "qc": {
+    "assemble": "账本+羽毛笔墨水组装(同批assemble成立)",
+    "pixel": "统一/无畸变",
+    "verdict": "pass(个别末段compose尾裁)"
+   }
+  },
+  {
+   "id": "s02_atlantic",
+   "t": [
+    20.6,
+    25.0
+   ],
+   "voice_ref": "sec02",
+   "intent": "大西洋海面空镜（一万两千公里）",
+   "framing": "航拍空镜",
+   "source": {
+    "provider": "image-motion",
+    "note": "像素海面静帧+HyperFrames Ken Burns缓推(准运动，声明型不烘焙Seedance，全片像素统一)"
+   },
+   "anchor_refs": [
+    "anc_s02_atlantic"
+   ],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s02_map",
+   "t": [
+    25.0,
+    28.97
+   ],
+   "voice_ref": "sec02",
+   "intent": "像素地图两国点亮拉线 + 报题→黑场",
+   "framing": "全屏地图",
+   "source": {
+    "provider": "seedance",
+    "model": "doubao-seedance-2-0-260128"
+   },
+   "anchor_refs": [],
+   "status": "generated",
+   "gen": {
+    "id": "s02_map",
+    "model": "doubao-seedance-2-0-260128",
+    "prompt": "Retro 16-bit PIXEL-ART paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat aged-yellow #C9A876 paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal 16:9 shot, no camera movement. Open on the empty paper field, then assemble the scene piece by piece with crisp pixel stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: chunky pixel-art groups keep sliding and popping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the pixel sea-wave texture slides in across the middle, then the lower-left landmass with the sky-blue-and-white highlighted country snaps into place, then the upper-right landmasses with the red-and-blue highlighted isles snap into place, and finally the cream dashed route line extends dash by dash across the ocean from lower-left to upper-right, connecting them in the last second to complete Image 2. Preserve the 16:9 framing, #C9A876 paper grain, pixel dithering, cream keylines, chunky pixels and soft shadows. Restrained tactile 2D pixel paper-craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no sound.",
+    "first_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/first_paper.png",
+    "last_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/s02_map_last.png",
+    "duration_req": 10,
+    "duration_actual_s": 10.0417,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null,
+    "x_oneapi_request_id": "202607171141001086069058268d9d6kA0rXK4p",
+    "task_id": "task_my7Ahy54Aqfprh7Ij0fdCzbjzSmHfk4n",
+    "attempts": {
+     "anchor_image": 1,
+     "seedance": 1
+    },
+    "qc": {
+     "dead_tail_s": 0.0,
+     "freeze_ge_1s": false,
+     "text_garbling": false,
+     "style": "一致(#C9A876纸底/像素颗粒/奶油描线)",
+     "verdict": "pass",
+     "note": "海面纹理滑入→南美(阿根廷天蓝白高亮)→欧非陆块→不列颠群岛红蓝点亮→虚线航线逐段延伸连通；无死尾；画面内零文字数字"
+    },
+    "file": "shots/s02_map.mp4",
+    "contact_sheet": "shots/s02_map_contact.jpg"
+   },
+   "qc": null
+  },
+  {
+   "id": "s03_card",
+   "t": [
+    29.32,
+    31.5
+   ],
+   "voice_ref": "sec03",
+   "intent": "章节卡『钱』",
+   "framing": "章节卡",
+   "source": {
+    "provider": "hyperframes",
+    "note": "MG 信息骨架"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s03_invade",
+   "t": [
+    31.5,
+    46.0
+   ],
+   "voice_ref": "sec03",
+   "intent": "1806/07 英军两次攻城、市民屋顶泼火力",
+   "framing": "像素小剧场",
+   "source": {
+    "provider": "collage-broll-pixel",
+    "note": "像素拼贴事件/氛围 b-roll（halftone→16-bit pixel 改版）",
+    "pipeline": "三闸门：隐喻→GPT-Image-2静帧(16:9)→Seedance首尾帧assemble；每条≤5s，长槽位拆多条/接MG"
+   },
+   "anchor_refs": [
+    "anc_s03_invade"
+   ],
+   "status": "qc_pass",
+   "gen": {
+    "engine": "seedance doubao-seedance-2-0-260128",
+    "first_frame": "anchors/_first_paper.png",
+    "last_frame": "anchors/s03_invade_last.png",
+    "file": "shots/s03_invade.mp4",
+    "duration_actual_s": 5.04,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null
+   },
+   "qc": {
+    "assemble": "建筑滑入→红衣英军列队→屋顶泼火力",
+    "pixel": "统一/无畸变",
+    "verdict": "pass(个别末段compose尾裁)"
+   }
+  },
+  {
+   "id": "s03_rail",
+   "t": [
+    46.0,
+    60.0
+   ],
+   "voice_ref": "sec03",
+   "intent": "英资铁路网在像素地图蔓延（2/3 高亮）",
+   "framing": "全屏地图",
+   "source": {
+    "provider": "hyperframes",
+    "note": "MG 信息骨架"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s03_trade",
+   "t": [
+    60.0,
+    71.0
+   ],
+   "voice_ref": "sec03",
+   "intent": "牛肉谷物货运航线（非正式帝国 4 成出口）",
+   "framing": "像素货运",
+   "source": {
+    "provider": "seedance",
+    "model": "doubao-seedance-2-0-260128"
+   },
+   "anchor_refs": [
+    "anc_s03_trade"
+   ],
+   "status": "generated",
+   "gen": {
+    "id": "s03_trade",
+    "model": "doubao-seedance-2-0-260128",
+    "prompt": "Retro 16-bit PIXEL-ART paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat aged-yellow #C9A876 paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal 16:9 shot, no camera movement. Open on the empty paper field, then assemble the scene piece by piece with crisp pixel stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: chunky pixel-art groups keep sliding and popping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the dock and sea slide in, then the steamship, then the steam train with cargo, then the cattle and stacked wheat sacks snap into place in the last second to complete Image 2. Preserve the 16:9 framing, #C9A876 paper grain, pixel dithering, cream keylines, chunky pixels and soft shadows. Restrained tactile 2D pixel paper-craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no sound.",
+    "first_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/first_paper.png",
+    "last_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/s03_trade_last.png",
+    "duration_req": 10,
+    "duration_actual_s": 10.0417,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null,
+    "x_oneapi_request_id": "202607171140258354173158268d9d6xQNCAfm6",
+    "task_id": "task_lhCuGR7bxWNb40TjLaDggQURzkznVCtM",
+    "attempts": {
+     "anchor_image": 0,
+     "seedance": 1
+    },
+    "qc": {
+     "dead_tail_s": 0.0,
+     "freeze_ge_1s": false,
+     "text_garbling": false,
+     "style": "一致(#C9A876纸底/像素颗粒/奶油描线)",
+     "verdict": "pass",
+     "note": "组装节奏均匀：码头→铁轨→货船→火车→牛群/麦袋；无死尾(trailing YDIF<0.05 = 0帧)；无文字乱码；风格与既有镜头一致"
+    },
+    "file": "shots/s03_trade.mp4",
+    "contact_sheet": "shots/s03_trade_contact.jpg"
+   },
+   "qc": {
+    "assemble": "空场→水面→码头→货船→火车→牛群→麦袋货箱",
+    "pixel": "统一/无畸变",
+    "verdict": "pass"
+   }
+  },
+  {
+   "id": "s03_1913",
+   "t": [
+    71.0,
+    82.91
+   ],
+   "voice_ref": "sec03",
+   "intent": "财富对比条：1913 阿根廷 > 法国 > 德国",
+   "framing": "数据卡",
+   "source": {
+    "provider": "hyperframes",
+    "note": "MG 信息骨架"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s04_card",
+   "t": [
+    83.26,
+    85.5
+   ],
+   "voice_ref": "sec04",
+   "intent": "章节卡『血』",
+   "framing": "章节卡",
+   "source": {
+    "provider": "hyperframes",
+    "note": "MG 信息骨架"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s04_ruler",
+   "t": [
+    85.5,
+    101.0
+   ],
+   "voice_ref": "sec04",
+   "intent": "距离标尺 480km vs 12,700km",
+   "framing": "数据示意",
+   "source": {
+    "provider": "seedance",
+    "model": "doubao-seedance-2-0-260128"
+   },
+   "anchor_refs": [],
+   "status": "generated",
+   "gen": {
+    "id": "s04_ruler",
+    "model": "doubao-seedance-2-0-260128",
+    "prompt": "Retro 16-bit PIXEL-ART paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat aged-yellow #C9A876 paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal 16:9 shot, no camera movement. Open on the empty paper field, then assemble the scene piece by piece with crisp pixel stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: chunky pixel-art groups keep sliding and popping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the big green continent landmass and the tiny two-island cluster assemble piece by piece, then the very short solid cream arc draws quickly from the mainland coast to the small islands, and then the extremely long cream dashed arc slowly extends dash by dash from the islands toward the upper-right corner until it runs off the edge of the frame in the last second to complete Image 2. Preserve the 16:9 framing, #C9A876 paper grain, pixel dithering, cream keylines, chunky pixels and soft shadows. Restrained tactile 2D pixel paper-craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no sound.",
+    "first_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/first_paper.png",
+    "last_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/s04_ruler_last.png",
+    "duration_req": 10,
+    "duration_actual_s": 10.0417,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null,
+    "x_oneapi_request_id": "202607171141042483390138268d9d6e8wI7VRC",
+    "task_id": "task_mnkYkJSr2S6DjQNYVQL98BiZe6TOtTch",
+    "attempts": {
+     "anchor_image": 1,
+     "seedance": 1
+    },
+    "qc": {
+     "dead_tail_s": 0.0,
+     "freeze_ge_1s": false,
+     "text_garbling": false,
+     "style": "一致(#C9A876纸底/像素颗粒/奶油描线)",
+     "verdict": "pass",
+     "note": "大陆拼合→马岛小群岛→短测距线快速画完→长虚线缓慢延伸出画(右上)；两线粗细一致长短对比强；无死尾；零文字数字"
+    },
+    "file": "shots/s04_ruler.mp4",
+    "contact_sheet": "shots/s04_ruler_contact.jpg"
+   },
+   "qc": null
+  },
+  {
+   "id": "s04_belgrano",
+   "t": [
+    101.0,
+    120.0
+   ],
+   "voice_ref": "sec04",
+   "intent": "贝尔格拉诺号舰船像素剪影 + 323（禁残骸）",
+   "framing": "像素剪影",
+   "source": {
+    "provider": "collage-broll-pixel",
+    "note": "像素拼贴事件/氛围 b-roll（halftone→16-bit pixel 改版）",
+    "pipeline": "三闸门：隐喻→GPT-Image-2静帧(16:9)→Seedance首尾帧assemble；每条≤5s，长槽位拆多条/接MG"
+   },
+   "anchor_refs": [
+    "anc_s04_belgrano"
+   ],
+   "status": "qc_pass",
+   "gen": {
+    "engine": "seedance doubao-seedance-2-0-260128",
+    "first_frame": "anchors/_first_paper.png",
+    "last_frame": "anchors/s04_belgrano_last.png",
+    "file": "shots/s04_belgrano.mp4",
+    "duration_actual_s": 5.04,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null
+   },
+   "qc": {
+    "assemble": "云→海→军舰剪影→潜望镜航迹(末段稍静,compose尾裁)",
+    "pixel": "统一/无畸变",
+    "verdict": "pass(个别末段compose尾裁)"
+   }
+  },
+  {
+   "id": "s04_sheffield",
+   "t": [
+    120.0,
+    132.0
+   ],
+   "voice_ref": "sec04",
+   "intent": "飞鱼导弹击中谢菲尔德号（像素示意，禁伤亡）",
+   "framing": "像素示意",
+   "source": {
+    "provider": "collage-broll-pixel",
+    "note": "像素拼贴事件/氛围 b-roll（halftone→16-bit pixel 改版）",
+    "pipeline": "三闸门：隐喻→GPT-Image-2静帧(16:9)→Seedance首尾帧assemble；每条≤5s，长槽位拆多条/接MG"
+   },
+   "anchor_refs": [
+    "anc_s04_sheffield"
+   ],
+   "status": "qc_pass",
+   "gen": {
+    "engine": "seedance doubao-seedance-2-0-260128",
+    "first_frame": "anchors/_first_paper.png",
+    "last_frame": "anchors/s04_sheffield_last.png",
+    "file": "shots/s04_sheffield.mp4",
+    "duration_actual_s": 5.04,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null
+   },
+   "qc": {
+    "assemble": "海→军舰→飞鱼导弹掠海(同批assemble成立)",
+    "pixel": "统一/无畸变",
+    "verdict": "pass(个别末段compose尾裁)"
+   }
+  },
+  {
+   "id": "s04_toll",
+   "t": [
+    132.0,
+    141.0
+   ],
+   "voice_ref": "sec04",
+   "intent": "伤亡三行数字卡 649/255/3",
+   "framing": "数据卡",
+   "source": {
+    "provider": "hyperframes",
+    "note": "MG 信息骨架"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s04_fate",
+   "t": [
+    141.0,
+    148.76
+   ],
+   "voice_ref": "sec04",
+   "intent": "双命运分屏：加尔铁里下台 / 撒切尔连任",
+   "framing": "分屏卡",
+   "source": {
+    "provider": "hyperframes",
+    "note": "MG 信息骨架"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s05_rattin",
+   "t": [
+    149.11,
+    163.0
+   ],
+   "voice_ref": "sec05",
+   "intent": "1966 拉廷坐女王红毯（红黄牌起源）",
+   "framing": "像素重演",
+   "source": {
+    "provider": "collage-broll-pixel",
+    "note": "像素拼贴事件/氛围 b-roll（halftone→16-bit pixel 改版）",
+    "pipeline": "三闸门：隐喻→GPT-Image-2静帧(16:9)→Seedance首尾帧assemble；每条≤5s，长槽位拆多条/接MG"
+   },
+   "anchor_refs": [
+    "anc_s05_rattin"
+   ],
+   "status": "qc_pass",
+   "gen": {
+    "engine": "seedance doubao-seedance-2-0-260128",
+    "first_frame": "anchors/_first_paper.png",
+    "last_frame": "anchors/s05_rattin_last.png",
+    "file": "shots/s05_rattin.mp4",
+    "duration_actual_s": 5.04,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null
+   },
+   "qc": {
+    "assemble": "官员→红毯卷展开→蓝白条纹球员坐下(重做成功)",
+    "pixel": "统一/无畸变",
+    "verdict": "pass"
+   }
+  },
+  {
+   "id": "s05_hand",
+   "t": [
+    163.0,
+    178.0
+   ],
+   "voice_ref": "sec05",
+   "intent": "上帝之手像素重演（hero，FIFA 画面零使用）",
+   "framing": "像素重演 hero",
+   "source": {
+    "provider": "collage-broll-pixel",
+    "note": "像素拼贴事件/氛围 b-roll（halftone→16-bit pixel 改版）",
+    "pipeline": "三闸门：隐喻→GPT-Image-2静帧(16:9)→Seedance首尾帧assemble；每条≤5s，长槽位拆多条/接MG"
+   },
+   "anchor_refs": [
+    "anc_s05_hand"
+   ],
+   "status": "qc_pass",
+   "gen": {
+    "engine": "seedance doubao-seedance-2-0-260128",
+    "task_id": "task_VL7CTizQU1R1aH8rhFal2wAYvpt9m7zA",
+    "first_frame": "anchors/_first_paper.png(#C9A876空场)",
+    "last_frame": "anchors/s05_hand_last.png",
+    "file": "shots/s05_hand.mp4",
+    "duration_actual_s": 5.04,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null
+   },
+   "qc": {
+    "assemble": "成立：空纸场→看台逐块滑入→草地→球门+红门将+蓝球员→手球入网",
+    "pixel": "质感干净、深蓝球衣对、无畸变",
+    "deadtail": "末~1s hold(YDIF末24帧23/24<1)；组装已铺满至~4s，compose 尾裁到~4s 处理",
+    "verdict": "pass(compose 尾裁)"
+   }
+  },
+  {
+   "id": "s05_goal",
+   "t": [
+    178.0,
+    192.0
+   ],
+   "voice_ref": "sec05",
+   "intent": "世纪进球连过五人像素重演",
+   "framing": "像素重演",
+   "source": {
+    "provider": "collage-broll-pixel",
+    "note": "像素拼贴事件/氛围 b-roll（halftone→16-bit pixel 改版）",
+    "pipeline": "三闸门：隐喻→GPT-Image-2静帧(16:9)→Seedance首尾帧assemble；每条≤5s，长槽位拆多条/接MG"
+   },
+   "anchor_refs": [
+    "anc_s05_goal"
+   ],
+   "status": "qc_pass",
+   "gen": {
+    "engine": "seedance doubao-seedance-2-0-260128",
+    "first_frame": "anchors/_first_paper.png",
+    "last_frame": "anchors/s05_goal_last.png",
+    "file": "shots/s05_goal.mp4",
+    "duration_actual_s": 5.04,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null
+   },
+   "qc": {
+    "assemble": "球门+白衣防线→蓝衣球员带球残影突破",
+    "pixel": "统一/无畸变",
+    "verdict": "pass(个别末段compose尾裁)"
+   }
+  },
+  {
+   "id": "s05_revenge",
+   "t": [
+    192.0,
+    203.0
+   ],
+   "voice_ref": "sec05",
+   "intent": "马拉多纳自传『复仇』引文压帧",
+   "framing": "引文字卡",
+   "source": {
+    "provider": "hyperframes",
+    "note": "MG 信息骨架"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s05_9802",
+   "t": [
+    203.0,
+    212.96
+   ],
+   "voice_ref": "sec05",
+   "intent": "98/02 贝克汉姆记分牌快切",
+   "framing": "记分牌快切",
+   "source": {
+    "provider": "seedance",
+    "model": "doubao-seedance-2-0-260128"
+   },
+   "anchor_refs": [],
+   "status": "generated",
+   "gen": {
+    "id": "s05_9802",
+    "model": "doubao-seedance-2-0-260128",
+    "prompt": "Retro 16-bit PIXEL-ART paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat aged-yellow #C9A876 paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal 16:9 shot, no camera movement. Open on the empty paper field, then assemble the scene piece by piece with crisp pixel stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: chunky pixel-art groups keep sliding and popping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the green pitch and the white goal frame with the crowd wall slide in, then the red goalkeeper and the sky-blue-and-white striped shooter slide into place, and in the final second the shooter kicks and the ball streaks with a pixel afterimage trail into the far top corner while the keeper dives the other way, completing Image 2. Preserve the 16:9 framing, #C9A876 paper grain, pixel dithering, cream keylines, chunky pixels and soft shadows. Restrained tactile 2D pixel paper-craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no sound.",
+    "first_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/first_paper.png",
+    "last_frame_url": "https://storage.neodrop.ai/kuleshov/uk-arg/s05_9802_last.png",
+    "duration_req": 10,
+    "duration_actual_s": 10.0417,
+    "resolution": "1280x720",
+    "fps": 24,
+    "cost_usd": null,
+    "x_oneapi_request_id": "202607171141424491793128268d9d60XeuLc5z",
+    "task_id": "task_6n2x3I8cyMvprJjf2ChkYcIRFh8AhWzC",
+    "attempts": {
+     "anchor_image": 1,
+     "seedance": 1
+    },
+    "qc": {
+     "dead_tail_s": 0.0,
+     "freeze_ge_1s": false,
+     "text_garbling": false,
+     "style": "一致(#C9A876纸底/像素颗粒/奶油描线)",
+     "verdict": "pass",
+     "note": "球门/草皮/看台拼合→蓝白条纹球员带球助跑→射门、红衣门将反向扑救、球带像素拖影入死角；无死尾；球衣无号码零文字"
+    },
+    "file": "shots/s05_9802.mp4",
+    "contact_sheet": "shots/s05_9802_contact.jpg"
+   },
+   "qc": null
+  },
+  {
+   "id": "s06_photo",
+   "t": [
+    213.31,
+    222.0
+   ],
+   "voice_ref": "sec06",
+   "intent": "拉廷黑白档案照缓推（全片唯一真实面孔）",
+   "framing": "真人档案照",
+   "source": {
+    "provider": "image-motion",
+    "note": "档案照+轻微运动（连续≤2）"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s06_montage",
+   "t": [
+    222.0,
+    235.0
+   ],
+   "voice_ref": "sec06",
+   "intent": "横幅/看台/全片意象像素快闪蒙太奇",
+   "framing": "混剪蒙太奇",
+   "source": {
+    "provider": "collage-broll-pixel",
+    "note": "像素拼贴事件/氛围 b-roll（halftone→16-bit pixel 改版）",
+    "pipeline": "三闸门：隐喻→GPT-Image-2静帧(16:9)→Seedance首尾帧assemble；每条≤5s，长槽位拆多条/接MG"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  },
+  {
+   "id": "s06_gold",
+   "t": [
+    235.0,
+    240.04
+   ],
+   "voice_ref": "sec06",
+   "intent": "手写体金句『七十四天的加时赛』压帧→淡出（零 CTA）",
+   "framing": "收尾金句",
+   "source": {
+    "provider": "hyperframes",
+    "note": "MG 信息骨架"
+   },
+   "anchor_refs": [],
+   "status": "planned",
+   "gen": null,
+   "qc": null
+  }
+ ],
+ "overlays": [
+  {
+   "id": "badges",
+   "type": "数据角标×12",
+   "note": "记分牌/44年/报题/铁路出口/1913财富/距离/伤亡/命运/红黄牌/复仇引文/梅西/金句，半透明墨底pill叠画面不整屏"
+  },
+  {
+   "id": "ov_captions",
+   "type": "字幕层",
+   "source": "captions_data.js(104句,新timeline)",
+   "note": "墨底条白字"
+  }
+ ],
+ "edit": {
+  "transitions": [
+   "硬切（默认，靠质感层无痕）",
+   "黑场（章节闸门：钱/血/球）",
+   "像素溶解（形态转换，全片≤1次）"
+  ],
+  "lut": "褪色做旧：饱和度压低，统一 MG/collage-pixel/Seedance/档案照 四源",
+  "grain": "像素颗粒 + 泛黄做旧纸纹底 #C9A876（全片贯穿的缝合层）",
+  "palette": {
+   "paper": "#C9A876",
+   "ink": "#2B2118",
+   "accent": "#FFD21E",
+   "gilt": "#C9932B",
+   "mark": "#C0392B"
+  },
+  "loudness_lufs": -14
+ },
+ "ledger": {
+  "decisions": [
+   {
+    "date": "2026-07-16",
+    "stage": "brief",
+    "by": "用户",
+    "decision": "选题拍板：时事驱动《英国和阿根廷：什么仇什么怨》，挂 2026 世界杯热点",
+    "options_considered": [
+     "瑙鲁",
+     "荷兰农业",
+     "卢旺达",
+     "挪威主权基金",
+     "新加坡水（五候选全部让位于时事时效）"
+    ],
+    "reason": "紧跟时事；角度参考用户提供的微信文章（正文未抓到，见 brief）"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "brief",
+    "by": "EP",
+    "decision": "风格包 pixel-chronicle（首考）；16:9；3–4 分钟带",
+    "options_considered": [
+     "新建时事风格包（否：M1 不为首片新建包）"
+    ],
+    "reason": "人文志对标形态直接适配；像素 MG 重演可规避 FIFA 比赛画面版权"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "script",
+    "by": "用户→EP",
+    "decision": "script v1 判 AI 味过重，按 narration-voice 规则集全文重写 v2",
+    "options_considered": [
+     "v1 局部修补（否：排比/对仗是结构性问题）"
+    ],
+    "reason": "用户反馈+内化 Humanizer-zh/social-media-skills 方法论"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "script",
+    "by": "用户",
+    "decision": "script v2 通过，放行进入 ④ audio",
+    "options_considered": [
+     "打回再改"
+    ],
+    "reason": "结构（钱→血→球）+ 去 AI 味自查 46/50；EP 已用 WebSearch 六源交叉核实时事锚 F01/F02/F05 为真（FIFA/ESPN/WaPo/Forbes），地基可信"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "by": "用户→EP",
+    "decision": "时长承诺 220s → 245s（±10%），保 pixel-chronicle 冷静基调不强行提速/硬砍",
+    "options_considered": [
+     "坚持 220s（需砍约 150 字）",
+     "强行提速念快（否：违背零表演腔冷静基调）"
+    ],
+    "reason": "pixel-chronicle 实测语速 ~300字/分本就是该赛道冷静常速；对标《佛得角》244s；brief『3–4分钟带』自洽；实际以 timeline 为准"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "by": "用户",
+    "decision": "音色人设改为『年轻女声（二十多岁）+ 语速更快』，原中年男声废弃",
+    "options_considered": [
+     "保留中年男声样本"
+    ],
+    "reason": "用户听 sec01 首版后反馈；基调仍守 pixel-chronicle 冷静克制零表演腔（不滑向甜美/播音腔）"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "by": "用户",
+    "decision": "音色定稿：候选 B（年轻女声 / 气泡音个性），语速较候选版放慢",
+    "options_considered": [
+     "A 磁性电台",
+     "C 温柔讲述",
+     "D 知性清冷"
+    ],
+    "reason": "用户听 4 候选后选 B『最对味/有辨识度』，要求语速再慢一些"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "by": "EP",
+    "decision": "当前直连端点确认无音色锁定能力，音色一致性方案待用户拍板（声音复刻根治 vs 分块兜底）",
+    "options_considered": [
+     "reference_audio锚定(验证无效)",
+     "speaker/voice_type预置(验证无效)"
+    ],
+    "reason": "铁律5：引擎能力缺失如实报，不静默凑合"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "by": "用户→EP",
+    "decision": "音色一致性根治：TTS 从 seed-audio-1.0 迁移到 MiniMax speech-2.8-hd（new-api 网关），固定音色 audiobook_female_1 + speed 1.1 + emotion neutral",
+    "options_considered": [
+     "seed-audio 分块兜底",
+     "seed-audio 声音复刻"
+    ],
+    "reason": "用户指定 MiniMax 一把直出；固定 voice_id 零漂移。声纹复验 min0.891/mean0.94 vs seed-audio 描述模式 min0.624，根治。白赚：sec04 整段过审免拆、语速均匀~305字/分"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "by": "用户",
+    "decision": "④ audio 听审通过（MiniMax audiobook_female_1，音色一致性根治），放行进入 ⑤ storyboard",
+    "options_considered": [
+     "返工调音色/语速"
+    ],
+    "reason": "用户听全片旁白确认『没问题』；声纹一致性 min0.891、G1 时长/回转写均过"
+   },
+   {
+    "date": "2026-07-17",
+    "stage": "review→compose",
+    "by": "用户→EP",
+    "decision": "draft 打回，四线返工：①音色 MiniMax 单次整条(238.74s)②音画同步:镜头切换钉逐词音频戳③引入 Pexels 真实视频空镜代替文字卡(用户接 APIhub/Pixabay/Pexels)④像素只保留历史事件、数据降角标⑤修布局穿字",
+    "options_considered": [
+     "draft 上高清直接交付(否:体验硬伤)"
+    ],
+    "reason": "用户看片反馈精准；audio-first 被我compose违反必须修；对标佛得角=像素+真实素材混排，文字卡过多是我用文字凑实拍缺口"
+   },
+   {
+    "date": "2026-07-17",
+    "stage": "compose",
+    "by": "EP",
+    "decision": "compose v2 返工完成：真实空镜代文字卡+音画同步贴cue+整条音轨+布局修，lint/check双过",
+    "options_considered": [
+     "v1文字卡为主(否:用户反馈静态拖沓)"
+    ],
+    "reason": "落实用户4点反馈;对标佛得角像素+实拍混排"
+   },
+   {
+    "date": "2026-07-17",
+    "stage": "compose",
+    "by": "用户→EP",
+    "decision": "compose v3：换最稳系统音色shaonv + 音画钉真实逐词戳 + 空镜≤3s大量快切(缺素材降文本)",
+    "options_considered": [
+     "v2真实空镜但单素材过长/重复/音画未准"
+    ],
+    "reason": "落实用户v2看片3点反馈(音色漂/音画不同步最重要/空镜久且重复相关性差)"
+   },
+   {
+    "date": "2026-07-17",
+    "decision": "v4音频选型：seed-audio长音频出局(实测original_duration=120s硬上限；整条1215字两次500/截断；两段拆分跨段声纹0.824漂移；790字被压109s语速失真)。MiniMax shaonv+calm+speed1.0 整条244.6s single-pass，两两声纹min0.904/mean0.928，选定",
+    "evidence": "audio/response_full_seed*.json audio/response_seed{A,B}.json"
+   },
+   {
+    "date": "2026-07-17",
+    "decision": "字幕/音画对齐从 whisper转写戳(比例映射) 换 已知文本强制对齐(wav2vec2-zh CTC forced_align)。根因坐实：whisper把中文数字转阿拉伯数字，全片字数差~80字，gen_captions_v2按全局字数比例映射被系统性拉歪。v4剧本每字直拿真实戳，1:1零估算",
+    "evidence": "scripts/forced_align.py scripts/gen_captions_v3.py"
+   },
+   {
+    "date": "2026-07-17",
+    "decision": "像素镜头降速：8条5.04s原片 setpts 2x→10.03s(15fps有效帧,符合定格动画质感)，挂载端按cue区间尾对齐(media-start=clip_len-span)保组装完成拍点落在文案上",
+    "evidence": "compose/assets/s0*_s.mp4"
+   },
+   {
+    "date": "2026-07-17",
+    "decision": "BGM渲染前挂入composition(minimax music-2.6生成,两次调用成本都记:trace 6a5a13a4(107.8s弃用)+6a5a13ed(82.6s采用))",
+    "evidence": "compose/assets/bgm_meta.json"
+   },
+   {
+    "date": "2026-07-17",
+    "decision": "v4 素材池纪律固化：tag按desc关键词过滤(防时代错位)+全局轮换+复用错开media-start(防同画面)。broadcast-risk 素材(Sky/AP/1966转播/1982档案共9条)全部≤3s闪切并在manifest标注，交付时告知用户",
+    "evidence": "scripts/build_compose_v4.py TAG_FILTER"
+   },
+   {
+    "date": "2026-07-18",
+    "decision": "v5三项(用户draft_v4反馈)：①字幕略快根因=对齐器分块拼接重复帧+均匀缩放，改精确平铺后6锚点转写零偏；②音色换官方 Gentle_Senior(6候选韵律筛+2决赛声纹，Laid_BackGirl 0.804漂移出局)；③broll改硬性一素材一次(41切段41素材,切段2.2~5s,池耗尽fallback链)，足球草皮特写回绕重复与azteca暗尾黑屏根治(素材窗尾留0.8s余量)，banner像素复用改真实横幅新闻≤3.2s",
+    "evidence": "scripts/forced_align.py scripts/build_compose_v5.py audio/payload_v5_*.json"
+   },
+   {
+    "date": "2026-07-19",
+    "decision": "时效文案更新：比赛已过3天，'昨天凌晨'→'前两天凌晨'、'然后就是昨天'→'然后就是前两天'（拉廷7-11去世,'上礼拜'仍准确保留；sec02'今天'为报题修辞不动）。整条音轨重生成+全链路重跑",
+    "evidence": "F01/F05 research.md"
+   },
+   {
+    "date": "2026-07-19",
+    "decision": "final render 降级说明(非静默)：docker 帧级复现通道因镜像构建网络超时(DeadlineExceeded, node:22-bookworm-slim 拉取失败)不可用，降级为本地渲染(同 CLI 0.7.57, -q high, --strict)——与全部已验收 draft 同引擎同版本，仅失去跨机字节级复现保证。已告知用户",
+    "evidence": "/tmp/final_render.log"
+   },
+   {
+    "date": "2026-07-19",
+    "decision": "final 首渲抽帧抓出两缺陷并修：①缝隙并入使尾对齐像素窗越媒体末尾0.24s(hand段尾黑帧)→并入逻辑改为优先后条前扩(削media_start,payoff不动)、否则前条延长且媒体窗前移防越界；②match_replay池被上游耗尽后三级回退抓到sheffield军舰照撞'补时被绝杀'文案→match_replay加RESERVE(fans_banner2/goal_action)+战争素材TAG_EXCLUDE",
+    "evidence": "out/final_review*.jpg"
+   }
+  ],
+  "costs": [
+   {
+    "id": "tts_voiceover_adopted",
+    "date": "2026-07-16",
+    "stage": "audio",
+    "item": "全片旁白采纳版 sec01–06（seed-audio-1.0，sec04 拆两段）",
+    "billed_seconds": 259.9,
+    "cost_usd": 0.2963,
+    "note": "单价$0.00114/s 反推估（DEBT）；B 气泡音女声，speech_rate 逐节 0/0/0/0/+7/-8"
+   },
+   {
+    "id": "tts_trials",
+    "date": "2026-07-16",
+    "stage": "audio",
+    "item": "音色 gate + 审核诊断试验损耗（弃用）",
+    "billed_seconds": 177.4,
+    "cost_usd": 0.2022,
+    "note": "中年男声1 + 清亮女声1 + 4候选ABCD + sec04审核二分诊断2；均未入片"
+   },
+   {
+    "id": "tts_minimax",
+    "date": "2026-07-16",
+    "stage": "audio",
+    "item": "MiniMax speech-2.8-hd 全片6节(240s)+音色候选6+提速试验",
+    "cost_usd": null,
+    "note": "MiniMax 网关计费单价待核（DEBT）；seed-audio 弃用产物保留在 audio/ 待清理"
+   },
+   {
+    "id": "img_gate2_b1",
+    "date": "2026-07-16",
+    "stage": "anchors",
+    "item": "GPT-Image-2 pixel-collage 静帧×2 (s01_banner/s05_hand 风格试金石)",
+    "cost_usd": null,
+    "note": "medium/16:9；单价待核DEBT；x-oneapi-request-id 见 imgresp_*.json"
+   },
+   {
+    "id": "img_gate2_b2",
+    "date": "2026-07-16",
+    "stage": "anchors",
+    "item": "GPT-Image-2 pixel-collage 静帧×8 (1806/invade/trade/belgrano/sheffield/rattin/hand深蓝/goal)",
+    "cost_usd": null,
+    "note": "medium/16:9；单价待核DEBT；request-id见imgresp_*.json"
+   },
+   {
+    "id": "sd_s05_hand",
+    "date": "2026-07-16",
+    "stage": "motion",
+    "item": "Seedance 组装 s05_hand(hero, 5.04s)",
+    "cost_usd": null,
+    "note": "满价约$2.7；单价/request-id 待补 DEBT"
+   },
+   {
+    "id": "sd_collage_b1",
+    "date": "2026-07-16",
+    "stage": "motion",
+    "item": "Seedance 组装 collage×6 (banner/1806/invade/belgrano/sheffield/goal)",
+    "cost_usd": null,
+    "note": "满价约$2.7/条；s03_trade/s05_rattin 补做中；单价待核DEBT"
+   },
+   {
+    "id": "img_s02_atlantic",
+    "date": "2026-07-16",
+    "stage": "anchors",
+    "item": "GPT-Image-2 像素海面静帧 s02_atlantic",
+    "cost_usd": null,
+    "note": "改路由 seedance→image-motion(像素统一)"
+   },
+   {
+    "id": "sd_collage_b2",
+    "date": "2026-07-16",
+    "stage": "motion",
+    "item": "Seedance 组装 collage×2 补做 (s03_trade/s05_rattin)",
+    "cost_usd": null,
+    "note": "s05_rattin首轮FAILED重做成功；满价约$2.7/条"
+   },
+   {
+    "id": "pexels_broll",
+    "date": "2026-07-17",
+    "stage": "compose-rework",
+    "item": "Pexels 真实视频空镜×8检索下载(采用7)",
+    "cost_usd": 0,
+    "note": "Pexels 免费素材(用户接APIhub/Pixabay/Pexels);API_HUB/PIXABAY/PEXELS 凭据入.env"
+   },
+   {
+    "id": "mm_full",
+    "date": "2026-07-17",
+    "stage": "compose-rework",
+    "item": "MiniMax 整条音轨单次生成238.74s(替6节拼接)",
+    "cost_usd": null,
+    "note": "单次无120s限制;音色绝对一致"
+   },
+   {
+    "id": "pexels_bulk",
+    "date": "2026-07-17",
+    "stage": "compose-v3",
+    "item": "Pexels 大量≤3s空镜×21",
+    "cost_usd": 0,
+    "note": "免费"
+   }
+  ],
+  "gates": [
+   {
+    "date": "2026-07-16",
+    "stage": "script",
+    "gate": "narration-voice 出厂自查",
+    "result": "pass",
+    "notes": "v2：linter 硬查 0 命中；五维自评 46/50；金句仅收尾 1 处"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "gate": "时事锚事实核查（EP 主动，进音频前）",
+    "result": "pass",
+    "notes": "WebSearch 实测：F01 阿根廷2-1英格兰半决赛（FIFA官网+ESPN gameId760515+NBC+NPR+Yahoo+FOX 六源）；F05 拉廷7/11去世89岁（WaPo讣告）；F02 马岛横幅+FIFA或处罚（Forbes/BusinessStandard，附2014年3万瑞郎先例）。F06五角大楼邮件仍存疑但非script承重点"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "gate": "G1 音频自查（时长 + 独立回转写）",
+    "result": "pass",
+    "notes": "时长 261.7s∈[220,270] PASS。独立回转写 mlx-whisper large-v3-turbo 表面字级相似度 91.77%，逐条研判：差异全为 汉字数字↔阿拉伯数字(1806/480/12700/323/649/74) 与 whisper 同音误听(补时→捕食/账→仗/撒→萨/杵→处)；专名(布宜诺斯艾利斯/贝尔格拉诺/马尔维纳斯/加尔铁里)全对，0 处 TTS 吞字或错音，实质≥98%。各节 subtitle_vs_src 亦 OK 佐证。"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "gate": "引擎音色锁定能力验证（分节一致性）",
+    "result": "fail-引擎不支持",
+    "notes": "seed-audio-1.0 v3/tts/create：reference_audio(对象/数组/裸b64)、speaker、voice_type 均被接口接受(HTTP200)但对音色无效。声纹坐实：加reference后 sec01↔probe 相似度 0.624→0.594(-0.03)；speaker指定预置ID后 vs 原B描述 0.704 ≈ B内部参照0.724(音色未变)。分节漂移矩阵 vs sec01：sec02=.624/sec03=.724/sec04=.79/sec05=.746/sec06=.856。整片一次生成受120s上限。DEBT：评估火山声音复刻(上传样本→固定speaker_id→合成)或换引擎，回填 tts-audio.md。"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "gate": "G1 音频自查（MiniMax 重做）",
+    "result": "pass",
+    "notes": "时长240.0s∈[220,270]PASS；音色一致性声纹 vs sec01 = .891/.945/.962/.954/.949(min.891 mean.94)，相邻接缝.891-.978，较seed-audio(min.624)根治；mlx-whisper逐词对齐978词。独立回转写另跑补留痕。"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "audio",
+    "gate": "G1 独立回转写（MiniMax voiceover）",
+    "result": "pass-研判",
+    "notes": "mlx-whisper large-v3-turbo 表面字级87.68%(REF1076/HYP1173)。差异全为 汉字数字→阿拉伯(44/1806/1913/480/12700/323/649/74/255) 与 whisper同音误听(补时→捕食/账→仗/仇→愁/怨→愿/艾→埃/进→浸)，0处吞字，专名(布宜诺斯艾利斯/贝尔格拉诺/马尔维纳斯/加尔铁里)全对。HYP偏长疑whisper对平缓音色啰嗦，人耳终验。"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "storyboard",
+    "gate": "自查八项",
+    "result": "pass-带note",
+    "notes": "①区间对齐timeline无缝隙/重叠、首尾0–240.04s ✓；②每镜3–16s、大镜内部元素/组装持续变化，≥每8–10s一变 ✓；③连续同版式≤2（MG与collage-pixel严格交替）✓；④幻灯片风险：纯MG版式卡最多连续2镜(s04_toll+s04_fate)，collage-pixel为assemble准运动不计静态 ✓；⑤声部匹配pixel-chronicle表(MG=信息/collage=事件氛围/档案=唯一真人/seedance=空镜)✓；⑥hybrid承诺：collage-pixel 10镜承担运动质感 ✓；⑦Seedance组划分：collage每条≤5s，长槽位(s03_invade14.5s/s04_belgrano19s/s05各镜)motion阶段拆多条5s+接MG，届时定组 DEBT；⑧每镜主动作+运镜(collage=assemble-from-empty定格,MG=元素进出,禁静态描述)✓。sec05高潮段compose按2–3s/镜快切细化。"
+   },
+   {
+    "date": "2026-07-16",
+    "stage": "compose",
+    "gate": "lint+check 质量门",
+    "result": "pass",
+    "notes": "lint 0error(1warn track密集DEBT)；check 0findings(布局/motion/runtime/对比全过，字幕墨底条rgba0.66修AA对比2.68→>7)。25镜精排240.04s，collage clip重编码-g12防seek冻帧。"
+   },
+   {
+    "date": "2026-07-17",
+    "stage": "review",
+    "gate": "draft 用户看片(L0+人眼)",
+    "result": "打回返工",
+    "notes": "L0:时长240✓/无黑帧/冻结多处1.2-2.3s(MG卡静态感偏多)/响度-23偏低。用户4点:①布局(补时字/红点线/章节金线 穿字重叠)②音色分节拼接有跳变③音画不同步画面提前(compose镜头时长自估未贴音频戳,违反audio-first)④文字卡占比高+转换慢+没耐心(实拍通路缺,用文字凑)。"
+   }
+  ]
+ },
+ "compose": {
+  "file": "compose/index.html",
+  "fps": 30,
+  "resolution": "1280x720",
+  "duration_s": 246.0,
+  "lint": "pass(0 error;1 warning=track2密集17元素,DEBT可拆子composition)",
+  "check": "pass(0 findings，字幕加墨底条修对比)",
+  "draft_render": "out/draft.mp4(rendering)",
+  "v2": {
+   "changes": "真实空镜(Pexels×7:海面/布宜诺斯艾利斯/港口/伦敦/灰海/球场/机场，做旧缝合)代文字卡；像素×9保留历史事件；13文字卡→2章节/大字+12数据角标；音画同步(镜头钉逐词cue戳)；MiniMax整条音轨238.74s单次(音色一致)；布局修(角标不穿字/章节金线不穿字)",
+   "lint": "0 error",
+   "check": "0 findings",
+   "draft": "out/draft_v2.mp4"
+  },
+  "v3": {
+   "changes": "①音色→female-shaonv(系统最稳min0.907)②音画同步:字幕用whisper逐词真实戳(替字数估算)+画面像素事件钉cue③空镜≤3s快切(单素材最长3s，59个broll快切+像素8+档案照)④大量相关真实素材(Pexels 21+7:海/城/殖民建筑/火车/货运/牛麦/军舰/荒岛/伦敦/墓地/人群/机场/阿根廷旗)⑤数据降角标(错开不重叠)",
+   "clips": "68视觉+13角标+1章节",
+   "lint": "0 error"
+  },
+  "v4": {
+   "builder": "scripts/build_compose_v4.py",
+   "changes": "音轨mmC(244.6s,calm/1.0)+forced-align字幕108句+cue表cues_v4.json；像素13挂载(8条2x降速+4条新10s原生+banner复用)全部尾对齐；broll3重构池(36新+broll2留10,49快切,23素材)；BGM轨0.23；黑缝零(池尾并入上条)",
+   "check": "pass(0 error;1 warning=track3密集13元素DEBT;对比9/9 WCAG AA)",
+   "pixel_coverage_s": 108.8,
+   "render": "out/draft_v4.mp4 (246.04s, 180MB, loudnorm -14.5 LUFS/TP -1.5；pre-norm 备份 draft_v4_prenorm.mp4)",
+   "self_check": "抽帧两轮(v4_review1/2.jpg)+定点帧4张：时代错位(1806段1920s街景)/池轮换错位(昨天段夜雕像+晴天旗)/belgrano空头 均已修；字幕121/125s空档为句间静音(正确)；素材34种最多复用2次"
+  },
+  "v5": {
+   "builder": "scripts/build_compose_v5.py",
+   "duration_s": 258.06,
+   "changes": "Gentle_Senior音轨256.7s+修正对齐+一素材一次(41/41)+缝隙自动并入+BGM 256.2s+真实横幅新闻收尾",
+   "render": "out/draft_v5.mp4(258.1s, loudnorm -14; prenorm 备份)",
+   "self_check": "断言:broll零重复(41/41)+轨道无缝;抽帧2轮+定点5帧:墨西哥段azteca预留生效/金句双夜景/横幅新闻卡'亚特兰大'句/字幕6锚点转写零偏"
+  },
+  "final": {
+   "file": "out/final.mp4",
+   "duration_s": 255.7,
+   "lufs": -13.9,
+   "tp": -1.5,
+   "self_check": "抽帧两轮+定点：hand payoff落'上帝之手'、无黑帧、回顾段全球赛素材、时效词'前两天'落音复核、broll 41/41零重复、素材错位零"
+  }
+ }
+}

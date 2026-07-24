@@ -1,0 +1,3 @@
+# tools/ 的第三方依赖（film-ir 自身依赖在 film-ir/pyproject.toml；tools/judge/* 与
+# kuleshov-lint.py 纯 stdlib 无需第三方）。
+numpy>=1.24      # tools/measure-render.py：帧差静态持有测量

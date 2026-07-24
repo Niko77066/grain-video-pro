@@ -1,0 +1,757 @@
+{
+  "meta": {
+    "title": "samsung-health-ai-consent",
+    "title_display": "Samsung Health AI 同意条款追问",
+    "format": "faceless_explainer",
+    "style_pack": "tech-newsroom",
+    "commitment": {
+      "type": "mixed_source / evidence_led",
+      "duration_s": 45,
+      "tolerance_pct": 5
+    },
+    "aspect": "16:9",
+    "budget": {
+      "cap_usd": null,
+      "spent_usd": 3.85
+    },
+    "pipeline_version": "m0-v1",
+    "status": "delivered"
+  },
+  "audio": {
+    "voiceover": {
+      "status": "planned",
+      "model": "seed-audio-1.0",
+      "voice_profile": "一位专业的中文科技新闻主播（成年女性，普通话，冷静克制，语速中等）",
+      "text_prompt_file": "audio/payload-voiceover.json",
+      "strategy": "整片一次生成（60s < 120s 上限，防分节音色漂移）",
+      "gen": {
+        "take": 1,
+        "date": "2026-07-14",
+        "model": "seed-audio-1.0",
+        "payload": "audio/payload-voiceover.json",
+        "response": "audio/response-voiceover.json",
+        "file": "audio/voiceover.mp3",
+        "duration_actual_s": 44.04,
+        "original_duration_s": 44,
+        "wallclock_s": 46.7,
+        "verdict": "qc_pass",
+        "note": "原承诺 60s±5% 下 g1_fail_duration（实测 44.04s，音色读速 ~5.1 字/s 超预算表假设）；用户裁决接受 44s 现状、承诺改 45s±5% 后复判 pass（见 d03）"
+      }
+    },
+    "music": null,
+    "timeline": {
+      "file": "audio/timeline.json",
+      "duration_s": 44.04,
+      "sections": [
+        {
+          "id": "sec01",
+          "t": [
+            0.0,
+            7.187
+          ]
+        },
+        {
+          "id": "sec02",
+          "t": [
+            7.187,
+            17.507
+          ]
+        },
+        {
+          "id": "sec03",
+          "t": [
+            17.507,
+            25.467
+          ]
+        },
+        {
+          "id": "sec04",
+          "t": [
+            25.467,
+            35.187
+          ]
+        },
+        {
+          "id": "sec05",
+          "t": [
+            35.187,
+            44.04
+          ]
+        }
+      ],
+      "words_count": 202,
+      "source": "seed-audio-1.0 逐字时间戳（enable_subtitle），标点已过滤"
+    }
+  },
+  "anchors": [
+    {
+      "id": "anchor_avatar_host",
+      "type": "avatar_portrait",
+      "status": "locked",
+      "need": "科技新闻主播形象（成年女性，与旁白声音档人设一致），按 16:9 嵌入版式框构图（胸上景、右侧留版式空间）",
+      "used_by": [
+        "s02_avatar_hook",
+        "s08_avatar_verdict"
+      ],
+      "file": "anchors/avatar-host-v2.png",
+      "gen": {
+        "model": "gpt-image-2",
+        "quality": "medium",
+        "size": "1792x1008",
+        "date": "2026-07-14",
+        "prompt_file": "anchors/PROMPTS.md",
+        "wallclock_s": [
+          126.2,
+          107.5,
+          105.0
+        ]
+      },
+      "candidates": [
+        {
+          "file": "anchors/avatar-host-v1.png",
+          "request_id": "202607141411445811073828268d9d6Y0iWEHqG",
+          "note": "灰西装/蓝光演播室/构图最标准；风险：背景含捏造字样 TECH NEWS DAILY，i2v 背景文字易碎"
+        },
+        {
+          "file": "anchors/avatar-host-v2.png",
+          "request_id": "202607141411445715530578268d9d6oYLqiCOf",
+          "note": "藏青西装白衬衫/暖灰背景琥珀光带（呼应 --warn 色）；脸最自然，无文字风险；右侧留白略少"
+        },
+        {
+          "file": "anchors/avatar-host-v3.png",
+          "request_id": "202607141411445738422588268d9d6YAOHLRCj",
+          "note": "无框眼镜/马尾/监视器墙蓝光；右侧留白最佳记者感最强；风险：眼镜在唇同步生成中易抖"
+        }
+      ],
+      "lock_note": "用户 N选1 锁定 v2（2026-07-14）；v1/v3 留档不删"
+    },
+    {
+      "id": "anchor_consent_page",
+      "type": "screen_capture",
+      "status": "captured",
+      "need": "官方同意页整页高清截屏（samsunghealth.com/shd/gen-ai，含标题/四类数据/撤回段），自采、带地址栏、留出处角标位",
+      "used_by": [
+        "s03_consent_read",
+        "s04_review_close"
+      ],
+      "file": "anchors/consent-page-full.png",
+      "gen": {
+        "method": "chrome headless self-capture",
+        "cmd": "Chrome --headless=new --force-device-scale-factor=2 --window-size=1600,2200 --virtual-time-budget=8000 --screenshot",
+        "url": "https://samsunghealth.com/shd/gen-ai?cc=US&fqdn=samsunghealth.settings&lc=en&platform=1&scv=7005009",
+        "date": "2026-07-14",
+        "cost_usd": 0,
+        "derived": [
+          {
+            "file": "anchors/consent-page-crop.png",
+            "note": "内容区裁切 2640x880@2x，供实录精读框"
+          }
+        ]
+      }
+    },
+    {
+      "id": "anchor_style_frame",
+      "type": "style_frame",
+      "status": "locked",
+      "need": "深夜卧室手机微光场景风格帧（GPT-Image-2）：s01 Seedance 首帧锚点 + 全片 LUT 缝合基准",
+      "used_by": [
+        "s01_hook_scene",
+        "edit.lut"
+      ],
+      "file": "anchors/style-frame-v1.png",
+      "gen": {
+        "model": "gpt-image-2",
+        "quality": "medium",
+        "size": "1792x1008",
+        "date": "2026-07-14",
+        "prompt_file": "anchors/PROMPTS.md",
+        "wallclock_s": [
+          34.6,
+          51.1
+        ]
+      },
+      "candidates": [
+        {
+          "file": "anchors/style-frame-v1.png",
+          "request_id": "202607141414122747518098268d9d6lZRdJk3I",
+          "note": "手+手环特写，手机屏抽象图表（无可读文字无logo），冷蓝调最克制，适合 dolly-in 与 LUT 取色"
+        },
+        {
+          "file": "anchors/style-frame-v2.png",
+          "request_id": "202607141414122796399268268d9d6yrHSRLSV",
+          "note": "过肩躺床视角，叙事感强人物在场；屏幕 UI 细节多，i2v 时 UI 形变风险略高"
+        }
+      ],
+      "lock_note": "用户 N选1 锁定 sf1（2026-07-14）；sf2 留档不删"
+    }
+  ],
+  "shot_groups": [
+    {
+      "id": "g01_hook",
+      "provider": "seedance",
+      "shots": [
+        "s01_hook_scene"
+      ],
+      "duration_s": 4.99,
+      "seam_out": "B 硬切（s01 尾 → s02 数字人开场卡，声部切换即叙事信号）"
+    }
+  ],
+  "shots": [
+    {
+      "id": "s01_hook_scene",
+      "t": [
+        0.0,
+        4.99
+      ],
+      "voice_ref": "sec01",
+      "voice_cue": "你的睡眠、处方、甚至经期记录，三星想拿去训练AI。",
+      "intent": "私密健康数据被索取的不安具象化——hook 氛围",
+      "framing": "深夜卧室，特写手机/手环屏幕微光映在手腕与床单上，健康数据界面滚动；缓慢推近（dolly in）",
+      "source": {
+        "provider": "seedance",
+        "group": "g01_hook"
+      },
+      "anchor_refs": [
+        "anchor_style_frame"
+      ],
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "payload": "shots/payload-s01-seedance.json",
+        "task_id": "task_hMVUYkaZ2vRT7K1zVHxybYCGRrxMXqgi",
+        "refs": [
+          "anchor_style_frame@reference_image"
+        ],
+        "file": "shots/s01.mp4",
+        "duration_actual_s": 5.042,
+        "resolution": "1920x1080@24fps",
+        "wallclock_s": 300.9,
+        "cost_usd": 2.7
+      },
+      "qc": {
+        "tech": "pass（5.042s vs 计划 4.99s→compose 尾裁 0.05s；无黑帧；1080p）",
+        "semantic": "pass（抽帧 3：兑现 intent，与锚点 sf1 一致——冷蓝/手环/抽象图表/无可读文字，dolly-in 可感）"
+      },
+      "route_reason": "真运动+氛围是 Seedance 独有语言；MG/图片动效表达不了'深夜微光'的体感（task_fit 归零）"
+    },
+    {
+      "id": "s02_avatar_hook",
+      "t": [
+        4.99,
+        7.187
+      ],
+      "voice_ref": "sec01",
+      "voice_cue": "这个弹窗，值得你停三秒。",
+      "intent": "提问者出面立题——追问开场卡",
+      "framing": "数字人嵌入圆角视频卡（案例 Beat 6F 式），旁侧核心问题大字'你到底同意了什么？'上屏，下横栏栏目条",
+      "source": {
+        "provider": "heygen_avatar",
+        "embed": "hyperframes 版式框"
+      },
+      "anchor_refs": [
+        "anchor_avatar_host"
+      ],
+      "status": "qc_pass",
+      "gen": {
+        "model": "fal-ai/heygen/avatar4/image-to-video",
+        "payload": "shots/payload-s02-avatar.json",
+        "task_id": "task_MpFkgG40e3cpgSOL6emuni2vqzqgdFQi",
+        "trace_id": "6a5645e809fd626d244d3463",
+        "refs": [
+          "anchor_avatar_host",
+          "audio/vo-s02.wav"
+        ],
+        "file": "shots/s02.mp4",
+        "duration_actual_s": 2.2,
+        "resolution": "1278x720@25fps",
+        "wallclock_s": 490.3,
+        "cost_usd": 0.3,
+        "matte": "shots/matte/s02-cut.webm"
+      },
+      "qc": {
+        "tech": "pass（2.20s ≈ 音频 2.197s；720p 达嵌入卡显示需求）",
+        "semantic": "pass（人脸与锚点 v2 一致，无畸变；唇同步待成片人眼验——M0 门在 review）"
+      },
+      "route_reason": "提问者声部只能由'人'承担（风格包声部表）；嵌入式而非全屏，遵循案例 'Functional, not decorative'"
+    },
+    {
+      "id": "s03_consent_read",
+      "t": [
+        7.187,
+        15.75
+      ],
+      "voice_ref": "sec02",
+      "voice_cue": "官方条款写得明白：四类健康数据将用于AI训练——身体与睡眠、用药和剂量、诊断与检验结果、经期周期，",
+      "intent": "证据主镜：官方条款原文精读，公信力来源",
+      "framing": "缩放进实录（浏览器窗框），7.19–8.67 停在标题，随后滚动至四类数据清单，8.67/11/12.5/14 四拍逐类高亮下划线跟旁白；出处角标常驻右下",
+      "source": {
+        "provider": "hyperframes",
+        "template": "实录精读框",
+        "asset": "anchor_consent_page"
+      },
+      "anchor_refs": [
+        "anchor_consent_page"
+      ],
+      "status": "qc_pass",
+      "gen": null,
+      "qc": null,
+      "route_reason": "真实页面自采实录是本片公信力支柱（风格包铁则：禁伪造 UI）；滚动+高亮由 HyperFrames 声明式驱动，可逐词对齐"
+    },
+    {
+      "id": "s04_review_close",
+      "t": [
+        15.75,
+        17.507
+      ],
+      "voice_ref": "sec02",
+      "voice_cue": "并且包含人工审看。",
+      "intent": "证据特写：human review 三个词顶到观众脸上",
+      "framing": "实录特写：'including human review' 区域放大，下划线扫过 + 琥珀高亮（全片 3 次配额之 1）",
+      "source": {
+        "provider": "hyperframes",
+        "template": "实录精读框·特写",
+        "asset": "anchor_consent_page"
+      },
+      "anchor_refs": [
+        "anchor_consent_page"
+      ],
+      "status": "qc_pass",
+      "gen": null,
+      "qc": null,
+      "route_reason": "同上，实录连镜第 2 镜（≤2 达标）；特写景别变化避免同质"
+    },
+    {
+      "id": "s05_promise_vs_popup",
+      "t": [
+        17.507,
+        25.467
+      ],
+      "voice_ref": "sec03",
+      "voice_cue": "三星说，随时可以撤回。但拒绝的代价写在另一个弹窗里：云同步关闭，已同步的健康数据将被删除。",
+      "intent": "全片转折：官方页的体贴措辞 vs 拒绝弹窗的删除警告，落差即论点（F07）",
+      "framing": "条款拆解卡：左panel官方撤回承诺原文（等宽引用块，出处：官方页）；19.55s '但'字起面板推移，右panel压入拒绝弹窗原文引用（出处角标 via 9to5Google），'will be deleted' 琥珀高亮（配额之 2）",
+      "source": {
+        "provider": "hyperframes",
+        "template": "条款拆解卡"
+      },
+      "anchor_refs": [],
+      "status": "qc_pass",
+      "gen": null,
+      "qc": null,
+      "route_reason": "弹窗无法自采实录（需真机三星账号触发），用带出处的排版引用而非截图仿制——工艺诚实优先；MG 拆解卡正是该模板的用途"
+    },
+    {
+      "id": "s06_dataflow",
+      "t": [
+        25.467,
+        31.87
+      ],
+      "voice_ref": "sec04",
+      "voice_cue": "删的是云端，手机本地还在。可跨设备使用全靠云同步——用功能换同意，",
+      "intent": "机制澄清（F05）：删除范围=云端；功能与同意的捆绑结构可视化",
+      "framing": "数据流图：手机节点（常亮）→云节点→AI训练管线，粒子沿线流动；26.5s 拒绝分支演示——云节点熄灭、同步线断裂、本地节点保持亮；29.9s '用功能换同意'两侧砝码交换动画",
+      "source": {
+        "provider": "hyperframes",
+        "template": "数据流图"
+      },
+      "anchor_refs": [],
+      "status": "qc_pass",
+      "gen": null,
+      "qc": null,
+      "route_reason": "精确的信息拓扑（哪个节点灭、哪条线断）只有 MG 能无歧义表达；Seedance 表达不了'本地 vs 云端'的准确性要求"
+    },
+    {
+      "id": "s07_gdpr",
+      "t": [
+        31.87,
+        35.187
+      ],
+      "voice_ref": "sec04",
+      "voice_cue": "这在GDPR「自由同意」的标尺下，正被质疑。",
+      "intent": "把争议放到法理标尺上（F08，措辞'被质疑'）",
+      "framing": "注文卡：大字'自由同意？' + GDPR Art.7(4) 'freely given' 原文小注；角标 overlay：Android Authority 投票 86% 会拒绝（F09）",
+      "source": {
+        "provider": "hyperframes",
+        "template": "注文卡"
+      },
+      "anchor_refs": [],
+      "status": "qc_pass",
+      "gen": null,
+      "qc": null,
+      "route_reason": "法条引用+比例数字是版式语言的主场"
+    },
+    {
+      "id": "s08_avatar_verdict",
+      "t": [
+        35.187,
+        44.04
+      ],
+      "voice_ref": "sec05",
+      "voice_cue": "同意页写着随时撤回，拒绝键连着删除。你同意的不只是一次授权，是这笔交易的定价权。看清，再点。",
+      "intent": "裁决者出面收束；对仗句上屏；行动指引",
+      "framing": "白帧 2 帧后入裁决收尾卡：数字人嵌入版式框，右侧对仗两行大字逐行上屏（35.2/37.0），40.7s '定价权'字重加粗，42.6s '看清，再点。'单独成屏一拍；片尾角标：条款链接见简介 + 数据截至 2026-07-14",
+      "source": {
+        "provider": "heygen_avatar",
+        "embed": "hyperframes 版式框"
+      },
+      "anchor_refs": [
+        "anchor_avatar_host"
+      ],
+      "status": "qc_pass",
+      "gen": {
+        "model": "fal-ai/heygen/avatar4/image-to-video",
+        "payload": "shots/payload-s08-avatar.json",
+        "task_id": "task_GqBsC3iuXnbcU2LYEd9xxtZ4sazuik6Q",
+        "trace_id": "6a5645e8e4fca02dc77f434f",
+        "refs": [
+          "anchor_avatar_host",
+          "audio/vo-s08.wav"
+        ],
+        "file": "shots/s08.mp4",
+        "duration_actual_s": 8.88,
+        "resolution": "1278x720@25fps",
+        "wallclock_s": 471.3,
+        "cost_usd": 0.3,
+        "matte": "shots/matte/s08-cut.webm"
+      },
+      "qc": {
+        "tech": "pass（8.88s vs 音频 8.853s→compose 尾裁 0.03s）",
+        "semantic": "pass（与锚点 v2 一致，神态自然；唇同步待成片人眼验）"
+      },
+      "route_reason": "裁决声部由人承担（首尾呼应 s02）；8.85s 略超风格包'数字人段≤8s'指引 0.85s，以内部三拍变化（两行大字/加粗/独立收束屏）抵消霸屏感"
+    },
+    {
+      "id": "s06_avatar_analysis",
+      "t": [
+        25.467,
+        31.87
+      ],
+      "voice_ref": "sec04",
+      "voice_cue": "删的是云端，手机本地还在。可跨设备使用全靠云同步——用功能换同意，",
+      "intent": "分析声部：数字人口播 + 数据流 MG 合成于身侧（对标官方集成效果）",
+      "framing": "抠像全屏合成（透明 webm），人物左、竖排数据流右",
+      "source": {
+        "provider": "heygen_avatar",
+        "embed": "matte-composite"
+      },
+      "anchor_refs": [
+        "anchor_avatar_host"
+      ],
+      "status": "qc_pass",
+      "gen": {
+        "model": "fal-ai/heygen/avatar4/image-to-video",
+        "payload": "shots/payload-s06-avatar.json",
+        "task_id": "task_ZMmmfu0Z99PPEsbyw7PDWwH5PDhxmD2n",
+        "trace_id": "6a572534ea38a359e8726d0f",
+        "refs": [
+          "anchor_avatar_host",
+          "audio/vo-s06.wav"
+        ],
+        "file": "shots/s06-avatar.mp4",
+        "matte": "shots/matte/s06-cut.webm",
+        "duration_actual_s": 6.44,
+        "resolution": "1278x720@25fps",
+        "wallclock_s": 67.8,
+        "cost_usd": 0.3
+      },
+      "qc": {
+        "tech": "pass（6.44s tail-trim 至 6.403）",
+        "semantic": "pass（口型对分析段音频；抠像边缘干净）"
+      }
+    }
+  ],
+  "overlays": [
+    {
+      "id": "o01_captions",
+      "type": "kinetic_captions",
+      "range": [
+        "s01_hook_scene",
+        "s08_avatar_verdict"
+      ],
+      "note": "全片逐词字幕轨，词级时间戳驱动（案例 body 级 caption 轨模式）"
+    },
+    {
+      "id": "o02_provenance_screencap",
+      "type": "出处角标",
+      "range": [
+        "s03_consent_read",
+        "s04_review_close"
+      ],
+      "text": "samsunghealth.com/shd/gen-ai · 2026-07-14 实录"
+    },
+    {
+      "id": "o03_provenance_popup",
+      "type": "出处角标",
+      "range": [
+        "s05_promise_vs_popup"
+      ],
+      "text": "拒绝弹窗原文 · via 9to5Google 2026-07-13"
+    },
+    {
+      "id": "o04_poll_badge",
+      "type": "数据角标",
+      "range": [
+        "s07_gdpr"
+      ],
+      "text": "Android Authority 读者投票 · 86% 表示会拒绝"
+    },
+    {
+      "id": "o05_endcard",
+      "type": "片尾角标",
+      "range": [
+        "s08_avatar_verdict"
+      ],
+      "text": "条款原文链接见简介 · 数据截至 2026-07-14"
+    }
+  ],
+  "edit": {
+    "transitions": [
+      "硬切",
+      "面板推移(声部切换)",
+      "缩放进实录",
+      "白帧2帧(结论前)",
+      "对焦模糊落定(hero入场)",
+      "抠像人物合成(presenter over MG)"
+    ],
+    "lut": "ambient-aurora-dark (bg-ambient comp) + saturate(0.94) contrast(1.05) 烘焙 clip 缝合",
+    "grain": "assets/grain.png @ opacity 0.045 overlay（固定 seed 42）",
+    "loudness_lufs": -14
+  },
+  "ledger": {
+    "decisions": [
+      {
+        "id": "d01_style_pack",
+        "date": "2026-07-14",
+        "decision": "不用 daily-brief，按用户口述方向新建草案风格包 tech-newsroom（网页实录+数据流MG+Seedance场景+数字人）",
+        "reason": "用户在开拍提问中明确给出混源新闻质感方向；daily-brief 禁生成视频、纯版式，与选题的证据实录需求不匹配",
+        "alternatives": "daily-brief 严格守包（被用户否）"
+      },
+      {
+        "id": "d03_duration_commitment",
+        "date": "2026-07-14",
+        "decision": "接受 take-1 旁白 44.04s 现状，时长承诺 60s±5% 改为 45s±5%，不加字不重生成",
+        "reason": "用户在停点明确选择'接受 44s 现状'；备选'加两句硬事实+沉稳语速重生成保60s'与'不加字改50s承诺'均被否",
+        "alternatives": "加两句(F07/F09)重生成保60s；226字+留白改50s"
+      },
+      {
+        "id": "d04_style_reference",
+        "date": "2026-07-14",
+        "decision": "数字人+MG 形式参照 heygen-com/hyperframes-launches 官方案例：数字人嵌入版式框（圆角视频卡+下横栏+字幕），不全屏霸屏；compose 采用根 index.html + 每节子 composition 架构",
+        "reason": "用户指定该案例为形式参考；案例 Beat 6F 'Functional, not decorative' 原则与 tech-newsroom 声部表一致",
+        "alternatives": "数字人全屏口播首尾"
+      },
+      {
+        "id": "d05_storyboard_gate",
+        "date": "2026-07-14",
+        "decision": "分镜 8 镜通过用户门；幻灯片风险 FLAG（s05–s07 声明型三连 17.7s）用户裁决接受，维持 MG 路由",
+        "reason": "用户认可'高动态 MG + 证据密度优先'的辩护；备选（s06 前半改第二 Seedance 镜）被否",
+        "alternatives": "s06 前半改 Seedance 场景镜（+$0.5，准确性降）"
+      },
+      {
+        "id": "d02_budget",
+        "date": "2026-07-14",
+        "decision": "预算上限不设，cap_usd=null，只记账不熔断",
+        "reason": "用户未设预算；铁律7成本不进路由权重",
+        "alternatives": null
+      },
+      {
+        "id": "d06_anchor_lock",
+        "date": "2026-07-14",
+        "decision": "主播肖像锁 v2（藏青西装/琥珀光带），风格帧锁 sf1（手+手环特写/抽象图表）",
+        "reason": "用户 N选1 拍板，与执行推荐一致：v2 脸最自然且无背景文字 i2v 风险；sf1 无可读文字、冷蓝调适合 LUT 基准与 5s 缓推",
+        "alternatives": "avatar v1（背景捏造字样）、v3（眼镜 i2v 风险）；style sf2（UI 形变风险）"
+      },
+      {
+        "id": "d07_polish_redo",
+        "date": "2026-07-15",
+        "decision": "review→compose 打回一次：视觉升级 v2。参照 heygen hyperframes-launch 官方示例三招——液态玻璃面板/对焦模糊入场/生成式动态氛围背景 + 强调色辉光",
+        "reason": "用户看片认可内容与四类烘焙素材达标，但指出 HyperFrames MG 表现力未吃满，官方示例更漂亮更科技感是目标效果；v1 扁平深灰底+硬边卡片工整但素",
+        "guardrail": "保新闻克制：玻璃+景深+辉光可上，彩虹霓虹/矩阵雨/全息HUD 不上（tech-newsroom 反模式仍生效）；证据实录真实性不动",
+        "kept": "out/final-v1-flat.mp4 留档对照"
+      },
+      {
+        "id": "d08_presenter_integration",
+        "date": "2026-07-15",
+        "decision": "v3：钩子/分析/裁决三段(s02/s06/s08)改为数字人抠像全屏合成，MG(标题/竖排数据流/裁决句+辉光同心环)落其身后/身侧；补生成 s06 分析段口播；实录段 s03-s05/s07 保持全屏MG",
+        "reason": "用户指出对标视频核心是\"人物口播+MG在人物背后\"同框，v1/v2 把数字人塞小卡与MG分区，未达；remove-background 抠像后三明治合成实现集成",
+        "guardrail": "条款实录 s03/s04 保持全屏精读(可读性优先，用户拍板\"只在说话拍点出镜\")；抠像边缘 QC 通过(发丝无白边)",
+        "kept": "out/final-v1-flat.mp4 / final-v2(分区玻璃版) 对照留档"
+      }
+    ],
+    "costs": [
+      {
+        "id": "c01_tts_take1",
+        "date": "2026-07-14",
+        "item": "seed-audio-1.0 旁白 take1（44s 计费时长）",
+        "usd_est": 0.05
+      },
+      {
+        "id": "c02_anchors_gptimage",
+        "date": "2026-07-14",
+        "item": "gpt-image-2 medium ×5（主播肖像×3 + 风格帧×2）",
+        "usd_est": 0.2,
+        "request_ids": [
+          "...5811073828...",
+          "...5715530578...",
+          "...5738422588...",
+          "...2747518098...",
+          "...2796399268..."
+        ]
+      },
+      {
+        "id": "c03_seedance_s01",
+        "date": "2026-07-14",
+        "item": "Seedance 2.0 5s/1080p 带参考（s01）",
+        "usd_est": 2.7,
+        "trace": "task_hMVUYkaZ..."
+      },
+      {
+        "id": "c04_avatar_s02_s08",
+        "date": "2026-07-14",
+        "item": "HeyGen Avatar4 ×2（2.2s + 8.85s，720p）",
+        "usd_est": 0.6,
+        "trace": "6a5645e809.../6a5645e8e4..."
+      },
+      {
+        "id": "c05_avatar_s06",
+        "date": "2026-07-15",
+        "item": "HeyGen Avatar4 分析段口播 6.4s/720p",
+        "usd_est": 0.3,
+        "trace": "6a572534ea..."
+      }
+    ],
+    "gates": [
+      {
+        "id": "g01_script_wordcount",
+        "stage": "script",
+        "date": "2026-07-14",
+        "check": "字数硬校验：226 字，承诺 60s 中文常速 220–260 字",
+        "result": "pass",
+        "postmortem": "预算表按 ~3.8 字/s 估时，该音色实测 ~5.1 字/s——字数过关但时长脱靶，教训已回写风格包"
+      },
+      {
+        "id": "g02_audio_g1",
+        "stage": "audio",
+        "date": "2026-07-14",
+        "check": "G1：①总时长 44.04s ∈ 45s±5%（42.75–47.25，d03 修订后承诺）②独立回转写 vs 剧本：字面 94.2%（faster-whisper small），差异均为同音字；拼音层 99.0%；两处非同音可疑（审看/标尺）经 medium 模型精听平反",
+        "result": "pass",
+        "evidence": "audio/g1-transcription-check.json",
+        "note": "whisperx CLI 因 torch2.6 weights_only 与 pyannote VAD 不兼容，改用其底层 faster-whisper 同模型转写（非降级，harness 替换）"
+      },
+      {
+        "id": "g03_storyboard_8checks",
+        "stage": "storyboard",
+        "date": "2026-07-14",
+        "check": "八项自查",
+        "result": "pass_with_flag",
+        "detail": {
+          "1_区间铺满": "pass（程序验证：8 镜无缝隙无重叠，尾=44.04=音频总长）",
+          "2_视觉变化": "pass（最长镜 8.85s，且各镜含内部动画拍点）",
+          "3_同版式连续": "pass（实录连镜=2：s03/s04；MG 三连 s05/s06/s07 为三种不同模板+面板推移转场）",
+          "4_幻灯片风险": "FLAG（s05–s07 声明型连续 3 镜共 17.7s，超'静态类连续≤2'字面；辩护：三镜均为高动态 MG——面板推移/节点断线动画/砝码交换，非 Ken Burns 静帧；已在 ⏸ 门向用户明示，由用户裁决）",
+          "5_声部匹配": "pass（场景=氛围hook，实录=证据，拆解卡=证据，数据流/注文=信息，avatar=提问/裁决）",
+          "6_运动承诺": "pass（承诺 mixed_source/evidence_led，非 motion_led）",
+          "7_组划分算术": "pass（Seedance 仅 g01：1 镜 4.99s ≤15s；组和=Seedance 总量）",
+          "8_主动作运镜": "pass（每镜一个主动作：推近/高亮扫过/面板推移/断线/上屏，无静态场景描述）"
+        }
+      },
+      {
+        "id": "g04_compose_lint",
+        "stage": "compose",
+        "date": "2026-07-14",
+        "check": "npx hyperframes lint：初跑 10 错误（字体无 @font-face 声明×8、GSAP/CSS transform 冲突×2）；修复后 0 错误",
+        "result": "pass",
+        "note": "127 条 composition_self_attribute_selector 警告记档不阻塞（每 composition 仅实例化一次，无兄弟实例泄漏场景；案例项目同类警告出厂先例）"
+      },
+      {
+        "id": "g05_compose_visual_qc",
+        "stage": "compose",
+        "date": "2026-07-14",
+        "check": "draft 渲染抽帧目检 13 帧（全部 8 镜 + 关键拍点），三轮修订",
+        "result": "pass",
+        "fixes": [
+          "s04 特写高亮 x 偏左 178px → 帧测量反推精确坐标（两轮收敛）",
+          "s03 标题特写窗口左缘露灰色重复标题 → 焦点 x -793→-1100",
+          "s06 断线后残留粒子 → visibility 硬杀",
+          "s08 结语与暗化论证行叠字 → 论证行完全退场",
+          "s08 区间字幕删除（与屏上裁决大字逐字重复）"
+        ],
+        "note": "修订轮数 3/3 到限收敛；s04 高亮右缘含\", to\"约 20px 可接受溢出"
+      },
+      {
+        "id": "g06_review_L0",
+        "stage": "review",
+        "date": "2026-07-15",
+        "check": "L0 仪器链：时长 44.07∈45±5% / 1080p30 / -14.07LUFS·TP-1.01 / 回转写拼音层 99.01% / 黑帧 3 处均为设计性暗场 / 冻结 9 处均为版式持帧 / 转场 4 种 / 琥珀 3 处",
+        "result": "pass",
+        "evidence": "review.md + out/review-transcription.json",
+        "pending": "用户看片（M0 评委门）+ /video-score 登记"
+      },
+      {
+        "id": "g07_compose_v2_visual",
+        "stage": "compose",
+        "date": "2026-07-15",
+        "check": "v2 视觉升级 draft 抽帧目检 7 帧：动态氛围底/玻璃面板/强调辉光/对焦入场全部落地；lint 0 错误（含 backdrop-filter，track 冲突已修）",
+        "result": "pass",
+        "note": "手法回写风格包 §5b；v1 扁平版留档 out/final-v1-flat.mp4 供盲评对照"
+      },
+      {
+        "id": "g08_review_L0_v2",
+        "stage": "review",
+        "date": "2026-07-15",
+        "check": "v2 成片 L0：时长 44.1s∈45±5% / 1080p30 / -14.07LUFS·TP-1.01 / 黑帧 0（v1 为3）/ 冻结 2（v1 为9，动态底消除大部分静止误检）",
+        "result": "pass",
+        "evidence": "out/final.mp4 + out/compare/cmp-*.png（v1/v2 同帧对比）",
+        "note": "docker 渲染二次触发（首次 exit144 中断，清事务目录后重跑 24min 通过）；待用户看 v2 片"
+      },
+      {
+        "id": "g09_review_L0_v3",
+        "stage": "review",
+        "date": "2026-07-15",
+        "check": "v3 成片 L0：44.1s∈45±5% / 1080p30 / -14.07LUFS·TP-1.01 / 黑帧0 / 冻结2；三段人物抠像合成边缘 QC 通过",
+        "result": "pass",
+        "evidence": "out/final.mp4",
+        "note": "docker 渲染 43min（含抠像 webm 合成，较 v2 慢）；待用户看 v3 片"
+      },
+      {
+        "id": "g10_video_score",
+        "stage": "deliver",
+        "date": "2026-07-15",
+        "check": "/video-score 7维登记为 golden set 新锚点 GS-09（基线列）",
+        "result": "pass",
+        "scores": {
+          "D1意图": 5,
+          "D2准确": 5,
+          "D3开头": 4,
+          "D4节奏": 4,
+          "D5音画": 5,
+          "D6字幕": 4,
+          "D7完成": 4
+        },
+        "avg": 4.43,
+        "note": "golden set 追加 GS-09（只追加，未改 GS-01~08）；基线打分 row12：老版C-I=v1扁平(均4.0)，新版K-Q=v3人物集成(均4.43)，差值+0.43；雷达图 out/score-radar.png（v1/v3双序列）",
+        "scores_v1_flat": {
+          "D1": 5,
+          "D2": 5,
+          "D3": 4,
+          "D4": 3,
+          "D5": 4,
+          "D6": 4,
+          "D7": 3,
+          "avg": 4.0
+        },
+        "scores_v3": {
+          "D1": 5,
+          "D2": 5,
+          "D3": 4,
+          "D4": 4,
+          "D5": 5,
+          "D6": 4,
+          "D7": 4,
+          "avg": 4.43
+        },
+        "delta": 0.43
+      }
+    ]
+  }
+}

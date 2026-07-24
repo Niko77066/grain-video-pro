@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "title": "",
+    "format": "",
+    "style_pack": "",
+    "commitment": { "type": "", "duration_s": 60, "tolerance_pct": 5 },
+    "aspect": "16:9",
+    "budget": { "cap_usd": 0, "spent_usd": 0 },
+    "pipeline_version": "m0-v1",
+    "status": "brief"
+  },
+  "audio": {
+    "voiceover": null,
+    "music": null,
+    "timeline": null
+  },
+  "anchors": [],
+  "shot_groups": [],
+  "shots": [],
+  "overlays": [],
+  "edit": {
+    "transitions": [],
+    "lut": null,
+    "grain": null,
+    "loudness_lufs": -14
+  },
+  "ledger": {
+    "decisions": [],
+    "costs": [],
+    "gates": []
+  }
+}

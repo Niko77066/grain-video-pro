@@ -1,0 +1,76 @@
+{
+  "schema": "style-contract@1",
+  "style_pack": "case-file",
+  "source": "playbook.md §1/§2/§6 散文→机器合同编译（2026-07-21 升级计划 P0-2；Codex hf-breach 三声部压单声部事故的直接产物）",
+  "denominators": "一切份额分母 = audio.timeline.duration_s（真实音频总长）。provider 份额按镜头区间时长分区求和（每镜恰一 provider，互斥）；trait 份额按镜头标记求和，可跨 provider 重叠。",
+  "amend_policy": "数值仅可在各自 amend 带宽内调整：ir patch 写 meta.contract_amendments[\"<dotted.path>\"]（自动记 ledger，评委与用户看片时可见）。声部不可删除；越出带宽 = 合同违约——只能改片，或带 contract_violation 标记出厂（禁 delivered、禁合 main）。本文件生产期内对生产 agent 只读（守卫钩拦截）。",
+  "plan": {
+    "voices": {
+      "collage_broll": {
+        "role": "隐喻间奏——抽象/情绪/概念镜的真运动声部",
+        "providers": [
+          "collage_broll"
+        ],
+        "min_shots": {
+          "value": 3,
+          "amend": [
+            2,
+            6
+          ]
+        }
+      },
+      "document": {
+        "role": "文件实证——浏览器 chrome + 同步高亮，带观众读文件",
+        "providers": [
+          "hyperframes"
+        ],
+        "declared_as": "document",
+        "min_shots": {
+          "value": 1,
+          "amend": [
+            1,
+            4
+          ]
+        }
+      },
+      "typography": {
+        "role": "论点版式——钩子/论点/大数字/收尾，居中极简",
+        "providers": [
+          "hyperframes"
+        ],
+        "declared_as": "typography",
+        "min_shots": {
+          "value": 2,
+          "amend": [
+            1,
+            6
+          ]
+        }
+      }
+    },
+    "voice_declaration": "声部声明写 shots[].source.params.voice ∈ {document, collage_broll, typography}（m1-v2 起 storyboard 必填）。providers 独占的声部（collage_broll）按 provider 计数，legacy 片无声明也可校验；共享 provider 的声部（document/typography 同为 hyperframes）无声明时降 warn。"
+  },
+  "render": {
+    "static_hold_ratio_max": {
+      "value": 0.65,
+      "amend": [
+        0.55,
+        0.7
+      ],
+      "basis": "measure-render@0.0015 阈值实测：Claude 打磨版 hf 片 0.619（必须绿）；Codex 翻车片 0.747（带宽顶 0.70 仍红）。竖屏案卷片型的版式/文件精读段天然持有偏高，上限据此定。"
+    },
+    "min_video_elements": {
+      "value": 3,
+      "amend": [
+        2,
+        99
+      ],
+      "basis": "compose 内 <video> 计数——拼贴/实拍烘焙声部的物理存在证明。Codex 翻车片 = 0 却自称社媒知识片。"
+    }
+  },
+  "inviolable": [
+    "三声部一个都不能删（min_shots 不可低于各自 amend 下限）",
+    "playbook §6 反模式一票否决清单不可由 agent 解释豁免",
+    "自报字段（static_class 等）与 evidence/render-metrics.json 实测矛盾时，以实测为准"
+  ]
+}

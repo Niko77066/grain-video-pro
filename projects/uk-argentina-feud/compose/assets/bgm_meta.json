@@ -1,0 +1,32 @@
+{
+  "source": "generated",
+  "provider": "minimax music-2.6 (new-api.neodrop.ai gateway, v1/music_generation)",
+  "license": "AI-generated for this production via team MiniMax gateway account; no third-party catalog license involved",
+  "prompt": "Restrained documentary underscore, instrumental only. Slow 70 BPM, minor key, subdued and contemplative with quiet historical gravitas. Soft sustained analog pads and low warm drones as the bed, with a sparse, gentle 8-bit chiptune melody (muted square wave lead, subtle retro video-game texture) floating quietly on top. Very low dynamics, no drums or only faint soft pulse, no climax, no build-up, flat energy throughout, seamless loop-friendly ambient background music for narration underneath a voiceover. Melancholic, thoughtful, restrained.",
+  "generation": {
+    "raw_duration_s": 82.62,
+    "sample_rate_raw": 44100,
+    "trace_id": "6a5a13ed2677b8251413bb66",
+    "provider_trace_id": "06a946edd244e1d31a82e1319d402c81",
+    "elapsed_s": 99,
+    "note": "A duplicate generation call also completed (trace_id 6a5a13a4b4a3f2cc809b2e8d, 107.8s track, elapsed 127s) — its file was overwritten and not used; both calls incurred cost, record both in ledger."
+  },
+  "post": "loop-assembled to 243 s: natural intro 0-62 s + body segment 10-62 s x3 + tail segment 10-47 s, 3 s triangular acrossfades at all seams; acompressor(threshold -18 dB, ratio 2) + loudnorm(I=-30, TP=-6, LRA=9); 2 s fade-in head, 3 s fade-out tail (st=240); resampled 48 kHz stereo, mp3 192 kbps",
+  "duration_s": 243.0,
+  "sample_rate": 48000,
+  "channels": 2,
+  "integrated_lufs": -29.7,
+  "true_peak_dbtp": -13.46,
+  "lra": 4.2,
+  "short_term_range_lufs": [-32.6, -27.3],
+  "narration_ref": {
+    "file": "voiceover.mp3",
+    "duration_s": 238.74,
+    "integrated_lufs": -22.43
+  },
+  "mount_recommendation": {
+    "data_volume": 0.23,
+    "range": [0.18, 0.29],
+    "rationale": "narration -22.4 LUFS; target BGM 18-22 LU below narration = -40.4 to -44.4 LUFS effective; file is -29.7 LUFS, so gain -10.7 to -14.7 dB -> volume 0.29 to 0.18; nominal 0.23 lands at ~-42.4 LUFS (20 LU below narration)"
+  }
+}

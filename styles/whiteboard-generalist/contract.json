@@ -1,0 +1,60 @@
+{
+  "schema": "style-contract@1",
+  "style_pack": "whiteboard-generalist",
+  "source": "从 KuleshovAgent 迁入（2026-07-24，公测兜底包）。『白板』是信息组织方式不是画风——合同只立可机械判定的下限门；『统一视觉手柄是否成立』『模板味』交 Judge，不做正则门。",
+  "denominators": "一切份额分母 = audio.timeline.duration_s（真实音频总长）。",
+  "amend_policy": "数值仅可在各自 amend 带宽内调整：ir patch 写 meta.contract_amendments[\"<dotted.path>\"]（自动记 ledger）。越出带宽 = 合同违约——带 contract_violation 标记停 review 候审（禁 delivered）。本文件生产期内对生产 agent 只读。",
+  "_molly_enforcement": "molly film-ir/gates.py 当前机器执法：plan.provider_share.* / plan.traits.*.share_min / plan.graphics_run_max_s / render.static_hold_ratio_max / render.min_video_elements。本合同的 plan.style_lock / plan.traits.pixel_narrative.craft / plan.visual_handle_declared / incompatible_topics 为**声明项**——molly 门暂未覆盖，先由 playbook 散文 + Judge 执法；补齐机器门属后续工作（不在 2026-07-24 迁移范围）。此说明防静默降级：以为在门上，其实还在纸面上。",
+  "incompatible_topics": [
+    "realistic_person_reenactment"
+  ],
+  "_incompatible_note": "三包共同规则：真人题材只允许符号化角色/叙事替身。兜底包对选题最大限度开放，仅此一条硬不兼容。",
+  "plan": {
+    "visual_handle_declared": {
+      "value": 1,
+      "amend": [1, 1],
+      "basis": "机械项：全片统一的色彩/字体/节奏或重复视觉手柄的**声明在场**（meta.style_notes.visual_handle 非空）。声明是否成立交 Judge——合同只查在场性。[molly 门未覆盖，见 _molly_enforcement]"
+    },
+    "style_lock": {
+      "profiles": ["pixel", "collage"],
+      "basis": "空白包：拼贴/像素任选其一，同片单一——须写 meta.style_notes.generated_style 选定；实拍/HTML/图片/数字人自由组合。[molly 门未覆盖，暂由 playbook §1 + Judge 执法]"
+    },
+    "traits": {
+      "pixel_narrative": {
+        "craft": {
+          "protocol": "image_first_assembly",
+          "image_first": true,
+          "requires_anchor_refs": 1,
+          "min_gen_duration_s": 10,
+          "basis": "空白包生成镜同走图先行（生成方式固定先生图后生视频，不可豁免）：seedance 镜必挂 ≥1 静帧锚（选定风格的锚点），生成时长 ≥10s 慢组装。与 style_lock 配套。[molly craft 门未覆盖，暂由 playbook §1 + Judge 执法]"
+        }
+      }
+    },
+    "provider_share": {
+      "hyperframes": {
+        "max": {
+          "value": 0.4,
+          "amend": [0.25, 0.4],
+          "basis": "素材配比硬门：纯 HTML/MG 动画（provider=hyperframes）按时长份额 ≤40%，剩余 ≥60% 必须由真素材声部承担（image_motion/footage/avatar/seedance/collage_broll）。storyboard 阶段 style.contract.plan 门在花钱/出片前挡住『全 MG 幻灯片』。amend 只能收紧不能松过 40%。[molly 门已覆盖]"
+        }
+      }
+    }
+  },
+  "render": {
+    "static_hold_ratio_max": {
+      "value": 0.6,
+      "amend": [0.45, 0.7],
+      "basis": "兜底包下限门：未经母仓实测标定（[实验假设]），带宽放宽待首批公测片回填。防幻灯片化的底线不放弃。[molly 门已覆盖]"
+    },
+    "min_video_elements": {
+      "value": 2,
+      "amend": [1, 99],
+      "basis": "真运动元素的物理存在证明（compose 内 <video> 计数）。[实验假设] 待公测片校准。[molly 门已覆盖]"
+    }
+  },
+  "inviolable": [
+    "每镜只承担一个主要传播意图（通用视频生产纪律原则化）",
+    "生成后 ffprobe 验证真实时长——自报与实测矛盾以实测为准",
+    "换个选题仍完全成立的模板化画面 = 不合格（Judge 模板味专项，不做正则门）"
+  ]
+}

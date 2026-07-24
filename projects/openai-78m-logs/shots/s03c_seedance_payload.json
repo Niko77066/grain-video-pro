@@ -1,0 +1,26 @@
+{
+ "model": "doubao-seedance-2-0-260128",
+ "prompt": "Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat teal paper field) and Image 2 as the exact completed last frame. One continuous locked-off vertical shot, no camera movement, PACED EVENLY ACROSS THE ENTIRE FIVE SECONDS: pieces keep arriving continuously through the whole shot, do NOT finish early and do NOT hold a long static frame. Open on the empty teal field; the tall halftone server filing-cabinet frame slides in and locks, its drawers pull open one by one, then speech-bubble document papers fly in from the edges and file themselves into the open drawers continuously, a cut-out hand placing the final speech-bubble paper into a drawer in the last second to complete Image 2. Preserve the 9:16 framing, cream keylines, brick-red cardstock accents, uncoated paper grain, halftone dots, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound.",
+ "metadata": {
+  "content": [
+   {
+    "type": "image_url",
+    "image_url": {
+     "url": "https://storage.neodrop.ai/kuleshov/assets/s03c_first.png"
+    },
+    "role": "first_frame"
+   },
+   {
+    "type": "image_url",
+    "image_url": {
+     "url": "https://storage.neodrop.ai/kuleshov/assets/s03c_last.png"
+    },
+    "role": "last_frame"
+   }
+  ],
+  "resolution": "720p",
+  "ratio": "9:16",
+  "generate_audio": false,
+  "duration": 5
+ }
+}

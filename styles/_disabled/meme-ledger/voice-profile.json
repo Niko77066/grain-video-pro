@@ -1,0 +1,41 @@
+{
+  "schema": "voice-profile@1",
+  "provider": "minimax",
+  "model": "speech-2.8-hd",
+  "voice_id": "Chinese (Mandarin)_Humorous_Elder",
+  "display_name": "Humorous Elder · Gravelly, Warm, Textured",
+  "language_boost": "Chinese",
+  "generation": {
+    "mode": "single-pass",
+    "response_format": "hex",
+    "audio_setting": {
+      "format": "mp3",
+      "sample_rate": 32000,
+      "bitrate": 128000,
+      "channel": 1
+    },
+    "voice_setting": {
+      "speed": 1.03,
+      "vol": 1,
+      "pitch": 0,
+      "english_normalization": true
+    }
+  },
+  "performance": {
+    "register": "像一位见过太多商业套路、但仍愿意给你算清账的长辈；平实、稍微带笑意、不过度表演。",
+    "pause": "用中文句读控制；反转前可插入 0.15–0.30 秒停顿。",
+    "forbidden": [
+      "模仿特定真人声音或口癖",
+      "连续笑声、怪叫或角色扮演",
+      "用情绪标签代替文案节奏"
+    ]
+  },
+  "verification": {
+    "source": "MiniMax 官方系统音色表，2026-07-23 核对",
+    "required_after_generation": [
+      "独立回转写与冻结剧本比对，准确率至少 95%",
+      "强制对齐生成逐字 timeline",
+      "检查音轨与 compose/assets/voiceover.mp3 同一文件版本"
+    ]
+  }
+}

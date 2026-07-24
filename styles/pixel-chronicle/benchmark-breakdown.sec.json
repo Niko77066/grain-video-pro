@@ -1,0 +1,616 @@
+{
+  "meta": {
+    "duration_s": 243.00,
+    "resolution": "1920x1080",
+    "aspect_ratio": "16:9",
+    "fps": 30,
+    "fps_confidence": 0.85,
+    "scene_overview": "一部结合复古像素风动画与高清实拍的纪录短片。从地理位置、资源匮乏开局，讲述非洲岛国佛得角通过侨汇与合作实现经济脱贫，最终聚焦于该国足球队及老门将在国际赛场上的不屈表现。",
+    "dominant_palette": "像素段落以暖黄/大地色为主，实拍段落以海洋冷蓝与高对比自然光为主",
+    "audio_presence": true,
+    "tolerances": {
+      "color_deltaE_max": 2.5,
+      "position_px_max": 5,
+      "time_offset_s_max": 0.05,
+      "scale_variance_pct_max": 3.0
+    }
+  },
+  "shots": [
+    {
+      "shot_id": "S1",
+      "time_in_s": 0.00,
+      "time_out_s": 21.80,
+      "duration_s": 21.80,
+      "transition_in": "fade",
+      "transition_out": "glitch/cut",
+      "camera": {
+        "shot_size": "MS",
+        "movement": "static with 2D element animations",
+        "speed_style": "normal",
+        "lens_estimate": null,
+        "depth_of_field": "flat 2D"
+      },
+      "composition": {
+        "framing": "center",
+        "subject_count": null,
+        "key_positions_px": "主体图形大多居于画面中央或左右对比分布"
+      },
+      "lighting": {
+        "type": "2D flat",
+        "intensity": "high",
+        "practicals": null,
+        "time_of_day": null
+      },
+      "color": {
+        "palette": "复古泛黄背景，像素色块高饱和",
+        "contrast_level": "中",
+        "grade_style": "16-bit 像素游戏风格"
+      },
+      "subjects": "像素化的火山岛屿、地球仪、足球门将、成捆钞票、密集人群、干裂土地与大米",
+      "actions": "图形元素随旁白逐个弹出、缩放或位移，展示数据对比",
+      "environment": "抽象的复古纸质纹理背景",
+      "props": "球队徽章、足球、米碗、空麻袋",
+      "text_on_screen": "GDP、1.2B、50K、薪资、2/3、小县城、土地贫瘠、资源匮乏、进口",
+      "effects": "图形弹跳动效、局部像素化撕裂转场",
+      "audio": {
+        "music": "复古电子铺底",
+        "sfx": "UI 弹出音、金币声",
+        "dialogue": "男声旁白介绍佛得角极端的贫乏现状"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": "出现疑似英格兰及西班牙国家足球队的真实徽章标识",
+        "reproduction_difficulty_points": "密集的 2D 图形与文字随音频卡点弹出，时间轴对齐精度要求高",
+        "physics_consistency_observed": "符合 2D 动画的缩放与位移逻辑",
+        "continuity_observed": "纸质背景纹理在切点间保持静态连贯"
+      },
+      "confidence": 0.95
+    },
+    {
+      "shot_id": "S2",
+      "time_in_s": 21.80,
+      "time_out_s": 34.50,
+      "duration_s": 12.70,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "camera": {
+        "shot_size": "ELS",
+        "movement": "pan / drone tracking",
+        "speed_style": "smooth",
+        "lens_estimate": "广角镜头",
+        "depth_of_field": "深景深"
+      },
+      "composition": {
+        "framing": "rule of thirds",
+        "subject_count": 0,
+        "key_positions_px": "地平线位于画面上三分之一"
+      },
+      "lighting": {
+        "type": "hard natural",
+        "intensity": "high",
+        "practicals": null,
+        "time_of_day": "day"
+      },
+      "color": {
+        "palette": "大地黄、海洋蓝",
+        "contrast_level": "高",
+        "grade_style": "自然写实"
+      },
+      "subjects": "无具体人物主体，海浪与贫瘠山脉、白色灯塔",
+      "actions": "海浪拍打礁石，镜头平缓推移，随后切入三维地图动画",
+      "environment": "干旱的岩石海岸、宽广海面",
+      "props": "红顶白身灯塔、海上摩托艇",
+      "text_on_screen": "Cape Verde，万物皆可讲，佛得角",
+      "effects": "实拍到 3D 地图的硬切，海面叠加陆地轮廓图形",
+      "audio": {
+        "music": "节奏渐缓，带入感增强",
+        "sfx": "海浪声、风声",
+        "dialogue": "引出国家名称与地理位置"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": null,
+        "reproduction_difficulty_points": "实拍海浪形态及快艇尾迹存在天然随机性",
+        "physics_consistency_observed": "水体波纹与航拍视角透视一致",
+        "continuity_observed": "地图拉伸视角与实拍海面视角具有视觉衔接感"
+      },
+      "confidence": 0.90
+    },
+    {
+      "shot_id": "S3",
+      "time_in_s": 34.50,
+      "time_out_s": 55.50,
+      "duration_s": 21.00,
+      "transition_in": "cut",
+      "transition_out": "fade",
+      "camera": {
+        "shot_size": "MS",
+        "movement": "static with graphical pans",
+        "speed_style": "normal",
+        "lens_estimate": null,
+        "depth_of_field": "flat"
+      },
+      "composition": {
+        "framing": "center",
+        "subject_count": 1,
+        "key_positions_px": "林则徐人物像素图位于画面右下角"
+      },
+      "lighting": {
+        "type": "2D flat",
+        "intensity": "high",
+        "practicals": null,
+        "time_of_day": null
+      },
+      "color": {
+        "palette": "灰褐背景，高亮黄色数字与地图色块",
+        "contrast_level": "中",
+        "grade_style": "像素图解风"
+      },
+      "subjects": "像素化岛屿、饼干屑、身着清朝官服的历史人物（林则徐）",
+      "actions": "展示国家面积微小如饼干屑掉落，历史人物手持卷轴",
+      "environment": "抽象世界地图底纹",
+      "props": "卷轴、饼干",
+      "text_on_screen": "10X、530K、4033km²、佛得角",
+      "effects": "箭头动画、图形掉落粉碎粒子效果",
+      "audio": {
+        "music": "轻巧的解说背景乐",
+        "sfx": "物体掉落声",
+        "dialogue": "解说国家面积狭小及中文译名由来"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": "出现特定历史人物的像素化形象",
+        "reproduction_difficulty_points": "饼干屑散落的像素粒子轨迹难以精确量化对标",
+        "physics_consistency_observed": "饼干掉落遵循简单抛物线动画逻辑",
+        "continuity_observed": "地图底图比例尺保持不变"
+      },
+      "confidence": 0.95
+    },
+    {
+      "shot_id": "S4",
+      "time_in_s": 55.50,
+      "time_out_s": 84.00,
+      "duration_s": 28.50,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "camera": {
+        "shot_size": "LS",
+        "movement": "static to pan",
+        "speed_style": "slow",
+        "lens_estimate": "长焦（夕阳特写），广角（海岸）",
+        "depth_of_field": "浅景深到深景深切换"
+      },
+      "composition": {
+        "framing": "center to rule of thirds",
+        "subject_count": 0,
+        "key_positions_px": "太阳居中，海龟位于画面偏下方"
+      },
+      "lighting": {
+        "type": "backlit to hard natural",
+        "intensity": "varies",
+        "practicals": null,
+        "time_of_day": "sunset to day"
+      },
+      "color": {
+        "palette": "橙红夕阳，转入像素暗色调",
+        "contrast_level": "高",
+        "grade_style": "纪录片质感混搭暗调像素"
+      },
+      "subjects": "落日、海浪冲击岩石、沙滩上的海龟；随后的像素大航海帆船与被铁链束缚的奴隶",
+      "actions": "海龟在沙滩爬行；像素画面中展示航线连接与奴隶贸易",
+      "environment": "真实海岸线转入像素化荒芜山脉",
+      "props": "像素化矿石、抽油机、帆船、铁链",
+      "text_on_screen": "火山地貌、耕种困难、奴隶贸易、船舶补给、中转",
+      "effects": "航线光点流动、红色循环箭头指示",
+      "audio": {
+        "music": "氛围变沉重",
+        "sfx": "海浪声",
+        "dialogue": "讲述大航海时代及奴隶贸易中转站的历史"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": "涉及奴隶贸易的视觉表达，内容较沉重",
+        "reproduction_difficulty_points": "实拍海龟表面的沙粒纹理及夕阳光晕极度复杂",
+        "physics_consistency_observed": "实拍自然现象物理逻辑合理",
+        "continuity_observed": "历史时间线在解说中自然推进"
+      },
+      "confidence": 0.92
+    },
+    {
+      "shot_id": "S5",
+      "time_in_s": 84.00,
+      "time_out_s": 100.00,
+      "duration_s": 16.00,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "camera": {
+        "shot_size": "LS to MS",
+        "movement": "drone tilt down / handheld",
+        "speed_style": "normal",
+        "lens_estimate": "广角",
+        "depth_of_field": "深景深"
+      },
+      "composition": {
+        "framing": "top down / eye level",
+        "subject_count": 10,
+        "key_positions_px": "人群分布在画面下半部分"
+      },
+      "lighting": {
+        "type": "hard natural",
+        "intensity": "high",
+        "practicals": null,
+        "time_of_day": "day"
+      },
+      "color": {
+        "palette": "铁锈红、尘土黄、海洋蓝",
+        "contrast_level": "中",
+        "grade_style": "未经修饰的纪实质感"
+      },
+      "subjects": "生锈的废弃船只、拥挤杂乱的贫民区俯瞰、海边收网的渔民群体",
+      "actions": "渔民在沙滩上聚集拉拽渔网，神情严肃",
+      "environment": "破败港口、密集棚户区、荒凉山脉与海滩",
+      "props": "废旧渔船、渔网",
+      "text_on_screen": null,
+      "effects": "无明显后期特效",
+      "audio": {
+        "music": "低沉平缓",
+        "sfx": "环境杂音",
+        "dialogue": "描述独立后未能摆脱贫穷的现实"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": "存在多位真实平民面孔，客观记录生活状态",
+        "reproduction_difficulty_points": "航拍棚户区的复杂房屋结构与肌理难以被生成模型完全复刻",
+        "physics_consistency_observed": "渔民拉网的肌肉发力与重力表现一致",
+        "continuity_observed": "色调保持在干旱炎热的质感"
+      },
+      "confidence": 0.88
+    },
+    {
+      "shot_id": "S6",
+      "time_in_s": 100.00,
+      "time_out_s": 125.00,
+      "duration_s": 25.00,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "camera": {
+        "shot_size": "MS",
+        "movement": "static graphics + drone sliding",
+        "speed_style": "normal",
+        "lens_estimate": null,
+        "depth_of_field": "flat / infinite"
+      },
+      "composition": {
+        "framing": "split screen style",
+        "subject_count": null,
+        "key_positions_px": "像素人物分列木牌两侧"
+      },
+      "lighting": {
+        "type": "flat / natural",
+        "intensity": "high",
+        "practicals": null,
+        "time_of_day": "day"
+      },
+      "color": {
+        "palette": "多色彩调和",
+        "contrast_level": "中",
+        "grade_style": "明亮"
+      },
+      "subjects": "像素化的一家三口、背书包的学生、拉行李箱的劳工；实拍的沿海城市、游客、操作手机的人",
+      "actions": "像素人物向左右两个方向分流；实拍人物在草地行走、手持手机进行转账操作",
+      "environment": "木制路标背景、现代海滨城市鸟瞰、草地",
+      "props": "路标牌、行李箱、手机与银行卡、大量外币钞票",
+      "text_on_screen": "读书打工、廉价劳动力、旅游服务、港口交通、渔业、支柱产业、佛得角经济结构",
+      "effects": "钞票阵列平移覆盖画面",
+      "audio": {
+        "music": "节奏变轻快",
+        "sfx": "纸币刷刷声",
+        "dialogue": "讲述人口外流与侨汇经济及旅游业的兴起"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": "出现真实手机界面及大面积法定货币特写，存在金融特征",
+        "reproduction_difficulty_points": "大量排列的货币纹理较易产生摩尔纹或对标误差",
+        "physics_consistency_observed": null,
+        "continuity_observed": "从贫穷到经济改善的逻辑连贯"
+      },
+      "confidence": 0.94
+    },
+    {
+      "shot_id": "S7",
+      "time_in_s": 125.00,
+      "time_out_s": 141.00,
+      "duration_s": 16.00,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "camera": {
+        "shot_size": "LS to MCU",
+        "movement": "drone forward / static",
+        "speed_style": "normal",
+        "lens_estimate": "广角为主",
+        "depth_of_field": "深景深"
+      },
+      "composition": {
+        "framing": "center",
+        "subject_count": 5,
+        "key_positions_px": "演讲台位于画面中下部"
+      },
+      "lighting": {
+        "type": "natural / flat",
+        "intensity": "high",
+        "practicals": null,
+        "time_of_day": "day"
+      },
+      "color": {
+        "palette": "明亮海蓝、政治人物红蓝西装",
+        "contrast_level": "高",
+        "grade_style": "清晰通透"
+      },
+      "subjects": "实拍的干净海滨城市、街头卖艺与修车平民；像素化的演讲政客及跨国握手的双手",
+      "actions": "平民在街头平静生活，像素政客挥手，两只大手在屏幕中央相握",
+      "environment": "海岸度假村、城市街角",
+      "props": "汽车引擎盖、演讲台、泡泡玩具",
+      "text_on_screen": "政治秩序",
+      "effects": "握手动画、复古像素过渡",
+      "audio": {
+        "music": "平稳积极",
+        "sfx": null,
+        "dialogue": "强调其作为非洲最稳定国家之一的政治环境及国际合作"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": "像素化政客可能映射真实政治人物",
+        "reproduction_difficulty_points": "实拍人群中吹出的微小肥皂泡边缘极难逐帧比对",
+        "physics_consistency_observed": "握手动画符合人体骨骼阻挡关系",
+        "continuity_observed": null
+      },
+      "confidence": 0.90
+    },
+    {
+      "shot_id": "S8",
+      "time_in_s": 141.00,
+      "time_out_s": 164.00,
+      "duration_s": 23.00,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "camera": {
+        "shot_size": "CU to LS",
+        "movement": "graphic slides / zoom",
+        "speed_style": "normal",
+        "lens_estimate": null,
+        "depth_of_field": "flat"
+      },
+      "composition": {
+        "framing": "grid / center",
+        "subject_count": 1,
+        "key_positions_px": "动漫少女面部居中满屏"
+      },
+      "lighting": {
+        "type": "flat",
+        "intensity": "high",
+        "practicals": null,
+        "time_of_day": null
+      },
+      "color": {
+        "palette": "明黄字块、二次元高饱和色",
+        "contrast_level": "高",
+        "grade_style": "像素图解/动漫风"
+      },
+      "subjects": "并排的像素风景卡片（水坝、港口、学校、医院）、一名含泪后转为笑颜的像素动漫风蓝发少女、像素国家体育场",
+      "actions": "卡片依次滑出，少女表情从落泪变为开心比 V 手势，周围金币闪烁",
+      "environment": "纯色背景转为像素国旗背景",
+      "props": "金币符号 ($)",
+      "text_on_screen": "外部援助、没有资源、生路、2007、脱贫、合作产物",
+      "effects": "少女面部流泪动画与闪光粒子、实拍人物与像素背景合成",
+      "audio": {
+        "music": "激昂上扬",
+        "sfx": "升级提示音、闪烁声",
+        "dialogue": "讲述利用外部援助补齐短板并在2007年摘掉最不发达国家帽子"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": "日系二次元像素少女属于特殊艺术表达，实拍握手人物抠像合成在像素背景上",
+        "reproduction_difficulty_points": "合成画面的边缘处理与风格割裂感是此处的视觉特征",
+        "physics_consistency_observed": null,
+        "continuity_observed": "从基建到脱贫的情绪递进衔接自然"
+      },
+      "confidence": 0.95
+    },
+    {
+      "shot_id": "S9",
+      "time_in_s": 164.00,
+      "time_out_s": 187.00,
+      "duration_s": 23.00,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "camera": {
+        "shot_size": "MS to LS",
+        "movement": "zoom out / graphic pans",
+        "speed_style": "fast",
+        "lens_estimate": null,
+        "depth_of_field": "flat"
+      },
+      "composition": {
+        "framing": "center",
+        "subject_count": 11,
+        "key_positions_px": "门将位于球门正中央"
+      },
+      "lighting": {
+        "type": "stadium simulation",
+        "intensity": "high",
+        "practicals": null,
+        "time_of_day": "night"
+      },
+      "color": {
+        "palette": "草地绿、球衣亮黄与深蓝",
+        "contrast_level": "高",
+        "grade_style": "像素体育直播风"
+      },
+      "subjects": "全副武装的像素化国家队球员阵列、40岁的身穿1号黄色球衣的像素门将",
+      "actions": "门将在球门前连续做出高难度分身扑救动作，计分板数字跳动",
+      "environment": "满座的像素化足球场馆",
+      "props": "足球、球网、记分牌",
+      "text_on_screen": "被世界记住、不是一座球场、一支球队、40岁的门将、走出国岛、重返故乡",
+      "effects": "门将瞬间幻影分身特效、记分牌翻页",
+      "audio": {
+        "music": "高燃体育战歌",
+        "sfx": "哨声、人群欢呼声",
+        "dialogue": "重点讲述40岁门将沃齐尼亚的神奇扑救与逼平西班牙的壮举"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": "包含明确指向真实赛事比分与球队的描述",
+        "reproduction_difficulty_points": "分身扑救时的人物重叠轮廓线容易在对标时产生多边形误差",
+        "physics_consistency_observed": "足球轨迹符合体育动画夸张逻辑",
+        "continuity_observed": "门将动作连贯，充满力量感"
+      },
+      "confidence": 0.96
+    },
+    {
+      "shot_id": "S10",
+      "time_in_s": 187.00,
+      "time_out_s": 200.00,
+      "duration_s": 13.00,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "camera": {
+        "shot_size": "CU",
+        "movement": "static / slight handheld drift",
+        "speed_style": "slow",
+        "lens_estimate": "中长焦",
+        "depth_of_field": "浅景深"
+      },
+      "composition": {
+        "framing": "center",
+        "subject_count": 1,
+        "key_positions_px": "人物面孔占据画面中心"
+      },
+      "lighting": {
+        "type": "stadium lights / indoor soft",
+        "intensity": "medium",
+        "practicals": null,
+        "time_of_day": "night / day"
+      },
+      "color": {
+        "palette": "球员为暖色调，插播一段黑白回忆，母亲画面偏暗冷调",
+        "contrast_level": "中高",
+        "grade_style": "情感纪实"
+      },
+      "subjects": "眼眶含泪的真实门将面庞、黑白画面中的扑救身影、坐在沙发上手持遥控器的年迈母亲",
+      "actions": "门将抬头叹息落泪，母亲在电视机前专注观看比赛",
+      "environment": "球场近景、普通家庭客厅",
+      "props": "电视遥控器",
+      "text_on_screen": null,
+      "effects": "闪回到黑白褪色效果",
+      "audio": {
+        "music": "情感转向煽情",
+        "sfx": null,
+        "dialogue": "解释门将落泪原因：启蒙教练离世，母亲因贫穷无法到场"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": "涉及高度真实的公众人物及其家属特写，具备强烈的肖像隐私属性",
+        "reproduction_difficulty_points": "真实的眼泪反光及微表情肌肉牵动是机器生成难以完美对齐的部分",
+        "physics_consistency_observed": null,
+        "continuity_observed": "从像素回到实拍的情绪落地非常扎实"
+      },
+      "confidence": 0.92
+    },
+    {
+      "shot_id": "S11",
+      "time_in_s": 200.00,
+      "time_out_s": 243.00,
+      "duration_s": 43.00,
+      "transition_in": "cut",
+      "transition_out": "fade to black",
+      "camera": {
+        "shot_size": "Varies (LS to MS)",
+        "movement": "handheld / drone / static",
+        "speed_style": "normal / slow motion",
+        "lens_estimate": "混合焦段",
+        "depth_of_field": "全景深为主"
+      },
+      "composition": {
+        "framing": "dynamic",
+        "subject_count": 100,
+        "key_positions_px": "人群填满球场看台，马匹奔跑于画面左下方向右"
+      },
+      "lighting": {
+        "type": "natural sunlight",
+        "intensity": "high",
+        "practicals": null,
+        "time_of_day": "day"
+      },
+      "color": {
+        "palette": "明亮的蓝白色调主导（国旗色）",
+        "contrast_level": "高",
+        "grade_style": "振奋写实"
+      },
+      "subjects": "海浪中推船的人、在机场拥抱的母女、欢呼的看台球迷、列队唱国歌的球员、黑沙滩上举着国旗骑马的人、大合影群体",
+      "actions": "球迷狂欢、球员庄严肃穆、骑马者在海浪边驰骋、人群面对镜头微笑",
+      "environment": "狂风海浪、机场大厅、大型体育场、黑色火山沙滩",
+      "props": "佛得角国旗、巨幅看台海报",
+      "text_on_screen": "Cape Verde, 被世界看见",
+      "effects": "结尾画面叠加优雅的手写体白色英文",
+      "audio": {
+        "music": "情绪饱满的史诗感交响/合唱",
+        "sfx": "人群喧哗、海浪声",
+        "dialogue": "总结这个国家通过足球精神被世界看见"
+      },
+      "comparison_notes": {
+        "ambiguous_or_sensitive_elements": "包含大量真实大众面孔及国家标志符号",
+        "reproduction_difficulty_points": "看台数千人的细微动作与飞舞的纸片/旗帜极度复杂，慢动作骑马溅起的水花存在高度混沌性",
+        "physics_consistency_observed": "慢镜头下水花溅射符合流体力学",
+        "continuity_observed": "多场景混剪，依靠音频及情绪线条实现逻辑连贯"
+      },
+      "confidence": 0.90
+    }
+  ],
+  "sec_timeline": [
+    { "sec": 0, "shot_id": "S1", "summary": "展示像素风岛屿与宏观经济数据标题" },
+    { "sec": 10, "shot_id": "S1", "summary": "使用像素球星薪资对比国家GDP总额" },
+    { "sec": 20, "shot_id": "S1", "summary": "表现当地土地贫瘠与粮食严重依赖进口" },
+    { "sec": 30, "shot_id": "S2", "summary": "实拍海面浮现 3D 轮廓图，引出国家名称" },
+    { "sec": 40, "shot_id": "S3", "summary": "利用天通苑小区人口数据直观对比该国人口总数" },
+    { "sec": 50, "shot_id": "S3", "summary": "林则徐像素人物登场，解释中文译名渊源" },
+    { "sec": 60, "shot_id": "S4", "summary": "实拍落日与海龟，镜头平缓移动" },
+    { "sec": 70, "shot_id": "S4", "summary": "转入像素画面，展示大西洋航海线与中转站地位" },
+    { "sec": 80, "shot_id": "S4", "summary": "描述奴隶贸易与船舶补给历史，像素帆船驶过" },
+    { "sec": 90, "shot_id": "S5", "summary": "实拍俯瞰密集的贫民棚户区结构" },
+    { "sec": 100, "shot_id": "S6", "summary": "像素小人站在路标前，面临背井离乡的抉择" },
+    { "sec": 110, "shot_id": "S6", "summary": "实拍旅游业场景与手机海外侨汇转账过程" },
+    { "sec": 120, "shot_id": "S6", "summary": "满屏复古色调的当地法定纸币平移展示" },
+    { "sec": 130, "shot_id": "S7", "summary": "实拍干净的沿海城镇，平民街头休闲" },
+    { "sec": 140, "shot_id": "S8", "summary": "像素化大跨度基建展示及多国合作握手动画" },
+    { "sec": 150, "shot_id": "S8", "summary": "蓝发二次元像素少女从落泪变为喜悦" },
+    { "sec": 160, "shot_id": "S8", "summary": "画面切入宏伟的像素化国家体育场建筑" },
+    { "sec": 170, "shot_id": "S9", "summary": "门将面对球门严阵以待，气氛紧张" },
+    { "sec": 180, "shot_id": "S9", "summary": "门将连续分身扑救，大屏幕显示战平西班牙" },
+    { "sec": 190, "shot_id": "S10", "summary": "实拍特写：真实老门将仰面叹息并含泪" },
+    { "sec": 200, "shot_id": "S11", "summary": "实拍渔民在海浪的冲击下协力推船" },
+    { "sec": 210, "shot_id": "S11", "summary": "蓝衣球迷看台狂欢，国家队庄严列队" },
+    { "sec": 220, "shot_id": "S11", "summary": "举着国旗的骑手在黑色沙滩上慢动作骑马奔驰" },
+    { "sec": 230, "shot_id": "S11", "summary": "众人合影，白色手写体英文标题浮现" },
+    { "sec": 240, "shot_id": "S11", "summary": "画面逐渐淡出至黑场，全片结束" }
+  ],
+  "cut_points": [
+    0.00,
+    21.80,
+    34.50,
+    55.50,
+    84.00,
+    100.00,
+    125.00,
+    141.00,
+    164.00,
+    187.00,
+    200.00,
+    243.00
+  ],
+  "comparison_notes": {
+    "sensitive_elements_flagged": "全片充斥大量真实国家的国旗/队徽、法定货币纹理及现役球员真实面孔，具有极高的版权与肖像敏感度。",
+    "known_ambiguous_points": "由于像素动画与实拍混剪，在 2D 动效过渡及故障(Glitch)转场处，自动比对算法极易将像素点阵误判为图像噪点或画质劣化。",
+    "color_grade_observed_range": "色域宽广且存在两极分化：像素部分色彩纯度高、无过渡；实拍部分存在逆光大光比及深邃的海洋自然色带。",
+    "timing_tolerance": "剪辑点密集且伴随音效卡点，转场帧时间轴容差建议维持在 ±0.05s 以内。",
+    "content_sensitivity_notes": "涉及奴隶贸易、极端贫困等历史与社会客观写实画面，已采用不含价值倾向的泛化语言进行描述。"
+  },
+  "uncertainties": [
+    "视频内部帧率推测为稳定的 30fps，但含部分可能由低帧率转制的 16-bit 动画片段，建议使用底层文件工具复核真实媒体信息。",
+    "考虑到全片长达4分钟且包含大量快速微剪辑，出于结构化宏观理解需求，部分镜头合并为 Shot 段落，sec_timeline 亦采用 10 秒固定步长抽样展示，并未作逐毫秒级穷举。"
+  ],
+  "quality_notes": [
+    "声画同步质检：音频中旁白的语速节奏与字幕弹出、视觉位移的同步率极高，特别是体育赛场段落配乐的鼓点与扑救动作精确对齐。",
+    "视觉一致性质检：从抽象像素过渡到高清实拍的转换逻辑流畅，例如通过海浪声与镜头前推，消解了二维与三维的视觉壁垒。",
+    "对标建议：若以该片作为基准对标，需允许在“水花飞溅、人群扰动、发丝运动”等高频复杂区域存在客观的结构相似性（SSIM）数值波动。"
+  ]
+}

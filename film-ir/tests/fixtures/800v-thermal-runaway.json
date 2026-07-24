@@ -1,0 +1,1129 @@
+{
+  "meta": {
+    "title": "800V 热失控:热量是怎么一路传开的",
+    "slug": "800v-thermal-runaway",
+    "format": "faceless_explainer",
+    "style_pack": "engineering-anatomy",
+    "commitment": {
+      "type": "motion_led",
+      "duration_s": 90,
+      "tolerance_pct": 5
+    },
+    "aspect": "16:9",
+    "audience": "大众科普向",
+    "budget": {
+      "cap_usd": null,
+      "spent_usd": 0
+    },
+    "pipeline_version": "m0-v1",
+    "status": "delivered-v2"
+  },
+  "audio": {
+    "voiceover": {
+      "file": "audio/voiceover.mp3",
+      "model": "seed-audio-1.0",
+      "voice_desc": "一位专业的中文纪录片解说员（中年男性，普通话，声音低沉冷静，克制而有张力，语速中等）",
+      "payload": "audio/payload-voiceover-v1.json",
+      "response": "audio/tts-response-v1.json",
+      "format": "mp3/48kHz/stereo/128kbps",
+      "duration_s": 90.43,
+      "gen_wallclock_s": 69.2,
+      "generated_once": true,
+      "note": "整片一次生成（90.4s < 120s 上限），音色无跨节漂移"
+    },
+    "music": {
+      "type": "sfx_bed",
+      "file": "audio/sfx_bed.wav",
+      "gen": "程序化合成(numpy/scipy,seed=42)",
+      "desc": "克制低频张力床+关键节点能量层(短路tick@18.6/喷阀whoosh@25.94/蔓延rumble@41.58/电弧crackle@54.82/水流wash@60.2),peak -16dBFS,收尾归静",
+      "mix": "sidechain 闪避到旁白之下,终混 -14 LUFS(compose/mux_audio.sh)"
+    },
+    "timeline": {
+      "source": "seed-audio enable_subtitle 逐字时间戳（词级轴见 audio/timeline.json）",
+      "duration_s": 90.43,
+      "sections": [
+        {
+          "id": "sec01",
+          "t": [
+            0.0,
+            12.34
+          ]
+        },
+        {
+          "id": "sec02",
+          "t": [
+            13.18,
+            25.26
+          ]
+        },
+        {
+          "id": "sec03",
+          "t": [
+            25.94,
+            40.82
+          ]
+        },
+        {
+          "id": "sec04",
+          "t": [
+            41.58,
+            54.38
+          ]
+        },
+        {
+          "id": "sec05",
+          "t": [
+            54.82,
+            67.9
+          ]
+        },
+        {
+          "id": "sec06",
+          "t": [
+            68.74,
+            90.43
+          ]
+        }
+      ],
+      "words_file": "audio/timeline.json"
+    }
+  },
+  "anchors": [
+    {
+      "id": "a01_styleframe",
+      "type": "style_frame",
+      "intent": "engineering-anatomy 定调帧:碳黑演播室、骨白线框标注、热色梯(琥珀→橙红→白炽)、冷却蓝仅正常态。全片 LUT 与热色 shader 的取色基准。",
+      "aspect": "16:9",
+      "status": "locked",
+      "file": "anchors/a01_styleframe.png",
+      "cdn_url": "https://storage.neodrop.ai/kuleshov/800v-thermal-runaway/a01_styleframe.png",
+      "picked_from": "a01-c2(热已扩散2-3颗,蓝→琥珀→白炽核心全在一帧;LUT 最全)",
+      "gen": {
+        "model": "gpt-image-2",
+        "quality": "medium",
+        "prompt_file": "anchors/payload-a01-c2.json",
+        "request_id": "202607141351244344591538268d9d6dFqrTvMF"
+      }
+    },
+    {
+      "id": "a02_pack",
+      "type": "product",
+      "intent": "800V 电池包(方形电芯路线),事故调查演播室打光。用于 s01 开场 hero 与 s15 收尾呼应的同一个包一致性(Seedance @ref)。",
+      "aspect": "16:9",
+      "status": "locked",
+      "file": "anchors/a02_pack.png",
+      "cdn_url": "https://storage.neodrop.ai/kuleshov/800v-thermal-runaway/a02_pack.png",
+      "picked_from": "a01-c1(单芯烧红的干净一排)",
+      "gen": {
+        "model": "gpt-image-2",
+        "quality": "medium",
+        "prompt_file": "anchors/payload-a01-styleframe.json",
+        "request_id": "202607141346523354877928268d9d6hOEHDGRK"
+      }
+    },
+    {
+      "id": "a03_module",
+      "type": "prop",
+      "intent": "方形电芯剖切/内部结构(卷芯/极耳/隔膜层),同款视觉。用于 s03 微观、s04 微距、s05 喷阀、s08 蔓延的电芯一致性(Seedance @ref);并作 s02/s13 程序化 3D 剖面的视觉参照。",
+      "aspect": "16:9",
+      "status": "locked",
+      "file": "anchors/a03_module.png",
+      "cdn_url": "https://storage.neodrop.ai/kuleshov/800v-thermal-runaway/a03_module.png",
+      "picked_from": "a01-c3(单芯剖切露卷芯从芯部烧起)",
+      "gen": {
+        "model": "gpt-image-2",
+        "quality": "medium",
+        "prompt_file": "anchors/payload-a01-c3.json",
+        "request_id": "202607141351241437391008268d9d6X0oOooAY"
+      }
+    },
+    {
+      "id": "a04_microlayers",
+      "type": "style_frame",
+      "aspect": "16:9",
+      "status": "locked",
+      "intent": "电芯内部分层结构(正极/隔膜/负极)+ SEI 膜裂口琥珀热光,用于 s03 图片动效(Ken Burns)",
+      "file": "anchors/s03_microlayers.png",
+      "gen": {
+        "model": "gpt-image-2",
+        "quality": "medium",
+        "prompt_file": "anchors/payload-s03-microlayers.json",
+        "request_id": "20260715020239147926448268d9d6a0H9PdZd"
+      }
+    }
+  ],
+  "shot_groups": [
+    {
+      "id": "g_s01",
+      "shots": [
+        "s01"
+      ],
+      "duration_s": 7.0,
+      "seam_out": "C-剖面擦除→MG(s02),compose 层运动接管 handoff",
+      "note": "开场 hero,建议双候选选优"
+    },
+    {
+      "id": "g_s04",
+      "shots": [
+        "s04"
+      ],
+      "duration_s": 7.34,
+      "seam_out": "B-硬切→Seedance(s05),微距膜熔→喷阀实景"
+    },
+    {
+      "id": "g_s05",
+      "shots": [
+        "s05"
+      ],
+      "duration_s": 7.26,
+      "seam_out": "C-剖面擦除→MG(s06),喷阀实景→温度数字卡",
+      "note": "hero"
+    },
+    {
+      "id": "g_s08",
+      "shots": [
+        "s08"
+      ],
+      "duration_s": 6.62,
+      "seam_out": "C-剖面擦除→MG(s09),包内蔓延→传热路径标注",
+      "note": "hero"
+    },
+    {
+      "id": "g_s11",
+      "shots": [
+        "s11"
+      ],
+      "duration_s": 5.38,
+      "seam_out": "B-硬切→Seedance(s12),电弧微距→消防实景;s11 出场带白炽闪帧"
+    },
+    {
+      "id": "g_s12",
+      "shots": [
+        "s12"
+      ],
+      "duration_s": 8.54,
+      "seam_out": "C-剖面擦除→MG(s13),消防实景→防护件装入图"
+    },
+    {
+      "id": "g_s15",
+      "shots": [
+        "s15"
+      ],
+      "duration_s": 6.6,
+      "seam_out": "C→MG 收尾卡(s16),运动接管 pull-out 到黑场前"
+    }
+  ],
+  "shots": [
+    {
+      "id": "s01",
+      "t": [
+        0.0,
+        7.0
+      ],
+      "voice_ref": "sec01",
+      "intent": "钩子:事故调查演播室里一块 800V 电池包,一颗电芯已泛起琥珀微光——立题'热量怎么传开'",
+      "framing": "全景 hero",
+      "motion": "slow dolly-in",
+      "source": {
+        "provider": "seedance"
+      },
+      "anchor_refs": [
+        "a02_pack",
+        "a01_styleframe"
+      ],
+      "candidates": 2,
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "prompt_file": "shots/payload2-s01.json",
+        "task_id": "task_VxMz21tlAHotGO633pmfuYRpAtr1u7RC",
+        "request_id": "202607141437426809848838268d9d6NLl2YIlL",
+        "refs": [
+          "a02_pack",
+          "a01_styleframe"
+        ],
+        "duration_actual_s": 8.042,
+        "fps": 24,
+        "file": "shots/s01.mp4"
+      },
+      "qc": {
+        "technical": "pass(1920x1080/24fps/无黑帧/无冻结)",
+        "semantic": "单芯克制烧红、邻芯冷却蓝、蒸汽上升,兑现'最早期onset';与 a02 锚点同一块包。选优=B。"
+      }
+    },
+    {
+      "id": "s02",
+      "t": [
+        7.0,
+        13.18
+      ],
+      "voice_ref": "sec01",
+      "intent": "剖面擦除钻入电池包顶视爆炸剖面,一颗电芯点亮热色,标注'一颗电芯'——从宏观进入内部",
+      "framing": "剖面标注卡(俯视爆炸图)",
+      "motion": "运动接管 handoff + 标注引出",
+      "source": {
+        "provider": "hyperframes",
+        "template": "剖面标注卡",
+        "render": "webgl-3d(battery-module-3d)"
+      },
+      "anchor_refs": [
+        "a01_styleframe"
+      ],
+      "static_class": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s03",
+      "t": [
+        13.18,
+        18.6
+      ],
+      "voice_ref": "sec02",
+      "intent": "微观:电芯内部分层结构(正极/隔膜/负极),负极表面 SEI 保护膜碎裂发热——起点在 90°C",
+      "framing": "微观概念静帧",
+      "motion": "Ken Burns push-in ≤6s",
+      "source": {
+        "provider": "image-motion"
+      },
+      "anchor_refs": [
+        "a04_microlayers",
+        "a01_styleframe"
+      ],
+      "static_class": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s04",
+      "t": [
+        18.6,
+        25.94
+      ],
+      "voice_ref": "sec02",
+      "intent": "微距真运动:隔膜在 130°C 熔穿,正负极接触迸出短路火花,热光扩散——失控起步",
+      "framing": "极微距",
+      "motion": "rack focus + 热光扩散,短路瞬间白炽闪帧",
+      "source": {
+        "provider": "seedance"
+      },
+      "anchor_refs": [
+        "a03_module",
+        "a01_styleframe"
+      ],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "prompt_file": "shots/payload2-s04.json",
+        "task_id": "task_trvLWQbghE2ZtbftOk7KuwcKB57ur4hL",
+        "request_id": "202607141437464285827678268d9d61NOxDmki",
+        "refs": [
+          "a03_module",
+          "a01_styleframe"
+        ],
+        "duration_actual_s": 8.042,
+        "fps": 24,
+        "file": "shots/s04.mp4"
+      },
+      "qc": {
+        "technical": "pass(1920x1080/24fps/无黑帧/无冻结)",
+        "semantic": "卷芯层熔穿白炽点、热光透层,兑现膜熔→内短路;无文字/无畸变。"
+      }
+    },
+    {
+      "id": "s05",
+      "t": [
+        25.94,
+        33.2
+      ],
+      "voice_ref": "sec03",
+      "intent": "hero:方形电芯泄压阀喷出高速烟气射流(可燃气),高压锅喷发",
+      "framing": "中近景侧面",
+      "motion": "slow-mo + side tracking",
+      "source": {
+        "provider": "seedance"
+      },
+      "anchor_refs": [
+        "a03_module",
+        "a01_styleframe"
+      ],
+      "candidates": 2,
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "prompt_file": "shots/payload2-s05.json",
+        "task_id": "task_AeXJGx5qcLZHQJvfjkRRFzYcZujzEDZA",
+        "request_id": "202607141437522069099128268d9d6g0dMXWfv",
+        "refs": [
+          "a03_module",
+          "a01_styleframe"
+        ],
+        "duration_actual_s": 8.042,
+        "fps": 24,
+        "file": "shots/s05.mp4"
+      },
+      "qc": {
+        "technical": "pass(1920x1080/24fps/无黑帧/无冻结)",
+        "semantic": "侧向爆裂+卷芯外露+横向高速喷射(顺带冲击邻芯),兑现喷发A且超预期(预演波及)。选优=A。"
+      }
+    },
+    {
+      "id": "s06",
+      "t": [
+        33.2,
+        37.4
+      ],
+      "voice_ref": "sec03",
+      "intent": "743°C 大数字 + 对比锚'铝熔点 660°C'——七百多度足以熔铝",
+      "framing": "温度大数字卡",
+      "motion": "count-up ≤0.6s",
+      "source": {
+        "provider": "hyperframes",
+        "template": "温度大数字卡"
+      },
+      "anchor_refs": [
+        "a01_styleframe"
+      ],
+      "static_class": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s07",
+      "t": [
+        37.4,
+        41.58
+      ],
+      "voice_ref": "sec03",
+      "intent": "正极颗粒高温释氧,标注 O₂——'这团火自带助燃剂'的题句",
+      "framing": "剖面标注卡(正极微观)",
+      "motion": "标注线点亮 O₂",
+      "source": {
+        "provider": "hyperframes",
+        "template": "剖面标注卡"
+      },
+      "anchor_refs": [
+        "a01_styleframe"
+      ],
+      "static_class": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s08",
+      "t": [
+        41.58,
+        48.2
+      ],
+      "voice_ref": "sec04",
+      "intent": "hero:电池包内部视角,热色从一颗电芯沿排列向邻芯依次蔓延——多米诺开始",
+      "framing": "包内俯视中景",
+      "motion": "热色蔓延 + slow push",
+      "source": {
+        "provider": "seedance"
+      },
+      "anchor_refs": [
+        "a03_module",
+        "a01_styleframe"
+      ],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "prompt_file": "shots/payload2-s08.json",
+        "task_id": "task_QK0sNsVPWuyDcfV1spGm5B1LF2LnasqU",
+        "request_id": "20260714143755132343088268d9d6YT1teHhO",
+        "refs": [
+          "a02_pack",
+          "a01_styleframe"
+        ],
+        "duration_actual_s": 8.042,
+        "fps": 24,
+        "file": "shots/s08.mp4"
+      },
+      "qc": {
+        "technical": "pass(1920x1080/24fps/无黑帧/无冻结)",
+        "semantic": "一排电芯白炽→橙→暗→冷却蓝梯度波,兑现蔓延多米诺;锚点包一致。"
+      }
+    },
+    {
+      "id": "s09",
+      "t": [
+        48.2,
+        52.2
+      ],
+      "voice_ref": "sec04",
+      "intent": "四条传热路径剖面标注逐条点亮:芯壁传导/汇流排/高温喷气/热辐射",
+      "framing": "剖面标注卡(四路径)",
+      "motion": "标注逐条 stagger 点亮",
+      "source": {
+        "provider": "hyperframes",
+        "template": "剖面标注卡"
+      },
+      "anchor_refs": [
+        "a01_styleframe"
+      ],
+      "static_class": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s10",
+      "t": [
+        52.2,
+        54.82
+      ],
+      "voice_ref": "sec04",
+      "intent": "链路进度条入场:电芯→邻芯→模组,节点依次变热色——大约每 50 秒一颗",
+      "framing": "链路进度条",
+      "motion": "节点位移承接点亮(非 opacity)",
+      "source": {
+        "provider": "hyperframes",
+        "template": "链路进度条"
+      },
+      "anchor_refs": [
+        "a01_styleframe"
+      ],
+      "static_class": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s11",
+      "t": [
+        54.82,
+        60.2
+      ],
+      "voice_ref": "sec05",
+      "intent": "hero:800V 高压母线绝缘层受热碳化,暗处拉出刺目电弧,点燃可燃气——800V 额外一层",
+      "framing": "微距暗场",
+      "motion": "rack focus 到电弧,出场白炽闪帧",
+      "source": {
+        "provider": "seedance"
+      },
+      "anchor_refs": [
+        "a01_styleframe"
+      ],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "prompt_file": "shots/payload2-s11.json",
+        "task_id": "task_jkXlZU2WAWD5witYIINngJF4tczVuv3e",
+        "request_id": "202607141437583367741658268d9d6SqXfjqw5",
+        "refs": [
+          "a01_styleframe"
+        ],
+        "duration_actual_s": 6.042,
+        "fps": 24,
+        "file": "shots/s11.mp4"
+      },
+      "qc": {
+        "technical": "pass(1920x1080/24fps/无黑帧/无冻结)",
+        "semantic": "蓝白电弧击打铜母线+火花,兑现800V电弧;蓝白为特批唯一非热色光,合规。"
+      }
+    },
+    {
+      "id": "s12",
+      "t": [
+        60.2,
+        68.74
+      ],
+      "voice_ref": "sec05",
+      "intent": "消防水流浇在冒烟车底,烟不减——水在外、热在内的无力感;上万升水/48h 复燃",
+      "framing": "实景中景",
+      "motion": "handheld + 水流冲刷",
+      "source": {
+        "provider": "seedance"
+      },
+      "anchor_refs": [
+        "a01_styleframe"
+      ],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "prompt_file": "shots/payload2-s12.json",
+        "task_id": "task_FHBTwOL82B8q6JO6uhs4fhKrdp3Xsg20",
+        "request_id": "202607141438006108158878268d9d6jnd7smyq",
+        "refs": [],
+        "duration_actual_s": 10.042,
+        "fps": 24,
+        "file": "shots/s12.mp4"
+      },
+      "qc": {
+        "technical": "pass(1920x1080/24fps/无黑帧/无冻结)",
+        "semantic": "夜景车底冒烟+水柱冲刷+警灯,兑现'浇不灭'的无力感;无脸/无字;纯文生视频。"
+      }
+    },
+    {
+      "id": "s13",
+      "t": [
+        68.74,
+        74.2
+      ],
+      "voice_ref": "sec06",
+      "intent": "招牌镜头:防护件逐层装入爆炸图(气凝胶垫/云母板/定向排气道),热色被冷却蓝逐段封住",
+      "framing": "剖面标注卡(防护装入)",
+      "motion": "逐层滑入 stagger + 热色→冷却蓝渐变",
+      "source": {
+        "provider": "hyperframes",
+        "template": "剖面标注卡",
+        "render": "webgl-3d(battery-module-3d)"
+      },
+      "anchor_refs": [
+        "a01_styleframe"
+      ],
+      "static_class": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s14",
+      "t": [
+        74.2,
+        78.8
+      ],
+      "voice_ref": "sec06",
+      "intent": "链路进度条复现:蔓延在'邻芯'节点被截断(冷却蓝封住)——拆掉多米诺",
+      "framing": "链路进度条",
+      "motion": "热色推进到邻芯被拦停",
+      "source": {
+        "provider": "hyperframes",
+        "template": "链路进度条"
+      },
+      "anchor_refs": [
+        "a01_styleframe"
+      ],
+      "static_class": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    },
+    {
+      "id": "s15",
+      "t": [
+        78.8,
+        85.4
+      ],
+      "voice_ref": "sec06",
+      "intent": "收尾 hero(呼应开场):同一电池包冷静下来,单芯微光被封,整包无恙——国标底线 2 小时",
+      "framing": "全景 hero",
+      "motion": "slow pull-out",
+      "source": {
+        "provider": "seedance"
+      },
+      "anchor_refs": [
+        "a02_pack",
+        "a01_styleframe"
+      ],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "doubao-seedance-2-0-260128",
+        "resolution": "1080p",
+        "ratio": "16:9",
+        "prompt_file": "shots/payload2-s15.json",
+        "task_id": "task_q9lw2vjaOpUwn0MF13rNhNhtrbjNta5A",
+        "request_id": "202607141438017095233548268d9d68LJ1lpmN",
+        "refs": [
+          "a02_pack",
+          "a01_styleframe"
+        ],
+        "duration_actual_s": 8.042,
+        "fps": 24,
+        "file": "shots/s15.mp4"
+      },
+      "qc": {
+        "technical": "pass(1920x1080/24fps/无黑帧/无冻结)",
+        "semantic": "整包冷静、单芯余烬、烟散去,兑现收尾并呼应开场(同一块包 bookend)。"
+      }
+    },
+    {
+      "id": "s16",
+      "t": [
+        85.4,
+        90.43
+      ],
+      "voice_ref": "sec06",
+      "intent": "收尾卡:'2 小时不起火不爆炸'+ 出处 + 片尾角标'信息截至 2026-07',黑场前 0.3s 收",
+      "framing": "收尾卡",
+      "motion": "淡定入场,黑场 0.3s",
+      "source": {
+        "provider": "hyperframes",
+        "template": "收尾卡"
+      },
+      "anchor_refs": [
+        "a01_styleframe"
+      ],
+      "static_class": true,
+      "status": "planned",
+      "gen": null,
+      "qc": null
+    }
+  ],
+  "overlays": [
+    {
+      "id": "ov_anchor1",
+      "type": "时间锚卡",
+      "shot_range": [
+        "s01",
+        "s01"
+      ],
+      "intent": "2026.07.01 / GB 38031-2025 / 不起火·不爆炸(F11)",
+      "source": "hyperframes"
+    },
+    {
+      "id": "ov_temp1",
+      "type": "温度标注",
+      "shot_range": [
+        "s04",
+        "s04"
+      ],
+      "intent": "温度 count-up 90°C→130°C(F01/F02)",
+      "source": "hyperframes"
+    },
+    {
+      "id": "ov_water",
+      "type": "对比锚字幕条",
+      "shot_range": [
+        "s12",
+        "s12"
+      ],
+      "intent": "上万升水 ≈ 一辆消防车水箱装不下;48h 内可复燃(F09)",
+      "source": "hyperframes"
+    },
+    {
+      "id": "ov_2h",
+      "type": "时间锚标注",
+      "shot_range": [
+        "s15",
+        "s15"
+      ],
+      "intent": "整包 2 小时(F11)",
+      "source": "hyperframes"
+    },
+    {
+      "id": "ov_footer",
+      "type": "片尾角标",
+      "shot_range": [
+        "s16",
+        "s16"
+      ],
+      "intent": "信息截至 2026-07(时效声明)",
+      "source": "hyperframes"
+    }
+  ],
+  "edit": {
+    "transitions": [
+      "hard_cut",
+      "white_flash_2-4f",
+      "section_wipe",
+      "black_0.3s"
+    ],
+    "lut": null,
+    "grain": null,
+    "loudness_lufs": -14
+  },
+  "ledger": {
+    "decisions": [
+      {
+        "id": "d20",
+        "stage": "compose-v2",
+        "date": "2026-07-15",
+        "decision": "s02 真 3D 走 headless Chrome 逐帧烘焙成 mp4 挂入(bake.html?t= 确定性渲染),放弃 HyperFrames 页内 Three.js 集成",
+        "why": "实测三连坑:①ESM 在 file:// 渲染管线被 CORS 拦死(预览正常/渲染全黑);②UMD classic 加载后引擎按帧重建 DOM,canvas 引用被换;③纯2D canary 同黑证实非 WebGL 问题。烘焙 149 帧@24fps 走已验证的视频管线。材质经 3 轮 timebox 打磨(env反射/棱线/压过曝),仍偏图形化——按用户'放进来先看看'入片,由用户看片裁决去留。已回写 hyperframes.md 知识包。"
+      },
+      {
+        "id": "d19",
+        "stage": "compose-v2",
+        "date": "2026-07-15",
+        "decision": "v2 全片 5/10 打回(用户裁决):主因 Seedance 画面节奏慢+无收尾定帧;7 镜按 2-2-video 纪律 v3 重生成(段内≥2-3 硬切 beat+视觉奇观+锁定收尾定帧留 1.4s,尾裁仍落定帧)",
+        "why": "用户反馈:每5秒最后一镜 hard-cut 停在明确画面、下一段直接切景别串联;5秒至少2镜、要视觉奇观。v3 QC:7 条段内多镜全部兑现,contact sheet 确认。v2 备份于 shots/v2_backup/。"
+      },
+      {
+        "id": "d18",
+        "stage": "compose",
+        "date": "2026-07-15",
+        "decision": "compose 引擎=HyperFrames(index.html+gsap,docker render);字体从 Google Fonts 子集化打包(105中文+28其他字形→woff2);s02/s13 剖面 v1 用 2D SVG",
+        "why": "HyperFrames 可用且为 SOP 指定引擎;docker 渲染环境无中文字体故必须打包子集woff2;真3D模组(proto已验证)留作 review 后按需定点换入(DEBT)。"
+      },
+      {
+        "id": "d17",
+        "stage": "compose",
+        "date": "2026-07-15",
+        "decision": "Seedance 片渲前重编码为密集关键帧(GOP=12@24fps)",
+        "why": "HyperFrames 渲染警告原片关键帧稀疏(间隔达6.75s)会 seek 冻帧;重编码消除,CRF16 高质量保真。"
+      },
+      {
+        "id": "d16",
+        "stage": "compose",
+        "date": "2026-07-15",
+        "decision": "s03 微观分层图单独生成(a04_microlayers),不复用 a03 整颗剖切",
+        "why": "s03 意图是'正极/隔膜/负极分层+SEI膜',a03 是整颗卷芯剖切,层次特写不同。",
+        "alternatives": "复用a03(层次表达不到位,弃)"
+      },
+      {
+        "id": "d15",
+        "stage": "compose",
+        "date": "2026-07-15",
+        "decision": "不烧录字幕(旁白+画面自解释);加克制 SFX 声音床(低频铺底+关键音效:喷阀嘶鸣/电弧噼啪/水流),均压到旁白之下(原生音≤-18dB,混音-14 LUFS)",
+        "why": "用户拍板。无字幕更电影感;SFX 床提升物理过程沉浸感,符合风格包声部表'音效轨可加低频铺底与静默打点'。",
+        "alternatives": "烧中文字幕(更普惠但选电影感);纯旁白(克制但少一层冲击)"
+      },
+      {
+        "id": "d01",
+        "stage": "brief",
+        "date": "2026-07-14",
+        "decision": "新建风格包 engineering-anatomy(工程解剖),不用 daily-brief",
+        "why": "选题是物理过程解剖,吃真运动画面;daily-brief 明确禁用生成视频,声部表不匹配。用户拍板。",
+        "alternatives": "daily-brief(纯版式,被否)"
+      },
+      {
+        "id": "d02",
+        "stage": "brief",
+        "date": "2026-07-14",
+        "decision": "时长承诺 90s ± 5%,受众大众科普向,预算不设上限(仅记账)",
+        "why": "用户拍板:90s 能把 800V 特殊性(高压电弧/绝缘)和防护设计装进链条;科普向决定术语降维+对比锚。",
+        "alternatives": "60s(链条砍到 4 节点,被否)"
+      },
+      {
+        "id": "d08",
+        "stage": "storyboard",
+        "date": "2026-07-14",
+        "decision": "16 镜五源混排:7 镜 Seedance 真运动(hero/物理过程)、8 镜 HyperFrames MG(剖面/数据/进度条/收尾)、1 镜图片动效(微观分层)。剖面/爆炸图走 HyperFrames 内的真 Three.js 3D(见 d10),非 2D 伪 3D。",
+        "why": "物理过程(喷阀/蔓延/电弧/消防)与开场收尾 hero 走 Seedance 拿真运动体感;不可见的图解(温度/传热路径/防护装入)走 MG 保清晰标注;微观分层拍不到走图片动效。真运动占比 53.9% 兑现 motion_led。逐镜声部与 engineering-anatomy 声部表一致。",
+        "alternatives": "全 MG 图解(信息清晰但违约 motion_led,且违反风格包'恨幻灯片化')"
+      },
+      {
+        "id": "d10",
+        "stage": "storyboard",
+        "date": "2026-07-14",
+        "decision": "剖面/爆炸图用程序化 Three.js 真 3D(RoundedBox 电芯阵列 + 热色 emissive + UnrealBloom),不下载 glb;并计划渲静帧当 s01/s05/s08 的 Seedance @ref 做跨源一致性",
+        "why": "遵用户'去找一个 CC0 电池 glb'指令实搜:Poly Pizza(最大 CC0 源)15 结果全是 AA/6V/铅酸 car battery + 低模卡通,主题与风格全不对;Sketchfab CC0 基本需登录下载(创建账号是禁区)。方形电芯模组是规则几何,程序化建模是真 WebGL 3D(景深/相机/热色 shader 全可控)且符合 HyperFrames 无 Math.random/Date.now 确定性铁律——比货不对板的下载模型效果更好。概念验证已渲通过,存 compose/proto/battery-module-3d.html。",
+        "alternatives": "下载 Poly Pizza 卡通 car battery(主题错,弃);2D SVG 伪 3D(用户明确要真 3D,弃);买 CGTrader/TurboSquid 付费 EV 包模型(未授权采购+仍需重做材质,弃)",
+        "debt": "proto 用 CDN Three.js;compose 正式版须把 three.module.js 及 addons vendored 到本地(HyperFrames 禁 CDN)。找到干净 CC0/CC-BY 的真实整车底盘模型可作 s01/s15 环境上下文(非必须)。"
+      },
+      {
+        "id": "d11",
+        "stage": "storyboard",
+        "date": "2026-07-14",
+        "decision": "s01(开场)、s05(喷阀)做双候选选优;Seedance 提示词采用 2-2-video 骨架(SUBJECTS/ENVIRONMENT/STYLE/CONTINUITY/AUDIO RULE/TIMELINE + 硬切收尾帧 + SFX-only)",
+        "why": "用户拍板'效果第一位',两个最吃第一印象/最难一次成的 hero 各生成 2 候选,墙钟归零、成本 +1 次;2-2-video 结构与铁律(旁白走 TTS、无 BGM、原生音频只留环境声)完全对齐,按本片 5–8s 短镜把 beats 收到 3–5 个。",
+        "alternatives": "全部单候选(省成本但赌一次成,与'效果第一位'冲突,弃)"
+      },
+      {
+        "id": "d12",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "decision": "Seedance duration 必须放进 metadata;首批 4 hero 顶层 duration=8 被忽略产出恒 5.04s,改 metadata 重生成",
+        "why": "探针实测:metadata.duration=10 → 10.04s;顶层 duration 被忽略默认约 5.04s(冒烟'4→5.04'实为此默认值,非时长漂移)。已回写 references/seedance.md 契约。分镜无需重切,重生成即拿到规划时长(s01 重生成实测 8.04s)。",
+        "alternatives": "接受 5.04s 并重切分镜到 5s 节拍(需补 2-3 镜撑 motion_led,复杂;因 duration 可修而放弃)"
+      },
+      {
+        "id": "d13",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "decision": "hero 双候选选优:s01 用 B(单芯克制/最早期 onset)、s05 用 A(侧向爆裂/卷芯外露)。用户拍板。5.04s 候选留作 backup",
+        "why": "s01-B 更贴'只有一颗在烧'的开场意图与风格宣言的克制;s05-A 最惊艳且科普露内部结构。四候选质感均达标(1080p/无黑帧/LUT正确/锚点一致)。最终 s01/s05 按赢的 prompt 在正确时长重生成。",
+        "alternatives": "s01-A(戏剧但偏离onset)、s05-B(垂直射流更符物理但选戏剧性)"
+      },
+      {
+        "id": "d09",
+        "stage": "storyboard",
+        "date": "2026-07-14",
+        "decision": "白炽闪帧转场用满 2 次(s04 短路瞬间、s11 电弧),硬切为默认;剖面擦除升级为运动接管 handoff(d07)",
+        "why": "两处'点火'节点(内短路、高压电弧)是全片仅有的爆燃瞬间,配白炽闪帧;风格包限全片≤2 次,正好用满不超。",
+        "alternatives": "闪帧只用 1 次(s11)保余量——舍弃,s04 短路是失控起点值得强调"
+      },
+      {
+        "id": "d06",
+        "stage": "audio",
+        "date": "2026-07-14",
+        "decision": "G1 回转写用 mlx-whisper(large-v3-turbo)替代知识包默认的 WhisperX,并新增 pinyin 级校验",
+        "why": "本机无 whisperx 且 pip 装不动;mlx-whisper 走 Apple Silicon 原生,现成可用。中文 ASR 同音字导致字面级 G1 假性不达标,故加读音级比对作为主判据——非静默降级,已如实记 gate g02 并标 DEBT 待回写知识包。",
+        "alternatives": "装 whisperx(环境受阻);仅用字面级(会误杀合格音频)"
+      },
+      {
+        "id": "d07",
+        "stage": "audio",
+        "date": "2026-07-14",
+        "decision": "采纳用户指定的画面参考(hyperframes-launches/vfx-heygen-combined),但只借合成技术不借其广告长相",
+        "why": "该参考是 HeyGen 产品发布会 VFX(lime-green/光泽感),与本片事故调查纪录片气质冲突;可迁移的是三点技术:HyperFrames 承载真 WebGL(剖面→真3D+热色shader)、运动接管转场(cut-the-curve 替代硬擦除)、lint/validate/inspect 流程。已落 compose/reference-notes.md,带入 storyboard/compose。",
+        "alternatives": "全盘照搬(违反 engineering-anatomy 反模式,被否);完全不用(浪费用户明确给的高质量技术参考)"
+      },
+      {
+        "id": "d04",
+        "stage": "script",
+        "date": "2026-07-14",
+        "decision": "开场钩子选 GB 38031-2025 新国标时效钩(2026-07-01 生效),不用'电动车为什么起火快'的恐惧钩",
+        "why": "新国标两周前刚生效,时效性强且与结尾'2小时不起火不爆炸'形成首尾闭环;恐惧钩与风格包'恨恐吓式剪辑'冲突。",
+        "alternatives": "恐惧钩(被否,违反风格包反模式);纯机理钩'一切从一层膜开始'(弱于时效钩)"
+      },
+      {
+        "id": "d03",
+        "stage": "brief",
+        "date": "2026-07-14",
+        "decision": "画幅 16:9;结尾落在'工程如何应对'而非'观众该做什么'",
+        "why": "16:9 为模板默认且适配长视频平台,用户未另指;结尾落工程应对更符合'解剖'气质,且避免科普片变安全宣传片。风格包开拍四问之四的裁决。",
+        "alternatives": "9:16 竖版(未选);结尾落观众逃生指引(未选,可在字幕角标带一句)"
+      }
+    ],
+    "costs": [
+      {
+        "id": "c01",
+        "stage": "audio",
+        "date": "2026-07-14",
+        "item": "旁白全片 TTS",
+        "model": "seed-audio-1.0",
+        "request_id": null,
+        "metric": "original_duration 90.4s",
+        "note": "成本反查凭据未从响应头留存(DEBT:下次 TTS 存 header)"
+      },
+      {
+        "id": "c02",
+        "stage": "anchors",
+        "date": "2026-07-14",
+        "item": "a01 风格帧候选 c1",
+        "model": "gpt-image-2/medium",
+        "request_id": "202607141346523354877928268d9d6hOEHDGRK",
+        "tokens": {
+          "input": 254,
+          "output": 1158
+        }
+      },
+      {
+        "id": "c03",
+        "stage": "anchors",
+        "date": "2026-07-14",
+        "item": "a01 风格帧候选 c2",
+        "model": "gpt-image-2/medium",
+        "request_id": "202607141351244344591538268d9d6dFqrTvMF",
+        "tokens": {
+          "output_image": 1158
+        }
+      },
+      {
+        "id": "c04",
+        "stage": "anchors",
+        "date": "2026-07-14",
+        "item": "a01 风格帧候选 c3(剖切)",
+        "model": "gpt-image-2/medium",
+        "request_id": "202607141351241437391008268d9d6X0oOooAY",
+        "tokens": {
+          "output_image": 1158
+        }
+      },
+      {
+        "id": "c05",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s01-A 开场hero候选A",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/8s",
+        "task_id": "task_h1nxjySyndN2osWc59l1z25FvSmNXXlo",
+        "request_id": "202607141414006378675798268d9d6yjgxCDWF"
+      },
+      {
+        "id": "c06",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s01-B 开场hero候选B",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/8s",
+        "task_id": "task_csvo9I0Fn8OvweyPEjvxncI2m6ItrMHi",
+        "request_id": "202607141414103040295238268d9d6otqnJi9R"
+      },
+      {
+        "id": "c07",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s05-A 喷阀hero候选A",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/8s",
+        "task_id": "task_bbaCXPhntL0iWAiceIMM5quTrby4ox57",
+        "request_id": "202607141414196674050968268d9d6QnZvY9Vj"
+      },
+      {
+        "id": "c08",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s05-B 喷阀hero候选B",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/8s",
+        "task_id": "task_QngpNVanLLeWdGxlj0pNVV6vIoBrKkmh",
+        "request_id": "202607141414249545719218268d9d64ROJdccZ"
+      },
+      {
+        "id": "c09",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s01开场hero(重生成,选B)",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/8s",
+        "task_id": "task_VxMz21tlAHotGO633pmfuYRpAtr1u7RC",
+        "request_id": "202607141437426809848838268d9d6NLl2YIlL"
+      },
+      {
+        "id": "c10",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s04微距膜熔",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/8s",
+        "task_id": "task_trvLWQbghE2ZtbftOk7KuwcKB57ur4hL",
+        "request_id": "202607141437464285827678268d9d61NOxDmki"
+      },
+      {
+        "id": "c11",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s05喷阀hero(重生成,选A)",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/8s",
+        "task_id": "task_AeXJGx5qcLZHQJvfjkRRFzYcZujzEDZA",
+        "request_id": "202607141437522069099128268d9d6g0dMXWfv"
+      },
+      {
+        "id": "c12",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s08蔓延",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/8s",
+        "task_id": "task_QK0sNsVPWuyDcfV1spGm5B1LF2LnasqU",
+        "request_id": "20260714143755132343088268d9d6YT1teHhO"
+      },
+      {
+        "id": "c13",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s11电弧",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/6s",
+        "task_id": "task_jkXlZU2WAWD5witYIINngJF4tczVuv3e",
+        "request_id": "202607141437583367741658268d9d6SqXfjqw5"
+      },
+      {
+        "id": "c14",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s12消防实景",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/10s",
+        "task_id": "task_FHBTwOL82B8q6JO6uhs4fhKrdp3Xsg20",
+        "request_id": "202607141438006108158878268d9d6jnd7smyq"
+      },
+      {
+        "id": "c15",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "item": "s15收尾hero",
+        "model": "doubao-seedance-2-0-260128",
+        "spec": "1080p/16:9/8s",
+        "task_id": "task_q9lw2vjaOpUwn0MF13rNhNhtrbjNta5A",
+        "request_id": "202607141438017095233548268d9d68LJ1lpmN"
+      },
+      {
+        "id": "c16",
+        "stage": "compose",
+        "date": "2026-07-15",
+        "item": "s03 微观分层图",
+        "model": "gpt-image-2/medium",
+        "request_id": "20260715020239147926448268d9d6a0H9PdZd"
+      }
+    ],
+    "gates": [
+      {
+        "id": "g08",
+        "stage": "deliver",
+        "date": "2026-07-15",
+        "check": "v2 L0 复验 + /video-score 登记",
+        "result": "pass",
+        "evidence": "v2: 90.46s/1080p24/0黑帧0冻结/音轨mux。GS-10 登记:v1=[5,5,3,2,4,4,3]→3.71,v2=[5,5,4,4,4,4,4]→4.29(自评待用户校准)。用户裁决'先这样'交付。"
+      },
+      {
+        "id": "g07",
+        "stage": "review",
+        "date": "2026-07-15",
+        "check": "L0 手动仪器复验",
+        "result": "pass_with_note",
+        "evidence": "时长90.46s(PASS)/1080p24fps/无黑帧无冻结/转场4种/真运动53.9%。响度-15.3 LUFS(目标-14,低1.3LU,容差内不削波)。详见 review.md。",
+        "note": "响度可两遍loudnorm精调;s02/s13为2D SVG,真3D留作定点换入。"
+      },
+      {
+        "id": "g06",
+        "stage": "compose",
+        "date": "2026-07-15",
+        "check": "hyperframes lint + snapshot 关键帧目检",
+        "result": "pass",
+        "evidence": "lint 0 error(2 条 track 密度警告不阻塞);snapshot 7 帧(3/10/16/35/50/71/88s)画面正确:Seedance+锚点卡、剖面阵列标注、Ken Burns、743数字卡、四路径、防护三层、2小时收尾;5 字体加载正常,中文无碎,LUT 统一。"
+      },
+      {
+        "id": "g05",
+        "stage": "motion",
+        "date": "2026-07-14",
+        "check": "7 镜 Seedance 镜头级 QC(技术+语义)",
+        "result": "pass",
+        "evidence": "全部 1920x1080/24fps,无黑帧无冻结,时长达标(duration 入 metadata 后正确)。语义逐镜兑现 intent,LUT/锚点一致,无角色变脸/文字碎裂。s01=B、s05=A 选优定稿,5.04s 候选留 backup。",
+        "note": "s05 喷射冲击邻芯为超预期彩蛋(预演波及),非缺陷。"
+      },
+      {
+        "id": "g01",
+        "stage": "script",
+        "date": "2026-07-14",
+        "check": "字数硬校验 + 钩子 + 视觉变化密度 + But/Therefore 链 + 事实回链",
+        "result": "pass",
+        "evidence": "旁白 ≈ 373 字(标准 330–390);六节全部回链 F01–F11;详见 script.md 自查节"
+      },
+      {
+        "id": "g02",
+        "stage": "audio",
+        "date": "2026-07-14",
+        "check": "G1 回转写准确率 ≥95% + 总时长承诺 ±5%",
+        "result": "pass",
+        "evidence": "独立回转写 mlx-whisper large-v3-turbo。读音级(toneless-pinyin)准确率 98.4% PASS;字面级 92.4% 不达标但全部归因于 ASR 同音字(负极/腹脊、熔/融、电弧/电壶、乘员/成员等)+ 数字写法(九十/90)+ whisper 静音尾幻觉(感谢观看),非 TTS 缺陷——故以读音级为准。时长 90.43s 落在 85.5–94.5s 内。",
+        "note": "本项目首次引入 pinyin 级 G1 校验以规避中文 ASR 同音字地板,建议回写进 tts-audio.md 知识包(DEBT)"
+      },
+      {
+        "id": "g04",
+        "stage": "anchors",
+        "date": "2026-07-14",
+        "check": "锚点 N选1 品味门 + 公网可达性",
+        "result": "pass",
+        "evidence": "用户拍板:a01=c2(风格帧/LUT基准)、a02=c1(包hero)、a03=c3(剖面)。三张 oss-upload 到 grain S3,HTTP 200 可达。GPT-Image-2 中文文字无(纯画面),中质量够用。"
+      },
+      {
+        "id": "g03",
+        "stage": "storyboard",
+        "date": "2026-07-14",
+        "check": "storyboard 八项自查",
+        "result": "pass",
+        "evidence": "[1]无缝隙/重叠+首尾对齐90.43s [2]最长镜s12=8.54s≤10 [3]连续同版式≤2(实测1) [4]静态类连续≤2(实测2,卡上限) [5]声部逐镜匹配engineering-anatomy声部表 [6]motion_led可达:真运动53.9%>50% [7]分组算术7组/各≤15s/各1镜 [8]每镜一主动作+运镜词。脚本 scratchpad/sb_check.py 可复算。",
+        "note": "静态类连续=2 处(s02+s03、s06+s07、s09+s10、s13+s14)均卡在上限,compose 时若某 MG 镜偏静需警惕幻灯片化"
+      }
+    ]
+  }
+}
