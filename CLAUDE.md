@@ -1,67 +1,77 @@
-# Kuleshov · M0 手工作坊
+# Grain Video Pro · Agent Operating Contract
 
-全自动多源视频 agent 生产链路 **Kuleshov** 的第一形态：人 + Claude Code + ~10 份文件。
-设计蓝图（v3.4）：https://claude.ai/code/artifact/06e62b33-6e82-4ffc-b893-94a15ccd69a1
+Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制作内核代号 **Kuleshov**：它把调研、编剧、导演、素材路由、合成和质检编码成 agent 可执行的十阶段管线，并以 Film IR、风格合同和质量门保证每条片可追溯、可复跑、可验收。
 
-M0 的交付物不是视频，是：**验证过的品味资产 + 带人工分的片库（未来评委的校准语料）+ 稳定下来的 prompt 模式（未来编译器的输入）**。
+本文件是仓库级运行契约，不是阶段说明书。具体生产步骤以 `.claude/skills/produce/SKILL.md` 为准；一条片的实时状态以该项目的 `film.json` 为准。
 
-## 当前目标（M1 · 2026-07-16 会后拍板版）
+## 当前任务面
 
-场景定位：**社媒账号内容创作与运营**（覆盖 KOL 选题验证 → KOC 起号变现），产出发布**小红书 + 抖音**。选题、创意、信息密度是拿流量的生命线（评分卡已补 D8 创意 / D9 网感）。M1 两条生产链路，**首片均已交付**（2026-07-20 状态），当前重心是把两条链路固化为**可端到端复跑的生产模式**（工程项见 `docs/m1-plan.md` 7/18–22 段）：
+独立 Kuleshov 管线已经完成多条横屏知识科普与竖屏新闻调查样片，Film IR、三套风格包、终渲实测层和 G2 隔离评委均已落地。当前主线是把这些经过出片验证的能力收敛为 **Grain 原生 Video step-skill**：保留知识、契约与工具，把常驻编排、provider 调用、凭据和发布封印交给宿主 harness。
 
-1. **知识科普类 3 分钟视频**——风格包 `styles/pixel-chronicle/`，首片 `projects/uk-argentina-feud/`（已出厂合 main）；
-2. **荆华密算 AI 隐私平台社媒视频**——内容引擎：**搜集全球 AI 隐私与泄露热点新闻 → 专业解读 + 安全提醒 → 凸显六场景（法律/医疗/心理/职场/金融/科研）中的产品价值**。风格包 `styles/case-file/`，首片 `projects/openai-78m-logs/`（已出厂合 main）。企业号红线见 `.claude/skills/rednote-mentor/references/compliance.md`。
+- 当前生产入口：`.claude/skills/produce/SKILL.md`
+- Grain 集成施工稿：`docs/grain-delivery-plan.md`
+- Film IR 与上下文架构：`docs/film-ir-context-architecture.md`
+- 当前执行与历史排期：`docs/m1-plan.md`
 
-M0 实验项目（800v-thermal-runaway / estee-lauder-night / samsung-health-ai-consent / _smoke）与弃用风格包（daily-brief / tech-newsroom / engineering-anatomy / night-luxe）已于 2026-07-20 精简出库：git 历史可查，本地全量归档在 `~/kuleshov-archive/m0-projects/`，film.json 校准语料在 `film-ir/tests/fixtures/` 有只读副本。
+对现状的表述必须区分 **已经跑通**、**正在集成** 与 **仅有计划**。不要把规划中的 Grain 能力写成已经上线，也不要再把本仓称为“M0 手工作坊”或“外挂”。
 
-外部依赖：**检索/实拍素材已闭环**（Pexels + archive.org 公域 + APIhub 新闻三层方案，见 `produce/references/footage-sourcing.md`）；**服务器渲染 API 通路已验**（`tools/render-remote.sh`，知识包 `produce/references/server-render.md`）——切默认前须下一部片按"compose 自带 woff2 字体"新规双跑达帧级一致。
+## 真相源与权责边界
 
-账号运营层用 `/rednote-mentor`（按需：选题反推 brief / 封面标题 / 合规咨询）：选题从搜索词反推进 brief，冷启动数据按 L5 回流归因。**发布包（双平台文案 + 封面）不再随片出厂**（2026-07-20 用户取消："没什么用"，运营端自理）。M1 工程化设计（Film IR API、导演—子导演上下文、风格包注入机制）见 `docs/film-ir-context-architecture.md`，排期与 todo 见 `docs/m1-plan.md`。
+1. **项目状态**只认 `projects/<slug>/film.json`。续跑、返工、汇报进度前先读 IR，不依赖对话记忆。
+2. **生产方法**以 `.claude/skills/produce/SKILL.md` 和其 `references/` 为准；只加载当前阶段与已选来源需要的知识。
+3. **视觉承诺**以 `styles/<style>/playbook.md` 与 `contract.json` 为准。playbook 解释意图，contract 执行硬门；生产期不得直接修改合同给当前项目放行。
+4. **客观质量**以终渲证据为准。IR 自报字段与 `evidence/render-metrics.json` 冲突时，以成片反测结果为准。
+5. **编排与能力分离**：本仓拥有制作知识、Film IR、风格合同与质量工具；宿主拥有主循环、agent 调度、provider 凭据与生产工具调用。不要在文档或代码里重新耦合某个单一 harness。
 
-## 目录
+## 仓库地图
 
-- `.claude/skills/produce/` — 十阶段生产管线 SOP（入口：`/produce`），引擎知识包在其 `references/` 下，按镜头路由按需加载
-- `styles/` — 风格包（现存两包：`pixel-chronicle` 知识科普横屏 / `case-file` 官号竖屏）+ 反主观翻译总表（`translation-table.md`）+ 进化规程（`_iteration.md`）。每包 `playbook.md`（散文）+ `contract.json`（机器合同，storyboard 预检 + review 实测终检；生产期只读，带宽内调整走 `meta.contract_amendments`）
-- `projects/<片名>/` — 每片一个目录：`film.json`（全片唯一真相源）+ 阶段 artifact + 产物
-- `film-ir/` — Film IR API（Python 库 + CLI `kuleshov-ir`：read / patch / validate / execute 四动词 + G1 门套件 + migrate 收编器）；测试 `film-ir/.venv/bin/python -m pytest film-ir/tests/`
-- **worktree 凭据**：`.env` 只活在主仓（gitignored），`.git/hooks/post-checkout` 钩子会在新 worktree 落地时自动软链主仓 `.env`（2026-07-21 装；重克隆后按此句复原钩子——worktree 内脚本 `source .env` 从此免手拷）
-- `tools/oss-upload.sh` — 本地资产传 grain S3 → 返回 `storage.neodrop.ai` 公网 URL（Seedance @ref 引用用）
-- `tools/measure-render.py` — 成片实测层：从终渲 mp4 反测逐镜静态持有 / `<video>` 计数 / 响度 → `evidence/render-metrics.json`（`style.contract.render` 门的证据源；自报字段与实测矛盾以实测为准）
-- `tools/judge/` — G2 评委 harness：证据包生成（contact sheet + Golden 并排，隔离创作上下文）→ Kimi API 盲评 → 校准协议（先校准后放权，凭据 `KIMI_API_KEY` 入 `.env`）
+- `.claude/skills/produce/` — 十阶段生产管线与导演知识包；按阶段、按镜头来源加载
+- `.claude/skills/rednote-mentor/` — 小红书选题、标题、封面与合规辅助；按需调用，不属于成片交付硬门
+- `film-ir/` — Film IR Python 库与 `kuleshov-ir` CLI：`read / patch / validate / execute`
+- `styles/` — `pixel-chronicle`、`case-file`、`whiteboard-generalist` 三套可用风格包，以及模板、禁用区和进化规程
+- `projects/<slug>/` — 每条片的 IR、阶段产物、证据与输出；项目脚本不自动等于可复用管线
+- `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用与响度，作为 render contract 的证据源
+- `tools/judge/` — G2 隔离评审：生成证据包、出题、阅卷与校准
+- `tools/render-remote.sh` — HyperFrames 远端渲染客户端；地址由 `RENDER_URL` 注入，不假设本机或固定 IP
+- `docs/` — 架构决策、事故复盘、升级计划与 Grain 交付设计
 
-## 运行铁律（M0 版 Rule Zero）
+## Production Invariants
 
-1. **先写 IR，再花钱。** 一切生成动作（图 / 音频 / 视频）必须对应 `film.json` 里已存在的镜头或资产条目；生成完立刻回填结果与参数。查不到条目就不许调 API。
-2. **留痕不可事后补。** 每次生成记录：模型、完整 prompt、seed、参考文件、成本、耗时、实际时长；每个关键决策（选源、重做、降级、砍内容）记入 `ledger.decisions`，带理由。
-3. **音频先行。** `audio.timeline` 定稿后，一切视觉时长以真实音频时间戳为准，禁止按剧本字数估时。
-4. **状态从文件读。** 续跑、重做、回答"做到哪了"之前，先读 `film.json`——状态机活在文件里，不在对话记忆里，也不在提示词里。
-5. **禁止静默降级——工具降级与表达降级同罪。**（2026-07-21 五片对照实验后扩订）工具降级：引擎不可用、参数被迫改变（如超时重试想丢掉首帧锚定）、**更换渲染执行环境**（Docker→本机也算，复现性契约也是引擎契约）。表达降级：删除风格包必需声部、把真运动做成入场动画冒充、跳过 hero-frame/锚点品味门、拿自评顶替评委门。两类都不许自动执行：人在环停下来问；端到端授权时，合同带宽内的调整走 `meta.contract_amendments`（留痕、不打断），带宽外与上述清单项一律**带 `contract_violation` 标记停在 review 等用户裁决**——片子照出，但禁 `delivered`、禁合 main。"全程未降级"的汇报口径以此清单为准，不许语义缩窄。
-6. **每片出厂过 `/video-score` 登记**，人工分进片库；发现问题用 `/video-triage` 归因。这是未来机器评委的校准语料，漏一片少一片。
-7. **来源平权，质量唯一。** MG 动画（HyperFrames）、AI 生成视频（Seedance）、数字人、图片动效、实拍/检索素材是五种平权的表达语言——选源只问一个问题：**哪种来源最能表达这个镜头的意图**。成本只记账、不进路由权重；禁止"能用便宜的就先用便宜的"。最终目的是把用户期望主题的视频做到最好，不惜成本。
+以下规则高于阶段偏好和 provider 便利性。
 
-## 品味宪法（初稿 — 每一条都等作者亲手裁决）
+1. **先写 IR，再花钱。** 任何出图、TTS、视频生成、检索或渲染动作，必须对应 `film.json` 中已经存在的资产或镜头。查不到条目，不得调用付费或不可逆工具。
+2. **留痕与动作同时发生。** 每次生成记录模型、完整 prompt、seed、参考资产、成本、耗时与实际时长；每个选源、重做、降级与删改决策都写入 `ledger.decisions`，不得事后补造。
+3. **音频是全片时钟。** `audio.timeline` 定稿后，所有视觉区间绑定真实时间戳；禁止按剧本字数估时，也禁止为凑预设时长拉伸内容。
+4. **状态从文件读。** 开工、续跑、重做和进度汇报都先读 `film.json`。状态机活在文件里，不在提示词或聊天上下文里。
+5. **禁止静默降级。** 工具不可用、provider 参数改变、渲染环境切换、必需视觉声部被删除、真运动被入场动画冒充、hero-frame 或评委门被跳过，都属于降级。合同带宽内的调整写入 `meta.contract_amendments`；带宽外违约必须标记 `contract_violation` 并停在 review，禁止置为 `delivered`。
+6. **机器验事实，隔离评委验观感。** G1 负责结构、算术、合同和终渲指标；G2 只看证据与 Golden 对照，不读取创作理由。任何失败都回到责任阶段定点修复，不以自评替代门禁。
+7. **来源平权，意图优先。** MG 动画、AI 视频、数字人、图片动效、实拍与检索素材都是表达语言。逐镜头选择最能兑现 intent 的来源；成本只记账，不得自动把“更便宜”当成“更合适”。
+8. **拒绝整片式返工。** 单镜问题定位到 prompt、锚点、路由、剪辑或合同，再重跑最小受影响单元。重做一镜可以很便宜，重做一条片不该成为默认动作。
+9. **已经交付不等于已经产品化。** 样片验证了制作能力；接入 Grain、provider 映射、发布封印与运行时凭据托管必须按各自验收状态表述。
 
-> **状态：草案。** 以下从蓝图与既有拉片记录中提炼，不是定稿。请逐条批注：保留 / 改写 / 删除，并补上只属于你的硬观点。定稿前按"强倾向"执行，与用户意见冲突时停下来问。
+## Taste Constitution
 
-### 爱
+这不是审美口号，而是当多种做法都“技术上可行”时的裁决顺序。新增例外必须经过作者裁决，并沉淀回风格包或本节。
 
-- **意义产生于并置**（库里肖夫）。剪辑点是第一表达手段：先想"这两个镜头相邻说明了什么"，再想单个镜头有多美。
-- **真实音频的呼吸感。** 剪辑点落在句读与节拍上；J-cut / L-cut 是默认动作，不是炫技。
-- **克制的版式。** 一屏只讲一个主张；字是排出来的，不是堆出来的。
-- **有出处的事实。** 每个事实主张能回链 research；宁可少说一件事，不说一件没根据的事。
-- **每 8–10 秒一次视觉变化。** 观众的注意力是租来的，租金按秒计。
+### 我们追求
 
-### 恨
+- **意义产生于并置。** 先问相邻镜头共同表达了什么，再问单镜够不够漂亮；剪辑点是第一表达手段。
+- **真实音频的呼吸。** 剪辑落在句读与节拍上，J-cut / L-cut 是默认语法，不是装饰技巧。
+- **克制而有主张的版式。** 一屏只讲一个重点，文字要被设计，不是被堆上去。
+- **可以回链的事实。** 每个事实主张都能追溯到 research；宁可少说，不拿未经核实的信息换密度。
+- **持续兑现注意力。** 通常每 8–10 秒发生一次有意义的视觉变化；变化服务叙事，不为动而动。
 
-- **幻灯片化。** 静帧 + 慢速 Ken Burns 冒充运动；用冻结帧补时长（直接判废，反模式零容忍）。
-- **转场遮丑。** "来源切换必加转场"是心虚；全片转场词汇 ≤ 4 种。
-- **模板味。** 出厂前自问"换个选题/产品名还成立吗？"——成立，就是没做够。
-- **AI 光泽的塑料感**不做质感缝合（统一 LUT + 共享颗粒）就出厂。
-- **无意图的运镜。** 动了，但说不出为什么动。
+### 我们拒绝
 
-### 宁可牺牲什么，保什么
+- **幻灯片伪装成视频。** 静帧加慢速 Ken Burns 不等于运动；冻结帧补时长直接判废。
+- **用转场遮掩剪辑。** 来源切换不必自动加特效；全片转场词汇保持克制且有语义。
+- **可以随意换题的模板味。** 如果替换产品名或选题后整条片仍然成立，说明导演工作还没做够。
+- **未经缝合的 AI 塑料感。** 多源素材必须通过 LUT、颗粒、构图和节奏建立同一世界。
+- **无意图的运镜。** 每个运动都要能回答“它让观众看见或感受到什么”。
 
-- 宁可**短**，不可**水**：60 秒讲不完就砍内容，不掺水。
-- 宁可信息密度降一档，保**节奏的呼吸**。
-- 宁可重做一个镜头，不放过一处**角色变脸 / 文字碎裂**。
-- 宁可 TTS 平实克制，不要过火的**表演腔**。
+### 牺牲顺序
+
+- 宁可短，不可水；内容装不下就砍，不用空话填时长。
+- 宁可降低一档信息密度，也要保住节奏与呼吸。
+- 宁可重做一个镜头，也不放过角色变脸、文字碎裂与关键动作失败。
+- 宁可 TTS 平实克制，也不要过火的表演腔。
