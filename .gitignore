@@ -5,11 +5,18 @@
 projects/**/shots/*result*.json
 projects/**/shots/*status*.json
 
-# 重媒体产物不进 git;留痕(film.json/md/prompt)与锚点图必须进
+# 重媒体产物不进 git;留痕(film.json/md/prompt)进。
+# 2026-07-24 用户拍板扩订:锚点/hero 图(png/jpg)与 woff2 字体也不进 git——
+# 均可再生(锚点按 film.json.gen 的 prompt 重出、字体按 review.md 记的命令重子集化),
+# 只保留文本 IR/配方层,进一步瘦身仓库。成片与媒体走 CDN + 本地归档(~/kuleshov-archive)。
 projects/**/*.mp4
 projects/**/*.mov
 projects/**/*.wav
 projects/**/*.mp3
+projects/**/*.png
+projects/**/*.jpg
+projects/**/*.jpeg
+projects/**/*.woff2
 node_modules/
 .DS_Store
 

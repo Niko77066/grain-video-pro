@@ -1,0 +1,53 @@
+{
+  "assets": [
+    {
+      "file": "footage/s05_skyline.mp4",
+      "shot": "s05_skyline",
+      "source": "https://www.pexels.com/video/aerial-footage-of-city-at-night-2248563/",
+      "license": "pexels",
+      "section": "sec02",
+      "desc": "城市夜景航拍泛景（定位空镜，无特定城市）",
+      "dur_s": 35.2
+    },
+    {
+      "file": "footage/s11_raid.mp4",
+      "shot": "s11_raid",
+      "source": "https://www.pexels.com/video/raccoon-eating-27027232/",
+      "license": "pexels",
+      "section": "sec03",
+      "desc": "真实浣熊进食特写（物种证据·非城市垃圾场景）",
+      "dur_s": 35.04
+    },
+    {
+      "file": "footage/s16_night.mp4",
+      "shot": "s16_night",
+      "source": "https://www.pexels.com/video/curious-raccoon-foraging-in-a-forest-clearing-32087341/",
+      "license": "pexels",
+      "section": "sec04",
+      "desc": "真实浣熊觅食走动（物种证据·林地非城市）",
+      "dur_s": 16.17
+    },
+    {
+      "file": "footage/s21_roof2.mp4",
+      "shot": "s21_roof2",
+      "source": "https://www.pexels.com/video/aerial-night-view-of-suburban-neighborhood-37445092/",
+      "license": "pexels",
+      "section": "sec05",
+      "desc": "郊区居民区屋顶夜景航拍（‘你家屋顶’落点空镜）",
+      "dur_s": 40.27
+    },
+    {
+      "file": "footage/s23_real.mp4",
+      "shot": "s23_real",
+      "source": "https://www.pexels.com/video/raccoons-eating-on-the-grass-7722724/",
+      "license": "pexels",
+      "section": "sec06",
+      "desc": "真实浣熊进食（收尾物种证据）",
+      "dur_s": 16.2
+    }
+  ],
+  "gaps": [
+    "城市浣熊翻垃圾桶/翻食的真实实拍：Pexels/Pixabay 库内无（浣熊素材皆林地/动物园）。按 footage 铁律未静默顶替：城市翻桶行为由像素 Seedance 镜(s03/s04/s14)承担；实拍位改用真浣熊进食/觅食作‘真实物种证据’，s21/s05 为城市/屋顶空镜。"
+  ],
+  "note": "5 段全 Pexels；一素材全片一次；compose 挂载留 0.8s 尾余量；统一 LUT+颗粒缝合。"
+}

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh" data-resolution="landscape" data-fps="30">
+<head><meta charset="UTF-8"><title>城市里的野生动物 EP01：浣熊 — Kuleshov</title>
+<script src="assets/gsap.min.js"></script>
+<script src="assets/captions_data.js"></script>
+<style>
+@font-face{font-family:"SansSC";font-weight:400;src:url("assets/fonts/sans-sc-400-cn.woff2") format("woff2");}
+@font-face{font-family:"SansSC";font-weight:700;src:url("assets/fonts/sans-sc-700-cn.woff2") format("woff2");}
+@font-face{font-family:"SerifSC";font-weight:700;src:url("assets/fonts/serif-sc-700-cn.woff2") format("woff2");}
+:root{--paper:#C9A876;--ink:#2B2118;--cream:#F5EAD0;--accent:#FFD21E;--gilt:#C9932B;--mark:#C0392B;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:1280px;height:720px;overflow:hidden;background:var(--ink);font-family:"SansSC",sans-serif;}
+#root{position:relative;width:1280px;height:720px;overflow:hidden;background:var(--ink);}
+.fullframe{position:absolute;inset:0;width:1280px;height:720px;object-fit:cover;z-index:1;}
+.real{filter:sepia(0.32) saturate(0.8) contrast(1.06) brightness(0.95);}
+.pix{filter:saturate(0.94) contrast(1.02);}
+.mg{position:absolute;inset:0;width:1280px;height:720px;background:var(--ink);overflow:hidden;opacity:0;z-index:2;}
+.mg .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.22;filter:saturate(0.8) contrast(1.05);}
+.mg .bgimg.strong{opacity:0.5;}
+.mg .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(43,33,24,0.4),rgba(43,33,24,0.86));}
+.mg .scrim.strong{background:radial-gradient(ellipse at center,rgba(43,33,24,0.55),rgba(43,33,24,0.9));}
+.ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;padding:0 90px;}
+.kick{font-family:"SansSC";font-weight:700;font-size:32px;color:var(--paper);letter-spacing:3px;}
+.huge{font-family:"SerifSC";font-weight:700;font-size:150px;color:var(--gilt);line-height:1;letter-spacing:2px;text-shadow:0 5px 0 rgba(0,0,0,0.22);}
+.huge .unit{font-size:70px;margin-left:8px;}
+.sub{font-family:"SansSC";font-weight:700;font-size:44px;color:var(--cream);}
+.sub .hl{color:var(--accent);}
+.accentbig{color:var(--accent)!important;}
+.rule{width:0;height:3px;background:var(--gilt);}
+.chap .chzh{font-family:"SerifSC";font-weight:700;font-size:172px;color:var(--cream);letter-spacing:12px;}
+.chap .chzh::before{content:"『";color:var(--gilt);}.chap .chzh::after{content:"』";color:var(--gilt);}
+.chap .chidx{font-family:"SansSC";font-weight:700;font-size:30px;color:var(--paper);letter-spacing:8px;}
+.chrule{width:0;height:3px;background:var(--gilt);margin-top:6px;}
+.chzh.title{font-size:96px;letter-spacing:8px;}
+.chzh.title::before,.chzh.title::after{content:"";}
+.ep{font-family:"SerifSC";font-weight:700;font-size:40px;color:var(--accent);letter-spacing:4px;}
+.cols{display:flex;align-items:center;justify-content:center;gap:60px;margin-top:10px;}
+.col{display:flex;flex-direction:column;align-items:center;gap:16px;}
+.collab{font-family:"SansSC";font-weight:700;font-size:34px;color:var(--cream);}
+.vs{font-family:"SerifSC";font-weight:700;font-size:40px;color:var(--paper);}
+.grid{display:grid;gap:8px;}
+.grid.sparse{grid-template-columns:repeat(2,1fr);}
+.grid.dense{grid-template-columns:repeat(5,1fr);}
+.fs,.fc{width:34px;height:34px;border-radius:6px;}
+.fs{background:var(--paper);} .fc{background:var(--accent);}
+.bars{display:flex;gap:80px;align-items:flex-end;height:280px;margin-top:8px;}
+.barwrap{display:flex;flex-direction:column;align-items:center;gap:12px;justify-content:flex-end;height:100%;}
+.bar{width:90px;height:200px;background:linear-gradient(180deg,var(--mark),var(--gilt));border-radius:8px 8px 0 0;}
+.barlab{font-family:"SansSC";font-weight:700;font-size:32px;color:var(--cream);}
+.barlab .r{color:var(--mark);}
+.foot{font-family:"SansSC";font-weight:400;font-size:26px;color:var(--paper);opacity:0.9;}
+.ring{border-radius:50%;border:6px solid var(--paper);}
+.ring.big{width:230px;height:230px;}
+.ring.tiny{width:34px;height:34px;border-color:var(--accent);background:var(--accent);}
+.arrow{font-size:70px;color:var(--mark);}
+.dgrid{display:grid;grid-template-columns:repeat(20,1fr);gap:6px;max-width:760px;margin:6px auto;}
+.dd{width:26px;height:26px;border-radius:5px;background:var(--gilt);}
+.dcount{display:flex;gap:44px;margin-top:14px;}
+.dc{font-family:"SerifSC";font-weight:700;font-size:44px;color:var(--cream);}
+.dc.r{color:var(--mark);}
+.box{font-family:"SansSC";font-weight:700;font-size:40px;color:var(--cream);border:3px solid var(--paper);border-radius:12px;padding:28px 40px;background:rgba(43,33,24,0.5);}
+.box.accent{border-color:var(--accent);color:var(--accent);}
+.echoline{font-family:"SerifSC";font-weight:700;font-size:64px;color:var(--cream);letter-spacing:2px;text-shadow:0 3px 12px rgba(0,0,0,0.8);}
+.echoline .ar{color:var(--accent);margin:0 18px;}
+.quote{font-family:"SerifSC";font-weight:700;font-size:74px;color:#fff;line-height:1.5;letter-spacing:2px;text-shadow:0 3px 16px rgba(0,0,0,0.85);}
+.logo{font-family:"SansSC";font-weight:700;font-size:36px;color:var(--accent);letter-spacing:6px;}
+.next{font-family:"SansSC";font-weight:400;font-size:28px;color:var(--paper);letter-spacing:3px;}
+.badge{position:absolute;opacity:0;z-index:3;}
+.badge.stamp{left:50%;top:52%;transform:translate(-50%,-50%) rotate(-8deg);font-family:"SerifSC";font-weight:700;font-size:130px;color:var(--mark);border:8px solid var(--mark);border-radius:16px;padding:6px 40px;background:rgba(245,234,208,0.14);text-shadow:0 2px 10px rgba(0,0,0,0.6);}
+#capbox{position:absolute;left:50%;transform:translateX(-50%);bottom:44px;max-width:1040px;z-index:5;display:inline-block;background:rgba(43,33,24,0.74);padding:9px 28px;border-radius:8px;font-family:"SerifSC";font-weight:700;color:#fff;font-size:36px;line-height:1.3;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,0.9);opacity:0;}
+#wm{position:absolute;left:44px;top:38px;z-index:6;font-family:"SansSC";font-weight:700;font-size:24px;color:var(--cream);opacity:0.5;letter-spacing:2px;}
+#wm .dot{color:var(--accent);}
+#lut{position:absolute;inset:0;pointer-events:none;z-index:7;background:linear-gradient(180deg,rgba(201,168,118,0.1),transparent 42%,rgba(43,33,24,0.18));mix-blend-mode:multiply;}
+#grain{position:absolute;inset:0;pointer-events:none;z-index:7;opacity:0.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+#vig{position:absolute;inset:0;pointer-events:none;z-index:8;box-shadow:inset 0 0 150px 10px rgba(43,33,24,0.42);}
+#fade{position:absolute;inset:0;z-index:10;background:#000;opacity:0;pointer-events:none;}
+</style></head>
+<body>
+<div id="root" data-composition-id="raccoon" data-width="1280" data-height="720" data-start="0" data-duration="170.98" data-fps="30">
+<audio id="vo" class="clip" src="assets/vo.mp3" data-start="0" data-duration="170.98" data-track-index="0" data-volume="1" data-has-audio="true"></audio>
+<audio id="bgm" class="clip" src="assets/bgm.mp3" data-start="0" data-duration="170.98" data-track-index="4" data-volume="0.2" data-has-audio="true"></audio>
+<video id="v_s03_pick" class="clip fullframe pix" src="assets/clips/g1_hook.mp4" muted playsinline data-start="11.45" data-duration="11.45" data-media-start="0.0" data-track-index="1"></video>
+<video id="v_s07_peek" class="clip fullframe pix" src="assets/clips/g2_peek.mp4" muted playsinline data-start="37.15" data-duration="6.57" data-media-start="0.0" data-track-index="1"></video>
+<video id="v_s09_wash" class="clip fullframe pix" src="assets/clips/g3_wash.mp4" muted playsinline data-start="49.72" data-duration="8.28" data-media-start="0.0" data-track-index="1"></video>
+<video id="v_s14_near" class="clip fullframe pix" src="assets/clips/g4_near.mp4" muted playsinline data-start="95.88" data-duration="8.54" data-media-start="0.0" data-track-index="1"></video>
+<video id="v_s17_roof" class="clip fullframe pix" src="assets/clips/g5_roof.mp4" muted playsinline data-start="118.30" data-duration="4.27" data-media-start="0.0" data-track-index="1"></video>
+<video id="v_s20_kits" class="clip fullframe pix" src="assets/clips/g6_kits.mp4" muted playsinline data-start="136.25" data-duration="7.81" data-media-start="0.0" data-track-index="1"></video>
+<video id="v_s05_skyline" class="clip fullframe real" src="assets/clips/s05_skyline.mp4" muted playsinline data-start="22.90" data-duration="7.67" data-media-start="1.0" data-track-index="1"></video>
+<video id="v_s11_raid" class="clip fullframe real" src="assets/clips/s11_raid.mp4" muted playsinline data-start="66.00" data-duration="7.00" data-media-start="2.0" data-track-index="1"></video>
+<video id="v_s16_night" class="clip fullframe real" src="assets/clips/s16_night.mp4" muted playsinline data-start="111.89" data-duration="6.41" data-media-start="1.0" data-track-index="1"></video>
+<video id="v_s21_roof2" class="clip fullframe real" src="assets/clips/s21_roof2.mp4" muted playsinline data-start="144.06" data-duration="7.82" data-media-start="2.0" data-track-index="1"></video>
+<video id="v_s23_real" class="clip fullframe real" src="assets/clips/s23_real.mp4" muted playsinline data-start="157.23" data-duration="6.87" data-media-start="1.0" data-track-index="1"></video>
+<div id="mg_s01_31m" class="mg" data-scene="1"><div class="ctr">
+  <div class="kick">多伦多市政</div>
+  <div class="huge" data-a="pop">$31,000,000</div>
+  <div class="sub">打造<b class="hl">「防浣熊」</b>垃圾桶</div><div class="rule" data-a="rule"></div></div></div>
+<div id="mg_s02_timer" class="mg" data-scene="1"><div class="ctr">
+  <div class="kick">监控回放 · 浣熊破解</div>
+  <div class="huge accentbig" data-a="pop">30<span class="unit">秒</span></div>
+  <div class="sub">锁，就开了</div></div></div>
+<div id="mg_s06_title" class="mg" data-scene="1"><img class="bgimg" src="assets/img/title_bg.png"><div class="scrim"></div>
+ <div class="ctr">
+  <div class="chzh title" data-a="fade">城市里的野生动物</div>
+  <div class="rule" data-a="rule"></div>
+  <div class="sub" data-a="fade2">它们怎么活下来的</div>
+  <div class="ep" data-a="fade2">第一集 · 浣熊</div></div></div>
+<div id="mg_s08_card1" class="mg" data-scene="1"><div class="ctr chap"><div class="chidx" data-a="fade2">第一章</div><div class="chzh" data-a="fade">吃</div><div class="chrule" data-a="rule"></div></div></div>
+<div id="mg_s10_buffet" class="mg" data-scene="1"><div class="ctr">
+  <div class="kick" data-a="fade">城市的食物密度，远高于树林</div>
+  <div class="cols">
+    <div class="col"><div class="grid sparse" data-a="col1"><i class="fs"></i><i class="fs"></i><i class="fs"></i><i class="fs"></i></div><div class="collab">树林</div></div>
+    <div class="vs">VS</div>
+    <div class="col"><div class="grid dense" data-a="col2"><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i><i class="fc"></i></div><div class="collab accentbig">城市餐桌</div></div>
+  </div></div></div>
+<div id="mg_s11b_bloodsugar" class="mg" data-scene="1"><div class="ctr">
+  <div class="kick" data-a="fade">代价 · 一项研究给城市浣熊验了血</div>
+  <div class="bars">
+    <div class="barwrap"><div class="bar" data-a="bar1"></div><div class="barlab">血糖 <b class="r">↑</b></div></div>
+    <div class="barwrap"><div class="bar" data-a="bar2"></div><div class="barlab">体重 <b class="r">↑</b></div></div>
+  </div>
+  <div class="foot" data-a="fade2">来源：《保护生理学》</div></div></div>
+<div id="mg_s12_card2" class="mg" data-scene="1"><div class="ctr chap"><div class="chidx" data-a="fade2">第二章</div><div class="chzh" data-a="fade">走</div><div class="chrule" data-a="rule"></div></div></div>
+<div id="mg_s13_range" class="mg" data-scene="1"><div class="ctr">
+  <div class="kick" data-a="fade">活动范围：城市浣熊根本不用跑</div>
+  <div class="cols rng">
+    <div class="col"><div class="ring big" data-a="ring1"></div><div class="collab">乡下 1–4 km²</div></div>
+    <div class="arrow" data-a="arr">➜</div>
+    <div class="col"><div class="ring tiny" data-a="ring2"></div><div class="collab accentbig">城市 &lt;0.1 km²</div></div>
+  </div></div></div>
+<div id="mg_s15_density" class="mg" data-scene="1"><div class="ctr">
+  <div class="kick" data-a="fade">每平方公里，浣熊数量</div>
+  <div class="dgrid" data-a="dg"><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i><i class="dd"></i></div>
+  <div class="dcount"><span class="dc" data-a="d1">乡下 5–10</span><span class="dc accentbig" data-a="d2">城市 100</span><span class="dc r" data-a="d3">局部 300+</span></div></div></div>
+<div id="mg_s18_card3" class="mg" data-scene="1"><div class="ctr chap"><div class="chidx" data-a="fade2">第三章</div><div class="chzh" data-a="fade">生</div><div class="chrule" data-a="rule"></div></div></div>
+<div id="mg_s19_den" class="mg" data-scene="1"><div class="ctr">
+  <div class="kick" data-a="fade">城里没有老树，就地取材</div>
+  <div class="cols">
+    <div class="col"><div class="box" data-a="b1">树洞</div><div class="collab">野外产房</div></div>
+    <div class="arrow" data-a="arr">➜</div>
+    <div class="col"><div class="box accent" data-a="b2">烟囱 · 阁楼</div><div class="collab accentbig">城市产房</div></div>
+  </div>
+  <div class="foot" data-a="fade2">交配 1–3 月 · 孕期约 63–65 天 · 一胎 3–5 崽</div></div></div>
+<div id="mg_s22_echo" class="mg" data-scene="1"><img class="bgimg strong" src="assets/img/echo.png"><div class="scrim"></div>
+ <div class="ctr">
+  <div class="kick" data-a="fade">它把我们造的东西，重读成了自己的森林</div>
+  <div class="echoline" data-a="e1">垃圾桶 <span class="ar">→</span> 果树</div>
+  <div class="echoline" data-a="e2">烟囱 <span class="ar">→</span> 树洞</div></div></div>
+<div id="mg_s24_end" class="mg" data-scene="1"><img class="bgimg" src="assets/img/end_bg.png"><div class="scrim strong"></div>
+ <div class="ctr">
+  <div class="quote" data-a="fade">垃圾桶成了果树，<br>烟囱成了树洞</div>
+  <div class="rule" data-a="rule"></div>
+  <div class="logo" data-a="fade2">城市里的野生动物</div>
+  <div class="next" data-a="fade2">下一集 · 换一个邻居</div></div></div>
+<div id="bd_wanbai" class="badge stamp">完败</div>
+<div id="capbox"></div>
+<div id="wm">城市里的野生动物 <span class="dot">·</span> EP01</div>
+<div id="lut"></div><div id="grain"></div><div id="vig"></div><div id="fade"></div>
+</div>
+<script>
+const tl = gsap.timeline({paused:true});
+tl.set("#mg_s01_31m",{opacity:1},0.00); tl.set("#mg_s01_31m",{opacity:0},5.72); tl.fromTo("#mg_s01_31m [data-a=pop]",{opacity:0,scale:1.18},{opacity:1,scale:1,duration:0.5,ease:"power3.out"},0.08); tl.fromTo("#mg_s01_31m [data-a=rule]",{width:0},{width:220,duration:0.5,ease:"power2.out"},0.35); {let o={v:0};tl.to(o,{v:31000000,duration:2.2,ease:"power1.out",onUpdate:()=>{const el=document.querySelector("#mg_s01_31m [data-a=pop]");if(el)el.textContent="$"+Math.round(o.v).toLocaleString("en-US");}},0.20);}
+tl.set("#mg_s02_timer",{opacity:1},5.72); tl.set("#mg_s02_timer",{opacity:0},11.45); tl.fromTo("#mg_s02_timer [data-a=pop]",{opacity:0,scale:1.18},{opacity:1,scale:1,duration:0.5,ease:"power3.out"},5.80); {let o={v:0};tl.to(o,{v:30,duration:2.4,ease:"power1.out",onUpdate:()=>{const el=document.querySelector("#mg_s02_timer [data-a=pop]");if(el)el.firstChild.textContent=Math.round(o.v);}},5.92);}
+tl.set("#mg_s06_title",{opacity:1},30.57); tl.set("#mg_s06_title",{opacity:0},37.15); tl.fromTo("#mg_s06_title [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},30.67); tl.fromTo("#mg_s06_title [data-a=fade2]",{opacity:0},{opacity:1,duration:0.5},31.07); tl.fromTo("#mg_s06_title [data-a=rule]",{width:0},{width:220,duration:0.5,ease:"power2.out"},30.92); tl.fromTo("#mg_s06_title .bgimg",{scale:1.08},{scale:1.0,duration:6.6,ease:"none"},30.57);
+tl.set("#mg_s08_card1",{opacity:1},43.72); tl.set("#mg_s08_card1",{opacity:0},49.72); tl.fromTo("#mg_s08_card1 [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},43.82); tl.fromTo("#mg_s08_card1 [data-a=fade2]",{opacity:0},{opacity:1,duration:0.5},44.22); tl.fromTo("#mg_s08_card1 [data-a=rule]",{width:0},{width:220,duration:0.5,ease:"power2.out"},44.07);
+tl.set("#mg_s10_buffet",{opacity:1},58.00); tl.set("#mg_s10_buffet",{opacity:0},66.00); tl.fromTo("#mg_s10_buffet [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},58.10); tl.fromTo("#mg_s10_buffet [data-a=col1] i",{opacity:0,scale:0},{opacity:1,scale:1,duration:0.3,stagger:0.28,ease:"back.out(2)"},58.80); tl.fromTo("#mg_s10_buffet [data-a=col2] i",{opacity:0,scale:0},{opacity:1,scale:1,duration:0.25,stagger:0.22,ease:"back.out(2)"},59.80);
+tl.set("#mg_s11b_bloodsugar",{opacity:1},73.00); tl.set("#mg_s11b_bloodsugar",{opacity:0},79.86); tl.fromTo("#mg_s11b_bloodsugar [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},73.10); tl.fromTo("#mg_s11b_bloodsugar [data-a=fade2]",{opacity:0},{opacity:1,duration:0.5},73.50); tl.fromTo("#mg_s11b_bloodsugar [data-a=bar1]",{scaleY:0},{scaleY:1,duration:2.4,ease:"power1.inOut",transformOrigin:"50% 100%"},73.60); tl.fromTo("#mg_s11b_bloodsugar [data-a=bar2]",{scaleY:0},{scaleY:1,duration:3.0,ease:"power1.inOut",transformOrigin:"50% 100%"},74.40); tl.fromTo("#mg_s11b_bloodsugar  .barlab .r",{opacity:0,y:8},{opacity:1,y:0,duration:0.4,stagger:0.5},77.20);
+tl.set("#mg_s12_card2",{opacity:1},79.86); tl.set("#mg_s12_card2",{opacity:0},86.27); tl.fromTo("#mg_s12_card2 [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},79.96); tl.fromTo("#mg_s12_card2 [data-a=fade2]",{opacity:0},{opacity:1,duration:0.5},80.36); tl.fromTo("#mg_s12_card2 [data-a=rule]",{width:0},{width:220,duration:0.5,ease:"power2.out"},80.21);
+tl.set("#mg_s13_range",{opacity:1},86.27); tl.set("#mg_s13_range",{opacity:0},95.88); tl.fromTo("#mg_s13_range [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},86.37); tl.fromTo("#mg_s13_range [data-a=ring1]",{opacity:0,scale:0.4},{opacity:1,scale:1,duration:1.0,ease:"power2.out"},86.77); tl.fromTo("#mg_s13_range [data-a=arr]",{opacity:0,x:-24},{opacity:1,x:0,duration:0.6},89.27); tl.fromTo("#mg_s13_range [data-a=ring2]",{opacity:0,scale:2.2},{opacity:1,scale:1,duration:0.7,ease:"power3.out"},90.67);
+tl.set("#mg_s15_density",{opacity:1},104.42); tl.set("#mg_s15_density",{opacity:0},111.89); tl.fromTo("#mg_s15_density [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},104.52); tl.fromTo("#mg_s15_density [data-a=dg] i",{opacity:0,scale:0.3},{opacity:1,scale:1,duration:0.12,stagger:0.085,ease:"back.out(1.6)"},104.92); tl.fromTo("#mg_s15_density [data-a=d1]",{opacity:0,y:12},{opacity:1,y:0,duration:0.35},105.62); tl.fromTo("#mg_s15_density [data-a=d2]",{opacity:0,y:12},{opacity:1,y:0,duration:0.35},107.82); tl.fromTo("#mg_s15_density [data-a=d3]",{opacity:0,y:12},{opacity:1,y:0,duration:0.35},109.62);
+tl.set("#mg_s18_card3",{opacity:1},122.57); tl.set("#mg_s18_card3",{opacity:0},128.43); tl.fromTo("#mg_s18_card3 [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},122.67); tl.fromTo("#mg_s18_card3 [data-a=fade2]",{opacity:0},{opacity:1,duration:0.5},123.07); tl.fromTo("#mg_s18_card3 [data-a=rule]",{width:0},{width:220,duration:0.5,ease:"power2.out"},122.92);
+tl.set("#mg_s19_den",{opacity:1},128.43); tl.set("#mg_s19_den",{opacity:0},136.25); tl.fromTo("#mg_s19_den [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},128.53); tl.fromTo("#mg_s19_den [data-a=fade2]",{opacity:0},{opacity:1,duration:0.5},128.93); tl.fromTo("#mg_s19_den [data-a=b1]",{opacity:0,x:-34},{opacity:1,x:0,duration:0.7,ease:"power2.out"},129.03); tl.fromTo("#mg_s19_den [data-a=arr]",{opacity:0,scale:0.4},{opacity:1,scale:1,duration:0.5},130.83); tl.fromTo("#mg_s19_den [data-a=b2]",{opacity:0,x:34},{opacity:1,x:0,duration:0.7,ease:"power2.out"},132.03); tl.fromTo("#mg_s19_den  .foot",{opacity:0},{opacity:0.9,duration:0.6},133.83);
+tl.set("#mg_s22_echo",{opacity:1},151.88); tl.set("#mg_s22_echo",{opacity:0},157.23); tl.fromTo("#mg_s22_echo [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},151.98); tl.fromTo("#mg_s22_echo [data-a=e1]",{opacity:0,x:-26},{opacity:1,x:0,duration:0.7,ease:"power2.out"},152.48); tl.fromTo("#mg_s22_echo [data-a=e2]",{opacity:0,x:-26},{opacity:1,x:0,duration:0.7,ease:"power2.out"},154.08); tl.fromTo("#mg_s22_echo  .bgimg",{scale:1.08},{scale:1.0,duration:5.3,ease:"none"},151.88);
+tl.set("#mg_s24_end",{opacity:1},164.10); tl.set("#mg_s24_end",{opacity:0},170.98); tl.fromTo("#mg_s24_end [data-a=fade]",{opacity:0,y:14},{opacity:1,y:0,duration:0.5,ease:"power2.out"},164.20); tl.fromTo("#mg_s24_end [data-a=fade2]",{opacity:0},{opacity:1,duration:0.5},164.60); tl.fromTo("#mg_s24_end [data-a=rule]",{width:0},{width:220,duration:0.5,ease:"power2.out"},164.45); tl.fromTo("#mg_s24_end .bgimg",{scale:1.08},{scale:1.0,duration:6.9,ease:"none"},164.10);
+tl.fromTo("#bd_wanbai",{opacity:0,scale:1.6,rotation:-8},{opacity:1,scale:1,rotation:-8,duration:0.35,ease:"back.out(2)"},19.77); tl.to("#bd_wanbai",{opacity:0,duration:0.3},22.70);
+const box = document.querySelector("#capbox");
+(window.__captions||[]).forEach((c)=>{ tl.to(box,{opacity:1,duration:0.08,onStart:()=>{box.textContent=c.text;}},c.start); tl.to(box,{opacity:0,duration:0.08},c.end); });
+tl.set(box,{opacity:0},170.93);
+tl.to("#fade",{opacity:1,duration:1.2,ease:"none"},169.68);
+window.__timelines = window.__timelines || {};
+window.__timelines["raccoon"] = tl;
+</script>
+</body></html>
