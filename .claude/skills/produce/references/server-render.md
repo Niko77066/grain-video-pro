@@ -28,7 +28,7 @@
 
 ```bash
 tools/render-remote.sh <compose目录> <输出.mp4> [version默认0.7.3] [quality默认high]
-# 前提：VPN 东京节点（出口 IP 13.158.136.168，脚本自查）+ .env 有 FFMPEG_RENDER_HTTP_TOKEN
+# 前提：环境提供 RENDER_URL（渲染机端点，如 http://<host>:7300/render/hyperframes）+ FFMPEG_RENDER_HTTP_TOKEN；无本机 IP 假设
 # 503=并发闸满（并发1），退避重试；422=composition 业务失败看 logTail
 ```
 

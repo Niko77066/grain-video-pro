@@ -1,40 +1,41 @@
 #!/usr/bin/env bash
-# 渲染机 HTTP 渲染：HyperFrames composition 目录 → MP4（服务端 GPU 渲染）。
-# 用法: tools/render-remote.sh <composition目录> <输出mp4> [hyperframesVersion] [quality]
-#   例:  tools/render-remote.sh projects/x/compose out/final_remote.mp4 0.7.3 high
-# 前提（缺一必失败，契约见 docs/render-http-api.md）：
-#   1) 出口 IP 必须是 13.158.136.168（VPN 东京节点）——脚本自查；
-#   2) .env 里有 FFMPEG_RENDER_HTTP_TOKEN（飞书环境变量表 ffmpeg-runner 段，生产值）；
-#   3) 素材走 CDN URL，不打进 tar（本地相对路径资产会 404）。
+# 渲染机 HTTP 渲染：HyperFrames composition 目录 → MP4（服务端渲染）。
+# 用法: RENDER_URL=<渲染机端点> tools/render-remote.sh <composition目录> <输出mp4> [hyperframesVersion] [quality]
+#   例:  RENDER_URL=http://<render-host>:7300/render/hyperframes \
+#         tools/render-remote.sh projects/x/compose out/final.mp4 0.7.3 high
+#
+# **渲染机地址由环境提供**——交付到开发环境时指向那边专门的渲染机；本脚本不假设任何特定
+# 出口 IP / 主机（去本机耦合 2026-07-24）。契约见 docs/render-http-api.md。
+# 前提：
+#   1) RENDER_URL 指向渲染机的 /render/hyperframes 端点（环境变量，必填）；
+#   2) FFMPEG_RENDER_HTTP_TOKEN 鉴权 token（环境变量，由环境/宿主注入）；
+#   3) 素材走 CDN URL，不打进 tar（本地相对路径资产会 404）；
+#      tar 上传器默认 tools/oss-upload.sh，可用 RENDER_UPLOAD_CMD 覆写成开发环境的上传方式。
 set -euo pipefail
 
 here="$(cd "$(dirname "$0")/.." && pwd)"
+# .env 存在就加载（本地开发用）；开发环境/宿主直接从进程环境注入，无需 .env。
 # shellcheck disable=SC1091
-source "$here/.env"
+[ -f "$here/.env" ] && source "$here/.env"
 
 dir="${1:?用法: render-remote.sh <composition目录> <输出mp4> [version] [quality]}"
 out="${2:?缺输出路径}"
 ver="${3:-0.7.3}"
 quality="${4:-high}"
-: "${FFMPEG_RENDER_HTTP_TOKEN:?缺 FFMPEG_RENDER_HTTP_TOKEN（见飞书环境变量表 ffmpeg-runner 段）}"
-
-RENDER_URL="http://34.212.107.38:7300/render/hyperframes"
-
-egress="$(curl -s -4 --max-time 8 https://api.ipify.org || true)"
-if [ "$egress" != "13.158.136.168" ]; then
-  echo "✗ 出口 IP=$egress ≠ 13.158.136.168 —— VPN 切东京节点后重试（安全组只放行该源 IP）" >&2
-  exit 1
-fi
+: "${RENDER_URL:?缺 RENDER_URL——设为开发环境渲染机的 /render/hyperframes 端点（如 http://<host>:7300/render/hyperframes）}"
+: "${FFMPEG_RENDER_HTTP_TOKEN:?缺 FFMPEG_RENDER_HTTP_TOKEN（渲染机鉴权 token，由环境注入）}"
 
 stamp="$(date +%Y%m%d-%H%M%S)"
 tarfile="$(mktemp -t render-project)-.tar.gz"
 tar -czf "$tarfile" -C "$dir" .
 key="kuleshov/render-jobs/${stamp}-$(basename "$dir").tar.gz"
-tar_url="$("$here/tools/oss-upload.sh" "$tarfile" "$key")"
+# tar 上传器：默认 oss-upload.sh（需 S3 凭据）；开发环境可 RENDER_UPLOAD_CMD 覆写。
+upload="${RENDER_UPLOAD_CMD:-$here/tools/oss-upload.sh}"
+tar_url="$("$upload" "$tarfile" "$key")"
 echo "· tar 已上传: $tar_url" >&2
 
 hdr="$(mktemp -t render-headers)"
-http_code=$(curl -s -4 --max-time 600 -X POST "$RENDER_URL" \
+http_code=$(curl -s --max-time 600 -X POST "$RENDER_URL" \
   -H "Authorization: Bearer $FFMPEG_RENDER_HTTP_TOKEN" \
   -H "Content-Type: application/json" \
   -d "{\"hyperframesVersion\":\"$ver\",\"projectTar\":{\"url\":\"$tar_url\"},\"quality\":\"$quality\"}" \

@@ -20,7 +20,7 @@
 | **可移植知识** | `styles/`（playbook + `contract.json`，含 whiteboard 兜底）、`.claude/skills/produce/`（SOP + `references/`）、`.claude/skills/rednote-mentor/`、`CLAUDE.md`、`docs/` | 核心资产，纯文本，任何 harness 直接消费 |
 | **可移植工具** | `film-ir/`（`kuleshov-ir` CLI + 门套件）、`tools/kuleshov-lint.py`、`tools/measure-render.py`、`tools/judge/`（去模型、无 key）、`tools/preflight.sh` | Python/CLI；依赖见下「前置」 |
 | **本地-dev / 自带-key** | `.env` 里的 provider key（见 `.env.example`）：TTS/音乐/Seedance/检索 | 本地跑通用；**交付给宿主时这些由宿主 provider 工具注入，容器内不持有** |
-| **⚠ 组织基建（不可移植）** | `tools/render-remote.sh`（焊死组织 VPN 出口 IP + 私有渲染机 + `FFMPEG_RENDER_HTTP_TOKEN`）、`tools/oss-upload.sh`（组织 S3） | 宿主用自己的渲染器/存储替代；渲染核本身是 HyperFrames（宿主侧同源） |
+| **可配置外部服务** | `tools/render-remote.sh`（渲染客户端：`RENDER_URL` 指向开发环境/宿主的渲染机，**无本机 IP 假设** + `FFMPEG_RENDER_HTTP_TOKEN`）；`tools/oss-upload.sh`（tar 上传，默认组织 S3，可 `RENDER_UPLOAD_CMD` 覆写） | 配好 `RENDER_URL` 即用；渲染核是 HyperFrames（宿主侧同源）。宿主也可用自己的渲染器直接替代 |
 | **宿主特定（Claude Code）** | `.claude/settings.json` 的 film.json 直写拦截 hook（只在 Claude Code 生效）、`.git/hooks/post-checkout` 的 `.env` 软链 | 可移植的等价保证 = 「`kuleshov-ir patch` 是 film.json 唯一合法写入口」这条契约 + CI 校验，不靠 hook |
 | **一次性示例（可弃）** | `projects/*`（已交付样片作参考；mp4/wav gitignored）。`projects/uk-argentina-feud/scripts/` = 死脚本（硬编码到已删 worktree，**非管线/非包的一部分**，见其 README） | 参考用；不是可复用能力 |
 
