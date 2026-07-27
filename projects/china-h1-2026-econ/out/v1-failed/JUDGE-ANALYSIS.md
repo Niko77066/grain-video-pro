@@ -8,7 +8,7 @@
 
 - **画面应当一致**：渲染是确定性的（Docker 固定镜像、无 `Math.random`/`Date.now`、无渲染期网络请求），composition 输入只回滚了 `ledger.decisions` d026 记录的那三处改动的**逆操作**（见 §3），素材文件、音轨、字体、时间轴全部未动。
 - **音频链路不同**：原始 v1 的响度处理走了「`loudnorm TP=-1` → 真峰越线 → `alimiter` → 再 `loudnorm TP=-2`」三步弯路；这份只走一次干净的 `loudnorm I=-14 TP=-2`。听感上应该更规整一点点，不影响评委看的任何东西（评委只拿静帧，本来就没听）。
-- **一致性验证**：见文末 §6——用 `measure-render.py` 复测，看能不能复现出评委抓到的那个数字。
+- **一致性验证**：见文末 §7——已复测通过，`hold_ratio` 与 s06 的 `static_hold_ratio=0.755` 与原始 v1 逐项一致。
 
 `compose-v1/index.html` 与交付版 `compose/index.html` 的差异是 **32 行**（`diff` 计数），全部落在那三处。
 
