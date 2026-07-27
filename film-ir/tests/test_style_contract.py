@@ -372,3 +372,55 @@ def test_shipped_contracts_have_no_dead_terms():
         assert not dead, f"{f.parent.name} 有无人执法的合同条目: {dead}"
         checked.append(f.parent.name)
     assert checked, "一个风格包都没扫到，路径大概错了"
+
+
+# ------------------------------------------------ 包级转场词汇上限
+
+ANCHOR_CONTRACT = {
+    "schema": "style-contract@1",
+    "style_pack": "anchor-desk",
+    "plan": {"transitions_max": {"value": 3, "amend": [2, 4]}},
+}
+
+
+def _with_transitions(*names) -> dict:
+    ir = _codex_hf_ir()
+    ir["meta"]["style_pack"] = "anchor-desk"
+    ir["edit"] = {"transitions": list(names)}
+    return ir
+
+
+def test_pack_transitions_within_limit(project):
+    """3 种 = 上限，放行。"""
+    ir, pdir = project(ANCHOR_CONTRACT,
+                       _with_transitions("hard_cut", "dip_to_navy", "gold_wipe"))
+    assert not _errors(run_gates(ir, project_dir=pdir), "style.contract.plan")
+
+
+def test_pack_transitions_over_limit_is_error(project):
+    """4 种：G1 通用门（≤4）放行，包级门（≤3）拦下——包比通用更严时必须拦得住。"""
+    ir, pdir = project(ANCHOR_CONTRACT,
+                       _with_transitions("hard_cut", "dip_to_navy", "gold_wipe",
+                                         "whip_pan"))
+    report = run_gates(ir, project_dir=pdir)
+    msgs = [x["message"] for x in _errors(report, "style.contract.plan")]
+    assert any("转场词汇 4 种" in m for m in msgs)
+    assert not _errors(report, "edit.transitions")     # 通用门确实没响
+
+
+def test_pack_transitions_amendment_within_band(project):
+    """带宽内放宽到 4：包级门让路，通用门仍然守着。"""
+    ir_dict = _with_transitions("hard_cut", "dip_to_navy", "gold_wipe", "whip_pan")
+    ir_dict["meta"]["contract_amendments"] = {"plan.transitions_max": 4}
+    ir, pdir = project(ANCHOR_CONTRACT, ir_dict)
+    assert not _errors(run_gates(ir, project_dir=pdir), "style.contract.plan")
+
+
+def test_pack_transitions_amendment_out_of_band_is_violation(project):
+    """越界放宽到 5：修改无效 + 违约，5 种转场仍被拦。"""
+    ir_dict = _with_transitions("a", "b", "c", "d", "e")
+    ir_dict["meta"]["contract_amendments"] = {"plan.transitions_max": 5}
+    ir, pdir = project(ANCHOR_CONTRACT, ir_dict)
+    report = run_gates(ir, project_dir=pdir)
+    assert _errors(report, "style.contract.amend")
+    assert _errors(report, "style.contract.plan")

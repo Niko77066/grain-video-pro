@@ -122,6 +122,7 @@ ENFORCED_TERMS: frozenset[str] = frozenset({
     "plan.traits.pixel_narrative.share_min",
     "plan.traits.ai_nonpixel_stylization.share_max",
     "plan.graphics_run_max_s",
+    "plan.transitions_max",
     "render.static_hold_ratio_max",
     "render.min_video_elements",
     "render.palette_drift_max",

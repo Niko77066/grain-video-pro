@@ -122,13 +122,12 @@
       "basis": "声明项：主播形象锚点（16:9 半身像）与 TTS 音色档固定配对，跨片跨期不换，两者生成参数全留痕。人设是栏目级资产。[molly 门未覆盖，暂由 playbook §1 + Judge 执法]"
     },
     "transitions_max": {
-      "enforced": false,
       "value": 3,
       "amend": [
         2,
         4
       ],
-      "basis": "声明项：hard_cut / dip_to_navy / gold_wipe。比 G1 通用上限 4 更严——播报体靠硬切的干脆，不靠转场。[molly 只查通用上限 4，本包这条暂由 Judge 执法]"
+      "basis": "hard_cut / dip_to_navy / gold_wipe。比 G1 通用上限 4 更严——播报体靠硬切的干脆，不靠转场。**机器执法：film-ir style.contract.plan（storyboard 起，数 edit.transitions 的词汇种数）**。带宽下限 2 = 硬切 + 一种章节闸门；上限 4 = 退回 G1 通用上限，不得再松。"
     }
   },
   "render": {

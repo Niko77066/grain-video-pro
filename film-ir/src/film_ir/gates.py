@@ -387,6 +387,17 @@ def style_contract_plan(ir: FilmIR, ctx: GateContext | None = None) -> list[Viol
                     v.append(_err("style.contract.plan", "plan.traits.ai_nonpixel_stylization",
                                   f"AI 风格化非像素份额 {dur / total:.0%} > 上限 {share_max:.0%}"))
 
+    # 转场词汇种数：包级上限（只在比 G1 通用上限更严时才写）。单位与
+    # edit_transitions 一致——数的是**词汇种数**不是出现次数。本门在 storyboard
+    # 就跑，比 compose 阶段的通用门早：转场词汇是剪辑语法的事前承诺，
+    # 不该等到剪完才发现超编。
+    tr_max = _eff(c, "plan.transitions_max", amendments, v)
+    if tr_max is not None and len(ir.edit.transitions) > tr_max:
+        v.append(_err("style.contract.plan", "edit.transitions",
+                      f"转场词汇 {len(ir.edit.transitions)} 种 > 本包上限 "
+                      f"{tr_max:g}（G1 通用上限 {TRANSITIONS_MAX}，本包更严）",
+                      evidence=", ".join(ir.edit.transitions)))
+
     # 声明型图形连续时长（MG 段与实拍段交替的可码判投影）
     if plan.get("graphics_run_max_s"):
         run_max = _eff(c, "plan.graphics_run_max_s", amendments, v)
