@@ -107,14 +107,17 @@
       "basis": "声明型图形（hyperframes + image_motion）连续时长上限——防『连着看三张卡』。实证片最长连续段 **10.61s**（s12 静帧特写 2.57 + s13 产量条 4.70 + s14 转折卡 3.34），已经贴着上限，是这条片子最该改进的一处节奏问题：静帧特写紧接两张全屏卡，中间缺一次实拍换气。11.0 是照实证片现状定的，**不是理想值**；第二片应当把它压到 8–9s 区间并回填带宽。[单片标定]"
     },
     "no_panel_chrome": {
+      "enforced": false,
       "value": 1,
       "basis": "🔴 一票否决：压在画面上的数据卡/角标/数据条/字幕**禁带 background + border + box-shadow 的浮动面板**。可读性只准由『渐变到透明的压暗层 + 多层 text-shadow 等效描边 + 字重留白』承担。唯一豁免是角标级信息，且须在 CSS 写 /* lint-allow-panel: 理由 */。**机器执法：tools/kuleshov-lint.py ④**。宪法出处：CLAUDE.md 品味宪法「我们拒绝 · 压在画面上的组件底板」（2026-07-27 用户拍板）。"
     },
     "caption_no_punctuation": {
+      "enforced": false,
       "value": 1,
       "basis": "🔴 一票否决：字幕不许带任何标点符号。句末标点删除、句中停顿换全角空格；切分仍用标点，只在渲染层剥离。**机器执法：tools/kuleshov-lint.py ⑤**。宪法出处：CLAUDE.md 品味宪法「我们拒绝 · 带标点的字幕」（2026-07-27 用户拍板）。"
     },
     "anchor_persona_locked": {
+      "enforced": false,
       "value": 1,
       "basis": "声明项：主播形象锚点（16:9 半身像）与 TTS 音色档固定配对，跨片跨期不换，两者生成参数全留痕。人设是栏目级资产。[molly 门未覆盖，暂由 playbook §1 + Judge 执法]"
     },
@@ -124,7 +127,7 @@
         2,
         4
       ],
-      "basis": "声明项：hard_cut / dip_to_navy / gold_wipe。比 G1 通用上限 4 更严——播报体靠硬切的干脆，不靠转场。[molly 只查通用上限 4，本包这条暂由 Judge 执法]"
+      "basis": "hard_cut / dip_to_navy / gold_wipe。比 G1 通用上限 4 更严——播报体靠硬切的干脆，不靠转场。**机器执法：film-ir style.contract.plan（storyboard 起，数 edit.transitions 的词汇种数）**。带宽下限 2 = 硬切 + 一种章节闸门；上限 4 = 退回 G1 通用上限，不得再松。"
     }
   },
   "render": {

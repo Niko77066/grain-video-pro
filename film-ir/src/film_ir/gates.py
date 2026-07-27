@@ -23,6 +23,20 @@ GROUP_MAX_S = 15.0     # Seedance 单次生成上限
 GROUP_MAX_SHOTS = 5
 STATIC_RUN_MAX = 2     # 静态类连续镜头上限（幻灯片风险）
 TRANSITIONS_MAX = 4    # 全片转场词汇上限（品味宪法）
+
+# m0 历史片：**只有这些门追溯适用**，其余降 warn。
+#
+# 为什么要有这张表：m0-v1 的片子是上一套 harness 下做完并验收的，IR 从未迁到
+# m1。它们现在报的 error 绝大多数不是片子的问题，是 IR 没建模当年不存在的
+# 概念——timeline.sections 没记过、shot_groups 是 m1 才有的、章节黑场的时长
+# 不进镜头区间、终渲证据在别的仓里。为了让旧片好看而放宽门是错的；补造当年
+# 不存在的数据当留痕更错（铁律 2）。所以：承认它们是 m0 产物，不参与当前门禁。
+#
+# slides.risk 例外，因为它不是建模缺口：hf-breach 事故的核心争议正是"版式卡
+# 属本征静态所以不算幻灯片"这个自我豁免，事后被判定为成因之一、门也因此收紧。
+# 让它继续对 m0 片报 error，是门追认当年的判断，不是误伤。
+M0_RETROACTIVE_GATES = frozenset({"slides.risk"})
+M0_NOTE = "（m0 历史片：本门在 m0 时代不存在或依赖 m0 未建模的字段，降为 warn）"
 VISUAL_CHANGE_MAX_S = 10.5  # 每 8–10s 一次视觉变化的可码判上界
 
 _STAGE_INDEX = {s: i for i, s in enumerate(STAGES)}
@@ -303,6 +317,17 @@ def style_contract_plan(ir: FilmIR, ctx: GateContext | None = None) -> list[Viol
     for k in _contract.unknown_amendments(c, amendments):
         v.append(_err("style.contract.amend", f"meta.contract_amendments[{k}]",
                       f"修改指向不存在/不可调的合同条目: {k}"))
+    # 装饰条款体检：合同是机器硬门，没有执法点的条目会被静默忽略，
+    # 让人以为门在那儿。挡在 storyboard（花钱之前），不等到 review。
+    dead, declared = _contract.unenforced_terms(c)
+    for k in dead:
+        v.append(_err("style.contract.schema", f"contract.{k}",
+                      f"合同条目无人执法: {k}——校验器不读这个键，它是装饰品。"
+                      "要么在 gates.py 补执法点并登记进 contract.ENFORCED_TERMS，"
+                      '要么显式写 "enforced": false（降 warn，交 Judge 兜底）'))
+    for k in declared:
+        v.append(_warn("style.contract.schema", f"contract.{k}",
+                       f"合同校验器不执法: {k}——归属见该条目 basis（lint / Judge / 人工）"))
     plan = c.get("plan") or {}
     shots = sorted(ir.shots, key=lambda s: s.t[0])
     total = ir.audio.timeline.duration_s if ir.audio.timeline else None
@@ -376,6 +401,17 @@ def style_contract_plan(ir: FilmIR, ctx: GateContext | None = None) -> list[Viol
                     v.append(_err("style.contract.plan", "plan.traits.ai_nonpixel_stylization",
                                   f"AI 风格化非像素份额 {dur / total:.0%} > 上限 {share_max:.0%}"))
 
+    # 转场词汇种数：包级上限（只在比 G1 通用上限更严时才写）。单位与
+    # edit_transitions 一致——数的是**词汇种数**不是出现次数。本门在 storyboard
+    # 就跑，比 compose 阶段的通用门早：转场词汇是剪辑语法的事前承诺，
+    # 不该等到剪完才发现超编。
+    tr_max = _eff(c, "plan.transitions_max", amendments, v)
+    if tr_max is not None and len(ir.edit.transitions) > tr_max:
+        v.append(_err("style.contract.plan", "edit.transitions",
+                      f"转场词汇 {len(ir.edit.transitions)} 种 > 本包上限 "
+                      f"{tr_max:g}（G1 通用上限 {TRANSITIONS_MAX}，本包更严）",
+                      evidence=", ".join(ir.edit.transitions)))
+
     # 声明型图形连续时长（MG 段与实拍段交替的可码判投影）
     if plan.get("graphics_run_max_s"):
         run_max = _eff(c, "plan.graphics_run_max_s", amendments, v)
@@ -422,6 +458,28 @@ def style_contract_render(ir: FilmIR, ctx: GateContext | None = None) -> list[Vi
         v.append(_err("style.contract.render", "evidence.compose.video_elements",
                       f"compose 内 <video> 共 {n_video} 个 < 下限 {video_min:g}"
                       "——烘焙声部无物理存在"))
+
+    # 跨镜头主色漂移：风格包立身之本是跨镜头一致性，而在此之前合同一条跨镜头
+    # 的门都表达不了（docs/todo-from-ac-experiment.md P1）。drift = 某镜主色直方图
+    # 到其余各镜的平均距离；超上限 = 这一镜没被缝进全片那个世界。
+    drift_max = _eff(c, "render.palette_drift_max", amendments, v)
+    if drift_max is not None:
+        pal = ev.get("palette") or {}
+        if not pal:
+            v.append(_warn("style.contract.render", "evidence.palette",
+                           "证据无 palette 段（measure-render 早于主色漂移指标）"
+                           "——重跑 tools/measure-render.py 才能执行此门"))
+        elif not pal.get("measurable"):
+            v.append(_warn("style.contract.render", "evidence.palette",
+                           f"主色漂移不可测：{pal.get('reason', '未说明')}"))
+        elif pal.get("max_drift") is not None and pal["max_drift"] > drift_max:
+            outliers = " ".join(o["id"] for o in pal.get("outlier_shots") or [])
+            v.append(_err("style.contract.render", "evidence.palette.max_drift",
+                          f"最离群镜 {pal.get('max_drift_shot')} 主色漂移 "
+                          f"{pal['max_drift']:.3f} > 上限 {drift_max:g}"
+                          "——该镜未缝进全片的世界（LUT/颗粒/配色统一失败）",
+                          evidence=f"outliers=[{outliers}] "
+                                   f"var={pal.get('pairwise_distance_var')}"))
 
     # 自报 static_class=false 但实测判静的镜头（Goodhart 的直接解毒剂）
     measured = {p.get("id"): p for p in static.get("per_shot") or []}
@@ -487,9 +545,22 @@ def run_gates(ir: FilmIR, stage: str | None = None,
             if _STAGE_INDEX[from_stage] <= idx:
                 ran.append(fn.__name__)
                 violations.extend(fn(ir, ctx))
+    downgraded = 0
+    if (ir.meta.pipeline_version or "").startswith("m0"):
+        kept = []
+        for x in violations:
+            if x.severity == "error" and x.gate not in M0_RETROACTIVE_GATES:
+                kept.append(Violation(x.gate, "warn", x.path,
+                                      x.message + M0_NOTE, x.evidence))
+                downgraded += 1
+            else:
+                kept.append(x)
+        violations = kept
     errors = [x for x in violations if x.severity == "error"]
     warns = [x for x in violations if x.severity == "warn"]
-    return {
+    # legacy_downgraded 必须出现在摘要里：m0 片降级后 ok=true / errors=0 与
+    # 真正干净的片子长得一模一样，不摆出这个数字就是又一次静默降级。
+    report = {
         "ok": not errors,
         "stage": stage,
         "gates_ran": ran,
@@ -497,3 +568,10 @@ def run_gates(ir: FilmIR, stage: str | None = None,
         "warnings": len(warns),
         "violations": [x.to_dict() for x in violations],
     }
+    if downgraded:
+        report["legacy_downgraded"] = downgraded
+        report["legacy_note"] = (
+            f"m0 历史片：{downgraded} 条 error 已降为 warn（本片不参与当前门禁，"
+            f"追溯适用的门：{', '.join(sorted(M0_RETROACTIVE_GATES))}）。"
+            "ok=true 不等于按当前标准通过。")
+    return report

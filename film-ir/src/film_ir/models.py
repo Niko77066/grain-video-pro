@@ -59,7 +59,9 @@ class Meta(IRModel):
     aspect: str = "16:9"
     audience: Optional[str] = None
     budget: Budget = Field(default_factory=Budget)
-    pipeline_version: str = "m0-v1"      # 生产工艺版本
+    # 默认必须是**当前**工艺版本：gates 对 m0 历史片降级执法，缺省值若是 m0
+    # 就等于"不写这个字段 = 免检"——门失守要靠 fail-closed，不靠人记得填。
+    pipeline_version: str = "m1-v2"      # 生产工艺版本
     schema_version: str = SCHEMA_VERSION  # 数据格式版本（与工艺版本分离）
     status: MetaStatus = "brief"
     # 风格合同带宽内调整：{"<合同dotted路径>": 数值}，经 ir patch 写入（自动留痕）。

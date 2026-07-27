@@ -194,14 +194,24 @@ def test_graphics_run_over_limit(project):
 
 # ---------------------------------------------------------------- render 门
 
-def _evidence(hold_ratio=0.75, video_elements=0, per_shot=None) -> dict:
-    return {
+def _evidence(hold_ratio=0.75, video_elements=0, per_shot=None,
+              palette=None) -> dict:
+    ev = {
         "schema": "render-metrics@1",
         "video": {"duration_s": 72.0},
         "static": {"hold_ratio": hold_ratio, "hold_total_s": hold_ratio * 72,
                    "per_shot": per_shot or []},
         "compose": {"video_elements": video_elements},
     }
+    if palette is not None:
+        ev["palette"] = palette
+    return ev
+
+
+def _palette(max_drift, shot_id="s07") -> dict:
+    return {"measurable": True, "max_drift": max_drift, "max_drift_shot": shot_id,
+            "pairwise_distance_var": 0.044, "drift_median": 0.33,
+            "outlier_shots": [{"id": shot_id, "drift": max_drift}]}
 
 
 def test_render_evidence_missing_is_error_in_review(project):
@@ -230,6 +240,73 @@ def test_render_polished_shape_passes(project):
     assert not _errors(report, "style.contract.render")
 
 
+# ------------------------------------------------- render 门 · 跨镜头主色漂移
+
+def _palette_contract(value=0.8, amend=(0.72, 0.88)) -> dict:
+    c = json.loads(json.dumps(CASE_FILE_CONTRACT))
+    c["render"]["palette_drift_max"] = {"value": value, "amend": list(amend)}
+    return c
+
+
+def test_palette_green_anchor_passes(project):
+    """浣熊片实测绿锚 0.691（delivered / G2 缝合 4-5）不得被回溯判红。
+
+    该镜是夜戏声部与琥珀编年史世界的合理色温差，不是缝合失败。
+    """
+    ir, pdir = project(_palette_contract(), _codex_hf_ir(status="review"),
+                       evidence=_evidence(0.52, 4, palette=_palette(0.6914)))
+    assert not _errors(run_gates(ir, project_dir=pdir), "style.contract.render")
+
+
+def test_palette_red_anchor_fails(project):
+    """负对照红锚 0.974：把另一部片（蓝调新闻棚）未调色镜头切进浣熊时间轴。"""
+    ir, pdir = project(_palette_contract(), _codex_hf_ir(status="review"),
+                       evidence=_evidence(0.52, 4,
+                                          palette=_palette(0.9737, "s17_roof")))
+    msgs = [x["message"] for x in
+            _errors(run_gates(ir, project_dir=pdir), "style.contract.render")]
+    assert any("主色漂移" in m and "s17_roof" in m for m in msgs)
+
+
+def test_palette_red_anchor_still_red_at_amend_ceiling(project):
+    """带宽顶 0.88 仍挡得住红锚——basis 里的这句承诺是可回归的。"""
+    ir_dict = _codex_hf_ir(status="review")
+    ir_dict["meta"]["contract_amendments"] = {"render.palette_drift_max": 0.88}
+    ir, pdir = project(_palette_contract(), ir_dict,
+                       evidence=_evidence(0.52, 4, palette=_palette(0.9737)))
+    assert _errors(run_gates(ir, project_dir=pdir), "style.contract.render")
+
+
+def test_palette_missing_in_legacy_evidence_is_warn(project):
+    """早于本指标的证据文件没有 palette 段：提示重跑，不误判违约。"""
+    ir, pdir = project(_palette_contract(), _codex_hf_ir(status="review"),
+                       evidence=_evidence(0.52, 4))
+    report = run_gates(ir, project_dir=pdir)
+    assert not _errors(report, "style.contract.render")
+    assert any(x["severity"] == "warn" and "palette" in x["path"]
+               for x in report["violations"])
+
+
+def test_palette_unmeasurable_is_warn(project):
+    """单镜片/空帧流的跨镜头指标无定义——降 warn，不假装能判。"""
+    ir, pdir = project(
+        _palette_contract(), _codex_hf_ir(status="review"),
+        evidence=_evidence(0.52, 4,
+                           palette={"measurable": False, "reason": "镜头数 <2"}))
+    report = run_gates(ir, project_dir=pdir)
+    assert not _errors(report, "style.contract.render")
+    assert any(x["severity"] == "warn" and "不可测" in x["message"]
+               for x in report["violations"])
+
+
+def test_palette_term_absent_skips_gate(project):
+    """未写此条目的合同（尚未标定的包）不受此门约束，也不因缺证据报错。"""
+    ir, pdir = project(CASE_FILE_CONTRACT, _codex_hf_ir(status="review"),
+                       evidence=_evidence(0.52, 4))
+    report = run_gates(ir, project_dir=pdir)
+    assert not any("palette" in x["path"] for x in report["violations"])
+
+
 def test_no_contract_pack_skips(project, tmp_path):
     """无合同的风格包不受此门约束。"""
     ir_dict = _codex_hf_ir()
@@ -238,3 +315,189 @@ def test_no_contract_pack_skips(project, tmp_path):
     report = run_gates(ir, project_dir=pdir)
     assert not [x for x in report["violations"]
                 if x["gate"].startswith("style.contract")]
+
+
+# ---------------------------------------------------------------- schema 门
+
+def test_unenforced_term_is_error(project):
+    """合同写了校验器不读的阈值条目：报 error，不静默忽略。
+
+    真实病灶：2026-07-27 风格包生成实验里，两份合成合同一共写了 26 条
+    render 门，校验器实际执法 1 条——其余全被静默吞掉，看起来却像有门。
+    """
+    contract = json.loads(json.dumps(CASE_FILE_CONTRACT))
+    contract["render"]["motion_source_share_min"] = {"value": 0.5,
+                                                     "amend": [0.44, 0.56]}
+    ir, pdir = project(contract, _codex_hf_ir())
+    msgs = [x["message"] for x in _errors(run_gates(ir, project_dir=pdir),
+                                          "style.contract.schema")]
+    assert any("render.motion_source_share_min" in m for m in msgs)
+
+
+def test_declared_unenforced_term_is_warn(project):
+    """自称 enforced:false 的条目降 warn——声明性条款合法，装饰品不合法。"""
+    contract = json.loads(json.dumps(CASE_FILE_CONTRACT))
+    contract["plan"]["visual_handle_declared"] = {"value": 1, "amend": [1, 1],
+                                                  "enforced": False}
+    ir, pdir = project(contract, _codex_hf_ir())
+    report = run_gates(ir, project_dir=pdir)
+    assert not _errors(report, "style.contract.schema")
+    assert any(x["gate"] == "style.contract.schema" and x["severity"] == "warn"
+               and "visual_handle_declared" in x["message"]
+               for x in report["violations"])
+
+
+def test_prose_fields_are_not_terms(project):
+    """basis / role / providers 是散文与配置，不是阈值条目，不该被误报。"""
+    contract = json.loads(json.dumps(CASE_FILE_CONTRACT))
+    contract["plan"]["voices"]["document"]["note"] = "文件实证声部"
+    contract["render"]["static_hold_ratio_max"]["basis"] = "实测 0.619 绿 / 0.747 红"
+    ir, pdir = project(contract, _codex_hf_ir())
+    assert not _errors(run_gates(ir, project_dir=pdir), "style.contract.schema")
+
+
+def test_shipped_contracts_have_no_dead_terms():
+    """三个出厂风格包不得有装饰条款——本门的回归锚。"""
+    from pathlib import Path
+
+    from film_ir import contract as _c
+
+    styles = Path(__file__).resolve().parents[2] / "styles"
+    checked = []
+    for f in sorted(styles.glob("*/contract.json")):
+        data = json.loads(f.read_text(encoding="utf-8"))
+        if data.get("schema") != _c.SCHEMA:
+            continue
+        dead, _ = _c.unenforced_terms(data)
+        assert not dead, f"{f.parent.name} 有无人执法的合同条目: {dead}"
+        checked.append(f.parent.name)
+    assert checked, "一个风格包都没扫到，路径大概错了"
+
+
+# ------------------------------------------------ 包级转场词汇上限
+
+ANCHOR_CONTRACT = {
+    "schema": "style-contract@1",
+    "style_pack": "anchor-desk",
+    "plan": {"transitions_max": {"value": 3, "amend": [2, 4]}},
+}
+
+
+def _with_transitions(*names) -> dict:
+    ir = _codex_hf_ir()
+    ir["meta"]["style_pack"] = "anchor-desk"
+    ir["edit"] = {"transitions": list(names)}
+    return ir
+
+
+def test_pack_transitions_within_limit(project):
+    """3 种 = 上限，放行。"""
+    ir, pdir = project(ANCHOR_CONTRACT,
+                       _with_transitions("hard_cut", "dip_to_navy", "gold_wipe"))
+    assert not _errors(run_gates(ir, project_dir=pdir), "style.contract.plan")
+
+
+def test_pack_transitions_over_limit_is_error(project):
+    """4 种：G1 通用门（≤4）放行，包级门（≤3）拦下——包比通用更严时必须拦得住。"""
+    ir, pdir = project(ANCHOR_CONTRACT,
+                       _with_transitions("hard_cut", "dip_to_navy", "gold_wipe",
+                                         "whip_pan"))
+    report = run_gates(ir, project_dir=pdir)
+    msgs = [x["message"] for x in _errors(report, "style.contract.plan")]
+    assert any("转场词汇 4 种" in m for m in msgs)
+    assert not _errors(report, "edit.transitions")     # 通用门确实没响
+
+
+def test_pack_transitions_amendment_within_band(project):
+    """带宽内放宽到 4：包级门让路，通用门仍然守着。"""
+    ir_dict = _with_transitions("hard_cut", "dip_to_navy", "gold_wipe", "whip_pan")
+    ir_dict["meta"]["contract_amendments"] = {"plan.transitions_max": 4}
+    ir, pdir = project(ANCHOR_CONTRACT, ir_dict)
+    assert not _errors(run_gates(ir, project_dir=pdir), "style.contract.plan")
+
+
+def test_pack_transitions_amendment_out_of_band_is_violation(project):
+    """越界放宽到 5：修改无效 + 违约，5 种转场仍被拦。"""
+    ir_dict = _with_transitions("a", "b", "c", "d", "e")
+    ir_dict["meta"]["contract_amendments"] = {"plan.transitions_max": 5}
+    ir, pdir = project(ANCHOR_CONTRACT, ir_dict)
+    report = run_gates(ir, project_dir=pdir)
+    assert _errors(report, "style.contract.amend")
+    assert _errors(report, "style.contract.plan")
+
+
+# ------------------------------------------------ m0 历史片降级
+
+def _m0(ir_dict: dict) -> dict:
+    ir_dict["meta"]["pipeline_version"] = "m0-v1"
+    return ir_dict
+
+
+def test_m0_downgrades_contract_errors_to_warn(project):
+    """m0 历史片：合同门的 error 降 warn 并带注明——不为旧片放宽门，也不判它违约。"""
+    ir, pdir = project(CASE_FILE_CONTRACT, _m0(_codex_hf_ir()))
+    report = run_gates(ir, project_dir=pdir)
+    assert not _errors(report, "style.contract.plan")
+    downgraded = [x for x in report["violations"] if "m0 历史片" in x["message"]]
+    assert downgraded, "合同门的 error 应被降级并带注明"
+
+
+def test_m1_keeps_contract_errors(project):
+    """同一份 IR 标 m1：照旧报 error。降级只对 m0 生效。"""
+    ir, pdir = project(CASE_FILE_CONTRACT, _codex_hf_ir())
+    assert _errors(run_gates(ir, project_dir=pdir), "style.contract.plan")
+
+
+def test_m0_still_errors_on_retroactive_gate(project):
+    """slides.risk 追溯适用：m0 片一样报 error。
+
+    hf-breach 事故的核心争议就是「版式卡属本征静态所以不算幻灯片」这个自我
+    豁免，事后被推翻。让它继续对 m0 片报 error 是门追认当年的判断。
+    """
+    ir_dict = _m0(_codex_hf_ir())
+    for s in ir_dict["shots"]:
+        s["static_class"] = True                     # 12 镜全静，必然超连跑上限
+    ir, pdir = project(CASE_FILE_CONTRACT, ir_dict)
+    assert _errors(run_gates(ir, project_dir=pdir), "slides.risk")
+
+
+def test_missing_pipeline_version_is_not_exempt(project):
+    """不写 pipeline_version 不等于免检——缺省值必须是当前工艺版本（fail-closed）。"""
+    ir_dict = _codex_hf_ir()
+    ir_dict["meta"].pop("pipeline_version", None)
+    ir, pdir = project(CASE_FILE_CONTRACT, ir_dict)
+    assert _errors(run_gates(ir, project_dir=pdir), "style.contract.plan")
+
+
+def test_m0_downgrade_is_reported_in_summary(project):
+    """降级必须出现在摘要里——否则 ok=true 与真正干净的片子无法区分。"""
+    ir, pdir = project(CASE_FILE_CONTRACT, _m0(_codex_hf_ir()))
+    report = run_gates(ir, project_dir=pdir)
+    assert report["legacy_downgraded"] > 0
+    assert "不等于按当前标准通过" in report["legacy_note"]
+
+
+def test_clean_m1_report_has_no_legacy_keys(project):
+    """m1 片的报告里不许出现 legacy_* 字段，免得读的人以为哪里被放行了。"""
+    ir_dict = _codex_hf_ir()
+    for i in (2, 5, 8):
+        ir_dict["shots"][i]["source"] = {"provider": "collage_broll"}
+    ir_dict["shots"][0]["source"]["params"] = {"voice": "document"}
+    ir, pdir = project(CASE_FILE_CONTRACT, ir_dict)
+    report = run_gates(ir, project_dir=pdir)
+    assert "legacy_downgraded" not in report and "legacy_note" not in report
+
+
+def test_pipeline_version_is_gated_against_self_exemption(project):
+    """m1 片不能把自己 patch 成 m0 来免检——meta.pipeline_version 是门控字段。"""
+    from film_ir.errors import IRError
+    from film_ir.patch import apply_patch
+
+    ir_dict = _codex_hf_ir()
+    try:
+        apply_patch(ir_dict, [{"op": "set", "path": "meta.pipeline_version",
+                               "value": "m0-v1"}])
+    except IRError as exc:
+        assert "pipeline_version" in str(exc)
+    else:
+        raise AssertionError("自我豁免通道敞着：pipeline_version 被改成了 m0-v1")

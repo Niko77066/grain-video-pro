@@ -31,7 +31,7 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 - `styles/` — 风格包与**三层路由层**：`case-file`（事实核验型新闻解读）、`pixel-chronicle`（结构化深度知识叙事）、`anchor-desk`（官方口径播报型解读，候选）三套专用包 + `whiteboard-generalist` 生产兜底模板；`routing.md`（路由规程）、`routing-vocab.json`（受控词表）、`routing-cases.json`（路由回归考卷 15 条）、`golden-set.json`（Golden 登记册：路径 + 实测规格 + known_defects，成片在 `~/kuleshov-archive/golden/` 不入库）、各包 `capability.json`（结构化能力卡），以及模板、禁用区和进化规程
 - `tools/route-style.py` — 风格包路由器：硬规则排除 → 能力卡打分 → 置信兜底，出 Top 3 + 理由 + 格式适配施工说明 + 被排除包及原因；`--check` 跑路由回归
 - `projects/<slug>/` — 每条片的 IR、阶段产物、证据与输出；项目脚本不自动等于可复用管线
-- `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用与响度，作为 render contract 的证据源
+- `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用、响度与跨镜头主色漂移，作为 render contract 的证据源
 - `tools/judge/` — G2 隔离评审：生成证据包、出题、阅卷与校准
 - `tools/render-remote.sh` — HyperFrames 远端渲染客户端；地址由 `RENDER_URL` 注入，不假设本机或固定 IP
 - `docs/` — 架构决策、事故复盘、升级计划与 Grain 交付设计

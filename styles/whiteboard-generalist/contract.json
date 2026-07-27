@@ -4,7 +4,7 @@
   "source": "从 KuleshovAgent 迁入（2026-07-24，公测兜底包）。『白板』是信息组织方式不是画风——合同只立可机械判定的下限门；『统一视觉手柄是否成立』『模板味』交 Judge，不做正则门。",
   "denominators": "一切份额分母 = audio.timeline.duration_s（真实音频总长）。",
   "amend_policy": "数值仅可在各自 amend 带宽内调整：ir patch 写 meta.contract_amendments[\"<dotted.path>\"]（自动记 ledger）。越出带宽 = 合同违约——带 contract_violation 标记停 review 候审（禁 delivered）。本文件生产期内对生产 agent 只读。",
-  "_molly_enforcement": "molly film-ir/gates.py 当前机器执法：plan.provider_share.* / plan.traits.*.share_min / plan.graphics_run_max_s / render.static_hold_ratio_max / render.min_video_elements。本合同的 plan.style_lock / plan.traits.pixel_narrative.craft / plan.visual_handle_declared / incompatible_topics 为**声明项**——molly 门暂未覆盖，先由 playbook 散文 + Judge 执法；补齐机器门属后续工作（不在 2026-07-24 迁移范围）。此说明防静默降级：以为在门上，其实还在纸面上。",
+  "_molly_enforcement": "执法面现由 film_ir.contract.ENFORCED_TERMS 单一真相源维护，不再靠本条散文对账：不在表内的阈值条目由 style.contract.schema 门报 error，写 \"enforced\": false 才降 warn。本合同的 plan.visual_handle_declared 已按此标注。plan.style_lock / plan.traits.pixel_narrative.craft / incompatible_topics 不是阈值条目（无 value 叶子），schema 门看不见它们——仍由 playbook 散文 + Judge 执法，补齐机器门属后续工作。",
   "incompatible_topics": [
     "realistic_person_reenactment"
   ],
@@ -13,7 +13,8 @@
     "visual_handle_declared": {
       "value": 1,
       "amend": [1, 1],
-      "basis": "机械项：全片统一的色彩/字体/节奏或重复视觉手柄的**声明在场**（meta.style_notes.visual_handle 非空）。声明是否成立交 Judge——合同只查在场性。[molly 门未覆盖，见 _molly_enforcement]"
+      "enforced": false,
+      "basis": "机械项：全片统一的色彩/字体/节奏或重复视觉手柄的**声明在场**（meta.style_notes.visual_handle 非空）。声明是否成立交 Judge——合同只查在场性。molly 门未覆盖，故 enforced:false（style.contract.schema 降 warn）。"
     },
     "style_lock": {
       "profiles": ["pixel", "collage"],

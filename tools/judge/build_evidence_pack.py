@@ -71,26 +71,38 @@ GOLDEN_SET = Path(__file__).resolve().parents[2] / "styles" / "golden-set.json"
 
 
 def resolve_golden(ref: str) -> tuple[Path | None, str | None, list[str] | None]:
-    """Golden 解析：风格包名 → styles/golden-set.json 登记册；目录 → 旧式 <dir>/out/final.mp4。
+    """Golden 解析：`<pack>` / `<pack>:<project>` → styles/golden-set.json 登记册；
+    目录 → 旧式 <dir>/out/final.mp4（剪枝后基本必然找不到，仅兼容）。
 
+    一个包可以有多条 Golden（各自锚不同的东西），数组第一条是 primary。
     返回 (视频路径, 标注名, known_defects)。**known_defects 必须随 Golden 进评委上下文**——
     Golden 里存在的违规不是可照抄的语法（登记册 how_to_use 第 2 条）。
     """
-    d = Path(ref)
-    if d.is_dir():
-        return d / "out" / "final.mp4", d.name, None
+    if Path(ref).is_dir():
+        return Path(ref) / "out" / "final.mp4", Path(ref).name, None
     if not GOLDEN_SET.is_file():
         print(f"警告: 找不到 Golden 登记册 {GOLDEN_SET}", file=sys.stderr)
         return None, None, None
     reg = json.loads(GOLDEN_SET.read_text(encoding="utf-8"))
-    entry = (reg.get("goldens") or {}).get(ref)
-    if not entry:
-        known = sorted(k for k, v in (reg.get("goldens") or {}).items() if v)
-        print(f"警告: 登记册里没有 Golden「{ref}」（已登记：{known}）", file=sys.stderr)
+    packs = reg.get("goldens") or {}
+    pack, _, want = ref.partition(":")
+    entries = packs.get(pack) or []
+    if isinstance(entries, dict):          # 容忍单对象写法
+        entries = [entries]
+    if not entries:
+        known = sorted(k for k, v in packs.items() if v)
+        print(f"警告: 登记册里没有 Golden「{pack}」（已登记：{known}）", file=sys.stderr)
         return None, None, None
-    return (Path(entry["file"]).expanduser(),
-            f"{ref} / {entry['project']}",
-            entry.get("known_defects"))
+    if want:
+        hit = next((e for e in entries if e.get("project") == want), None)
+        if hit is None:
+            print(f"警告: 「{pack}」下没有 Golden「{want}」"
+                  f"（该包已登记：{[e.get('project') for e in entries]}）", file=sys.stderr)
+            return None, None, None
+    else:
+        hit = entries[0]                   # primary
+    label = f"{pack} / {hit['project']}" + (f" ({hit['id']})" if hit.get("id") else "")
+    return Path(hit["file"]).expanduser(), label, hit.get("known_defects")
 
 
 def main() -> int:

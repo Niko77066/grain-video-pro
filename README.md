@@ -99,7 +99,7 @@ bash tools/preflight.sh projects/<slug>
 | `film-ir/` | Film IR 模型、CLI、执行适配器与 G1 门套件 |
 | `styles/` | 风格 playbook、机器合同、Golden 基准与进化规程 |
 | `tools/judge/` | G2 证据包、隔离评审与校准工具 |
-| `tools/measure-render.py` | 从终渲视频反测静态持有、媒体使用、响度等指标 |
+| `tools/measure-render.py` | 从终渲视频反测静态持有、媒体使用、响度、跨镜头主色漂移等指标 |
 | `projects/` | 已交付样片、生产中的项目与项目模板 |
 | `docs/` | 架构、复盘、升级计划与 Grain 集成方案 |
 

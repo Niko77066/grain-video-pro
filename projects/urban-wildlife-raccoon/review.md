@@ -12,8 +12,11 @@
 | `<video>` 元素数 | 11 | ≥4 | ✅ |
 | provider 份额 | HF 51.6% / Seedance 27.4% / footage 20.9% | HF [25,60] | ✅ |
 | 整体响度 | -14.0 LUFS | -14 | ✅ |
+| 跨镜头主色漂移 max_drift | **0.691**（s17_roof） | max 0.80（带宽 [0.72,0.88]） | ✅ |
 
 `kuleshov-ir validate` → **0 error**（1 warn = 合同带宽内 amendment 生效通知，理由见 ledger d12）。
+
+> 主色漂移一行为 2026-07-27 补测（同一 sha256 成片，仪器升级后重跑；静态/响度/份额各值逐字复现）。0.691 的离群镜 s17_roof + s16_night 是夜戏声部与琥珀编年史世界的色温差，与 G2 D6 缝合 4/5 的判断一致——本片同时是该指标的绿锚，见 `docs/todo-from-ac-experiment.md` P1-3。
 
 > hold_ratio 从首版 0.37 经数据卡渐进 reveal 降到 0.355（真减 hold，非假运动）；残留为 6 张结构卡（标题/三章节/收尾/虚实呼应）的合理呼吸 hold + count-up 钩子卡，非内容幻灯片化。
 

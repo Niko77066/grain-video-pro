@@ -104,8 +104,8 @@ WebSearch / 用户素材整理出 5–10 条核心事实，**每条带出处 URL
 ### ③b hero-frames 品味门（无条件触发）
 script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺（图便宜，视觉承诺是全片方差最大的决策，必须在沉没成本发生前采样）：
 1. 出 **3 张 hero frame**：钩子镜、核心隐喻镜、产品/结论镜（片型无产品位则取情感高潮镜）——用各自预期来源的真实工艺出图（Seedance 锚点静帧 / 拼贴静帧 / HyperFrames 截帧均可），落 `anchors/hero/`；
-2. 与风格包 **Golden 样片 contact sheet 并排**成一张对比图（文字规则进上下文会退化成抽象知识，视觉并排不会）。Golden 走登记册：`build_evidence_pack.py <project> --golden <风格包名>`（`styles/golden-set.json` 解析路径，成片在 `~/kuleshov-archive/golden/`，不入库）。🔴 **Golden 的 `known_defects` 随并排图一起进评委上下文**——Golden 里存在的违规不是可照抄的语法（例：pixel-chronicle 的 Golden 字幕带标点且带底框，早于 2026-07-27 两条拍板）；
-3. 评审（**G2 隔离评委，默认**）：`tools/judge/build_evidence_pack.py` 出证据 → `judge.py --node hero_frames --task` 出题 → **派发隔离 subagent 打分**（subagent 只见并排图与镜头意图，不含创作理由）→ `judge.py --node hero_frames --finalize <scores>` 阅卷；未达 Golden 下限**禁止铺开全片 storyboard**，换视觉方案回炉重来；
+2. 与风格包 **Golden 样片 contact sheet 并排**成一张对比图（文字规则进上下文会退化成抽象知识，视觉并排不会）。Golden 走登记册：`build_evidence_pack.py <project> --golden <风格包名>`（`styles/golden-set.json` 解析路径，成片在 `~/kuleshov-archive/golden/`，不入库；一个包多条 Golden 时缺省取 primary，要指定用 `<pack>:<project>`）。🔴 **Golden 的 `known_defects` 随并排图一起进评委上下文**——Golden 里存在的违规不是可照抄的语法（例：pixel-chronicle 的 GS-02 英阿片字幕带标点且带底框，早于 2026-07-27 两条拍板，用户拍板不修片只标注）；
+3. 评审（**G2 隔离评委，默认**）：`tools/judge/build_evidence_pack.py` 出证据 → `judge.py --node hero_frames --task` 出题 → **派发隔离 subagent 打分**（subagent 只见并排图与镜头意图，不含创作理由）→ `judge.py --node hero_frames --finalize <scores>` 阅卷；未达 Golden 下限**禁止铺开全片 storyboard**，换视觉方案回炉重来。本门是**绝对判断 → 单臂**（`--mode solo`，缺省）：证据里除 Golden 标尺外不得放竞争方案，否则分数被对手质量污染（`tools/judge/README.md`「评审模式协议」）。**Golden 是固定标尺不是对手**——不给它打分、不评"谁更好"。要比 A/B 视觉方案另跑 `--mode paired`，且配对结论不能当出厂判词；
 4. 结果记 `ledger.gates`（stage: `hero_frames`，带证据文件路径）。
 **不允许以"本片不用生成资产"为由跳过本门**——Codex hf-breach 正是靠"全声明型图形"让品味验证合法蒸发的。
 读 `references/tts-audio.md`（TTS 走 **MiniMax speech-2.8-hd 固定音色 single-pass** + 声纹 gate；不再用火山 seed-audio——分节音色漂移已弃）。音轨定稿后**必读 `references/forced-alignment.md`** 建逐字 timeline（剧本 1:1 强制对齐；禁 whisper 转写比例映射）——字幕/画面 cue/挂载全部由它派生。
@@ -153,10 +153,10 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 - **渲染默认走渲染机**（2026-07-20 双跑验收过、切默认，记 `ledger.decisions`）：`tools/render-remote.sh <compose> <out> [ver] [quality]`（`RENDER_URL` 指向宿主/开发环境的渲染机、由环境提供，无本机 IP 假设；503 并发满退避重试）；比本地 docker 快 ~2.3×。**本地 `hyperframes render --docker` 降为兜底**（机器宕机/占满时）。`npx hyperframes check` 不过禁 render。新风格包首用 woff2 时仍双跑一次（全片 SSIM + 关键版式帧目检换行/安全区，判据看目检不看全片 SSIM 数字）。
 
 ### ⑨ review
-0. **成片实测（先于一切自查，2026-07-21 起）**：`python3 tools/measure-render.py <project>` 产出 `evidence/render-metrics.json`（逐镜静态持有 / `<video>` 计数 / 时长 / 响度——从成片反测，不信自报字段），随后 `kuleshov-ir validate` 过 `style.contract.render` 零 error。自报 `static_class` 与实测矛盾时**以实测为准**，回去改片不许改字段。
+0. **成片实测（先于一切自查，2026-07-21 起）**：`python3 tools/measure-render.py <project>` 产出 `evidence/render-metrics.json`（逐镜静态持有 / `<video>` 计数 / 时长 / 响度 / 跨镜头主色漂移——从成片反测，不信自报字段），随后 `kuleshov-ir validate` 过 `style.contract.render` 零 error。自报 `static_class` 与实测矛盾时**以实测为准**，回去改片不许改字段。
 1. **L0 手动仪器**（结果与证据写 `review.md`）：`ffprobe` 查时长/分辨率/帧率；blackdetect / freezedetect 查黑帧冻结；响度是否 -14 LUFS；成片音轨回转写 vs 剧本；承诺复验（时长、运动占比、转场数）。出示证据，"我检查过了"不算数。
 2. **视觉出厂自查**（读 `references/visual-selfcheck.md`）：**先跑自动前置门 `python3 tools/kuleshov-lint.py projects/<片名>`**（woff2/时效词/脚注压边框，error 禁出厂），再抽帧逐项过版式反模式硬查（第一批：竖屏视觉重心 / 双角标 PPT 味 / 文件实证 / 死尾 / 幻灯片化 / 模板味 / 三面开钩一致 / 文字拆词；第二批：素材重复 / 时代地点错位 / 暗尾黑闪 / **音画同步(字幕·文字与 TTS，关键观感痛点，评委 D5/D6 必查)** / 时效词复核 / 烘焙镜头拍点 / **元素压容器边框(脚注·角标骑内框线)**），**任一命中必改再出厂**，结果记 `ledger.gates`——agent 出厂前**自己发现并指出问题**的门，不靠用户挑。背景与本次新增门见 `docs/postmortem-hf-breach.md`。
-3. **G2 成片门（隔离评委，默认）**：`tools/judge/build_evidence_pack.py` 出证据包（contact sheet + Golden 并排 + L0 + 实测指标 + 音轨，隔离创作上下文）→ `judge.py --node final --task` 出题 → **派发隔离 subagent 打分** → `judge.py --node final --finalize <scores>` 阅卷（可同理跑 `--node audio` 音频门），报告记 `ledger.gates`。扣分必须引用镜头 ID/时间码否则判无效；**fail → 回炉（§5），不问人**。评委否决权按"先校准后放权"（`tools/judge/README.md` 校准协议）——校准达标前 fail 记 DEBT 停 review（不阻断出片但禁 delivered）。
+3. **G2 成片门（隔离评委，默认）**：`tools/judge/build_evidence_pack.py` 出证据包（contact sheet + Golden 并排 + L0 + 实测指标 + 音轨，隔离创作上下文）→ `judge.py --node final --task` 出题 → **派发隔离 subagent 打分** → `judge.py --node final --finalize <scores>` 阅卷（可同理跑 `--node audio` 音频门），报告记 `ledger.gates`。扣分必须引用镜头 ID/时间码否则判无效；**fail → 回炉（§5），不问人**。评委否决权按"先校准后放权"（`tools/judge/README.md` 校准协议）——校准达标前 fail 记 DEBT 停 review（不阻断出片但禁 delivered）。本门同样是**绝对判断 → 单臂**；与旧版/其它方案比高下要另跑 `--mode paired --vs`，两路都跑时用 `--merge` 合并，非 `decisive` 不得声称胜负。
 4. 出厂后 `/video-score` 登记 9 维分（2026-07-16 起含 D8 创意 / D9 网感）入校准语料；有问题 `/video-triage` 归因到环节。
 
 ### ⑩ deliver
