@@ -303,6 +303,17 @@ def style_contract_plan(ir: FilmIR, ctx: GateContext | None = None) -> list[Viol
     for k in _contract.unknown_amendments(c, amendments):
         v.append(_err("style.contract.amend", f"meta.contract_amendments[{k}]",
                       f"修改指向不存在/不可调的合同条目: {k}"))
+    # 装饰条款体检：合同是机器硬门，没有执法点的条目会被静默忽略，
+    # 让人以为门在那儿。挡在 storyboard（花钱之前），不等到 review。
+    dead, declared = _contract.unenforced_terms(c)
+    for k in dead:
+        v.append(_err("style.contract.schema", f"contract.{k}",
+                      f"合同条目无人执法: {k}——校验器不读这个键，它是装饰品。"
+                      "要么在 gates.py 补执法点并登记进 contract.ENFORCED_TERMS，"
+                      '要么显式写 "enforced": false（降 warn，交 Judge 兜底）'))
+    for k in declared:
+        v.append(_warn("style.contract.schema", f"contract.{k}",
+                       f"声明性条款、无机器执法: {k}——由 Judge / 人工兜底"))
     plan = c.get("plan") or {}
     shots = sorted(ir.shots, key=lambda s: s.t[0])
     total = ir.audio.timeline.duration_s if ir.audio.timeline else None
@@ -422,6 +433,28 @@ def style_contract_render(ir: FilmIR, ctx: GateContext | None = None) -> list[Vi
         v.append(_err("style.contract.render", "evidence.compose.video_elements",
                       f"compose 内 <video> 共 {n_video} 个 < 下限 {video_min:g}"
                       "——烘焙声部无物理存在"))
+
+    # 跨镜头主色漂移：风格包立身之本是跨镜头一致性，而在此之前合同一条跨镜头
+    # 的门都表达不了（docs/todo-from-ac-experiment.md P1）。drift = 某镜主色直方图
+    # 到其余各镜的平均距离；超上限 = 这一镜没被缝进全片那个世界。
+    drift_max = _eff(c, "render.palette_drift_max", amendments, v)
+    if drift_max is not None:
+        pal = ev.get("palette") or {}
+        if not pal:
+            v.append(_warn("style.contract.render", "evidence.palette",
+                           "证据无 palette 段（measure-render 早于主色漂移指标）"
+                           "——重跑 tools/measure-render.py 才能执行此门"))
+        elif not pal.get("measurable"):
+            v.append(_warn("style.contract.render", "evidence.palette",
+                           f"主色漂移不可测：{pal.get('reason', '未说明')}"))
+        elif pal.get("max_drift") is not None and pal["max_drift"] > drift_max:
+            outliers = " ".join(o["id"] for o in pal.get("outlier_shots") or [])
+            v.append(_err("style.contract.render", "evidence.palette.max_drift",
+                          f"最离群镜 {pal.get('max_drift_shot')} 主色漂移 "
+                          f"{pal['max_drift']:.3f} > 上限 {drift_max:g}"
+                          "——该镜未缝进全片的世界（LUT/颗粒/配色统一失败）",
+                          evidence=f"outliers=[{outliers}] "
+                                   f"var={pal.get('pairwise_distance_var')}"))
 
     # 自报 static_class=false 但实测判静的镜头（Goodhart 的直接解毒剂）
     measured = {p.get("id"): p for p in static.get("per_shot") or []}

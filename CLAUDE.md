@@ -30,7 +30,7 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 - `film-ir/` — Film IR Python 库与 `kuleshov-ir` CLI：`read / patch / validate / execute`
 - `styles/` — `pixel-chronicle`、`case-file`、`whiteboard-generalist` 三套可用风格包，以及模板、禁用区和进化规程
 - `projects/<slug>/` — 每条片的 IR、阶段产物、证据与输出；项目脚本不自动等于可复用管线
-- `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用与响度，作为 render contract 的证据源
+- `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用、响度与跨镜头主色漂移，作为 render contract 的证据源
 - `tools/judge/` — G2 隔离评审：生成证据包、出题、阅卷与校准
 - `tools/render-remote.sh` — HyperFrames 远端渲染客户端；地址由 `RENDER_URL` 注入，不假设本机或固定 IP
 - `docs/` — 架构决策、事故复盘、升级计划与 Grain 交付设计
