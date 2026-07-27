@@ -130,6 +130,7 @@ SCENES.append(("mg_s02", "s02_gdp_screen", "mg", f"""
 </div>"""))
 
 SCENES.append(("ov_s03", "s03_city_aerial", "ov", """
+<div class="scrim-b"></div>
 <div class="stripwrap" data-a="strip"><div class="strip">
   <span class="sk">全年目标区间</span><span class="sv">4.5—5%</span>
   <span class="sdiv"></span><span class="sk">上半年实际</span><span class="sv gold">+4.7%</span>
@@ -149,6 +150,7 @@ SCENES.append(("mg_s04", "s04_turn_card", "mg", """
 </div>"""))
 
 SCENES.append(("ov_s05", "s05_site_aerial", "ov", """
+<div class="scrim-b"></div>
 <div class="tag-ll" data-a="tag">
   <div class="tk">固定资产投资 · 上半年同比</div>
   <div class="tv down"><span data-count="-5.7" data-dec="1">0.0</span>%</div>
@@ -158,12 +160,14 @@ SCENES.append(("ov_s05", "s05_site_aerial", "ov", """
 SCENES.append(("ph_s06", "s06_housing_photo", "ph", """
 <img src="assets/img/i_s06_housing.jpg" data-a="kb">
 <div class="veil-b"></div>
+<div class="scrim-rd"></div>
 <div class="hugewrap" data-a="huge">
   <div class="hk">房地产开发投资</div>
   <div class="hv down"><span data-count="-18.0" data-dec="1">0.0</span>%</div>
 </div>"""))
 
 SCENES.append(("ov_s07", "s07_street_crowd", "ov", """
+<div class="scrim-b"></div>
 <div class="tag-lr" data-a="tag">
   <div class="tk">社会消费品零售总额 · 上半年</div>
   <div class="tv flat">+<span data-count="1.3" data-dec="1">0.0</span>%</div>
@@ -176,6 +180,7 @@ SCENES.append(("ov_s08", "s08_question_anchor", "ov", """
 <div class="qghost" data-a="g">4.7<span class="u">%</span></div>"""))
 
 SCENES.append(("ov_s09", "s09_port_aerial", "ov", f"""
+<div class="scrim-rd"></div>
 <div class="scrim-b"></div>
 <div class="card" data-a="card">
   <div class="ct">货物进出口 · 累计同比</div>
@@ -194,16 +199,18 @@ SCENES.append(("ov_s09", "s09_port_aerial", "ov", f"""
 SCENES.append(("ph_s10", "s10_containers_photo", "ph", f"""
 <img src="assets/img/i_s10_containers.jpg" data-a="kb">
 <div class="veil-b"></div>
+<div class="scrim-rd"></div>
 <div class="card slim" data-a="card">
   <div class="ct">拆开来看</div>
   <div class="bars">
-    {barrow('出口 14.73 万亿元', '+13.4%', 54, '#8FA8C4', 'b1')}
+    {barrow('出口 14.73 万亿元', '+13.4%', 54, '#E2EBF6', 'b1')}
     {barrow('进口 10.74 万亿元', '+22.1%', 88, BLUE, 'b2')}
   </div>
   <div class="scale"><span>0%</span><span>5%</span><span>10%</span><span>15%</span><span>20%</span><span>25%</span></div>
 </div>"""))
 
 SCENES.append(("ov_s11", "s11_robot_line", "ov", """
+<div class="scrim-b"></div>
 <div class="tag-ll" data-a="tag">
   <div class="tk">高技术制造业增加值 · 上半年同比</div>
   <div class="tv up">+<span data-count="13.3" data-dec="1">0.0</span>%</div>
@@ -213,6 +220,7 @@ SCENES.append(("ov_s11", "s11_robot_line", "ov", """
 SCENES.append(("ph_s12", "s12_equipment_photo", "ph", """
 <img src="assets/img/i_s12_equipment.jpg" data-a="kb">
 <div class="veil-b"></div>
+<div class="scrim-rd"></div>
 <div class="hugewrap" data-a="huge">
   <div class="hk">装备制造业增加值</div>
   <div class="hv up">+<span data-count="9.3" data-dec="1">0.0</span>%</div>
@@ -244,6 +252,8 @@ SCENES.append(("mg_s14", "s14_overlooked_card", "mg", """
 </div>"""))
 
 SCENES.append(("ov_s15", "s15_supermarket", "ov", """
+<div class="scrim-rd"></div>
+<div class="scrim-b"></div>
 <div class="card compare" data-a="card">
   <div class="ct">谁跑得更慢</div>
   <div class="crow" data-a="c1">
@@ -360,6 +370,7 @@ fromto("#mg_s02 [data-a=q1]", "{scaleY:0}", '{scaleY:1,duration:0.85,ease:"power
 fromto("#mg_s02 [data-a=q2]", "{scaleY:0}", '{scaleY:1,duration:0.85,ease:"power2.out",transformOrigin:"50% 100%"}', _a + 1.15)
 fromto("#mg_s02 [data-a=band]", "{scaleX:0,opacity:0}", '{scaleX:1,opacity:1,duration:0.7,ease:"power2.out",transformOrigin:"0% 50%"}', cue("同比增长百分之四点七"))
 # s03
+fromto("#ov_s03 .scrim-b", *FADE, t0("s03_city_aerial"))
 fromto("#ov_s03 [data-a=strip]", '{opacity:0,y:26}', '{opacity:1,y:0,duration:0.55,ease:"power3.out"}', t0("s03_city_aerial") + 0.20)
 # s04
 _a = t0("s04_turn_card") + 0.12
@@ -369,6 +380,7 @@ fromto("#mg_s04 [data-a=a1]", '{opacity:0,y:-34}', '{opacity:0.55,y:0,duration:0
 fromto("#mg_s04 [data-a=a2]", '{opacity:0,y:34}', '{opacity:1,y:0,duration:0.5,ease:"power3.out"}', _a + 1.20)
 # s05
 _a = t0("s05_site_aerial") + 0.15
+fromto("#ov_s05 .scrim-b", *FADE, t0("s05_site_aerial"))
 fromto("#ov_s05 [data-a=tag]", '{opacity:0,x:-30}', '{opacity:1,x:0,duration:0.55,ease:"power3.out"}', _a)
 countup("ov_s05", _a + 0.22, 0.45)
 bar("#ov_s05 [data-a=tb]", _a + 0.22, 0.85)
@@ -378,6 +390,7 @@ fromto("#ph_s06 [data-a=huge]", *POPX, _a)
 countup("ph_s06", _a + 0.20, 0.45)
 # s07
 _a = t0("s07_street_crowd") + 0.16
+fromto("#ov_s07 .scrim-b", *FADE, t0("s07_street_crowd"))
 fromto("#ov_s07 [data-a=tag]", '{opacity:0,x:30}', '{opacity:1,x:0,duration:0.55,ease:"power3.out"}', _a)
 countup("ov_s07", _a + 0.20, 0.45)
 # s08
@@ -388,6 +401,7 @@ add(f'tl.fromTo("#v_s08",{{scale:1.0}},{{scale:1.065,duration:{dur("s08_question
 # s09 —— 卡片内容紧凑铺满，杜绝"大黑框空板"
 _a = t0("s09_port_aerial") + 0.15
 fromto("#ov_s09 .scrim-b", *FADE, t0("s09_port_aerial"))
+fromto("#ov_s09 .scrim-rd", *FADE, t0("s09_port_aerial"))
 fromto("#ov_s09 [data-a=kick]", *POP, _a)
 fromto("#ov_s09 [data-a=head]", *POP, _a + 0.16)
 fromto("#ov_s09 .lowerrule", BARIN[0], BARIN[1] % 0.7, _a + 0.30)
@@ -407,6 +421,7 @@ fromto("#ph_s10 [data-a=b2]", *POP, cue("进口涨百分之二十二点一") - 0
 bar("#ph_s10 [data-bar=b2]", cue("进口涨百分之二十二点一") - 0.30, 1.0)
 # s11
 _a = cue("还有制造")
+fromto("#ov_s11 .scrim-b", *FADE, t0("s11_robot_line"))
 fromto("#ov_s11 [data-a=tag]", '{opacity:0,x:-30}', '{opacity:1,x:0,duration:0.55,ease:"power3.out"}', _a)
 countup("ov_s11", _a + 0.25, 0.45)
 bar("#ov_s11 [data-a=tb]", _a + 0.25, 0.90)
@@ -432,6 +447,8 @@ for _i, _k in enumerate(("r1", "r2", "r3", "r4")):
            round(_a + 0.55 + _i * 0.20, 3))
 # s15
 _a = t0("s15_supermarket") + 0.15
+fromto("#ov_s15 .scrim-rd", *FADE, t0("s15_supermarket"))
+fromto("#ov_s15 .scrim-b", *FADE, t0("s15_supermarket"))
 fromto("#ov_s15 [data-a=card]", '{opacity:0,x:44}', '{opacity:1,x:0,duration:0.6,ease:"power3.out"}', _a)
 fromto("#ov_s15 [data-a=c1]", *POP, _a + 0.35)
 bar("#ov_s15 [data-a=cb1]", _a + 0.40, 1.2)

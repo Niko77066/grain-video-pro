@@ -1,14 +1,14 @@
 {
   "schema": "render-metrics@1",
-  "generated_at": "2026-07-27T08:53:01+00:00",
+  "generated_at": "2026-07-27T10:46:16+00:00",
   "video": {
     "file": "projects/china-h1-2026-econ/out/final.mp4",
-    "sha256": "69740b19c6140bdf57497e214daf368e949ce01462525e7347eaf387f84f9f31",
+    "sha256": "7cd08508e784a2c147d6f6e48766cff353acd0d26aa525694f848b56ec23b7ca",
     "duration_s": 82.0,
     "width": 1920,
     "height": 1080,
     "fps": 30.0,
-    "bit_rate": 11650212
+    "bit_rate": 10213912
   },
   "loudness_i_lufs": -14.1,
   "settings": {
@@ -37,8 +37,8 @@
       },
       {
         "t0": 18.5,
-        "t1": 20.75,
-        "dur": 2.25
+        "t1": 20.5,
+        "dur": 2.0
       },
       {
         "t0": 58.75,
@@ -67,12 +67,12 @@
       },
       {
         "t0": 80.5,
-        "t1": 81.75,
-        "dur": 1.25
+        "t1": 81.5,
+        "dur": 1.0
       }
     ],
-    "hold_total_s": 17.75,
-    "hold_ratio": 0.216,
+    "hold_total_s": 17.25,
+    "hold_ratio": 0.21,
     "per_shot": [
       {
         "id": "s01_hook_anchor",
@@ -98,8 +98,8 @@
       {
         "id": "s04_turn_card",
         "duration_s": 3.79,
-        "static_hold_s": 2.25,
-        "static_hold_ratio": 0.594,
+        "static_hold_s": 2.0,
+        "static_hold_ratio": 0.528,
         "measured_static": false
       },
       {
@@ -196,8 +196,8 @@
       {
         "id": "s18_end_card",
         "duration_s": 3.56,
-        "static_hold_s": 1.25,
-        "static_hold_ratio": 0.351,
+        "static_hold_s": 1.0,
+        "static_hold_ratio": 0.281,
         "measured_static": false
       }
     ],

@@ -25,5 +25,6 @@
 ## 未计入金额的资源
 
 - **Pexels 实拍素材**（6 视频 + 3 图片）：免费授权，`license=pexels`，逐条 `pexels_id` 与页面 URL 见 `footage/manifest.json`。
-- **本地 Docker 渲染**：自有算力。两次整片渲染（初版 + G2 回炉后重渲），各约 8 分钟 / 2459 帧。
+- **本地 Docker 渲染**：自有算力，共 **4 次整片渲染**——v1 初版 8m36s ／ v2 G2 回炉后 7m12s ／ v1 重建（补交失败成片）10m59s ／ v3 去底框版 6m42s，合计约 33 分钟 / 2459 帧每次。
 - **对齐与转写**：wav2vec2-zh CTC 强制对齐、mlx-whisper large-v3-turbo 回转写、speechbrain ECAPA 声纹比对，均为本机推理。
+- **G2 评委**：隔离 subagent，共 6 次调用（hero 门 2 次 + 成片门 3 轮 + 音频门 1 次），走宿主模型，不计 provider 费用。

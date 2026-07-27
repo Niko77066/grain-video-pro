@@ -58,16 +58,20 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
 #bug .date{font-weight:400;font-size:24px;line-height:1;letter-spacing:.06em;color:var(--gold);margin-left:6px;}
 
 /* 脚注自带暗压条 + 金色左边线（G2 hero 门 must_fix：不靠背景运气） */
-#foot{position:absolute;right:var(--safe);bottom:122px;padding:9px 16px 9px 18px;z-index:6;opacity:0;text-align:right;
+#foot{position:absolute;right:var(--safe);bottom:122px;z-index:6;opacity:0;text-align:right;
   font-weight:400;font-size:22px;line-height:1;letter-spacing:.04em;color:#C9D6E6;
-  background:linear-gradient(270deg,rgba(4,12,26,.86) 0%,rgba(4,12,26,.78) 72%,rgba(4,12,26,0) 100%);
-  border-right:3px solid var(--gold-dim);}
+  text-shadow:0 2px 10px rgba(0,0,0,.98),0 0 24px rgba(4,12,26,.9);}
 
 #capbox{position:absolute;left:0;right:0;bottom:44px;z-index:7;text-align:center;}
-.cap{display:inline-block;padding:10px 30px;background:rgba(4,12,26,.74);opacity:0;
+/* 字幕：无底框、无标点。可读性用多层阴影等效描边（广播字幕标准做法） */
+.cap{display:inline-block;opacity:0;
   position:absolute;left:50%;transform:translateX(-50%);bottom:0;white-space:nowrap;
-  font-family:"SansSC";font-weight:700;font-size:40px;line-height:1.28;color:#fff;
-  text-shadow:0 2px 10px rgba(0,0,0,.9);}
+  font-family:"SansSC";font-weight:700;font-size:44px;line-height:1.28;color:#fff;
+  letter-spacing:.02em;
+  text-shadow:0 0 3px rgba(4,12,26,1),0 0 6px rgba(4,12,26,1),
+              2px 2px 3px rgba(4,12,26,1),-2px 2px 3px rgba(4,12,26,1),
+              2px -2px 3px rgba(4,12,26,1),-2px -2px 3px rgba(4,12,26,1),
+              0 4px 22px rgba(0,0,0,.95);}
 
 #dip{position:absolute;inset:0;z-index:8;background:var(--navy-2);opacity:0;}
 /* transform 完全交给 GSAP（lint: gsap_css_transform_conflict）——CSS 不写 transform */
@@ -109,8 +113,8 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
   background:linear-gradient(180deg,rgba(95,176,232,.90),rgba(35,90,140,.7));}
 .qlab{font-weight:400;font-size:30px;line-height:1;color:var(--ink-dim);white-space:nowrap;}
 .qlab b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
-.band{display:inline-block;margin-top:40px;padding:16px 30px;border:1px solid rgba(200,162,74,.55);
-  background:rgba(200,162,74,.10);transform-origin:0% 50%;}
+.band{display:inline-block;margin-top:40px;padding:14px 0 0;border-top:2px solid rgba(200,162,74,.75);
+  transform-origin:0% 50%;}
 .band span{font-weight:700;font-size:30px;line-height:1;color:var(--gold);letter-spacing:.06em;}
 
 /* 转折字卡 */
@@ -140,76 +144,90 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
 .mrow.hl .mv{background:var(--gold);}
 
 /* ---------------- 数据卡（叠在实拍/静帧上） ---------------- */
-.card{position:absolute;right:var(--safe);top:196px;width:706px;padding:32px 36px 26px;
-  background:linear-gradient(180deg,rgba(9,27,54,.965),rgba(5,16,34,.985));
-  border:1px solid rgba(200,162,74,.42);box-shadow:0 24px 70px rgba(0,0,0,.55);}
-.card::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;
-  background:linear-gradient(90deg,var(--gold) 0%,var(--gold-dim) 55%,transparent 100%);}
+/* 数据卡：**无底框**（2026-07-27 用户拍板：压在实拍上的数据组件不许有 PPT 式深色底板）。
+   可读性改由三样承担：① 镜头级的无边缘柔性压暗 .scrim-r/.scrim-b；② 每个文字块自带多层
+   text-shadow（等效描边）；③ 字重与留白拉开层级。全片不再出现任何带边框/投影的浮动面板。 */
+.card{position:absolute;right:var(--safe);top:196px;width:706px;}
 .card.slim{top:250px;}
 .card.compare{top:224px;width:740px;}
-.card .ct{font-weight:700;font-size:32px;line-height:1;letter-spacing:.06em;}
-.card .cs{margin-top:14px;font-weight:400;font-size:30px;line-height:1;color:var(--ink-dim);
-  font-variant-numeric:tabular-nums;}
-.card .cfoot{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);
-  font-weight:400;font-size:22px;line-height:1.5;color:var(--ink-dim);}
+.card .ct{font-weight:700;font-size:34px;line-height:1;letter-spacing:.06em;
+  text-shadow:0 2px 10px rgba(0,0,0,.95),0 0 26px rgba(4,12,26,.9);}
+.card .cs{margin-top:14px;font-weight:400;font-size:30px;line-height:1;color:#C3D2E4;
+  font-variant-numeric:tabular-nums;text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.card .cfoot{margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.22);
+  font-weight:400;font-size:23px;line-height:1.5;color:#C3D2E4;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
 .card .cfoot b{color:var(--gold);font-weight:700;}
-
 .bars{margin-top:30px;}
 .bars.big{margin-top:44px;}
 .brow{margin-bottom:30px;}
 .bars.big .brow{margin-bottom:62px;}
 .brow .bk{display:flex;justify-content:space-between;align-items:baseline;
-  font-weight:400;font-size:25px;line-height:1;color:var(--ink-dim);}
+  font-weight:400;font-size:26px;line-height:1;color:#C3D2E4;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
 .bars.big .brow .bk{font-size:34px;}
-.brow .bk b{font-weight:700;font-size:40px;line-height:1;font-variant-numeric:tabular-nums;}
+.brow .bk b{font-weight:700;font-size:44px;line-height:1;font-variant-numeric:tabular-nums;
+  text-shadow:0 3px 14px rgba(0,0,0,.95),0 0 30px rgba(4,12,26,.85);}
 .bars.big .brow .bk b{font-size:58px;}
-.btrack{margin-top:12px;height:16px;background:rgba(255,255,255,.09);}
+.btrack{margin-top:14px;height:14px;background:rgba(255,255,255,.22);
+  box-shadow:0 2px 14px rgba(0,0,0,.75);}
 .bars.big .btrack{height:24px;}
-.btrack i{display:block;height:100%;transform-origin:0% 50%;}
+.btrack i{display:block;height:100%;transform-origin:0% 50%;
+  box-shadow:0 0 18px rgba(0,0,0,.45);}
 .scale{display:flex;justify-content:space-between;margin-top:8px;opacity:0;
-  font-weight:400;font-size:19px;line-height:1;color:#6E88A8;font-variant-numeric:tabular-nums;}
+  font-weight:400;font-size:20px;line-height:1;color:#8CA4C0;font-variant-numeric:tabular-nums;
+  text-shadow:0 2px 8px rgba(0,0,0,.95);}
 .bars.big + .scale{font-size:24px;}
 
 /* 对比卡（s15） */
 .card.compare .crow{margin-bottom:34px;}
-.card.compare .ck{font-weight:400;font-size:26px;line-height:1;color:var(--ink-dim);}
-.card.compare .cv{margin-top:10px;font-weight:700;font-size:62px;line-height:1;
-  font-variant-numeric:tabular-nums;color:#E8555C;}
+.card.compare .ck{font-weight:400;font-size:27px;line-height:1;color:#C3D2E4;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.card.compare .cv{margin-top:10px;font-weight:700;font-size:66px;line-height:1;
+  font-variant-numeric:tabular-nums;color:#E8555C;
+  text-shadow:0 3px 16px rgba(0,0,0,.95),0 0 32px rgba(4,12,26,.85);}
 .card.compare .cv.gold{color:var(--gold);}
-.card.compare .ctrack{margin-top:12px;height:18px;background:rgba(255,255,255,.09);}
+.card.compare .ctrack{margin-top:14px;height:16px;background:rgba(255,255,255,.22);
+  box-shadow:0 2px 14px rgba(0,0,0,.75);}
 .card.compare .ctrack i{display:block;height:100%;width:89%;background:#E8555C;transform-origin:0% 50%;}
 .card.compare .ctrack i.gold{width:100%;background:var(--gold);}
 
 /* ---------------- 角标（叠在实拍上） ---------------- */
-.tag-ll,.tag-lr{position:absolute;bottom:236px;padding:22px 30px 24px;
-  background:linear-gradient(90deg,rgba(4,12,26,.86) 0%,rgba(4,12,26,.72) 78%,rgba(4,12,26,.45) 100%);
-  border-left:4px solid var(--gold);min-width:520px;}
+/* 实拍角标：同样去底框，只留文字 + 一条金色细线做锚（线不是框） */
+.tag-ll,.tag-lr{position:absolute;bottom:236px;min-width:520px;}
 .tag-ll{left:var(--safe);}
-.tag-lr{right:var(--safe);border-left:none;border-right:4px solid var(--gold);text-align:right;
-  background:linear-gradient(270deg,rgba(4,12,26,.86) 0%,rgba(4,12,26,.72) 78%,rgba(4,12,26,.45) 100%);}
-.tk{font-weight:400;font-size:26px;line-height:1;color:var(--ink-dim);letter-spacing:.06em;}
-.tv{margin-top:12px;font-weight:700;font-size:86px;line-height:1;font-variant-numeric:tabular-nums;}
+.tag-lr{right:var(--safe);text-align:right;}
+.tk{font-weight:400;font-size:27px;line-height:1;color:#C3D2E4;letter-spacing:.06em;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.tv{margin-top:12px;font-weight:700;font-size:92px;line-height:1;font-variant-numeric:tabular-nums;
+  text-shadow:0 4px 20px rgba(0,0,0,.95),0 0 40px rgba(4,12,26,.85);}
 .tv.down{color:#E8555C;} .tv.up{color:var(--gold);} .tv.flat{color:#E8B44A;}
-.tsub{margin-top:8px;font-weight:400;font-size:24px;line-height:1;color:var(--ink-dim);}
-.tbar{margin-top:14px;height:12px;width:420px;background:rgba(255,255,255,.10);}
-.tbar i{display:block;height:100%;width:46%;background:#E8555C;transform-origin:0% 50%;}
+.tsub{margin-top:8px;font-weight:400;font-size:25px;line-height:1;color:#C3D2E4;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.tbar{margin-top:16px;height:12px;width:420px;background:rgba(255,255,255,.22);
+  box-shadow:0 2px 14px rgba(0,0,0,.75);}
+.tag-lr .tbar{margin-left:auto;}
+.tbar i{display:block;height:100%;width:46%;background:#E8555C;transform-origin:0% 50%;
+  box-shadow:0 0 18px rgba(0,0,0,.45);}
 .tbar i.up{width:62%;background:var(--gold);}
 
 /* 大数字（静帧镜） */
 .hugewrap{position:absolute;right:var(--safe);top:50%;transform:translateY(-50%);text-align:right;}
-.hk{font-weight:400;font-size:34px;line-height:1;color:var(--ink-dim);letter-spacing:.08em;}
+.hk{font-weight:400;font-size:34px;line-height:1;color:#C3D2E4;letter-spacing:.08em;
+  text-shadow:0 2px 12px rgba(0,0,0,.95);}
 .hv{margin-top:16px;font-weight:700;font-size:172px;line-height:1;
   font-variant-numeric:tabular-nums;text-shadow:0 10px 40px rgba(0,0,0,.7);}
 .hv.down{color:#E8555C;} .hv.up{color:var(--gold);}
 
 /* 上/下条（s03） */
 .stripwrap{position:absolute;left:var(--safe);bottom:236px;}
-.strip{display:flex;align-items:baseline;gap:22px;padding:20px 32px;
-  background:rgba(4,12,26,.80);border-left:4px solid var(--gold);}
-.strip .sk{font-weight:400;font-size:26px;color:var(--ink-dim);letter-spacing:.06em;}
-.strip .sv{font-weight:700;font-size:46px;font-variant-numeric:tabular-nums;}
+.strip{display:flex;align-items:baseline;gap:24px;}
+.strip .sk{font-weight:400;font-size:27px;color:#C3D2E4;letter-spacing:.06em;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.strip .sv{font-weight:700;font-size:50px;font-variant-numeric:tabular-nums;
+  text-shadow:0 3px 16px rgba(0,0,0,.95),0 0 32px rgba(4,12,26,.85);}
 .strip .sv.gold{color:var(--gold);}
-.strip .sdiv{width:1px;height:38px;background:rgba(255,255,255,.20);}
+.strip .sdiv{width:1px;height:42px;background:rgba(255,255,255,.28);}
 
 /* 设问镜（s08） */
 .qmark{position:absolute;right:250px;top:50%;transform:translateY(-50%);
@@ -252,7 +270,10 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
 
 /* 左下标题块的暗压条：金色 kicker 压在亮实拍上会掉到 1.07:1（lint contrast）——不靠背景运气 */
 .scrim-b{position:absolute;left:0;right:0;bottom:0;height:520px;
-  background:linear-gradient(180deg,rgba(4,12,26,0) 0%,rgba(4,12,26,.62) 44%,rgba(4,12,26,.92) 100%);}
+  background:linear-gradient(180deg,rgba(4,12,26,0) 0%,rgba(4,12,26,.52) 44%,rgba(4,12,26,.86) 100%);}
+/* 右侧无边缘压暗：数据列脱掉底板后，靠它把实拍压下去，不产生任何可见边界 */
+.scrim-rd{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(4,12,26,0) 30%,rgba(4,12,26,.50) 50%,rgba(4,12,26,.86) 72%,rgba(4,12,26,.93) 100%);}
 
 </style></head>
 <body>
@@ -300,6 +321,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
   </div>
 </div></div>
 <div id="ov_s03" class="scene ov">
+<div class="scrim-b"></div>
 <div class="stripwrap" data-a="strip"><div class="strip">
   <span class="sk">全年目标区间</span><span class="sv">4.5—5%</span>
   <span class="sdiv"></span><span class="sk">上半年实际</span><span class="sv gold">+4.7%</span>
@@ -317,6 +339,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
     <div class="ftxt"><div class="fl">投资 · 消费</div><div class="fv small">同时往下走</div></div></div>
 </div></div>
 <div id="ov_s05" class="scene ov">
+<div class="scrim-b"></div>
 <div class="tag-ll" data-a="tag">
   <div class="tk">固定资产投资 · 上半年同比</div>
   <div class="tv down"><span data-count="-5.7" data-dec="1">0.0</span>%</div>
@@ -325,11 +348,13 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
 <div id="ph_s06" class="scene ph">
 <img src="assets/img/i_s06_housing.jpg" data-a="kb">
 <div class="veil-b"></div>
+<div class="scrim-rd"></div>
 <div class="hugewrap" data-a="huge">
   <div class="hk">房地产开发投资</div>
   <div class="hv down"><span data-count="-18.0" data-dec="1">0.0</span>%</div>
 </div></div>
 <div id="ov_s07" class="scene ov">
+<div class="scrim-b"></div>
 <div class="tag-lr" data-a="tag">
   <div class="tk">社会消费品零售总额 · 上半年</div>
   <div class="tv flat">+<span data-count="1.3" data-dec="1">0.0</span>%</div>
@@ -340,6 +365,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
 <div class="qmark" data-a="q">?</div>
 <div class="qghost" data-a="g">4.7<span class="u">%</span></div></div>
 <div id="ov_s09" class="scene ov">
+<div class="scrim-rd"></div>
 <div class="scrim-b"></div>
 <div class="card" data-a="card">
   <div class="ct">货物进出口 · 累计同比</div>
@@ -357,15 +383,17 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
 <div id="ph_s10" class="scene ph">
 <img src="assets/img/i_s10_containers.jpg" data-a="kb">
 <div class="veil-b"></div>
+<div class="scrim-rd"></div>
 <div class="card slim" data-a="card">
   <div class="ct">拆开来看</div>
   <div class="bars">
-    <div class="brow" data-a="b1"><div class="bk"><span>出口 14.73 万亿元</span><b style="color:#8FA8C4">+13.4%</b></div><div class="btrack"><i data-bar="b1" style="width:54%;background:#8FA8C4"></i></div></div>
+    <div class="brow" data-a="b1"><div class="bk"><span>出口 14.73 万亿元</span><b style="color:#E2EBF6">+13.4%</b></div><div class="btrack"><i data-bar="b1" style="width:54%;background:#E2EBF6"></i></div></div>
     <div class="brow" data-a="b2"><div class="bk"><span>进口 10.74 万亿元</span><b style="color:#5FB0E8">+22.1%</b></div><div class="btrack"><i data-bar="b2" style="width:88%;background:#5FB0E8"></i></div></div>
   </div>
   <div class="scale"><span>0%</span><span>5%</span><span>10%</span><span>15%</span><span>20%</span><span>25%</span></div>
 </div></div>
 <div id="ov_s11" class="scene ov">
+<div class="scrim-b"></div>
 <div class="tag-ll" data-a="tag">
   <div class="tk">高技术制造业增加值 · 上半年同比</div>
   <div class="tv up">+<span data-count="13.3" data-dec="1">0.0</span>%</div>
@@ -374,6 +402,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
 <div id="ph_s12" class="scene ph">
 <img src="assets/img/i_s12_equipment.jpg" data-a="kb">
 <div class="veil-b"></div>
+<div class="scrim-rd"></div>
 <div class="hugewrap" data-a="huge">
   <div class="hk">装备制造业增加值</div>
   <div class="hv up">+<span data-count="9.3" data-dec="1">0.0</span>%</div>
@@ -402,6 +431,8 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
   <div class="mrow" data-a="r4"><span class="mk">投资</span><span class="mv"></span></div>
 </div></div>
 <div id="ov_s15" class="scene ov">
+<div class="scrim-rd"></div>
+<div class="scrim-b"></div>
 <div class="card compare" data-a="card">
   <div class="ct">谁跑得更慢</div>
   <div class="crow" data-a="c1">
@@ -452,7 +483,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
 <div id="bug"><span class="mark"></span><span class="txt">经济半年报</span><span class="date">2026 上半年</span></div>
 <div id="foot">数据来源：国家统计局 2026 年 7 月 15 日发布</div>
 <div id="dip"></div><div id="wipe"></div>
-<div id="capbox"><div class="cap" id="cap0">七月十五号，上半年的经济数据出来了。</div><div class="cap" id="cap1">同一张表上，有两组数字方向正好相反。</div><div class="cap" id="cap2">先看稳的。</div><div class="cap" id="cap3">上半年国内生产总值接近七十万亿元</div><div class="cap" id="cap4">同比增长百分之四点七</div><div class="cap" id="cap5">正好落在全年四点五到五的目标区间里。</div><div class="cap" id="cap6">但翻到投资和消费，情况反过来了。</div><div class="cap" id="cap7">固定资产投资同比下降百分之五点七</div><div class="cap" id="cap8">房地产开发投资降了百分之十八。</div><div class="cap" id="cap9">社会消费品零售总额只涨百分之一点三。</div><div class="cap" id="cap10">投资在缩，消费几乎没动。</div><div class="cap" id="cap11">那百分之四点七，是谁扛起来的？</div><div class="cap" id="cap12">外贸。</div><div class="cap" id="cap13">上半年货物进出口二十五万四千亿元</div><div class="cap" id="cap14">增长百分之十六点九。</div><div class="cap" id="cap15">出口涨百分之十三点四</div><div class="cap" id="cap16">进口涨百分之二十二点一。</div><div class="cap" id="cap17">还有制造。</div><div class="cap" id="cap18">高技术制造业增加值涨百分之十三点三</div><div class="cap" id="cap19">装备制造业涨百分之九点三。</div><div class="cap" id="cap20">工业机器人产量多了两成八</div><div class="cap" id="cap21">锂离子电池多了近四成。</div><div class="cap" id="cap22">这份表里还有一行，容易被跳过。</div><div class="cap" id="cap23">居民人均可支配收入实际增长百分之四点二</div><div class="cap" id="cap24">跑输了经济增速。</div><div class="cap" id="cap25">居民消费价格只涨百分之一</div><div class="cap" id="cap26">离百分之二的目标还差不少。</div><div class="cap" id="cap27">外需和制造这一棒已经跑起来了。</div><div class="cap" id="cap28">下半年要看的，是内需能不能接得住。</div></div>
+<div id="capbox"><div class="cap" id="cap0">七月十五号　上半年的经济数据出来了</div><div class="cap" id="cap1">同一张表上　有两组数字方向正好相反</div><div class="cap" id="cap2">先看稳的</div><div class="cap" id="cap3">上半年国内生产总值接近七十万亿元</div><div class="cap" id="cap4">同比增长百分之四点七</div><div class="cap" id="cap5">正好落在全年四点五到五的目标区间里</div><div class="cap" id="cap6">但翻到投资和消费　情况反过来了</div><div class="cap" id="cap7">固定资产投资同比下降百分之五点七</div><div class="cap" id="cap8">房地产开发投资降了百分之十八</div><div class="cap" id="cap9">社会消费品零售总额只涨百分之一点三</div><div class="cap" id="cap10">投资在缩　消费几乎没动</div><div class="cap" id="cap11">那百分之四点七　是谁扛起来的</div><div class="cap" id="cap12">外贸</div><div class="cap" id="cap13">上半年货物进出口二十五万四千亿元</div><div class="cap" id="cap14">增长百分之十六点九</div><div class="cap" id="cap15">出口涨百分之十三点四</div><div class="cap" id="cap16">进口涨百分之二十二点一</div><div class="cap" id="cap17">还有制造</div><div class="cap" id="cap18">高技术制造业增加值涨百分之十三点三</div><div class="cap" id="cap19">装备制造业涨百分之九点三</div><div class="cap" id="cap20">工业机器人产量多了两成八</div><div class="cap" id="cap21">锂离子电池多了近四成</div><div class="cap" id="cap22">这份表里还有一行　容易被跳过</div><div class="cap" id="cap23">居民人均可支配收入实际增长百分之四点二</div><div class="cap" id="cap24">跑输了经济增速</div><div class="cap" id="cap25">居民消费价格只涨百分之一</div><div class="cap" id="cap26">离百分之二的目标还差不少</div><div class="cap" id="cap27">外需和制造这一棒已经跑起来了</div><div class="cap" id="cap28">下半年要看的　是内需能不能接得住</div></div>
 <div id="vig"></div>
 </div>
 <script>
@@ -506,16 +537,19 @@ tl.fromTo("#mg_s02 [data-a=yoy]",{opacity:0,y:22},{opacity:1,y:0,duration:0.52,e
 tl.fromTo("#mg_s02 [data-a=q1]",{scaleY:0},{scaleY:1,duration:0.85,ease:"power2.out",transformOrigin:"50% 100%"},8.18);
 tl.fromTo("#mg_s02 [data-a=q2]",{scaleY:0},{scaleY:1,duration:0.85,ease:"power2.out",transformOrigin:"50% 100%"},8.53);
 tl.fromTo("#mg_s02 [data-a=band]",{scaleX:0,opacity:0},{scaleX:1,opacity:1,duration:0.7,ease:"power2.out",transformOrigin:"0% 50%"},11.72);
+tl.fromTo("#ov_s03 .scrim-b",{opacity:0},{opacity:1,duration:0.5,ease:"power2.out"},13.65);
 tl.fromTo("#ov_s03 [data-a=strip]",{opacity:0,y:26},{opacity:1,y:0,duration:0.55,ease:"power3.out"},13.85);
 tl.fromTo("#mg_s04 [data-a=kick]",{opacity:0,y:22},{opacity:1,y:0,duration:0.52,ease:"power3.out"},17.17);
 tl.fromTo("#mg_s04 [data-a=big]",{opacity:0,scale:1.12},{opacity:1,scale:1,duration:0.55,ease:"power3.out"},17.590000000000003);
 tl.fromTo("#mg_s04 [data-a=a1]",{opacity:0,y:-34},{opacity:0.55,y:0,duration:0.5,ease:"power3.out"},18.07);
 tl.fromTo("#mg_s04 [data-a=a2]",{opacity:0,y:34},{opacity:1,y:0,duration:0.5,ease:"power3.out"},18.37);
+tl.fromTo("#ov_s05 .scrim-b",{opacity:0},{opacity:1,duration:0.5,ease:"power2.out"},20.84);
 tl.fromTo("#ov_s05 [data-a=tag]",{opacity:0,x:-30},{opacity:1,x:0,duration:0.55,ease:"power3.out"},20.99);
 countUp("#ov_s05 [data-count]",21.209999999999997,0.45);
 tl.fromTo("#ov_s05 [data-a=tb]",{scaleX:0},{scaleX:1,duration:0.85,ease:"power2.out",transformOrigin:"0% 50%"},21.209999999999997);
 tl.fromTo("#ph_s06 [data-a=huge]",{opacity:0,x:34},{opacity:1,x:0,duration:0.52,ease:"power3.out"},24.6);
 countUp("#ph_s06 [data-count]",24.8,0.45);
+tl.fromTo("#ov_s07 .scrim-b",{opacity:0},{opacity:1,duration:0.5,ease:"power2.out"},27.44);
 tl.fromTo("#ov_s07 [data-a=tag]",{opacity:0,x:30},{opacity:1,x:0,duration:0.55,ease:"power3.out"},27.6);
 countUp("#ov_s07 [data-count]",27.8,0.45);
 tl.fromTo("#ov_s08 .scrim-r",{opacity:0},{opacity:1,duration:0.5,ease:"power2.out"},31.68);
@@ -523,6 +557,7 @@ tl.fromTo("#ov_s08 [data-a=g]",{opacity:0,scale:1.1},{opacity:0.26,scale:1,durat
 tl.fromTo("#ov_s08 [data-a=q]",{opacity:0,scale:0.5,rotation:-12},{opacity:1,scale:1,rotation:0,duration:0.6,ease:"back.out(2)"},35.96);
 tl.fromTo("#v_s08",{scale:1.0},{scale:1.065,duration:5.56,ease:"power1.inOut"},31.68);
 tl.fromTo("#ov_s09 .scrim-b",{opacity:0},{opacity:1,duration:0.5,ease:"power2.out"},37.24);
+tl.fromTo("#ov_s09 .scrim-rd",{opacity:0},{opacity:1,duration:0.5,ease:"power2.out"},37.24);
 tl.fromTo("#ov_s09 [data-a=kick]",{opacity:0,y:22},{opacity:1,y:0,duration:0.52,ease:"power3.out"},37.39);
 tl.fromTo("#ov_s09 [data-a=head]",{opacity:0,y:22},{opacity:1,y:0,duration:0.52,ease:"power3.out"},37.55);
 tl.fromTo("#ov_s09 .lowerrule",{scaleX:0},{scaleX:1,duration:0.7,ease:"power2.out",transformOrigin:"0% 50%"},37.69);
@@ -538,6 +573,7 @@ tl.fromTo("#ph_s10 [data-bar=b1]",{scaleX:0},{scaleX:1,duration:0.95,ease:"power
 countUp("#ph_s10 [data-count]",44.32,0.45);
 tl.fromTo("#ph_s10 [data-a=b2]",{opacity:0,y:22},{opacity:1,y:0,duration:0.52,ease:"power3.out"},45.949999999999996);
 tl.fromTo("#ph_s10 [data-bar=b2]",{scaleX:0},{scaleX:1,duration:1.0,ease:"power2.out",transformOrigin:"0% 50%"},46.0);
+tl.fromTo("#ov_s11 .scrim-b",{opacity:0},{opacity:1,duration:0.5,ease:"power2.out"},48.52);
 tl.fromTo("#ov_s11 [data-a=tag]",{opacity:0,x:-30},{opacity:1,x:0,duration:0.55,ease:"power3.out"},49.0);
 countUp("#ov_s11 [data-count]",49.25,0.45);
 tl.fromTo("#ov_s11 [data-a=tb]",{scaleX:0},{scaleX:1,duration:0.9,ease:"power2.out",transformOrigin:"0% 50%"},49.25);
@@ -557,6 +593,8 @@ tl.fromTo("#mg_s14 [data-a=r1]",{opacity:0,x:26},{opacity:0.34,x:0,duration:0.45
 tl.fromTo("#mg_s14 [data-a=r2]",{opacity:0,x:26},{opacity:0.34,x:0,duration:0.45,ease:"power2.out"},61.5);
 tl.fromTo("#mg_s14 [data-a=r3]",{opacity:0,x:26},{opacity:1,x:0,duration:0.45,ease:"power2.out"},61.7);
 tl.fromTo("#mg_s14 [data-a=r4]",{opacity:0,x:26},{opacity:0.34,x:0,duration:0.45,ease:"power2.out"},61.9);
+tl.fromTo("#ov_s15 .scrim-rd",{opacity:0},{opacity:1,duration:0.5,ease:"power2.out"},63.97);
+tl.fromTo("#ov_s15 .scrim-b",{opacity:0},{opacity:1,duration:0.5,ease:"power2.out"},63.97);
 tl.fromTo("#ov_s15 [data-a=card]",{opacity:0,x:44},{opacity:1,x:0,duration:0.6,ease:"power3.out"},64.12);
 tl.fromTo("#ov_s15 [data-a=c1]",{opacity:0,y:22},{opacity:1,y:0,duration:0.52,ease:"power3.out"},64.47);
 tl.fromTo("#ov_s15 [data-a=cb1]",{scaleX:0},{scaleX:1,duration:1.2,ease:"power2.out",transformOrigin:"0% 50%"},64.52000000000001);
