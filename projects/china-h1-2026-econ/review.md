@@ -128,7 +128,7 @@ HyperFrames 不支持只重渲区间，故整片重渲（墙钟约 8 分钟）�
 
 ### 第 3 轮 · **PASS**（`judge-report-final-r3.json`）—— 交付文件的评审
 
-用户两条修改（去底框 / 字幕去标点）改的是全片画面，第 2 轮报告对新版已失效，故重建证据包重跑一轮（旧包归档在 `evidence/judge-pack-r2/`）。
+用户两条修改（去底框 / 字幕去标点）改的是全片画面，第 2 轮报告对新版已失效，故重建证据包重跑一轮。三轮的打分与判词都收在 `evidence/judge-pack/`（`scores-final-r{1,2,3}.json` / `judge-report-final-r{1,2,3}.json`）；contact sheet、逐镜帧、音轨等重媒体证据按仓库惯例不入库，在 `~/kuleshov-archive/m1-projects/china-h1-2026-econ/`。
 
 | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 | **overall** |
 |---|---|---|---|---|---|---|---|---|---|
