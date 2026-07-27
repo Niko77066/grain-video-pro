@@ -1,0 +1,270 @@
+/* 联播蓝金数据屏 · compose 样式（真相源：anchors/hero/hero.css 的 hero 门执行口径）
+   字体纪律：自带 woff2，禁 local() 承担正文/标题；font-weight 只取 woff2 实有档（400/700）。 */
+@font-face{font-family:"SansSC";font-weight:400;src:url("assets/fonts/SansSC400.woff2") format("woff2");}
+@font-face{font-family:"SansSC";font-weight:700;src:url("assets/fonts/SansSC700.woff2") format("woff2");}
+@font-face{font-family:"SerifSC";font-weight:700;src:url("assets/fonts/SerifSC700.woff2") format("woff2");}
+
+:root{
+  --navy-0:#0A1E3C; --navy-1:#123A6B; --navy-2:#061428;
+  --gold:#C8A24A; --gold-dim:#8A6F31; --red:#C4262E;
+  --ink:#EEF3FA; --ink-dim:#9FB3CC; --safe:96px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--navy-2);
+  font-family:"SansSC",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;}
+
+.fullframe{position:absolute;inset:0;width:1920px;height:1080px;object-fit:cover;z-index:1;}
+
+/* ---------------- 场景层 ---------------- */
+.scene{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;opacity:0;}
+.scene.ov{z-index:4;background:transparent;}
+.scene.ph{z-index:2;background:var(--navy-2);}
+.scene.mg{z-index:3;
+  background:radial-gradient(120% 90% at 22% 30%,#1B4C86 0%,var(--navy-1) 42%,var(--navy-0) 78%,var(--navy-2) 100%);}
+.scene.ph img{position:absolute;inset:0;width:1920px;height:1080px;object-fit:cover;}
+.veil-b{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(6,20,40,.50) 0%,rgba(6,20,40,.06) 34%,rgba(6,20,40,.80) 100%);}
+.scrim-r{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(6,20,40,0) 42%,rgba(6,20,40,.62) 68%,rgba(6,20,40,.86) 100%);}
+.grid-bg{position:absolute;left:-60px;top:-40px;width:2100px;height:1200px;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:96px 96px;}
+
+/* ---------------- 通用构件 ---------------- */
+.rule{position:absolute;height:3px;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--gold-dim) 62%,transparent 100%);}
+.lowerrule{left:var(--safe);bottom:236px;width:920px;}
+.lowerrule.wide{width:1120px;bottom:250px;}
+.lower{position:absolute;left:var(--safe);bottom:132px;}
+.kicker{display:inline-flex;align-items:center;gap:14px;font-weight:700;font-size:26px;line-height:1;
+  letter-spacing:.30em;color:var(--gold);}
+.kicker::before{content:"";width:52px;height:3px;background:var(--red);}
+.headline{margin-top:20px;font-family:"SerifSC";font-weight:700;font-size:74px;line-height:1.12;
+  letter-spacing:.02em;text-shadow:0 6px 28px rgba(0,0,0,.55);}
+
+#bug{position:absolute;left:var(--safe);top:56px;display:flex;align-items:center;gap:14px;z-index:6;
+  padding:12px 26px 12px 0;
+  background:linear-gradient(90deg,rgba(4,12,26,.84) 0%,rgba(4,12,26,.76) 74%,rgba(4,12,26,0) 100%);}
+#bug .mark{width:8px;height:34px;background:var(--red);}
+#bug .txt{font-weight:700;font-size:30px;line-height:1;letter-spacing:.22em;}
+#bug .date{font-weight:400;font-size:24px;line-height:1;letter-spacing:.06em;color:var(--gold);margin-left:6px;}
+
+/* 脚注自带暗压条 + 金色左边线（G2 hero 门 must_fix：不靠背景运气） */
+#foot{position:absolute;right:var(--safe);bottom:122px;z-index:6;opacity:0;text-align:right;
+  font-weight:400;font-size:22px;line-height:1;letter-spacing:.04em;color:#C9D6E6;
+  text-shadow:0 2px 10px rgba(0,0,0,.98),0 0 24px rgba(4,12,26,.9);}
+
+#capbox{position:absolute;left:0;right:0;bottom:44px;z-index:7;text-align:center;}
+/* 字幕：无底框、无标点。可读性用多层阴影等效描边（广播字幕标准做法） */
+.cap{display:inline-block;opacity:0;
+  position:absolute;left:50%;transform:translateX(-50%);bottom:0;white-space:nowrap;
+  font-family:"SansSC";font-weight:700;font-size:44px;line-height:1.28;color:#fff;
+  letter-spacing:.02em;
+  text-shadow:0 0 3px rgba(4,12,26,1),0 0 6px rgba(4,12,26,1),
+              2px 2px 3px rgba(4,12,26,1),-2px 2px 3px rgba(4,12,26,1),
+              2px -2px 3px rgba(4,12,26,1),-2px -2px 3px rgba(4,12,26,1),
+              0 4px 22px rgba(0,0,0,.95);}
+
+#dip{position:absolute;inset:0;z-index:8;background:var(--navy-2);opacity:0;}
+/* transform 完全交给 GSAP（lint: gsap_css_transform_conflict）——CSS 不写 transform */
+#wipe{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:8;opacity:0;
+  background:linear-gradient(90deg,rgba(200,162,74,0) 0%,var(--gold) 42%,var(--gold) 58%,rgba(200,162,74,0) 100%);
+  transform-origin:0% 50%;}
+#vig{position:absolute;inset:0;z-index:5;pointer-events:none;
+  background:radial-gradient(120% 100% at 50% 45%,transparent 52%,rgba(4,12,26,.42) 100%);}
+
+/* ---------------- 右侧数字组（s01） ---------------- */
+.datacol{position:absolute;right:var(--safe);top:190px;width:660px;text-align:right;}
+.metric{margin-bottom:56px;}
+.metric .lab{font-weight:400;font-size:27px;line-height:1;color:var(--ink-dim);letter-spacing:.10em;}
+.metric .val{margin-top:12px;font-weight:700;font-size:104px;line-height:1;
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em;text-shadow:0 8px 30px rgba(0,0,0,.6);}
+.metric .val.up{color:var(--gold);}
+.metric .val.down{color:#E8555C;}
+.metric .val .u{font-size:50px;margin-left:6px;}
+.metric .note{margin-top:10px;font-weight:400;font-size:24px;line-height:1;color:var(--ink-dim);}
+
+/* ---------------- 全屏面板（mg） ---------------- */
+.pane{position:absolute;left:var(--safe);top:50%;transform:translateY(-50%);right:var(--safe);}
+.pane.wide{top:50%;}
+.ptitle{font-weight:700;font-size:40px;line-height:1;letter-spacing:.10em;color:var(--ink-dim);}
+.bignum{margin-top:26px;font-weight:700;font-size:170px;line-height:1;color:var(--gold);
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;}
+.bignum .unit{font-size:62px;margin-left:16px;color:var(--ink);}
+.yoy{margin-top:14px;font-weight:400;font-size:38px;line-height:1;color:var(--ink-dim);}
+.yoy b{font-weight:700;font-size:56px;color:var(--ink);font-variant-numeric:tabular-nums;}
+.gdprow{display:flex;gap:110px;align-items:flex-end;margin-top:36px;}
+.gdpleft{flex:1;}
+.gdpright{flex:0 0 auto;}
+.qbars{display:flex;gap:96px;align-items:flex-end;height:320px;}
+.qb{display:flex;flex-direction:column;align-items:center;gap:18px;justify-content:flex-end;height:100%;}
+.qtrack{width:168px;height:268px;display:flex;align-items:flex-end;}
+.qtrack i{display:block;width:168px;height:100%;
+  background:linear-gradient(180deg,rgba(200,162,74,.95),rgba(138,111,49,.75));}
+.qb:last-child .qtrack i{height:86%;
+  background:linear-gradient(180deg,rgba(95,176,232,.90),rgba(35,90,140,.7));}
+.qlab{font-weight:400;font-size:30px;line-height:1;color:var(--ink-dim);white-space:nowrap;}
+.qlab b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
+.band{display:inline-block;margin-top:40px;padding:14px 0 0;border-top:2px solid rgba(200,162,74,.75);
+  transform-origin:0% 50%;}
+.band span{font-weight:700;font-size:30px;line-height:1;color:var(--gold);letter-spacing:.06em;}
+
+/* 转折字卡 */
+.turn{position:absolute;left:var(--safe);top:50%;transform:translateY(-50%);}
+.turnbig{margin-top:30px;font-family:"SerifSC";font-weight:700;font-size:132px;line-height:1.16;}
+.turnbig .rev{color:var(--gold);}
+.flipcol{position:absolute;right:190px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:64px;}
+.fliprow{display:flex;align-items:center;gap:34px;opacity:0;}
+.fliprow .ar{font-size:118px;line-height:1;}
+.fliprow.up .ar{color:var(--gold);}
+.fliprow.down .ar{color:#E8555C;}
+.fliprow .fl{font-weight:400;font-size:30px;line-height:1;color:var(--ink-dim);letter-spacing:.06em;}
+.fliprow .fv{margin-top:12px;font-weight:700;font-size:76px;line-height:1;
+  font-variant-numeric:tabular-nums;}
+.fliprow.up .fv{color:var(--gold);}
+.fliprow.down .fv{color:#E8555C;}
+.fliprow .fv.small{font-size:52px;}
+/* s14：被跳过的那一行 —— 表格行母题（有语义，不是装饰填空） */
+.rowsmotif{position:absolute;right:var(--safe);top:50%;transform:translateY(-50%);width:640px;}
+.mrow{display:flex;align-items:center;justify-content:space-between;opacity:0;
+  padding:26px 28px;border-bottom:1px solid rgba(255,255,255,.12);}
+.mrow .mk{font-weight:400;font-size:30px;line-height:1;color:var(--ink-dim);letter-spacing:.08em;}
+.mrow .mv{width:170px;height:10px;background:rgba(255,255,255,.16);}
+.mrow.hl{background:rgba(200,162,74,.14);border-left:5px solid var(--gold);padding-left:23px;}
+.mrow.hl .mk{color:var(--gold);font-weight:700;}
+.mrow.hl .mv{background:var(--gold);}
+
+/* ---------------- 数据卡（叠在实拍/静帧上） ---------------- */
+/* 数据卡：**无底框**（2026-07-27 用户拍板：压在实拍上的数据组件不许有 PPT 式深色底板）。
+   可读性改由三样承担：① 镜头级的无边缘柔性压暗 .scrim-r/.scrim-b；② 每个文字块自带多层
+   text-shadow（等效描边）；③ 字重与留白拉开层级。全片不再出现任何带边框/投影的浮动面板。 */
+.card{position:absolute;right:var(--safe);top:196px;width:706px;}
+.card.slim{top:250px;}
+.card.compare{top:224px;width:740px;}
+.card .ct{font-weight:700;font-size:34px;line-height:1;letter-spacing:.06em;
+  text-shadow:0 2px 10px rgba(0,0,0,.95),0 0 26px rgba(4,12,26,.9);}
+.card .cs{margin-top:14px;font-weight:400;font-size:30px;line-height:1;color:#C3D2E4;
+  font-variant-numeric:tabular-nums;text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.card .cfoot{margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.22);
+  font-weight:400;font-size:23px;line-height:1.5;color:#C3D2E4;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.card .cfoot b{color:var(--gold);font-weight:700;}
+.bars{margin-top:30px;}
+.bars.big{margin-top:44px;}
+.brow{margin-bottom:30px;}
+.bars.big .brow{margin-bottom:62px;}
+.brow .bk{display:flex;justify-content:space-between;align-items:baseline;
+  font-weight:400;font-size:26px;line-height:1;color:#C3D2E4;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.bars.big .brow .bk{font-size:34px;}
+.brow .bk b{font-weight:700;font-size:44px;line-height:1;font-variant-numeric:tabular-nums;
+  text-shadow:0 3px 14px rgba(0,0,0,.95),0 0 30px rgba(4,12,26,.85);}
+.bars.big .brow .bk b{font-size:58px;}
+.btrack{margin-top:14px;height:14px;background:rgba(255,255,255,.22);
+  box-shadow:0 2px 14px rgba(0,0,0,.75);}
+.bars.big .btrack{height:24px;}
+.btrack i{display:block;height:100%;transform-origin:0% 50%;
+  box-shadow:0 0 18px rgba(0,0,0,.45);}
+.scale{display:flex;justify-content:space-between;margin-top:8px;opacity:0;
+  font-weight:400;font-size:20px;line-height:1;color:#8CA4C0;font-variant-numeric:tabular-nums;
+  text-shadow:0 2px 8px rgba(0,0,0,.95);}
+.bars.big + .scale{font-size:24px;}
+
+/* 对比卡（s15） */
+.card.compare .crow{margin-bottom:34px;}
+.card.compare .ck{font-weight:400;font-size:27px;line-height:1;color:#C3D2E4;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.card.compare .cv{margin-top:10px;font-weight:700;font-size:66px;line-height:1;
+  font-variant-numeric:tabular-nums;color:#E8555C;
+  text-shadow:0 3px 16px rgba(0,0,0,.95),0 0 32px rgba(4,12,26,.85);}
+.card.compare .cv.gold{color:var(--gold);}
+.card.compare .ctrack{margin-top:14px;height:16px;background:rgba(255,255,255,.22);
+  box-shadow:0 2px 14px rgba(0,0,0,.75);}
+.card.compare .ctrack i{display:block;height:100%;width:89%;background:#E8555C;transform-origin:0% 50%;}
+.card.compare .ctrack i.gold{width:100%;background:var(--gold);}
+
+/* ---------------- 角标（叠在实拍上） ---------------- */
+/* 实拍角标：同样去底框，只留文字 + 一条金色细线做锚（线不是框） */
+.tag-ll,.tag-lr{position:absolute;bottom:236px;min-width:520px;}
+.tag-ll{left:var(--safe);}
+.tag-lr{right:var(--safe);text-align:right;}
+.tk{font-weight:400;font-size:27px;line-height:1;color:#C3D2E4;letter-spacing:.06em;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.tv{margin-top:12px;font-weight:700;font-size:92px;line-height:1;font-variant-numeric:tabular-nums;
+  text-shadow:0 4px 20px rgba(0,0,0,.95),0 0 40px rgba(4,12,26,.85);}
+.tv.down{color:#E8555C;} .tv.up{color:var(--gold);} .tv.flat{color:#E8B44A;}
+.tsub{margin-top:8px;font-weight:400;font-size:25px;line-height:1;color:#C3D2E4;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.tbar{margin-top:16px;height:12px;width:420px;background:rgba(255,255,255,.22);
+  box-shadow:0 2px 14px rgba(0,0,0,.75);}
+.tag-lr .tbar{margin-left:auto;}
+.tbar i{display:block;height:100%;width:46%;background:#E8555C;transform-origin:0% 50%;
+  box-shadow:0 0 18px rgba(0,0,0,.45);}
+.tbar i.up{width:62%;background:var(--gold);}
+
+/* 大数字（静帧镜） */
+.hugewrap{position:absolute;right:var(--safe);top:50%;transform:translateY(-50%);text-align:right;}
+.hk{font-weight:400;font-size:34px;line-height:1;color:#C3D2E4;letter-spacing:.08em;
+  text-shadow:0 2px 12px rgba(0,0,0,.95);}
+.hv{margin-top:16px;font-weight:700;font-size:172px;line-height:1;
+  font-variant-numeric:tabular-nums;text-shadow:0 10px 40px rgba(0,0,0,.7);}
+.hv.down{color:#E8555C;} .hv.up{color:var(--gold);}
+
+/* 上/下条（s03） */
+.stripwrap{position:absolute;left:var(--safe);bottom:236px;}
+.strip{display:flex;align-items:baseline;gap:24px;}
+.strip .sk{font-weight:400;font-size:27px;color:#C3D2E4;letter-spacing:.06em;
+  text-shadow:0 2px 10px rgba(0,0,0,.95);}
+.strip .sv{font-weight:700;font-size:50px;font-variant-numeric:tabular-nums;
+  text-shadow:0 3px 16px rgba(0,0,0,.95),0 0 32px rgba(4,12,26,.85);}
+.strip .sv.gold{color:var(--gold);}
+.strip .sdiv{width:1px;height:42px;background:rgba(255,255,255,.28);}
+
+/* 设问镜（s08） */
+.qmark{position:absolute;right:250px;top:50%;transform:translateY(-50%);
+  font-family:"SerifSC";font-weight:700;font-size:420px;line-height:1;color:var(--gold);opacity:0;
+  text-shadow:0 12px 60px rgba(0,0,0,.7);}
+.qghost{position:absolute;right:216px;top:50%;margin-top:150px;
+  font-weight:700;font-size:120px;line-height:1;color:#fff;opacity:0;font-variant-numeric:tabular-nums;}
+.qghost .u{font-size:60px;}
+
+/* 物价卡（s16） */
+.cpi{margin-top:70px;display:flex;align-items:center;gap:70px;}
+.cpitrack{position:relative;flex:1;height:170px;}
+.cpibar{position:absolute;left:0;top:56px;width:100%;height:44px;background:rgba(255,255,255,.09);}
+.cpibar i{display:block;height:100%;width:40%;background:var(--gold);transform-origin:0% 50%;}
+.target{position:absolute;left:80%;top:14px;height:128px;border-left:3px dashed rgba(232,85,92,.9);}
+.target span{position:absolute;left:18px;top:-4px;white-space:nowrap;
+  font-weight:700;font-size:28px;line-height:1;color:#E8555C;letter-spacing:.04em;}
+.cpiscale{position:absolute;left:0;right:0;top:112px;display:flex;justify-content:space-between;opacity:0;
+  font-weight:400;font-size:22px;line-height:1;color:#6E88A8;font-variant-numeric:tabular-nums;}
+.cpival{font-weight:700;font-size:150px;line-height:1;color:var(--gold);
+  font-variant-numeric:tabular-nums;}
+.cpinote{margin-top:44px;font-weight:400;font-size:28px;line-height:1;color:var(--ink-dim);}
+
+/* 结论卡（s18） */
+.endtop{position:absolute;left:var(--safe);top:238px;width:1160px;}
+.endsub{margin-top:22px;font-weight:400;font-size:30px;line-height:1.6;color:var(--ink-dim);}
+.endline{position:absolute;left:var(--safe);bottom:132px;width:1200px;}
+.endline .q{font-family:"SerifSC";font-weight:700;font-size:88px;line-height:1.24;}
+.endline .q em{font-style:normal;color:var(--gold);}
+.split{position:absolute;right:var(--safe);top:50%;transform:translateY(-50%);width:440px;text-align:right;}
+.split .row{margin-bottom:46px;}
+.split .k{font-weight:400;font-size:25px;line-height:1;color:var(--ink-dim);letter-spacing:.06em;}
+.split .v{margin-top:10px;font-weight:700;font-size:60px;line-height:1;font-variant-numeric:tabular-nums;}
+.split .v.gold{color:var(--gold);} .split .v.red{color:#E8555C;}
+.split .bar{margin-top:14px;height:10px;background:rgba(255,255,255,.10);}
+.split .bar i{display:block;height:100%;transform-origin:0% 50%;}
+.split .row:nth-child(1) .bar i{width:100%;}
+.split .row:nth-child(2) .bar i{width:79%;}
+.split .row:nth-child(3) .bar i{width:8%;}
+
+/* 左下标题块的暗压条：金色 kicker 压在亮实拍上会掉到 1.07:1（lint contrast）——不靠背景运气 */
+.scrim-b{position:absolute;left:0;right:0;bottom:0;height:520px;
+  background:linear-gradient(180deg,rgba(4,12,26,0) 0%,rgba(4,12,26,.52) 44%,rgba(4,12,26,.86) 100%);}
+/* 右侧无边缘压暗：数据列脱掉底板后，靠它把实拍压下去，不产生任何可见边界 */
+.scrim-rd{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(4,12,26,0) 30%,rgba(4,12,26,.50) 50%,rgba(4,12,26,.86) 72%,rgba(4,12,26,.93) 100%);}

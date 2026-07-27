@@ -45,3 +45,13 @@ film-ir/.pytest_cache/
 
 # Film IR 锁文件
 projects/**/film.json.lock
+
+# out/ 里的重复副本不进 git（真身在项目根与 evidence/）；out/ 只留 COSTS.md 与 RUNLOG.md 这类独有内容
+projects/**/out/film.json
+projects/**/out/review.md
+projects/**/out/render-metrics.json
+# 失败版重建脚手架与其分析：一次性中间产物，结论已并进 review.md 与 ledger
+projects/**/out/v1-failed/
+projects/**/compose-v1/
+# forced-align 的中间输入（由 audio/narration.txt 一行重生成）
+projects/**/audio/spoken.json

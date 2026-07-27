@@ -1,0 +1,82 @@
+/* 联播蓝金数据屏 · 视觉手柄基准样式（hero frame 取样用，compose 期升级为 composition CSS） */
+@font-face { font-family: SansSC;  src: url("../../compose/assets/fonts/SansSC400.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: SansSC;  src: url("../../compose/assets/fonts/SansSC700.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: SerifSC; src: url("../../compose/assets/fonts/SerifSC700.woff2") format("woff2"); font-weight: 700; }
+
+:root {
+  --navy-0:#0A1E3C; --navy-1:#123A6B; --navy-2:#061428;
+  --gold:#C8A24A;  --gold-dim:#8A6F31;
+  --red:#C4262E;   --ink:#EEF3FA; --ink-dim:#9FB3CC;
+  --safe:96px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1920px; height:1080px; overflow:hidden; background:var(--navy-2); }
+body { font-family:SansSC,sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+.stage { position:relative; width:1920px; height:1080px; overflow:hidden; }
+
+/* full-bleed 媒体层 */
+.bed { position:absolute; inset:0; }
+.bed img { width:100%; height:100%; object-fit:cover; display:block; }
+/* 冷蓝广播 LUT：先去饱和压亮，再叠一层 navy 蓝，避免 hue-rotate 把海水推成绿 */
+.grade-cool  { filter:saturate(.58) contrast(1.10) brightness(.80); }
+.grade-cool::after { content:""; position:absolute; inset:0; pointer-events:none;
+  background:#12457F; mix-blend-mode:color; opacity:.42; }
+.grade-cool::before { content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
+  background:radial-gradient(120% 100% at 50% 45%, transparent 45%, rgba(4,14,30,.55) 100%); }
+.veil { position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(6,20,40,.55) 0%, rgba(6,20,40,.10) 38%, rgba(6,20,40,.82) 100%); }
+
+/* 联播底板（无实拍时的演播底） */
+.studio { position:absolute; inset:0;
+  background:radial-gradient(120% 90% at 22% 28%, #1B4C86 0%, var(--navy-1) 42%, var(--navy-0) 78%, var(--navy-2) 100%); }
+.studio::after { content:""; position:absolute; inset:0;
+  background:repeating-linear-gradient(90deg, rgba(255,255,255,.030) 0 1px, transparent 1px 4px); }
+
+/* 金线 */
+.rule { position:absolute; height:3px; background:linear-gradient(90deg,var(--gold) 0%, var(--gold-dim) 62%, transparent 100%); }
+.rule.thin { height:2px; opacity:.7; }
+
+/* 左下标题条 */
+.lower { position:absolute; left:var(--safe); bottom:118px; }
+.kicker { display:inline-flex; align-items:center; gap:14px;
+  font:700 26px/1 SansSC; letter-spacing:.30em; color:var(--gold); }
+.kicker::before { content:""; width:52px; height:3px; background:var(--red); }
+.headline { margin-top:20px; font:700 74px/1.12 SerifSC; letter-spacing:.02em;
+  text-shadow:0 6px 28px rgba(0,0,0,.55); }
+.sub { margin-top:16px; font:400 28px/1.45 SansSC; color:var(--ink-dim); }
+
+/* 右侧数据组 */
+.datacol { position:absolute; right:var(--safe); top:200px; width:640px; text-align:right; }
+.metric { margin-bottom:52px; }
+.metric .lab { font:400 27px/1 SansSC; color:var(--ink-dim); letter-spacing:.10em; }
+.metric .val { margin-top:12px; font:700 108px/1 SansSC; font-variant-numeric:tabular-nums;
+  letter-spacing:-.01em; text-shadow:0 8px 30px rgba(0,0,0,.5); }
+.metric .val.up   { color:var(--gold); }
+.metric .val.down { color:#E8555C; }
+.metric .val .u { font-size:52px; margin-left:6px; }
+.metric .arrow { font-size:64px; margin-right:10px; }
+.metric .note { margin-top:8px; font:400 24px/1 SansSC; color:var(--ink-dim); }
+
+/* 左上角标 */
+.bug { position:absolute; left:var(--safe); top:64px; display:flex; align-items:center; gap:14px; }
+.bug .mark { width:8px; height:34px; background:var(--red); }
+.bug .txt  { font:700 30px/1 SansSC; letter-spacing:.22em; color:var(--ink); }
+.bug .date { font:400 24px/1 SansSC; letter-spacing:.06em; color:var(--gold); margin-left:6px; }
+
+/* 脚注（贴金线上方，禁压边框）
+   G2 hero 门 must_fix s01：脚注走到肤色/亮底区会对比度塌陷 → 自带暗压条，不靠背景运气 */
+.foot { position:absolute; left:var(--safe); bottom:44px; padding:9px 18px 9px 16px;
+  font:400 22px/1 SansSC; color:#C9D6E6; letter-spacing:.04em;
+  background:linear-gradient(90deg, rgba(4,12,26,.80) 0%, rgba(4,12,26,.72) 72%, rgba(4,12,26,0) 100%);
+  border-left:3px solid var(--gold-dim); }
+
+/* 图表 */
+.chartcard { position:absolute; right:var(--safe); top:170px; width:820px; height:600px;
+  background:linear-gradient(180deg, rgba(9,27,54,.965), rgba(5,16,34,.985));
+  border:1px solid rgba(200,162,74,.42); box-shadow:0 24px 70px rgba(0,0,0,.55); }
+.chartcard::before { content:""; position:absolute; left:0; top:0; width:100%; height:3px;
+  background:linear-gradient(90deg,var(--gold) 0%, var(--gold-dim) 55%, transparent 100%); }
+.chartcard .ct { padding:32px 36px 0; font:700 32px/1 SansSC; letter-spacing:.06em; }
+.chartcard .cs { padding:12px 36px 0; font:400 23px/1 SansSC; color:var(--ink-dim); }
+.legend { position:absolute; right:36px; top:36px; text-align:right; font:400 23px/1.9 SansSC; }
+.legend i { display:inline-block; width:26px; height:4px; margin-right:10px; vertical-align:middle; }

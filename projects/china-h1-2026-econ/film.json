@@ -1,0 +1,1394 @@
+{
+  "meta": {
+    "title": "《经济半年报》4.7% 背后的两组数字",
+    "title_display": "经济半年报 · 4.7% 背后的两组数字",
+    "slug": "china-h1-2026-econ",
+    "format": "anchor_news_recap",
+    "style_pack": "anchor-desk",
+    "commitment": {
+      "type": "structure_readout",
+      "duration_s": 80.0,
+      "tolerance_pct": 25.0
+    },
+    "aspect": "16:9",
+    "audience": "关心宏观数据但不读统计公报的普通观众",
+    "budget": {
+      "spent_usd": 1.11
+    },
+    "pipeline_version": "m1-v2",
+    "schema_version": "m1-v1",
+    "status": "review",
+    "contract_amendments": {},
+    "approval_policy": {
+      "mode": "autonomous",
+      "stop_on": [
+        "taste_constitution",
+        "budget_cap",
+        "contract_violation"
+      ],
+      "granted_by": "user_prompt_2026-07-27",
+      "note": "用户只给了选题与形式诉求，未设预算上限与人工停点；EP 端到端自主，代决一律 by:ep"
+    },
+    "style_notes": {
+      "visual_handle": "联播蓝金数据屏：#0A1E3C→#123A6B 深蓝渐变底 + #C8A24A 金色分隔线 + #C4262E 红色强调块；标题恒压左下 1/3 金线上；每个数据出场统一做『数字滚动到位 + 金线扫过』的重复动作；主播镜、数据屏与实拍素材共用同一冷蓝金调色缝成一个世界。",
+      "generated_style": "collage",
+      "generated_style_scope": "本片 shots[] 内无 seedance / collage_broll 生成镜——style_lock 为形式在场声明，实际不落任何生成 b-roll 工艺。唯一 AI 生成资产是数字人形象锚点（写实新闻主播 16:9 半身像，走 references/avatar.md 锚点纪律，不属 style_lock 管辖的生成镜声部）。若后续追加生成 b-roll，须按 collage 词表执法。",
+      "broadcast_reference": "CCTV 新闻联播的形式语法（正襟主播、蓝金演播室、红金标题条、数据大屏、庄重播报腔），内容语法仍按 taste 宪法走 But/Therefore 与事实回链——学形不学腔。",
+      "lut": "cool_blue_broadcast",
+      "typography": "标题 SerifSC700 / 正文与数据 SansSC400·700；数字用等宽变体防跳动"
+    }
+  },
+  "audio": {
+    "voiceover": {
+      "file": "audio/voiceover.mp3",
+      "status": "locked",
+      "text_prompt_file": "audio/narration.txt",
+      "voice_profile": "Chinese (Mandarin)_Male_Announcer · speed 1.0 · emotion calm · language_boost Chinese（栏目固定音色，与 a01_anchor_portrait 男主播形象配对，跨片不换）",
+      "gen": {
+        "model": "speech-2.8-hd (MiniMax via neodrop)",
+        "prompt_file": "audio/narration.txt",
+        "params": {
+          "voice": "Chinese (Mandarin)_Male_Announcer",
+          "speed": 1.0,
+          "emotion": "calm",
+          "english_normalization": true,
+          "language_boost": "Chinese",
+          "format": "mp3",
+          "single_pass": true
+        },
+        "refs": [],
+        "request_id": "202607270626458255766178268d9d6F6IwqaAY",
+        "date": "2026-07-27",
+        "cost_usd": 0.01,
+        "wallclock_s": 10.1,
+        "duration_actual_s": 81.96,
+        "file": "audio/voiceover.mp3",
+        "note": "single-pass 整片一次生成（禁分节拼接）。358 字 / 81.96s = 4.37 字每秒，落在 4.2–4.8 协议区间。网关未回单价，cost_usd 为按 MiniMax 公开字数价的估算。"
+      }
+    },
+    "timeline": {
+      "file": "audio/sections.json",
+      "source": "forced_align wav2vec2-large-xlsr-53-chinese-zh-cn (CTC)",
+      "duration_s": 81.96,
+      "sections": [
+        {
+          "id": "sec01",
+          "t": [
+            0.0,
+            6.91
+          ],
+          "text": "七月十五号，上半年的经济数据出来了。同一张表上，有两组数字方向正好相反。"
+        },
+        {
+          "id": "sec02",
+          "t": [
+            6.91,
+            17.05
+          ],
+          "text": "先看稳的。上半年国内生产总值接近七十万亿元，同比增长百分之四点七，正好落在全年四点五到五的目标区间里。"
+        },
+        {
+          "id": "sec03",
+          "t": [
+            17.05,
+            31.68
+          ],
+          "text": "但翻到投资和消费，情况反过来了。固定资产投资同比下降百分之五点七，房地产开发投资降了百分之十八。社会消费品零售总额只涨百分之一点三。"
+        },
+        {
+          "id": "sec04",
+          "t": [
+            31.68,
+            37.24
+          ],
+          "text": "投资在缩，消费几乎没动。那百分之四点七，是谁扛起来的？"
+        },
+        {
+          "id": "sec05",
+          "t": [
+            37.24,
+            48.52
+          ],
+          "text": "外贸。上半年货物进出口二十五万四千亿元，增长百分之十六点九。出口涨百分之十三点四，进口涨百分之二十二点一。"
+        },
+        {
+          "id": "sec06",
+          "t": [
+            48.52,
+            60.63
+          ],
+          "text": "还有制造。高技术制造业增加值涨百分之十三点三，装备制造业涨百分之九点三。工业机器人产量多了两成八，锂离子电池多了近四成。"
+        },
+        {
+          "id": "sec07",
+          "t": [
+            60.63,
+            74.84
+          ],
+          "text": "这份表里还有一行，容易被跳过。居民人均可支配收入实际增长百分之四点二，跑输了经济增速。居民消费价格只涨百分之一，离百分之二的目标还差不少。"
+        },
+        {
+          "id": "sec08",
+          "t": [
+            74.84,
+            81.96
+          ],
+          "text": "外需和制造这一棒已经跑起来了。下半年要看的，是内需能不能接得住。"
+        }
+      ],
+      "words_file": "audio/timeline_fa.json",
+      "words_count": 358
+    }
+  },
+  "anchors": [
+    {
+      "id": "a01_anchor_portrait",
+      "type": "avatar_portrait",
+      "intent": "栏目虚构主播形象锚点：16:9 半身构图（HeyGen 不外扩，源图比例=画面比例），正面对镜，蓝金演播室景深虚化背景。人设跨片固定：与 TTS 音色档配对后不换。",
+      "status": "locked",
+      "file": "anchors/a01_anchor_portrait.png",
+      "cdn_url": "https://storage.neodrop.ai/kuleshov/econ26/a01_anchor_portrait.png",
+      "aspect": "16:9",
+      "used_by": [
+        "s01_hook_anchor",
+        "s08_question_anchor",
+        "s17_close_anchor"
+      ],
+      "candidates": [
+        {
+          "file": "anchors/a01_cand1.png"
+        },
+        {
+          "file": "anchors/a01_cand2.png"
+        },
+        {
+          "file": "anchors/a01_cand3.png"
+        }
+      ],
+      "gen": {
+        "model": "gpt-image-2 (neodrop)",
+        "prompt": "Photorealistic 16:9 wide broadcast news studio shot, medium half-body framing of a completely fictional Chinese television news anchor, mid-30s, seated upright at a dark glass anchor desk, facing the camera straight on, calm neutral professional expression, mouth closed, direct eye contact with lens.\n\nWardrobe: charcoal navy suit jacket, plain white shirt, no tie pattern, no jewelry, no name badge.\n\nStudio: deep navy blue seamless backdrop with a soft gradient from #0A1E3C to #123A6B, thin brushed-gold horizontal accent lines running across the background, one large out-of-focus data screen glowing softly in the upper right background with abstract unreadable blue chart shapes, shallow depth of field so the background is clearly blurred.\n\nLighting: even soft broadcast key light on the face, gentle rim light on the shoulders in warm gold, no harsh shadows, skin tones natural and clean.\n\nComposition: subject positioned slightly left of center, head fully inside frame with comfortable headroom, body cut at mid-chest, generous empty background space on the right third for later graphic overlays. Camera at eye level, 50mm lens look.\n\nAbsolutely no text, no letters, no numbers, no logos, no station identification, no captions, no watermark anywhere in the image. Do not resemble any real or public person. Generic, anonymous, invented face.",
+        "params": {
+          "quality": "medium",
+          "size": "1792x1008",
+          "output_format": "png",
+          "n": 1,
+          "candidates": 3
+        },
+        "refs": [],
+        "request_id": "cand2=202607270616236375588768268d9d61THGdCft（选用）｜cand1=...OlrmQQ0L｜cand3=...KYJaPBFZ",
+        "date": "2026-07-27",
+        "cost_usd": 0.18,
+        "wallclock_s": 129.8,
+        "file": "anchors/a01_anchor_portrait.png",
+        "note": "3 候选 N 选 1 选定 cand2。选择依据：三张都是合格 16:9 半身构图，cand2 的背景数据屏虚化最深（叠加层文字可读性最好）、主播位于左三分位留出右侧图形区、面部占比最大（唇同步细节最优）。cand1 主体偏中央且右侧屏幕过亮抢注意力；cand3 构图与 cand2 接近但屏幕更锐、与前景争视线。"
+      },
+      "note": "合规硬约束：完全虚构的通用主播形象，不得像任何真实人物、不带任何真实电视台台标/栏目名/主播姓名。风格包唯一硬不兼容项是写实真人重演——本片主播是符号化栏目人设，不重演任何真实人物或事件现场。"
+    },
+    {
+      "id": "a02_style_frame",
+      "type": "style_frame",
+      "intent": "全片定调帧：联播蓝金数据屏的色板与光感基准（#0A1E3C→#123A6B 深蓝渐变、#C8A24A 金线、#C4262E 红块），供 compose 取 CSS 变量与统一 LUT 用。",
+      "status": "acquired",
+      "file": "anchors/hero/hero3_v2.png",
+      "aspect": "16:9",
+      "used_by": [],
+      "candidates": [],
+      "note": "定调帧改由 hero3_v2（纯 HTML 演播底板字卡）充当，不另出图：它本身就是本片蓝金色板与金线/红块比例的真实执行样本，比再生成一张示意图更贴合实际 compose 输出。CSS 变量真相源见 anchors/hero/hero.css。"
+    }
+  ],
+  "shot_groups": [],
+  "shots": [
+    {
+      "id": "s01_hook_anchor",
+      "t": [
+        0.0,
+        6.91
+      ],
+      "voice_ref": "sec01",
+      "intent": "钩子：立住『同一张表上有两组方向相反的数字』——+4.7% 与 −5.7% 同屏对置。",
+      "framing": "主播中景 · 右侧双数字组 · 左下标题条",
+      "motion": "固定机位，右侧双数字先后弹入，金线扫过",
+      "source": {
+        "provider": "avatar",
+        "params": {
+          "voice": "anchor",
+          "anchor_role": "主持声部·开场"
+        }
+      },
+      "anchor_refs": [
+        "a01_anchor_portrait"
+      ],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "fal-ai/heygen/avatar4/image-to-video (fal queue 经灵鲸网关)",
+        "prompt": "A composed television news anchor in a deep navy and gold broadcast studio, seated at a glass desk, steady eye contact with the camera, calm authoritative delivery, natural subtle head movement, no gestures beyond the shoulders.",
+        "params": {
+          "image_url": "https://storage.neodrop.ai/kuleshov/econ26/a01_anchor_portrait.png",
+          "audio_url": "https://storage.neodrop.ai/kuleshov/econ26/av_s01.mp3",
+          "aspect_ratio": "16:9",
+          "resolution": "1080p"
+        },
+        "refs": [
+          "anchor:a01_anchor_portrait"
+        ],
+        "request_id": "task_jFeuuaH74o159wY4K8ENyxUqSSvQTOgY",
+        "task_id": "6a670759276a620cb3a265df",
+        "date": "2026-07-27",
+        "cost_usd": 0.3,
+        "wallclock_s": 155.0,
+        "duration_actual_s": 6.935,
+        "file": "shots/s01-avatar.mp4",
+        "note": "实测 1920x1080 / 25fps / h264+aac / 6.935s。台词与口型 100% 由 audio_url 决定（音频先行是物理约束）；音频切片来自整片 single-pass voiceover 的 [0.00s 起] 区间，故三镜音色与全片完全一致，不存在分节漂移。实际 6.935s vs 分镜槽位 6.91s 溢出 0.025s，compose 走尾部裁切（保动作完成点），不冻结不变速。网关未回单价，cost_usd 按 HeyGen Avatar4 公开秒级价估算。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 25fps / h264；blackdetect(d=0.15,pix_th=0.10) 0 段、freezedetect(n=0.003,d=0.5) 0 段；实测时长已回填 gen.duration_actual_s。",
+        "semantic": "抽帧目检：三镜为同一形象锚点驱动，面部特征、发型、西装、演播室背景一致，无角色变脸；口型开合与爆破音位置自然，无塑料感；模型把源图重构图为居中略偏左的中景（源图为左三分位），右侧背景数据屏保留——compose 端右侧数据列改为叠深色 scrim 后再压字，保证可读性。无畸变、无多手指、无背景漂移。"
+      }
+    },
+    {
+      "id": "s02_gdp_screen",
+      "t": [
+        6.91,
+        13.65
+      ],
+      "voice_ref": "sec02",
+      "intent": "稳的一面：GDP 近 70 万亿、+4.7%，一/二季度 5.0 与 4.3 的落差同屏可见。",
+      "framing": "全屏数据屏 · 季度柱状 + 目标带",
+      "motion": "柱体依次生长，4.7% count-up，目标带横向扫入",
+      "source": {
+        "provider": "hyperframes",
+        "params": {
+          "voice": "data_screen",
+          "facts": [
+            "F01",
+            "F02",
+            "F03"
+          ]
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "sourced"
+    },
+    {
+      "id": "s03_city_aerial",
+      "t": [
+        13.65,
+        17.05
+      ],
+      "voice_ref": "sec03",
+      "intent": "把『落在目标区间内』落到具体城市实景上，给数据一次呼吸。",
+      "framing": "城市夜景航拍全景",
+      "motion": "素材自带航拍位移，叠冷蓝 LUT",
+      "source": {
+        "provider": "footage",
+        "params": {
+          "voice": "broll",
+          "asset": "footage/raw/v_sky.mp4",
+          "era_place": "上海夜景天际线（东方明珠可辨，与选题地点一致）"
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "pexels retrieval + ffmpeg regrade",
+        "params": {
+          "pexels_id": 33009782,
+          "page": "https://www.pexels.com/video/shanghai-night-skyline-with-tower-view-33009782/",
+          "license": "pexels",
+          "media_start_s": 4.0,
+          "transcode": "scale=1920:1080(crop) + eq=saturation=0.34:contrast=1.06:brightness=0.02,colortemperature=temperature=12000:mix=1,colorbalance=bs=0.10:bm=0.08:bh=0.05:rs=-0.06:rm=-0.05 + h264 crf18 -g 12 -keyint_min 12 -sc_threshold 0 -an @30fps"
+        },
+        "refs": [],
+        "date": "2026-07-27",
+        "cost_usd": 0.0,
+        "file": "compose/assets/clips/c_s03_sky.mp4",
+        "note": "上海外滩夜景航拍全景，东方明珠与陆家嘴天际线可辨，前景为观景平台人群剪影。 冷蓝广播 LUT 与演播室同色温；密集关键帧重编码防渲染器 seek 冻帧；原生音轨已剥离（旁白为唯一音源）。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 30fps / h264 / 无音轨；抽帧目检无模糊、无水印、无摆拍感。",
+        "semantic": "画面内容与镜头 intent 一致；地点/时代特征与选题一致或中性；冷蓝 LUT 后与演播室蓝同色温，无三层贴片感。"
+      }
+    },
+    {
+      "id": "s04_turn_card",
+      "t": [
+        17.05,
+        20.84
+      ],
+      "voice_ref": "sec03",
+      "intent": "叙事转折点：『但翻到投资和消费，情况反过来了』——用版式做 But 的重音。",
+      "framing": "全屏转折字卡 · 大字",
+      "motion": "双箭头由上翻下，底色由蓝转深，字块错峰入场",
+      "source": {
+        "provider": "hyperframes",
+        "params": {
+          "voice": "data_screen"
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "sourced"
+    },
+    {
+      "id": "s05_site_aerial",
+      "t": [
+        20.84,
+        24.46
+      ],
+      "voice_ref": "sec03",
+      "intent": "固定资产投资 −5.7%：实拍在建工地给『投资在缩』一个物证面。",
+      "framing": "工地航拍全景 · 左下数据角标",
+      "motion": "素材自带塔吊运动，角标数字 count-down 到 −5.7%",
+      "source": {
+        "provider": "footage",
+        "params": {
+          "voice": "broll",
+          "asset": "footage/raw/v_site.mp4",
+          "facts": [
+            "F04"
+          ]
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "pexels retrieval + ffmpeg regrade",
+        "params": {
+          "pexels_id": 19630919,
+          "page": "https://www.pexels.com/video/an-aerial-view-of-a-construction-site-with-a-lot-of-buildings-19630919/",
+          "license": "pexels",
+          "media_start_s": 6.0,
+          "transcode": "scale=1920:1080(crop) + eq=saturation=0.30:contrast=1.12:brightness=-0.09,colortemperature=temperature=12000:mix=1,colorbalance=bs=0.12:bm=0.10:bh=0.06:rs=-0.08:rm=-0.06 + h264 crf18 -g 12 -keyint_min 12 -sc_threshold 0 -an @30fps"
+        },
+        "refs": [],
+        "date": "2026-07-27",
+        "cost_usd": 0.0,
+        "file": "compose/assets/clips/c_s05_site.mp4",
+        "note": "多栋在建混凝土框架楼体的低空航拍，塔吊与脚手架在场，阴天，地点特征中性。 冷蓝广播 LUT 与演播室同色温；密集关键帧重编码防渲染器 seek 冻帧；原生音轨已剥离（旁白为唯一音源）。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 30fps / h264 / 无音轨；抽帧目检无模糊、无水印、无摆拍感。",
+        "semantic": "画面内容与镜头 intent 一致；地点/时代特征与选题一致或中性；冷蓝 LUT 后与演播室蓝同色温，无三层贴片感。"
+      }
+    },
+    {
+      "id": "s06_housing_photo",
+      "t": [
+        24.46,
+        27.44
+      ],
+      "voice_ref": "sec03",
+      "intent": "房地产开发投资 −18.0%：从工地全景推到楼体，数字从 −5.7 递进到 −18.0。",
+      "framing": "楼体照片缓推特写 · 大数字",
+      "motion": "Ken Burns 缓推 4%，power2.inOut；−18.0% 由小变正",
+      "source": {
+        "provider": "image_motion",
+        "params": {
+          "voice": "broll_still",
+          "asset": "footage/raw/p_site.jpg",
+          "facts": [
+            "F05"
+          ],
+          "kenburns": "scale 1.00→1.04, 2.98s"
+        }
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "qc_pass",
+      "gen": {
+        "model": "pexels retrieval + ffmpeg regrade (still)",
+        "params": {
+          "pexels_id": 9370034,
+          "page": "https://www.pexels.com/photo/9370034/",
+          "license": "pexels",
+          "export": "2400x1350（Ken Burns 放大 1.04–1.05 仍在原生像素内，不软）",
+          "grade": "eq=saturation=0.30:contrast=1.12:brightness=-0.09,colortemperature=temperature=12000:mix=1,colorbalance=bs=0.12:bm=0.10:bh=0.06:rs=-0.08:rm=-0.06"
+        },
+        "refs": [],
+        "date": "2026-07-27",
+        "cost_usd": 0.0,
+        "file": "compose/assets/img/i_s06_housing.jpg",
+        "note": "在建高层住宅楼体与塔吊，阴天灰白天空，地点特征中性。 Ken Burns 在 HyperFrames 里声明式做（可调、确定性、免一次转码），不预烘焙 mp4。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 30fps / h264 / 无音轨；抽帧目检无模糊、无水印、无摆拍感。",
+        "semantic": "画面内容与镜头 intent 一致；地点/时代特征与选题一致或中性；冷蓝 LUT 后与演播室蓝同色温，无三层贴片感。"
+      }
+    },
+    {
+      "id": "s07_street_crowd",
+      "t": [
+        27.44,
+        31.68
+      ],
+      "voice_ref": "sec03",
+      "intent": "社会消费品零售总额只涨 1.3%：人流很密，但增速很薄——画面与数字的反差本身是论点。",
+      "framing": "步行街人流平视 · 右下数据角标",
+      "motion": "素材自带人流运动，角标 +1.3% 弱脉冲",
+      "source": {
+        "provider": "footage",
+        "params": {
+          "voice": "broll",
+          "asset": "footage/raw/v_street.mp4",
+          "facts": [
+            "F06"
+          ],
+          "era_place": "广州上下九步行街，中文招牌可辨"
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "pexels retrieval + ffmpeg regrade",
+        "params": {
+          "pexels_id": 36759513,
+          "page": "https://www.pexels.com/video/vibrant-street-scenes-in-guangzhou-china-36759513/",
+          "license": "pexels",
+          "media_start_s": 3.0,
+          "transcode": "scale=1920:1080(crop) + eq=saturation=0.30:contrast=1.12:brightness=-0.09,colortemperature=temperature=12000:mix=1,colorbalance=bs=0.12:bm=0.10:bh=0.06:rs=-0.08:rm=-0.06 + h264 crf18 -g 12 -keyint_min 12 -sc_threshold 0 -an @30fps"
+        },
+        "refs": [],
+        "date": "2026-07-27",
+        "cost_usd": 0.0,
+        "file": "compose/assets/clips/c_s07_street.mp4",
+        "note": "广州上下九步行街白天人流，中文店招与红灯笼可辨，人群向镜头方向走动。 冷蓝广播 LUT 与演播室同色温；密集关键帧重编码防渲染器 seek 冻帧；原生音轨已剥离（旁白为唯一音源）。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 30fps / h264 / 无音轨；抽帧目检无模糊、无水印、无摆拍感。",
+        "semantic": "画面内容与镜头 intent 一致；地点/时代特征与选题一致或中性；冷蓝 LUT 后与演播室蓝同色温，无三层贴片感。"
+      }
+    },
+    {
+      "id": "s08_question_anchor",
+      "t": [
+        31.68,
+        37.24
+      ],
+      "voice_ref": "sec04",
+      "intent": "设问：『那百分之四点七，是谁扛起来的？』——全片唯一一次推近，给设问物理重量。",
+      "framing": "主播近景（全片唯一一次推近）",
+      "motion": "镜头静置，背景数据屏留问号形空位",
+      "source": {
+        "provider": "avatar",
+        "params": {
+          "voice": "anchor",
+          "anchor_role": "主持声部·设问"
+        }
+      },
+      "anchor_refs": [
+        "a01_anchor_portrait"
+      ],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "fal-ai/heygen/avatar4/image-to-video (fal queue 经灵鲸网关)",
+        "prompt": "A composed television news anchor in a deep navy and gold broadcast studio, seated at a glass desk, steady eye contact with the camera, calm authoritative delivery, natural subtle head movement, no gestures beyond the shoulders.",
+        "params": {
+          "image_url": "https://storage.neodrop.ai/kuleshov/econ26/a01_anchor_portrait.png",
+          "audio_url": "https://storage.neodrop.ai/kuleshov/econ26/av_s08.mp3",
+          "aspect_ratio": "16:9",
+          "resolution": "1080p"
+        },
+        "refs": [
+          "anchor:a01_anchor_portrait"
+        ],
+        "request_id": "task_dbyaQkMZCO6pEcSt1wckSDTLnFkFfmWg",
+        "task_id": "6a670759ea38a359e8831221",
+        "date": "2026-07-27",
+        "cost_usd": 0.3,
+        "wallclock_s": 135.0,
+        "duration_actual_s": 5.568,
+        "file": "shots/s08-avatar.mp4",
+        "note": "实测 1920x1080 / 25fps / h264+aac / 5.568s。台词与口型 100% 由 audio_url 决定（音频先行是物理约束）；音频切片来自整片 single-pass voiceover 的 [31.68s 起] 区间，故三镜音色与全片完全一致，不存在分节漂移。实际 5.568s vs 分镜槽位 5.56s 溢出 0.008s，compose 走尾部裁切（保动作完成点），不冻结不变速。网关未回单价，cost_usd 按 HeyGen Avatar4 公开秒级价估算。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 25fps / h264；blackdetect(d=0.15,pix_th=0.10) 0 段、freezedetect(n=0.003,d=0.5) 0 段；实测时长已回填 gen.duration_actual_s。",
+        "semantic": "抽帧目检：三镜为同一形象锚点驱动，面部特征、发型、西装、演播室背景一致，无角色变脸；口型开合与爆破音位置自然，无塑料感；模型把源图重构图为居中略偏左的中景（源图为左三分位），右侧背景数据屏保留——compose 端右侧数据列改为叠深色 scrim 后再压字，保证可读性。无畸变、无多手指、无背景漂移。"
+      }
+    },
+    {
+      "id": "s09_port_aerial",
+      "t": [
+        37.24,
+        43.75
+      ],
+      "voice_ref": "sec05",
+      "intent": "答案一是外贸：25.47 万亿元、+16.9%，港口作业画面与数据卡同框。",
+      "framing": "港口航拍全景 · 右侧数据卡",
+      "motion": "桥吊与船体真运动，右侧条形依次生长",
+      "source": {
+        "provider": "footage",
+        "params": {
+          "voice": "broll",
+          "asset": "footage/raw/v_port.mp4",
+          "facts": [
+            "F07"
+          ]
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "pexels retrieval + ffmpeg regrade",
+        "params": {
+          "pexels_id": 29904000,
+          "page": "https://www.pexels.com/video/aerial-view-of-container-ship-at-busy-port-terminal-29904000/",
+          "license": "pexels",
+          "media_start_s": 14.0,
+          "transcode": "scale=1920:1080(crop) + eq=saturation=0.30:contrast=1.12:brightness=-0.09,colortemperature=temperature=12000:mix=1,colorbalance=bs=0.12:bm=0.10:bh=0.06:rs=-0.08:rm=-0.06 + h264 crf18 -g 12 -keyint_min 12 -sc_threshold 0 -an @30fps"
+        },
+        "refs": [],
+        "date": "2026-07-27",
+        "cost_usd": 0.0,
+        "file": "compose/assets/clips/c_s09_port.mp4",
+        "note": "集装箱码头正俯拍：靠泊货轮、四台岸桥、堆场集装箱，桥吊与车辆在动，地点特征中性。 冷蓝广播 LUT 与演播室同色温；密集关键帧重编码防渲染器 seek 冻帧；原生音轨已剥离（旁白为唯一音源）。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 30fps / h264 / 无音轨；抽帧目检无模糊、无水印、无摆拍感。",
+        "semantic": "画面内容与镜头 intent 一致；地点/时代特征与选题一致或中性；冷蓝 LUT 后与演播室蓝同色温，无三层贴片感。"
+      }
+    },
+    {
+      "id": "s10_containers_photo",
+      "t": [
+        43.75,
+        48.52
+      ],
+      "voice_ref": "sec05",
+      "intent": "拆开外贸：出口 +13.4%、进口 +22.1%——进口跑得更快是本节的暗线。",
+      "framing": "集装箱堆场照片缓推 · 出口/进口双条",
+      "motion": "Ken Burns 缓推 5% + 双条错峰生长",
+      "source": {
+        "provider": "image_motion",
+        "params": {
+          "voice": "broll_still",
+          "asset": "footage/raw/p_containers.jpg",
+          "facts": [
+            "F07"
+          ],
+          "kenburns": "scale 1.00→1.05, 4.77s"
+        }
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "qc_pass",
+      "gen": {
+        "model": "pexels retrieval + ffmpeg regrade (still)",
+        "params": {
+          "pexels_id": 24244234,
+          "page": "https://www.pexels.com/photo/24244234/",
+          "license": "pexels",
+          "export": "2400x1350（Ken Burns 放大 1.04–1.05 仍在原生像素内，不软）",
+          "grade": "eq=saturation=0.30:contrast=1.12:brightness=-0.09,colortemperature=temperature=12000:mix=1,colorbalance=bs=0.12:bm=0.10:bh=0.06:rs=-0.08:rm=-0.06"
+        },
+        "refs": [],
+        "date": "2026-07-27",
+        "cost_usd": 0.0,
+        "file": "compose/assets/img/i_s10_containers.jpg",
+        "note": "集装箱堆场与集卡通道的高空俯拍，成排彩色集装箱，地点特征中性。 Ken Burns 在 HyperFrames 里声明式做（可调、确定性、免一次转码），不预烘焙 mp4。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 30fps / h264 / 无音轨；抽帧目检无模糊、无水印、无摆拍感。",
+        "semantic": "画面内容与镜头 intent 一致；地点/时代特征与选题一致或中性；冷蓝 LUT 后与演播室蓝同色温，无三层贴片感。"
+      }
+    },
+    {
+      "id": "s11_robot_line",
+      "t": [
+        48.52,
+        53.36
+      ],
+      "voice_ref": "sec06",
+      "intent": "答案二是制造：高技术制造业增加值 +13.3%，产线在动是这条论断的物证。",
+      "framing": "机械臂产线中景 · 左下数据角标",
+      "motion": "机械臂真运动，角标 +13.3% count-up",
+      "source": {
+        "provider": "footage",
+        "params": {
+          "voice": "broll",
+          "asset": "footage/raw/v_robot.mp4",
+          "facts": [
+            "F09"
+          ]
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "pexels retrieval + ffmpeg regrade",
+        "params": {
+          "pexels_id": 32386532,
+          "page": "https://www.pexels.com/video/industrial-robot-arm-in-high-tech-factory-32386532/",
+          "license": "pexels",
+          "media_start_s": 1.5,
+          "transcode": "scale=1920:1080(crop) + eq=saturation=0.30:contrast=1.12:brightness=-0.09,colortemperature=temperature=12000:mix=1,colorbalance=bs=0.12:bm=0.10:bh=0.06:rs=-0.08:rm=-0.06 + h264 crf18 -g 12 -keyint_min 12 -sc_threshold 0 -an @30fps"
+        },
+        "refs": [],
+        "date": "2026-07-27",
+        "cost_usd": 0.0,
+        "file": "compose/assets/clips/c_s11_robot.mp4",
+        "note": "洁净车间内黄色六轴工业机械臂取放作业中景，白色产线与顶灯在背景。 冷蓝广播 LUT 与演播室同色温；密集关键帧重编码防渲染器 seek 冻帧；原生音轨已剥离（旁白为唯一音源）。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 30fps / h264 / 无音轨；抽帧目检无模糊、无水印、无摆拍感。",
+        "semantic": "画面内容与镜头 intent 一致；地点/时代特征与选题一致或中性；冷蓝 LUT 后与演播室蓝同色温，无三层贴片感。"
+      }
+    },
+    {
+      "id": "s12_equipment_photo",
+      "t": [
+        53.36,
+        55.93
+      ],
+      "voice_ref": "sec06",
+      "intent": "装备制造业 +9.3%：从产线整体推到单台设备，把『装备』这个词落到具体机器上。",
+      "framing": "激光切割设备特写缓推 · 大数字",
+      "motion": "Ken Burns 缓推 4%，+9.3% 由小变正",
+      "source": {
+        "provider": "image_motion",
+        "params": {
+          "voice": "broll_still",
+          "asset": "footage/raw/p_laser.jpg",
+          "facts": [
+            "F09"
+          ],
+          "kenburns": "scale 1.00→1.04, 2.57s"
+        }
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "qc_pass",
+      "gen": {
+        "model": "pexels retrieval + ffmpeg regrade (still)",
+        "params": {
+          "pexels_id": 38487774,
+          "page": "https://www.pexels.com/photo/38487774/",
+          "license": "pexels",
+          "export": "2400x1350（Ken Burns 放大 1.04–1.05 仍在原生像素内，不软）",
+          "grade": "eq=saturation=0.30:contrast=1.12:brightness=-0.09,colortemperature=temperature=12000:mix=1,colorbalance=bs=0.12:bm=0.10:bh=0.06:rs=-0.08:rm=-0.06"
+        },
+        "refs": [],
+        "date": "2026-07-27",
+        "cost_usd": 0.0,
+        "file": "compose/assets/img/i_s12_equipment.jpg",
+        "note": "工业激光切割机切割头特写，蓝白机身与蜂窝工作台。 Ken Burns 在 HyperFrames 里声明式做（可调、确定性、免一次转码），不预烘焙 mp4。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 30fps / h264 / 无音轨；抽帧目检无模糊、无水印、无摆拍感。",
+        "semantic": "画面内容与镜头 intent 一致；地点/时代特征与选题一致或中性；冷蓝 LUT 后与演播室蓝同色温，无三层贴片感。"
+      }
+    },
+    {
+      "id": "s13_output_bars",
+      "t": [
+        55.93,
+        60.63
+      ],
+      "voice_ref": "sec06",
+      "intent": "新动能产量：机器人 +28.0%、锂电 +39.3%、3D 打印 +48.5%（第三条只上屏不口播）。",
+      "framing": "全屏产量增速条 · 三条",
+      "motion": "三条错峰生长 stagger 0.18s，末条 48.5% 冲出画幅右缘再回弹",
+      "source": {
+        "provider": "hyperframes",
+        "params": {
+          "voice": "data_screen",
+          "facts": [
+            "F10"
+          ]
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "sourced"
+    },
+    {
+      "id": "s14_overlooked_card",
+      "t": [
+        60.63,
+        63.97
+      ],
+      "voice_ref": "sec07",
+      "intent": "第二次转折：『这份表里还有一行，容易被跳过』——全片唯一带主观色彩的一句。",
+      "framing": "全屏转折字卡 · 大字",
+      "motion": "字块自下推入，一条金线从左扫到右后停在字底",
+      "source": {
+        "provider": "hyperframes",
+        "params": {
+          "voice": "data_screen"
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "sourced"
+    },
+    {
+      "id": "s15_supermarket",
+      "t": [
+        63.97,
+        69.78
+      ],
+      "voice_ref": "sec07",
+      "intent": "居民人均可支配收入实际 +4.2% vs 经济增速 +4.7%：收入那条短一截，跑输写在画面上。",
+      "framing": "超市生鲜区中景 · 右侧对比条",
+      "motion": "顾客与手推车真运动，右侧两条对比条错峰生长",
+      "source": {
+        "provider": "footage",
+        "params": {
+          "voice": "broll",
+          "asset": "footage/raw/v_super.mp4",
+          "facts": [
+            "F13",
+            "F01"
+          ],
+          "era_place": "中国超市，中文价签可辨"
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "pexels retrieval + ffmpeg regrade",
+        "params": {
+          "pexels_id": 34835384,
+          "page": "https://www.pexels.com/video/vibrant-market-scene-in-beijing-supermarket-34835384/",
+          "license": "pexels",
+          "media_start_s": 0.06,
+          "transcode": "scale=1920:1080(crop) + eq=saturation=0.30:contrast=1.12:brightness=-0.09,colortemperature=temperature=12000:mix=1,colorbalance=bs=0.12:bm=0.10:bh=0.06:rs=-0.08:rm=-0.06 + h264 crf18 -g 12 -keyint_min 12 -sc_threshold 0 -an @30fps"
+        },
+        "refs": [],
+        "date": "2026-07-27",
+        "cost_usd": 0.0,
+        "file": "compose/assets/clips/c_s15_market.mp4",
+        "note": "中国超市生鲜区中景，中文价签与「水产」灯箱可辨，顾客推车走过。 冷蓝广播 LUT 与演播室同色温；密集关键帧重编码防渲染器 seek 冻帧；原生音轨已剥离（旁白为唯一音源）。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 30fps / h264 / 无音轨；抽帧目检无模糊、无水印、无摆拍感。",
+        "semantic": "画面内容与镜头 intent 一致；地点/时代特征与选题一致或中性；冷蓝 LUT 后与演播室蓝同色温，无三层贴片感。"
+      }
+    },
+    {
+      "id": "s16_cpi_card",
+      "t": [
+        69.78,
+        74.84
+      ],
+      "voice_ref": "sec07",
+      "intent": "居民消费价格 +1.0%，离全年 2% 目标还差不少——需求端偏冷的第二个证据。",
+      "framing": "全屏物价对照卡 · 实际 vs 目标",
+      "motion": "1.0% 柱体生长后停在 2% 目标虚线下方，虚线呼吸式微动",
+      "source": {
+        "provider": "hyperframes",
+        "params": {
+          "voice": "data_screen",
+          "facts": [
+            "F12",
+            "F03"
+          ]
+        }
+      },
+      "anchor_refs": [],
+      "static_class": false,
+      "status": "sourced"
+    },
+    {
+      "id": "s17_close_anchor",
+      "t": [
+        74.84,
+        78.4
+      ],
+      "voice_ref": "sec08",
+      "intent": "收束前半句：『外需和制造这一棒已经跑起来了。』",
+      "framing": "主播中景收尾",
+      "motion": "固定机位，背景数据屏渐暗",
+      "source": {
+        "provider": "avatar",
+        "params": {
+          "voice": "anchor",
+          "anchor_role": "主持声部·结论"
+        }
+      },
+      "anchor_refs": [
+        "a01_anchor_portrait"
+      ],
+      "static_class": false,
+      "status": "qc_pass",
+      "gen": {
+        "model": "fal-ai/heygen/avatar4/image-to-video (fal queue 经灵鲸网关)",
+        "prompt": "A composed television news anchor in a deep navy and gold broadcast studio, seated at a glass desk, steady eye contact with the camera, calm authoritative delivery, natural subtle head movement, no gestures beyond the shoulders.",
+        "params": {
+          "image_url": "https://storage.neodrop.ai/kuleshov/econ26/a01_anchor_portrait.png",
+          "audio_url": "https://storage.neodrop.ai/kuleshov/econ26/av_s17.mp3",
+          "aspect_ratio": "16:9",
+          "resolution": "1080p"
+        },
+        "refs": [
+          "anchor:a01_anchor_portrait"
+        ],
+        "request_id": "task_9CqLgZBje50r0deaynjvYshWqZtMNwI4",
+        "task_id": "6a67075aea38a359e8831223",
+        "date": "2026-07-27",
+        "cost_usd": 0.3,
+        "wallclock_s": 153.0,
+        "duration_actual_s": 3.6,
+        "file": "shots/s17-avatar.mp4",
+        "note": "实测 1920x1080 / 25fps / h264+aac / 3.6s。台词与口型 100% 由 audio_url 决定（音频先行是物理约束）；音频切片来自整片 single-pass voiceover 的 [74.84s 起] 区间，故三镜音色与全片完全一致，不存在分节漂移。实际 3.6s vs 分镜槽位 3.56s 溢出 0.04s，compose 走尾部裁切（保动作完成点），不冻结不变速。网关未回单价，cost_usd 按 HeyGen Avatar4 公开秒级价估算。"
+      },
+      "qc": {
+        "technical": "ffprobe 1920x1080 / 25fps / h264；blackdetect(d=0.15,pix_th=0.10) 0 段、freezedetect(n=0.003,d=0.5) 0 段；实测时长已回填 gen.duration_actual_s。",
+        "semantic": "抽帧目检：三镜为同一形象锚点驱动，面部特征、发型、西装、演播室背景一致，无角色变脸；口型开合与爆破音位置自然，无塑料感；模型把源图重构图为居中略偏左的中景（源图为左三分位），右侧背景数据屏保留——compose 端右侧数据列改为叠深色 scrim 后再压字，保证可读性。无畸变、无多手指、无背景漂移。"
+      }
+    },
+    {
+      "id": "s18_end_card",
+      "t": [
+        78.4,
+        81.96
+      ],
+      "voice_ref": "sec08",
+      "intent": "落在未决问题上：『下半年要看的，是内需能不能接得住。』并给出判据三指标。",
+      "framing": "全屏结论字卡 · 右侧三指标",
+      "motion": "标题分两行错峰推入，右侧三条比例条依次落位，末 0.8s 只余金线呼吸",
+      "source": {
+        "provider": "hyperframes",
+        "params": {
+          "voice": "data_screen",
+          "facts": [
+            "F07",
+            "F09",
+            "F06"
+          ]
+        }
+      },
+      "anchor_refs": [],
+      "static_class": true,
+      "status": "sourced"
+    }
+  ],
+  "overlays": [
+    {
+      "id": "ov_bug",
+      "type": "corner_bug",
+      "intent": "左上角标『▌经济半年报 2026 上半年』——全片唯一角标，防双角标 PPT 味。",
+      "text": "经济半年报 · 2026 上半年",
+      "scope": "global",
+      "source": "hyperframes",
+      "status": "planned"
+    },
+    {
+      "id": "ov_caption",
+      "type": "caption",
+      "intent": "全片字幕层，戳由 audio/timeline_fa.json 逐字轴派生（≤16 字/行，句读切行，尾 +0.12s，相邻 <0.24s 直接对接防闪缝）。",
+      "scope": "global",
+      "source": "hyperframes",
+      "status": "planned"
+    },
+    {
+      "id": "ov_source_foot",
+      "type": "footnote",
+      "intent": "来源脚注『数据来源：国家统计局 2026 年 7 月 15 日发布』，自带暗压条 + 金色左边线（G2 hero 门 must_fix s01：不靠背景运气）。只在带数据的镜头出现，不占满全片。",
+      "text": "数据来源：国家统计局 2026 年 7 月 15 日发布",
+      "shot_refs": [
+        "s02_gdp_screen",
+        "s05_site_aerial",
+        "s09_port_aerial",
+        "s13_output_bars",
+        "s16_cpi_card",
+        "s18_end_card"
+      ],
+      "source": "hyperframes",
+      "status": "planned"
+    }
+  ],
+  "edit": {
+    "transitions": [
+      "hard_cut",
+      "dip_to_navy",
+      "gold_wipe"
+    ],
+    "lut": "cool_blue_broadcast（实拍统一：saturate .58 / contrast 1.10 / brightness .80 + #12457F color 混合 42%，与演播室蓝同色温）",
+    "grain": "无（联播质感靠色温与版式统一，不叠颗粒——加颗粒反而破坏数据屏锐度）",
+    "loudness_lufs": -14.0,
+    "ducking": {
+      "music": "无 BGM（见 d017）",
+      "native_audio": "实拍素材原生音轨全部静音（-inf），旁白为唯一音源"
+    }
+  },
+  "ledger": {
+    "decisions": [
+      {
+        "id": "d001",
+        "date": "2026-07-27",
+        "decision": "选题定为 2026 年中国经济半年报（国家统计局 2026-07-15 发布），叙事角度取『同一份半年报里的两组反向数字』而非成绩单朗读。",
+        "stage": "brief",
+        "why": "用户只给了『财经主题』，EP 需自选具体选题。半年报是 7 月最主流的财经议题，数据密度高（适配 HTML 数据屏）、实拍素材可得性高（港口/产线/商圈），且天然含 But/Therefore 张力（GDP 4.7% 稳 vs 固投 -5.7%/社零 +1.3% 冷），比单点行情更能撑住 80s 结构。备选：黄金价格与央行购金潮（数据好但实拍弱、且易滑向投资建议）、美联储加息预期（对中文受众相关性弱）。",
+        "by": "ep"
+      },
+      {
+        "id": "d002",
+        "date": "2026-07-27",
+        "decision": "风格包落 whiteboard-generalist（兜底包），不落 pixel-chronicle / case-file。",
+        "stage": "brief",
+        "why": "用户要 CCTV 新闻联播质感 + 数字人/实拍/实拍图/HTML 四源混排：既不是像素科普（pixel-chronicle 横屏像素叙事），也不是竖屏案卷调查（case-file）。兜底包 §1 空白链路正是『生成风格二选一 + 实拍视频 + HTML + 图片 + 数字人自由组合』，是唯一合身的包。",
+        "by": "ep"
+      },
+      {
+        "id": "d003",
+        "date": "2026-07-27",
+        "decision": "片型声明为 anchor_news_recap（数字人主播版资讯速览），属 M0 主线 faceless_* 之外的片型扩展。",
+        "stage": "brief",
+        "why": "用户明确要数字人播报，faceless 前提不成立。按 SKILL §1.2 这属超纲片型，如实标记而非套用 faceless_news_recap 的已验证承诺——防止把未验证片型写成已验证。",
+        "by": "ep"
+      },
+      {
+        "id": "d004",
+        "date": "2026-07-27",
+        "decision": "commitment.duration_s=80、tolerance_pct=25（宽公差），不做时长硬锁。",
+        "stage": "brief",
+        "why": "SKILL §1.4 起时长不设硬门（2026-07-16 用户拍板），但 G1 的 commitment_duration 门仍在注册表里。用宽公差承接『时长由音频自然定长』的政策，而不是事后把 duration_s 改成实测值来骗过门。",
+        "by": "ep"
+      },
+      {
+        "id": "d005",
+        "date": "2026-07-27",
+        "decision": "渲染走本地 Docker 缓存镜像 hyperframes-renderer:0.7.64-arm64；G2 评委走隔离 subagent。",
+        "stage": "brief",
+        "why": "preflight 显示 remote_render_http / kimi_judge 均 missing_credentials（.env 无 RENDER_URL / FFMPEG_RENDER_HTTP_TOKEN / KIMI_API_KEY），SKILL §⑧ 的默认渲染机通路不可用。沿用 2026-07-24 浣熊片用户拍板的授权偏移（本地 Docker + subagent 评委），属显式记录的授权偏移，非静默降级。",
+        "by": "ep"
+      },
+      {
+        "id": "d06",
+        "date": "2026-07-27",
+        "decision": "修订门控字段: meta.commitment, meta.budget.cap_usd, meta.pipeline_version",
+        "stage": "brief",
+        "why": "brief 阶段初始化：meta 补全 + 开工决策与预检门留痕（EP 代决，approval_policy=autonomous）"
+      },
+      {
+        "id": "d007",
+        "date": "2026-07-27",
+        "decision": "『新闻联播那种感觉』落法拆成：画面形式对齐联播（主播/蓝金演播室/红金标题条/数据大屏/角标），行文不取联播播报腔。",
+        "stage": "script",
+        "why": "用户诉求的是『感觉』，而 narration-voice §4.2 明确要求把『像新闻联播的句子』重写。两者只在行文层冲突，在画面层不冲突——因此形式全给，腔调按品味宪法走 But/Therefore 与人话句式（如 sec03『但翻到投资和消费，情况反过来了』而非『与此同时』）。此为 EP 裁决，非用户批准；若用户看片后要求连行文一起联播化，回 script 阶段重走。",
+        "by": "ep"
+      },
+      {
+        "id": "d008",
+        "date": "2026-07-27",
+        "decision": "钩子取 H1（前后对比型）：『同一张表上，有两组数字方向正好相反』。",
+        "stage": "script",
+        "why": "6 个带型号变体中，H1 唯一同时满足三面开钩一致（封面『两组数字』＝首帧双数字＝口播首句）与不超卖（正文确实兑现两组反向数字）。H3/H6 把核心洞察提前到 0 秒导致后段无货可分期兑付；H5 清单式承诺会把兑现段逼成幻灯片。",
+        "by": "ep"
+      },
+      {
+        "id": "d009",
+        "date": "2026-07-27",
+        "decision": "机电产品出口占比 63.5%（F08）与 3D 打印设备产量 +48.5%（F10）只上屏不口播；新华社『新动能贡献率超四成』（F15）全片不用。",
+        "stage": "script",
+        "why": "前者是视听分工——数据密度让给 HTML 数据屏承担，旁白保持 358 字的呼吸；后者口径为新华社表述而非统计局定量公报，用 F09/F10 的硬数字替代可回避口径争议（research.md 已记该核实结论）。",
+        "by": "ep"
+      },
+      {
+        "id": "d010",
+        "date": "2026-07-27",
+        "decision": "主播形象锚点走 GPT-Image-2 quality=medium、size=1792x1008（正 16:9），出 3 候选 N 选 1。",
+        "stage": "anchors",
+        "why": "avatar.md 实测教训：源图比例=实际画面占比，1:1 肖像喂 16:9 请求会直接左右黑边，且 compose 救不回来——必须按目标画幅构图出图。image-motion.md 记 quality=low 够版式帧但角色/产品锚点要 medium 起步保面部细节，数字人驱动图属角色类。3 候选是廉价品味注入点（图便宜，别到视频阶段返工）。",
+        "by": "ep"
+      },
+      {
+        "id": "d011",
+        "date": "2026-07-27",
+        "decision": "TTS 音色选 Chinese (Mandarin)_Male_Announcer（男声播音腔），淘汰 Radio_Host；Chinese (Mandarin)_News_Anchor 虽名字最贴但实测为女声，与男主播锚点不配对故不用。",
+        "stage": "audio",
+        "why": "minimax-voices.md 的固化表全是女声，本片主播锚点是男性，必须先探测男声 id。探测 6 个候选全部有效，用 F0 中位判性别（News_Anchor 198.8Hz=女；Male_Announcer 127.0Hz、Radio_Host 131.1Hz=男）。整轨 ECAPA 声纹决赛（6 窗两两 cosine）：Male_Announcer min 0.858 / mean 0.894，Radio_Host min 0.759 / mean 0.839。按 minimax-voices.md 的相对锚判读（校准锚 Gentle_Senior min 0.820 为已判可用线），Male_Announcer 0.858 > 0.820 且与固化首选 Warm_Girl 0.862 基本持平 → 可用；Radio_Host 0.759 低于校准锚 → 出局。语速 4.37 字/s 落在 4.2–4.8 协议区间。",
+        "by": "ep"
+      },
+      {
+        "id": "d012",
+        "date": "2026-07-27",
+        "decision": "④ audio 与 ③b hero-frames 门并行跑，但 ⑤ storyboard 仍严格等 ③b 判定后才开工。",
+        "stage": "audio",
+        "why": "③b 门的作用是『在视觉沉没成本发生前采样视觉承诺』。TTS 不是视觉支出，且旁白已定稿、与视觉方案无耦合，先跑可省一大截墙钟；门真正卡的下游（铺开全片 storyboard 与烘焙镜头）一步没提前。这是并行不是跳门。",
+        "by": "ep"
+      },
+      {
+        "id": "d013",
+        "date": "2026-07-27",
+        "decision": "hero 门用同仓已交付 16:9 成片《800V 热失控》的 contact sheet 作『工艺下限参照』，而不是风格包 Golden。",
+        "stage": "hero_frames",
+        "why": "whiteboard-generalist 是公测兜底包，playbook §0 明确『不走考片制上架』——本包没有 Golden 样片，这是事实不是遗漏。为了不让品味门空转，改用同仓已出厂片作工艺下限锚，并在评委 manifest 里明确写清『不是本片风格目标，不要因风格不像扣分』。这是有据的替代基准，不是把门跳过。",
+        "by": "ep"
+      },
+      {
+        "id": "d014",
+        "date": "2026-07-27",
+        "decision": "s05 数据卡由『进出口双折线（1—6 月）』改为『三条累计同比条形』。",
+        "stage": "hero_frames",
+        "why": "评委 must_fix 要求给折线补 y 轴刻度。补刻度时发现：research.md 只有上半年累计值（合计 +16.9%、出口 +13.4%、进口 +22.1%），没有可回链的逐月累计序列——补刻度就意味着编造月度走势。按『可以回链的事实』宁可换图表形态也不编数据，改成三条条形直接呈现三个真实累计值，顺带彻底解决刻度不可读的问题。",
+        "by": "ep"
+      },
+      {
+        "id": "d015",
+        "date": "2026-07-27",
+        "decision": "确立三条版式执行口径，全片（含 compose）统一遵守：① 脚注自带暗压条 + 金色左边线，不靠背景运气；② 涨跌数字一律带正负号，箭头只做冗余强化不承担唯一方向语义；③ 标题块恒压左下 1/3 金线上，纯字卡不例外。",
+        "stage": "hero_frames",
+        "why": "三条都来自 G2 hero 门 must_fix：脚注走到主播肤色区对比度塌陷、▼5.7% 无负号、s08 字卡标题脱离手柄位。把它们从『这三帧的修补』升级成『全片执行口径』，是为了防止铺开后每张卡各摆各的——评委已经点名这是本片最大隐患。",
+        "by": "ep"
+      },
+      {
+        "id": "d016",
+        "date": "2026-07-27",
+        "decision": "实拍素材全部换成中国地点可辨或地点中性的镜头：弃用 Ankara 商场（v_mall）与越南街市（v_market），改用广州上下九步行街（v_street）与中国超市生鲜区（v_super）。",
+        "stage": "storyboard",
+        "why": "下载后抽帧 QC 发现 v_mall 的店招是拉丁字母、人物与场景明显是土耳其，v_market 有斗笠与越南街景——用它们承担『中国社零 +1.3%』『中国居民消费价格 +1.0%』就是 footage-sourcing.md 铁律 3 的地点错位（『德式老城冒充布宜诺斯艾利斯』同型）。替换素材中文招牌/中文价签可辨，与选题地点一致。",
+        "by": "ep"
+      },
+      {
+        "id": "d017",
+        "date": "2026-07-27",
+        "decision": "本片不加 BGM，旁白为唯一音源；实拍素材原生音轨全部静音。",
+        "stage": "storyboard",
+        "why": "bgm.md 的定位是『解说片 >10s 的氛围垫底，床要纹理不要旋律』。联播体的听感恰恰建立在『只有播报声 + 干净底噪』上，垫一层音乐床会立刻把它推向宣传片。这是风格判断不是省事——记在此以便 G2 音频门知道『无 BGM』是刻意选择而非遗漏。",
+        "by": "ep"
+      },
+      {
+        "id": "d018",
+        "date": "2026-07-27",
+        "decision": "18 镜全部按句读间隙切点，剪辑点取自 forced-alignment 的真实字戳间隙中点，compose 里禁手写时间数字。",
+        "stage": "storyboard",
+        "why": "forced-alignment.md §下游：画面 cue 全部从 timeline 派生，换音轨后重跑即全链跟随。本片 18 个切点逐个对到 >0.35s 的字间间隙（如 6.91 落在『正好相反｜先看稳的』的 0.94s 间隙中点），J-cut/L-cut 由此自然成立。",
+        "by": "ep"
+      },
+      {
+        "id": "d019",
+        "date": "2026-07-27",
+        "decision": "a02_style_frame 不再单独出图，改用 hero3_v2 截帧充当定调帧，色板真相源落在 anchors/hero/hero.css。",
+        "stage": "anchors",
+        "why": "style frame 的用途是给 compose 取 CSS 变量与统一 LUT 基准。hero 阶段已经产出了真实的 HTML 执行样本（含最终色值、金线粗细、红块比例），再生成一张 AI 示意图只会引入与实际 compose 不一致的第二套色值。省一次出图不是省钱，是消灭一个真相源分叉。",
+        "by": "ep"
+      },
+      {
+        "id": "d020",
+        "date": "2026-07-27",
+        "decision": "s15 的超市镜用满 v_super 6.0s 素材的 0.06—5.92s（尾部余量 0.08s），突破 footage-sourcing 空镜池铁律 4『挂载窗 + 时长 ≤ 素材时长 − 0.8s』。",
+        "stage": "compose",
+        "why": "该铁律的写明理由是『很多素材末尾有淡出/暗场，取到尾部 = 观感莫名黑屏』。实测 v_super 末 1.1s 逐帧 YAVG 稳定在 97.1—97.8（无衰减、无淡出），铁律要防的现象在本素材上不存在。备选是把 s15 拆成 footage+数据卡两镜，代价是把 hyperframes 份额从 33.2% 推到 36.7% 并制造 s15b+s16 连续 7.9s 图形段——用一个更差的结构去满足一条本例中不适用的规则，不值。此为带证据的例外，不是静默绕过；实测数据见 review.md L0。",
+        "by": "ep"
+      },
+      {
+        "id": "d021",
+        "date": "2026-07-27",
+        "decision": "渲染用自建镜像 hyperframes-renderer:0.7.64-arm64-corefix（在缓存镜像 0.7.64-arm64 上加一层 symlink），不是直接用缓存镜像。",
+        "stage": "compose",
+        "why": "缓存镜像 0.7.64-arm64 的容器内 CLI 按 monorepo 布局找 ../../../core/dist/hyperframe.manifest.json（解析到 /usr/local/lib/core/dist），而镜像里 manifest 实际在 /usr/local/lib/node_modules/hyperframes/dist —— 渲染在 file_server 阶段必失败（『Missing manifest ... Build core runtime artifacts before rendering』）。补的这一层只有 mkdir + ln -s，不碰 apt（2026-07-24 记过 build 期 apt 走代理被拒），构建 0.1s 通过。渲染参数与官方 --docker 通路逐字一致（--platform linux/arm64 --shm-size=2g，只读挂 /project，--fps 30 --quality high --format mp4 --no-browser-gpu），只换镜像 tag。",
+        "by": "ep"
+      },
+      {
+        "id": "d022",
+        "date": "2026-07-27",
+        "decision": "字幕由『单个 capbox + onStart 改 textContent』改成『每条字幕一个 DOM 节点 + opacity 开关』。",
+        "stage": "compose",
+        "why": "snapshot 乱序抽帧实测：按 73.5s → 15.5s 逆序 seek 后，15.5s 帧上留着 73.5s 的字幕『离百分之二的目标还差不少』。onStart 回调在非线性 seek 下不重放，这是渲染器 seek 驱动下的陈旧状态类 bug（hyperframes lint 的 gsap_exit_missing_hard_kill 是同一族问题）。改成逐条 DOM + opacity 后，同样的乱序抽帧 6 帧字幕全部正确。",
+        "by": "ep"
+      },
+      {
+        "id": "d023",
+        "date": "2026-07-27",
+        "decision": "所有数字 count-up 改为『随元素入场即刻起跑、0.7—0.9s 到位』，不再对齐到旁白念出该数字的时刻。",
+        "stage": "compose",
+        "why": "首轮 snapshot 抓到 s05 在 23.0s 屏显 −3.9%（真值 −5.7%）、s11 在 51.4s 屏显 +0.0%（真值 +13.3%），而同帧字幕已经念出了真值。数据片里屏上出现一个不存在的数字，比动效晚半拍严重得多——观众暂停就是一个事实错误。改后屏显数字在元素出现后 1s 内即为终值，早于或同步于旁白，不会出现屏字矛盾。",
+        "by": "ep"
+      },
+      {
+        "id": "d024",
+        "date": "2026-07-27",
+        "decision": "s05（外贸数据卡）原设计的『进出口双折线（1—6 月）』在 compose 期同样改为条形，与 hero 门 d014 一致；s04/s14 两张转折字卡各补一个有语义的右侧信息块（涨跌对照行 / 表格行母题），不留空白右半屏。",
+        "stage": "compose",
+        "why": "折线需要逐月累计序列，research 里没有可回链的月度数据；补刻度就等于编数据。字卡右半屏原本是纯空场，命中 G2 反模式表的『画面稀疏空板（元素孤立漂浮、留白无信息承载）』——补的两个块都承载真实信息（s04 是已建立的 +4.7% vs 投资消费方向，s14 是『被跳过的那一行』的表格母题），不是装饰填空。",
+        "by": "ep"
+      },
+      {
+        "id": "d025",
+        "date": "2026-07-27",
+        "decision": "视觉自查硬查 3『文件实证』未满足，如实标记为已知缺口停在 review 交用户裁决，不在本轮补镜。",
+        "stage": "review",
+        "why": "补一个『读统计局发布稿』的镜头要重排 18 镜 timeline、重跑 forced-align 派生的全部 cue、整片重渲（~25 分钟）并重跑全部门。缺口的实际风险是可控的：全片 13 个数据镜都挂了『数据来源：国家统计局 2026 年 7 月 15 日发布』脚注，事实全部回链 research.md 的 F01–F13，不存在无出处主张。把它写成『自查命中但选择不修』并说明代价，比自我豁免成一条『数据屏就是文件实证』诚实。用户若判定必须补，回 storyboard 定点插镜，不整片重来。",
+        "by": "ep"
+      },
+      {
+        "id": "d026",
+        "date": "2026-07-27",
+        "decision": "G2 第 1 轮 fail → 按 SKILL §5 定点回炉，改三处后整片重渲，不问人。",
+        "stage": "review",
+        "why": "评委反模式是硬门，规则派生判词优先于模型自报的 pass。三处改动：① s06/s10/s12 的 Ken Burns 从纯 scale 1.04–1.05 加大到 1.075–1.105 并叠一层横向次级位移（纯缩放在 2.5–3s 内的像素位移太小，帧差层面等于静止——评委抓的正是这一点，不是错标）；② 全片 count-up 时长从 0.7–0.9s 收到 0.45s，把『屏上数字尚未到位』的暴露窗压到 13 帧（评委在错位抽帧里抓到 −7.1% 过渡帧）；③ s18 三条判据加方向前缀『已经跑起来 ·』/『还没接上 ·』，把重复旧数字变成对照判据（评委 D1 扣分点）。HyperFrames 无法只重渲区间，故整片重渲——墙钟约 8 分钟，可接受。",
+        "by": "ep"
+      },
+      {
+        "id": "d027",
+        "date": "2026-07-27",
+        "decision": "第 2 轮 G2 fail 不再触发第 3 轮回炉；成片带 DEBT 停在 review，禁止置 delivered。",
+        "stage": "review",
+        "why": "三条依据叠加：① 本轮唯一反模式经放大帧证据反驳（货轮船首被误认为装饰图形），按它回炉等于改真实素材迁就一次误认；② tools/judge/README.md 的『先校准后放权』协议——本仓无 calibrate.py 达标记录（Spearman ρ≥0.7），评委**尚未获得否决权**，此阶段 fail 的正确处置就是『记 DEBT 停 review，不阻断出片但禁 delivered』；③ SKILL §6 止损：本阶段已修订 1 轮、评审 2 轮，评委本轮的其余扣分点（s04/s14 转折字卡手法重复、s07 步行街色温偏暖、s13 单镜三条数据密度偏高）都是 ≤0.5 分的打磨项，不是门级缺陷，留作下一版迭代清单而不是再烧一次 8 分钟整片重渲。最终状态 meta.status=review。",
+        "by": "ep"
+      },
+      {
+        "id": "d028",
+        "date": "2026-07-27",
+        "decision": "评委两轮共给出 4 条非门级改进意见，登记为下一版迭代清单，本版不改。",
+        "stage": "review",
+        "why": "① s04 与 s14 两张转折字卡共用『左侧大字 + 右侧信息块』骨架（右侧内容不同：涨跌对照行 vs 表格行母题）——这既可读作重复也可读作刻意的转折手柄，需作者裁决方向再改；② s07 广州步行街色温比全片冷蓝基调偏暖（日光 + 红灯笼所致），可单独压色温但会牺牲该镜的人气氛围；③ s13 单镜 4.7s 承载三条产量数据，其中 3D 打印 +48.5% 只上屏不口播，密度偏高；④ s18 三条判据的方向前缀本版已加，评委第 2 轮未再提。四条都不触发任何硬门，按『宁可少改不可乱改』留给下一版。",
+        "by": "ep"
+      },
+      {
+        "id": "d029",
+        "date": "2026-07-27",
+        "decision": "压在实拍上的数据组件一律去掉深色底框：数据卡、实拍角标、s03 条、来源脚注、字幕全部改成无底框；左上台标保留底板。",
+        "stage": "compose",
+        "why": "用户看片指出红框里的数据卡『带 AI 味儿，这种 AI 味儿来自这个深色底框，这种 PPT 风格最好不要出现在我们的视频里，能无底框就无底框，左上角这种信息层级的加个底框无所谓』。这是一条通则不是单点修改，故按层级统一执法：① 去掉 .card / .tag-ll / .tag-lr / .strip / #foot / .cap 的 background、border、box-shadow；② 可读性改由三样承担——镜头级**无边缘**柔性压暗（.scrim-rd 右侧 / .scrim-b 底部，纯渐变无可见边界，不构成框）、每个文字块的多层 text-shadow（等效描边）、字重与留白拉开层级；③ 条形轨道改亮色 rgba(255,255,255,.22)（背后已是压暗区，亮轨才读得出），出口条从灰蓝 #8FA8C4 改近白 #E2EBF6，避免和集装箱糊在一起；④ MG 全屏面板里的『全年目标区间』chip 一并去框改金线。#bug 按用户明示保留。改后 hyperframes check Contrast 仍 47/47 通过 WCAG AA。",
+        "by": "user"
+      },
+      {
+        "id": "d030",
+        "date": "2026-07-27",
+        "decision": "字幕去标点：句末标点删除，句中停顿标点换成全角空格；字幕生成逻辑固化成 scripts/gen_captions.py。",
+        "stage": "compose",
+        "why": "用户拍板『字幕不要加标点符号，专业视频从来不在字幕里加标点符号』。实现要点：**切分仍用标点**（它是断句与合并的依据，去掉会破坏 ≤16 字/行与不跨句合并的规则），只是不渲染出来——所以在渲染层剥离而不是在源文本层剥离。顺带把原来内联在会话里的字幕生成脚本落成 scripts/gen_captions.py，带『标点残留 0』断言，可复跑。29 条字幕全部重生成。",
+        "by": "user"
+      },
+      {
+        "id": "d031",
+        "date": "2026-07-27",
+        "decision": "重渲前一律把上一版成片改名留档（本次 out/final-v2-boxed.mp4），不再直接覆盖 out/final.mp4。",
+        "stage": "deliver",
+        "why": "G2 回炉重渲时直接 rm -f 覆盖了 v1 成片，归档副本又被二次 rsync 盖掉，导致用户索要『失败成片』时只能靠 composition 重渲复原（虽然实测数字逐项一致，但这是补救不是留痕）。留档是零成本的，覆盖是不可逆的。",
+        "by": "ep"
+      },
+      {
+        "id": "d032",
+        "date": "2026-07-27",
+        "decision": "G2 第 3 轮评审用的证据包重建自去底框后的第 3 版成片；第 2 轮的证据包整体归档到 evidence/judge-pack-r2/，不覆盖。",
+        "stage": "review",
+        "why": "用户的两条修改（去底框 + 字幕去标点）改的是全片画面，第 2 轮报告描述的是带底框那一版，对第 3 版已经失效。评委门必须评交付的那个文件，不能拿旧报告顶账——所以重建证据包重跑一轮，而不是沿用 r2 的 pass/fail 结论。",
+        "by": "ep"
+      },
+      {
+        "id": "d033",
+        "date": "2026-07-27",
+        "decision": "给第 3 轮评委的任务卡新增一条判定纪律：判『装饰元素/孤立漂浮』前先确认那东西是不是实拍画面里的真实物体，分不清就写『无法确认』不要直接计入反模式。",
+        "stage": "review",
+        "why": "第 2 轮评委把货轮船首当成叠加装饰图形，直接触发规则 fail。本片有大量港口/工地/产线/超市的真实航拍，船体、吊具、货柜、灯箱都是被拍到的东西。这条纪律不是给评委放水——它仍然可以在 note 里记录疑虑并扣分，只是不让一次物体误认单独触发否决。第 3 轮评委确实按这条处理了 s01/s08/s17 主播镜的质感落差（写成『观察，不计分』），机制生效。",
+        "by": "ep"
+      },
+      {
+        "id": "d34",
+        "date": "2026-07-27",
+        "decision": "修订门控字段: meta.style_pack",
+        "stage": "review",
+        "why": "风格包从 whiteboard-generalist 改挂 anchor-desk：用户认可本片效果后，把它蒸馏成了独立的新闻播报风格包（styles/anchor-desk/），本片即该包的实证片与参考实现。这不是改写历史——生产期本片确实跑在兜底包上（决策 d002 保留原样不动），新包是事后从本片提炼的，合同阈值也全部按本片实测标定。改挂后 kuleshov-ir validate 用 anchor-desk 合同复跑 0 error 0 warning，负向用例（4 实拍镜+1 主播镜退化成 hyperframes）正确报 6 条 error。"
+      }
+    ],
+    "costs": [
+      {
+        "id": "c001",
+        "date": "2026-07-27",
+        "stage": "anchors",
+        "item": "主播形象锚点 3 候选",
+        "model": "gpt-image-2 (neodrop)",
+        "request_id": "202607270616237419755928268d9d6OlrmQQ0L / ...THGdCft / ...KYJaPBFZ",
+        "cost_usd": 0.18,
+        "note": "1792x1008 quality=medium ×3，各 4632 output image tokens。网关未回单价，按 OpenAI 公开 gpt-image 中质量横幅价 ~$0.06/张估算，标注为估值。"
+      },
+      {
+        "id": "c002",
+        "date": "2026-07-27",
+        "stage": "audio",
+        "item": "TTS 音色探测 6 短样 + 2 条整片候选",
+        "model": "speech-2.8-hd (MiniMax via neodrop)",
+        "cost_usd": 0.03,
+        "note": "短样 6×20 字 + 整片 2×358 字。网关未回单价，按公开字数价估算。"
+      },
+      {
+        "id": "c003",
+        "date": "2026-07-27",
+        "stage": "motion",
+        "item": "数字人 3 镜（HeyGen Avatar 4）",
+        "model": "fal-ai/heygen/avatar4/image-to-video",
+        "request_id": "task_jFeuuaH… / task_dbyaQkMZ… / task_9CqLgZBj…",
+        "cost_usd": 0.9,
+        "note": "6.94s + 5.57s + 3.60s = 16.11s 成片时长。网关未回单价，按 HeyGen Avatar4 公开秒级价估算，标注为估值。"
+      },
+      {
+        "id": "c004",
+        "date": "2026-07-27",
+        "stage": "motion",
+        "item": "实拍视频 6 条 + 实拍图片 3 张",
+        "model": "Pexels API 检索",
+        "cost_usd": 0.0,
+        "note": "Pexels 免费授权（license=pexels），逐条记 pexels_id 与页面 URL 于 footage/manifest.json。"
+      },
+      {
+        "id": "c005",
+        "date": "2026-07-27",
+        "stage": "compose",
+        "item": "本地 Docker 渲染（1920x1080 / 30fps / 82s / quality=high）",
+        "model": "hyperframes-renderer:0.7.64-arm64-corefix",
+        "cost_usd": 0.0,
+        "note": "自有算力，无 provider 计费。墙钟约 8 分钟（2459 帧）。",
+        "wallclock_s": 480
+      }
+    ],
+    "gates": [
+      {
+        "id": "g001",
+        "date": "2026-07-27",
+        "stage": "brief",
+        "check": "capabilities preflight",
+        "result": "ready: minimax_tts / apihub_news / pexels / pixabay / ffmpeg / film_ir_cli / docker_render(启动 Docker Desktop 后转 ready)；missing: kimi_judge / remote_render_http。storyboard 不得把镜头路由到 missing 通路。",
+        "evidence": "capabilities.json"
+      },
+      {
+        "id": "g002",
+        "date": "2026-07-27",
+        "stage": "script",
+        "check": "narration-voice 出厂自查五步",
+        "result": "pass。① linter 硬查 12 条正则（9 条规格项 + 宣传腔/系动词/绝对化用语补查）机器跑，命中总数 0；② 朗读测试通过，最长句 37 字可一气读完，『外贸。』单字成句给换气点；③ 金句测试通过，结尾金句槽位仅 1 处且传信息非求转发；④ 五维评分 46/50（直接性9 节奏9 信任度10 真实性9 精炼度9）≥45 出厂线；⑤ 灵魂检查通过（观点：sec07『容易被跳过』；承认复杂：稳/冷各半，末句落未决问题）。正文 358 字（不含标点，机器计数）。",
+        "evidence": "script.md §出厂自查；audio/narration.txt"
+      },
+      {
+        "id": "g003",
+        "date": "2026-07-27",
+        "stage": "audio",
+        "check": "G1 回转写准确率 ≥95%",
+        "result": "pass。mlx-whisper large-v3-turbo 独立转写 vs 剧本，中文数字→阿拉伯数字归一后字符重合率 0.9935（306/306 字）。仅 2 处同音字替换（在→再、是→室），零吞字零错读。未归一时 0.8384，差异全部是数字书写形式噪声（tts-audio.md §声明为转写噪声不算错）。",
+        "evidence": "scratchpad/asr.json；对比脚本见 review.md"
+      },
+      {
+        "id": "g004",
+        "date": "2026-07-27",
+        "stage": "audio",
+        "check": "forced-alignment 验证协议（forced-alignment.md §验证协议）",
+        "result": "pass。① 分块平铺帧数 4097 vs 期望 4098（差 0.02s，assert 线 0.5s）；358 目标字全部可对齐，OOV 0。② 锚点切片转写（决定性）：8 个句首锚点按对齐戳切 [t−0.10, t+1.40]，mlx-whisper 转写后目标字均出现在切片开头 pos=0，8/8 通过。③ 静音交叉：silencedetect 在 −35/−30/−25/−20dB × 0.25–0.45s 全部返回 0 段静音（该 TTS 轨句间停顿本底高于 −20dB），本项无信号可判、不作为通过依据——由决定性的锚点切片测试承担。",
+        "evidence": "audio/timeline_fa.json；scratchpad/anchorprobe.json"
+      },
+      {
+        "id": "g005",
+        "date": "2026-07-27",
+        "stage": "hero_frames",
+        "check": "③b hero-frame 品味门（G2 隔离 subagent 盲评）",
+        "result": "pass。3/3 帧过工艺下限，antipatterns 空数组，citations_valid=true（规则派生判词，非模型自报）。模板测试判『半成立·需警告』：底盘属联播财经体裁共性，扛住测试的是内容层三装置（s01 的 ▲金/▼红 同栏对置、s08 只点亮『内需』的未决疑问句、s05 与 25.47 万亿元绑定的港口实拍）；评委警告『若后续镜头只复用底盘、中间换成普通图表加一行数据，模板味会立刻回来』——已作为 storyboard 的硬约束执行。must_fix 4 条全部当场修掉并回摄 v2。",
+        "evidence": "evidence/judge-pack-hero/judge-report-hero_frames.json；anchors/hero/hero{1,2,3}.png（评审版）与 hero{1,2,3}_v2.png（must_fix 修后版）"
+      },
+      {
+        "id": "g006",
+        "date": "2026-07-27",
+        "stage": "storyboard",
+        "check": "分镜自查八项 + 风格合同预检（SKILL §⑤）",
+        "result": "pass，全部 9 项过。机器判定部分：kuleshov-ir validate --stage storyboard 跑 refs_integrity / budget_guard / gen_traceability / commitment_duration / timeline_coverage / groups_arithmetic / slides_risk / visual_change / framing_repeat / motion_word / style_contract_plan，0 error 0 warning。关键数：18 镜首尾相接止于 81.96s=音频总长；最长镜 6.91s；静态类 4 镜全部被隔开；hyperframes 份额 33.2% ≤ 合同上限 40%，真素材声部 66.8% ≥ 下限 60%；contract_amendments 为空（全片未动合同）。第 7 项 Seedance 组算术不适用（本片无 seedance 镜）。",
+        "evidence": "storyboard.md §自查八项；kuleshov-ir validate 输出"
+      },
+      {
+        "id": "g007",
+        "date": "2026-07-27",
+        "stage": "compose",
+        "check": "compose 出厂前置门",
+        "result": "pass。① npx hyperframes@0.7.64 check：Lint 0 error / Runtime 0 error / Layout 0 issues across 9 samples / Motion 0 error / Contrast 47/47 通过 WCAG AA（首轮曾有 4 error：#foot 缺 hard kill ×2、#wipe CSS/GSAP transform 冲突、缺 c_s15_market.mp4，逐条修掉）。② python3 tools/kuleshov-lint.py：全过（woff2 自带无 local() 承担正文、无时效词漂移、脚注不压边框）。③ 字体：SansSC400/700 + SerifSC700 三只 woff2 就地从系统字体子集化（288 字形），font-weight 只用 400/700 两档实有档，无 faux-bold。",
+        "evidence": "hyperframes check 输出；tools/kuleshov-lint.py 输出；compose/assets/fonts/"
+      },
+      {
+        "id": "g008",
+        "date": "2026-07-27",
+        "stage": "compose",
+        "check": "渲染前 snapshot 目检（4 轮，共 44 帧）",
+        "result": "pass_with_fixes。逐轮抓到并修掉：① 屏显数字与旁白口径矛盾（count-up 晚到，见 d023）；② 卡片入场后大面积空板（s09 卡片空 3.5s、s13 只出一条、s14 右半屏全空）→ 内容错峰前移 + 补语义块；③ 转折字卡箭头被 right:-1240px 推出画外；④ CPI 目标线画成横向虚线读不出对照关系 → 改竖向标线 + 0—2.5% 刻度；⑤ 上海夜景镜被冷蓝 LUT 压得发闷 → 单独放亮曝光（同色温不同曝光，仍属同一 LUT 家族）；⑥ 字幕乱序 seek 残留（见 d022）；⑦ 三张全屏面板顶部堆叠、下半屏空 → 改垂直居中。",
+        "evidence": "evidence/snap/、snap2/、snap3/、snap4/ 的 contact sheet"
+      },
+      {
+        "id": "g009",
+        "date": "2026-07-27",
+        "stage": "review",
+        "check": "成片实测层 + style.contract.render（SKILL §⑨.0）",
+        "result": "pass。measure-render.py 从终渲反测：静态持有比 0.247（合同上限 0.60）、compose <video> 9 个（下限 2）、自报 static_class 与实测矛盾 0 镜、实测响度 -14.2 LUFS。逐镜实测判静仅 s06_housing_photo 一镜且该镜自报即为 static_class=true——无一镜『自报动、实测静』。kuleshov-ir validate --stage review 跑 14 道门 0 error 0 warning（含 style_contract_plan 与 style_contract_render）。",
+        "evidence": "evidence/render-metrics.json（sha256 b75e36a0…）；validate 输出"
+      },
+      {
+        "id": "g010",
+        "date": "2026-07-27",
+        "stage": "review",
+        "check": "L0 手动仪器（SKILL §⑨.1）",
+        "result": "pass。blackdetect 0 段；freezedetect(n=0.002,d=1.5) 0 段；末 1.5s 逐帧 YAVG 59.98–60.01 无衰减（无暗尾）；响度归一后 -14.24 LUFS / 真峰 -1.49 dBTP / LRA 2.0（视频流 -c:v copy 未重编码）；成片音轨用 mlx-whisper large-v3-turbo 独立回转写 vs 剧本，数字归一后重合率 0.9935（仅 2 处同音字，零吞字）；时长 82.00s 落在承诺 80s±25% 内；转场词汇 3 种 ≤ 上限 4。",
+        "evidence": "review.md §1；evidence/judge-pack/l0-report.json"
+      },
+      {
+        "id": "g011",
+        "date": "2026-07-27",
+        "stage": "review",
+        "check": "视觉出厂自查 16 项（SKILL §⑨.2）",
+        "result": "pass_with_flag。前置门 tools/kuleshov-lint.py 全过。16 项中 14 项通过（含素材零复用、地点无错位、无暗尾、无拆词、无压边框、字幕零跨剪辑点、乱序 seek 复验），1 项交评委（第 6 模板味）。**两项自查存疑、不自判通过**：① 硬查 3『文件实证』——全片引用国家统计局 2026-07-15 发布稿的数据，但画面没有该发布稿的截图或高保真复现，按字面口径命中；② 硬查 2『双角标』——左上台标 + 右下来源脚注同屏，已压到 22px+暗压条+仅数据镜出现，但不自判通过。五维自评：版式重心 4 / 层级克制 4 / 实证充分 3 / 动静得当 4 / 缝合统一 4——实证充分低于 4 线，如实记录，见 review.md §2 处置段。",
+        "evidence": "review.md §2；evidence/final-frames/（18 张逐镜帧）；evidence/shot-sheet.jpg；evidence/contact-sheet-3s.jpg"
+      },
+      {
+        "id": "g012",
+        "date": "2026-07-27",
+        "stage": "review",
+        "check": "G2 成片门 · 第 1 轮（隔离 subagent 盲评，node=final）",
+        "result": "FAIL（规则派生）。九维 3.7 均分高于 3.5 线、模型自报 pass、citations_valid=true，但命中 1 条反模式 → 按 judge.py 的 VERDICT_RULE『overall<3.5 或命中任一反模式 → fail』判 fail。反模式：s06_housing_photo 承诺『楼体照片缓推特写』而实测 static_hold_ratio=0.755（2.98s 里 2.25s 判静），命中『幻灯片伪装成视频』。分项：D1 4.3 / D2 4.3 / D3 3.5 / D4 4.0 / D5 3.0（无音轨证据，评委按纪律封顶）/ D6 4.0 / D7 3.0 / D8 4.0 / D9 3.5。评委另点出两处：s18 三条判据与前文数字完全重复、缺新增信息；错位抽帧在 s05 时段抓到一帧 −7.1% 与定格值 −5.7% 不符（count-up 过渡帧）。",
+        "evidence": "evidence/judge-pack/judge-report-final-r1.json；scores-final-r1.json"
+      },
+      {
+        "id": "g013",
+        "date": "2026-07-27",
+        "stage": "review",
+        "check": "G2 音频门（node=audio）",
+        "result": "DEBT · 无法执行。隔离 subagent 如实回报本会话无音频感知能力（Read 只支持图片/PDF/notebook，返回『This tool cannot read binary files』，无 ASR 或听觉输入工具），拒绝编造转写与听感——这是正确行为，不是失败。音频侧改由机器证据承担：① mlx-whisper large-v3-turbo 对成片音轨独立回转写 vs 剧本重合率 0.9935（g010）；② 响度 −14.24 LUFS / 真峰 −1.49 dBTP 实测（g010）；③ forced-alignment 锚点切片 8/8 通过（g004）。缺口是**人耳听感层**（音色是否像品牌嗓、有无爆音齿音、停顿是否自然）——本轮无从验证，如实记 DEBT 交用户耳判。",
+        "evidence": "scratchpad 音频评委回执：{\"unable_to_listen\": true}"
+      },
+      {
+        "id": "g014",
+        "date": "2026-07-27",
+        "stage": "review",
+        "check": "成片实测层复测（回炉后第 2 版）",
+        "result": "pass，且反模式根因已消除。静态持有比 0.247 → **0.216**；**逐镜 measured_static 从 1 镜（s06）降到 0 镜**——第 1 轮评委抓的『缓推被实测判静』在第 2 版不再成立。compose <video> 9 个；自报/实测矛盾 0 镜。响度 −14.11 LUFS / 真峰 −1.34 dBTP / LRA 2.1。blackdetect 0 段、freezedetect(d=1.5) 0 段。",
+        "evidence": "evidence/render-metrics.json（第 2 版）"
+      },
+      {
+        "id": "g015",
+        "date": "2026-07-27",
+        "stage": "review",
+        "check": "G2 成片门 · 第 2 轮（隔离 subagent 盲评，node=final）",
+        "result": "FAIL（规则派生）/ 反模式经证据反驳。九维均分 3.8（D1 4.0 / D2 4.5 / D3 3.5 / D4 3.5 / D5 3.5 / D6 4.0 / D7 3.5 / D8 4.0 / D9 3.5），高于 3.5 线、citations_valid=true、模型自报 pass；命中 1 条反模式故规则判 fail。第 1 轮的 s06 伪运动反模式已消失。**本轮反模式为评委误判**：评委称『s09 港口航拍左侧有一个半透明装饰性半圆/圆环图形，与数据卡、字幕均无信息关联』——该物体是实拍素材里**集装箱货轮的船首**（正俯拍视角下的圆弧形船头，带系泊缆绳），是真实拍摄内容，不是叠加的装饰图形。反驳证据：evidence/judge-pack/rebuttal-s09-ship-bow.jpg（s09 左半幅放大）。据此不按该条回炉——改实拍素材去迎合一次物体误认，是错误的处置。",
+        "evidence": "evidence/judge-pack/judge-report-final-r2.json；rebuttal-s09-ship-bow.jpg"
+      },
+      {
+        "id": "g016",
+        "date": "2026-07-27",
+        "stage": "review",
+        "check": "成片实测层复测（去底框第 3 版）",
+        "result": "pass。静态持有比 0.247(v1) → 0.216(v2) → **0.210(v3)**；逐镜 measured_static **0 镜**；compose <video> 9 个；自报/实测矛盾 0 镜；响度 −14.11 LUFS / 真峰 −1.34 dBTP / LRA 2.1；blackdetect 0 段、freezedetect(d=1.5) 0 段。kuleshov-ir validate 14 道门 0 error 0 warning；tools/kuleshov-lint.py 全过；hyperframes check 0 error、Contrast 47/47 通过 WCAG AA（去掉底板后靠无边缘压暗 + 多层 text-shadow 顶住，对比度没有下滑）。",
+        "evidence": "evidence/render-metrics.json（第 3 版）"
+      },
+      {
+        "id": "g017",
+        "date": "2026-07-27",
+        "stage": "review",
+        "check": "G2 成片门 · 第 3 轮（隔离 subagent 盲评，node=final）",
+        "result": "**PASS**（规则派生，非模型自报）。九维均分 **4.1**（D1 4.5 / D2 4.5 / D3 3.5 / D4 4.5 / D5 3.5 / D6 4.5 / D7 4.0 / D8 3.5 / D9 4.0），**antipatterns 空数组**，citations_valid=true。这是三轮里第一次干净通过：第 1 轮的 s06 伪运动已消除，第 2 轮那条『装饰性半圆』误认在本轮未复现——评委本轮明确按新加的判定纪律确认了『分不清是图形还是实拍物体就不计入反模式』。评委本轮反而正面确认了运动的真实性：『s02 GDP 数字从 52.43 滚动到 69.57、s05→s06 从 −5.7 越过 −10.9 定格 −18.0、s07 从 +0.8 到 +1.3，是真实计数动画而非静帧，与 measured_static 全 false 吻合』。D4 版式分从 3.5 升到 **4.5**（去底框直接带来的），D6 缝合分从 4.0 升到 4.5。",
+        "evidence": "evidence/judge-pack/judge-report-final-r3.json；scores-final-r3.json"
+      },
+      {
+        "id": "g018",
+        "date": "2026-07-27",
+        "stage": "review",
+        "check": "视觉出厂自查复核（去底框第 3 版，仅复查受影响项）",
+        "result": "pass。受两条改动影响的项逐条复查：**硬查 2 双角标** —— 用户明示『左上角这种信息层级的加个底框无所谓』，右下来源脚注已去掉底板与金边、只剩带阴影的文字，双角标疑虑解除（评委 D4 仍提到角标位置重复度，登记为下一版清单）；**硬查 9 文字不拆词** —— 18 帧复检，去底框后字号上调（字幕 40→44px、角标数字 86→92px）无一处拆词；**硬查 16 元素压容器边框** —— 容器已全部取消，该项自然消解；**硬查 13 音画同步** —— 字幕去标点后重新生成 29 条，戳仍 1:1 取自 forced-align 字轴，零跨剪辑点断言复跑通过。其余 12 项未受改动影响，沿用 g011 结论。",
+        "evidence": "evidence/final-frames/（18 张重抽）；evidence/shot-sheet.jpg；scripts/gen_captions.py 的标点残留 0 断言"
+      }
+    ]
+  }
+}
