@@ -23,6 +23,20 @@ GROUP_MAX_S = 15.0     # Seedance 单次生成上限
 GROUP_MAX_SHOTS = 5
 STATIC_RUN_MAX = 2     # 静态类连续镜头上限（幻灯片风险）
 TRANSITIONS_MAX = 4    # 全片转场词汇上限（品味宪法）
+
+# m0 历史片：**只有这些门追溯适用**，其余降 warn。
+#
+# 为什么要有这张表：m0-v1 的片子是上一套 harness 下做完并验收的，IR 从未迁到
+# m1。它们现在报的 error 绝大多数不是片子的问题，是 IR 没建模当年不存在的
+# 概念——timeline.sections 没记过、shot_groups 是 m1 才有的、章节黑场的时长
+# 不进镜头区间、终渲证据在别的仓里。为了让旧片好看而放宽门是错的；补造当年
+# 不存在的数据当留痕更错（铁律 2）。所以：承认它们是 m0 产物，不参与当前门禁。
+#
+# slides.risk 例外，因为它不是建模缺口：hf-breach 事故的核心争议正是"版式卡
+# 属本征静态所以不算幻灯片"这个自我豁免，事后被判定为成因之一、门也因此收紧。
+# 让它继续对 m0 片报 error，是门追认当年的判断，不是误伤。
+M0_RETROACTIVE_GATES = frozenset({"slides.risk"})
+M0_NOTE = "（m0 历史片：本门在 m0 时代不存在或依赖 m0 未建模的字段，降为 warn）"
 VISUAL_CHANGE_MAX_S = 10.5  # 每 8–10s 一次视觉变化的可码判上界
 
 _STAGE_INDEX = {s: i for i, s in enumerate(STAGES)}
@@ -531,6 +545,12 @@ def run_gates(ir: FilmIR, stage: str | None = None,
             if _STAGE_INDEX[from_stage] <= idx:
                 ran.append(fn.__name__)
                 violations.extend(fn(ir, ctx))
+    if (ir.meta.pipeline_version or "").startswith("m0"):
+        violations = [
+            x if (x.severity != "error" or x.gate in M0_RETROACTIVE_GATES)
+            else Violation(x.gate, "warn", x.path, x.message + M0_NOTE, x.evidence)
+            for x in violations
+        ]
     errors = [x for x in violations if x.severity == "error"]
     warns = [x for x in violations if x.severity == "warn"]
     return {
