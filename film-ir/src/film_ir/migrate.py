@@ -5,7 +5,9 @@ samsung-health-ai-consent（overlays.range、source.group、provider heygen_avat
 estee-lauder-night（static_type、shot_ref/shot_refs/scope=all_shots、provider 变体）、
 uk-argentina-feud（voiceover.engine 平铺、timeline 缺 duration_s、provider collage-broll-pixel、
 ledger 条目无 id）、openai-78m-logs（anchors.gen 字符串、shots.qc 字符串、
-edit.transitions 结构化条目、provider collage-broll、ledger 条目无 id）。
+edit.transitions 结构化条目、provider collage-broll、ledger 条目无 id）、
+dont-set-ac-26（shots.status=rendered_v2 版本标记、gates.when 而非 date、
+decisions/costs 无 date）。
 
 原则：只归一字段名与结构，不丢任何留痕——搬不动的键靠 extra=allow 原样保留。
 """
@@ -27,6 +29,12 @@ PROVIDER_MAP = {
     "collage-broll-pixel": "collage_broll",   # uk-argentina 方言：同通路的像素改版（原名存 origin_provider）
 }
 ANCHOR_STATUS_MAP = {"captured": "acquired", "picked": "selected"}
+
+# dont-set-ac-26 方言：shots.status 存的是**渲染版本标记**不是状态机取值。
+# 映射到 generated 而不是 qc_pass——该片 shots.qc 全是 null，没有任何 QC 证据，
+# 写成 qc_pass 等于凭空补一份质检留痕（铁律 2）。原值存 status_original。
+SHOT_STATUS_MAP = {"rendered": "generated", "rendered_v2": "generated",
+                   "rendered_v3": "generated"}
 _SEAM_PATTERNS = [
     (re.compile(r"^A|尾帧|续接|tail_relay"), "tail_relay"),
     (re.compile(r"^B|硬切|hard_cut"), "hard_cut"),
@@ -162,6 +170,12 @@ def _anchors(d: dict, log: list[str]) -> None:
 def _shots(d: dict, log: list[str]) -> None:
     for s in d.get("shots") or []:
         sid = s.get("id")
+        st = s.get("status")
+        if st in SHOT_STATUS_MAP:
+            s["status_original"] = st
+            s["status"] = SHOT_STATUS_MAP[st]
+            log.append(f"shots[{sid}].status {st!r} → {s['status']!r}"
+                       "（渲染版本标记非状态机取值；原值存 status_original）")
         src = s.get("source") or {}
         prov = src.get("provider")
         if prov in PROVIDER_MAP:
@@ -283,6 +297,27 @@ def _ledger(d: dict, log: list[str]) -> None:
         if "gate" in g and "check" not in g:
             g["check"] = g.pop("gate")
             log.append(f"gates[{g.get('id')}].gate → check")
+        # dont-set-ac-26 方言：日期字段叫 when（纯改名，是真数据）
+        if "when" in g and "date" not in g:
+            g["date"] = g.pop("when")
+            log.append(f"gates[{g.get('id')}].when → date")
+    # decisions / costs 缺 date：模型必填，但**不许凭空编日期**。只用本片自己
+    # 记录过的日期回填（gates[].date 的众数），并逐条写 date_source 让这次回填
+    # 看得见——声明过的近似好过静默的精确。全片一个日期都没有就不动，让它报错。
+    dates = [g["date"] for g in ledger.get("gates") or [] if g.get("date")]
+    if dates:
+        anchor_date = max(set(dates), key=dates.count)
+        for key in ("decisions", "costs"):
+            filled = 0
+            for it in ledger.get(key) or []:
+                if isinstance(it, dict) and not it.get("date"):
+                    it["date"] = anchor_date
+                    it["date_source"] = ("migrate: 原条目无日期，按本片 "
+                                         "ledger.gates 记录日回填，非条目实际发生日")
+                    filled += 1
+            if filled:
+                log.append(f"ledger.{key} {filled} 条缺 date → 回填 {anchor_date}"
+                           "（本片 gates 记录日；已逐条标 date_source）")
 
 
 def _gen_from_string(s: str) -> dict:

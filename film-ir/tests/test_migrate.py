@@ -4,7 +4,14 @@ from film_ir.gates import run_gates
 from film_ir.migrate import migrate
 from film_ir.models import FilmIR, SCHEMA_VERSION
 
-from conftest import load_fixture
+from conftest import load_fixture, minimal_ir, shot
+
+
+def _minimal_m0() -> dict:
+    """最小 m0 方言底座：给 dont-set-ac-26 那组用例用。"""
+    raw = minimal_ir(pipeline_version="m0-v1", status="delivered")
+    raw["shots"] = [shot("s01", 0.0, 5.0)]
+    return raw
 
 
 def test_all_real_films_migrate_to_valid_schema(real_film_raw):
@@ -109,3 +116,54 @@ def test_estee_dialect():
     assert ov_by_id["ov_sub"]["scope"] == "global"
     assert ov_by_id["ov_num_22"]["shot_range"] == ["s01_hook_film_number", "s01_hook_film_number"]
     assert ov_by_id["ov_tag_brand"]["shot_refs"] == ["s01_hook_film_number", "s06b_space_float"]
+
+
+# ---------------------------------------------- dont-set-ac-26 方言
+
+def test_shot_status_render_marker_maps_to_generated():
+    """rendered_v2 是渲染版本标记不是状态机取值 → generated，原值留痕。
+
+    刻意不映射到 qc_pass：该片方言里 shots.qc 全是 null，没有任何质检证据，
+    写成 qc_pass 等于凭空补一份留痕。
+    """
+    raw = _minimal_m0()
+    raw["shots"][0]["status"] = "rendered_v2"
+    out, log = migrate(raw)
+    assert out["shots"][0]["status"] == "generated"
+    assert out["shots"][0]["status_original"] == "rendered_v2"
+    assert any("status_original" in x for x in log)
+
+
+def test_gate_when_renamed_to_date():
+    """gates[].when → date：纯改名，是真数据。"""
+    raw = _minimal_m0()
+    raw["ledger"]["gates"] = [{"id": "G1", "stage": "review", "when": "2026-07-20",
+                               "result": "PASS"}]
+    out, log = migrate(raw)
+    g = out["ledger"]["gates"][0]
+    assert g["date"] == "2026-07-20" and "when" not in g
+
+
+def test_missing_dates_backfilled_from_own_gates_with_source():
+    """decisions/costs 缺 date：只用本片记录过的日期回填，且逐条标 date_source。"""
+    raw = _minimal_m0()
+    raw["ledger"]["gates"] = [{"id": "G1", "stage": "review", "when": "2026-07-20",
+                               "result": "PASS"}]
+    raw["ledger"]["decisions"] = [{"id": "d1", "stage": "brief", "decision": "x"}]
+    out, log = migrate(raw)
+    dec = out["ledger"]["decisions"][0]
+    assert dec["date"] == "2026-07-20"
+    assert "非条目实际发生日" in dec["date_source"]
+    assert any("回填 2026-07-20" in x for x in log)
+
+
+def test_no_date_anywhere_is_not_fabricated():
+    """全片一个日期都没有就不回填——宁可让它报错，也不编日期。"""
+    raw = _minimal_m0()
+    raw["ledger"]["gates"] = []
+    raw["ledger"]["decisions"] = [{"id": "d1", "stage": "brief", "decision": "x"}]
+    try:
+        out, _ = migrate(raw)
+    except Exception:
+        return                                  # schema 校验拦下，符合预期
+    assert "date" not in out["ledger"]["decisions"][0]
