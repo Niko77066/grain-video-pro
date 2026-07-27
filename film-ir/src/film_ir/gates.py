@@ -303,6 +303,17 @@ def style_contract_plan(ir: FilmIR, ctx: GateContext | None = None) -> list[Viol
     for k in _contract.unknown_amendments(c, amendments):
         v.append(_err("style.contract.amend", f"meta.contract_amendments[{k}]",
                       f"修改指向不存在/不可调的合同条目: {k}"))
+    # 装饰条款体检：合同是机器硬门，没有执法点的条目会被静默忽略，
+    # 让人以为门在那儿。挡在 storyboard（花钱之前），不等到 review。
+    dead, declared = _contract.unenforced_terms(c)
+    for k in dead:
+        v.append(_err("style.contract.schema", f"contract.{k}",
+                      f"合同条目无人执法: {k}——校验器不读这个键，它是装饰品。"
+                      "要么在 gates.py 补执法点并登记进 contract.ENFORCED_TERMS，"
+                      '要么显式写 "enforced": false（降 warn，交 Judge 兜底）'))
+    for k in declared:
+        v.append(_warn("style.contract.schema", f"contract.{k}",
+                       f"声明性条款、无机器执法: {k}——由 Judge / 人工兜底"))
     plan = c.get("plan") or {}
     shots = sorted(ir.shots, key=lambda s: s.t[0])
     total = ir.audio.timeline.duration_s if ir.audio.timeline else None

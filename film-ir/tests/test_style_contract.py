@@ -238,3 +238,60 @@ def test_no_contract_pack_skips(project, tmp_path):
     report = run_gates(ir, project_dir=pdir)
     assert not [x for x in report["violations"]
                 if x["gate"].startswith("style.contract")]
+
+
+# ---------------------------------------------------------------- schema 门
+
+def test_unenforced_term_is_error(project):
+    """合同写了校验器不读的阈值条目：报 error，不静默忽略。
+
+    真实病灶：2026-07-27 风格包生成实验里，两份合成合同一共写了 26 条
+    render 门，校验器实际执法 1 条——其余全被静默吞掉，看起来却像有门。
+    """
+    contract = json.loads(json.dumps(CASE_FILE_CONTRACT))
+    contract["render"]["motion_source_share_min"] = {"value": 0.5,
+                                                     "amend": [0.44, 0.56]}
+    ir, pdir = project(contract, _codex_hf_ir())
+    msgs = [x["message"] for x in _errors(run_gates(ir, project_dir=pdir),
+                                          "style.contract.schema")]
+    assert any("render.motion_source_share_min" in m for m in msgs)
+
+
+def test_declared_unenforced_term_is_warn(project):
+    """自称 enforced:false 的条目降 warn——声明性条款合法，装饰品不合法。"""
+    contract = json.loads(json.dumps(CASE_FILE_CONTRACT))
+    contract["plan"]["visual_handle_declared"] = {"value": 1, "amend": [1, 1],
+                                                  "enforced": False}
+    ir, pdir = project(contract, _codex_hf_ir())
+    report = run_gates(ir, project_dir=pdir)
+    assert not _errors(report, "style.contract.schema")
+    assert any(x["gate"] == "style.contract.schema" and x["severity"] == "warn"
+               and "visual_handle_declared" in x["message"]
+               for x in report["violations"])
+
+
+def test_prose_fields_are_not_terms(project):
+    """basis / role / providers 是散文与配置，不是阈值条目，不该被误报。"""
+    contract = json.loads(json.dumps(CASE_FILE_CONTRACT))
+    contract["plan"]["voices"]["document"]["note"] = "文件实证声部"
+    contract["render"]["static_hold_ratio_max"]["basis"] = "实测 0.619 绿 / 0.747 红"
+    ir, pdir = project(contract, _codex_hf_ir())
+    assert not _errors(run_gates(ir, project_dir=pdir), "style.contract.schema")
+
+
+def test_shipped_contracts_have_no_dead_terms():
+    """三个出厂风格包不得有装饰条款——本门的回归锚。"""
+    from pathlib import Path
+
+    from film_ir import contract as _c
+
+    styles = Path(__file__).resolve().parents[2] / "styles"
+    checked = []
+    for f in sorted(styles.glob("*/contract.json")):
+        data = json.loads(f.read_text(encoding="utf-8"))
+        if data.get("schema") != _c.SCHEMA:
+            continue
+        dead, _ = _c.unenforced_terms(data)
+        assert not dead, f"{f.parent.name} 有无人执法的合同条目: {dead}"
+        checked.append(f.parent.name)
+    assert checked, "一个风格包都没扫到，路径大概错了"
