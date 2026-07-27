@@ -107,7 +107,14 @@
 ### 用法
 
 - **回归对照**：改本包 playbook / contract / 提示词后，按 `styles/_iteration.md` 的棘轮跑——`judge.py --mode paired --vs` 比新旧，**外加两条单臂**验各自过没过出厂下限。两种模式不得互相顶替（协议见 `tools/judge/README.md`「评审模式协议」）。
-- **考题镜头** `test-shots.json`：尚未建立。按规程应取本片的高分位（D2 结构 5 / D7 钩子 5）与翻车位（D1 无出处标注、s17_roof 色温离群）各若干镜。
+- **考题镜头**：`styles/pixel-chronicle/test-shots.json`，5 个，全部取自 GS-01——
+  | | 取自 | 考什么 |
+  |---|---|---|
+  | ts01 | s01+s02+s03 | 反差连击钩子（D7 高分位，三镜连读） |
+  | ts02 | s10_buffet | 数据实物化 + MG/实拍交替纪律 |
+  | ts03 | s11b_bloodsugar | **屏上事实的出处标注——GS-01 唯一失分点** |
+  | ts04 | s16_night+s17_roof | 夜戏声部缝合（主色漂移离群位，绿锚 0.691） |
+  | ts05 | s22_echo+s23_real | 虚实呼应收尾（本包签名动作，D2 高分位） |
 
 ### 状态说明
 
