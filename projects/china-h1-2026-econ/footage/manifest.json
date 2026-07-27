@@ -1,0 +1,117 @@
+{
+ "schema": "footage-manifest@1",
+ "project": "china-h1-2026-econ",
+ "tier": "Pexels 纯空镜/氛围位（footage-sourcing 分层第一层）——不承担叙事证据，画面均为示意",
+ "reuse_check": "一素材全片一次：9 个资产 9 个镜位，零复用",
+ "items": [
+  {
+   "file": "compose/assets/clips/c_s03_sky.mp4",
+   "raw": "footage/raw/v_sky.mp4",
+   "source": "https://www.pexels.com/video/shanghai-night-skyline-with-tower-view-33009782/",
+   "pexels_id": 33009782,
+   "license": "pexels",
+   "section": "s03_city_aerial",
+   "desc": "上海外滩夜景航拍全景，东方明珠与陆家嘴天际线可辨，前景为观景平台人群剪影。",
+   "media_start_s": 4.0,
+   "dur_s": null
+  },
+  {
+   "file": "compose/assets/clips/c_s05_site.mp4",
+   "raw": "footage/raw/v_site.mp4",
+   "source": "https://www.pexels.com/video/an-aerial-view-of-a-construction-site-with-a-lot-of-buildings-19630919/",
+   "pexels_id": 19630919,
+   "license": "pexels",
+   "section": "s05_site_aerial",
+   "desc": "多栋在建混凝土框架楼体的低空航拍，塔吊与脚手架在场，阴天，地点特征中性。",
+   "media_start_s": 6.0,
+   "dur_s": null
+  },
+  {
+   "file": "compose/assets/clips/c_s07_street.mp4",
+   "raw": "footage/raw/v_street2.mp4",
+   "source": "https://www.pexels.com/video/vibrant-street-scenes-in-guangzhou-china-36759513/",
+   "pexels_id": 36759513,
+   "license": "pexels",
+   "section": "s07_street_crowd",
+   "desc": "广州上下九步行街白天人流，中文店招与红灯笼可辨，人群向镜头方向走动。",
+   "media_start_s": 3.0,
+   "dur_s": null
+  },
+  {
+   "file": "compose/assets/clips/c_s09_port.mp4",
+   "raw": "footage/raw/v_port.mp4",
+   "source": "https://www.pexels.com/video/aerial-view-of-container-ship-at-busy-port-terminal-29904000/",
+   "pexels_id": 29904000,
+   "license": "pexels",
+   "section": "s09_port_aerial",
+   "desc": "集装箱码头正俯拍：靠泊货轮、四台岸桥、堆场集装箱，桥吊与车辆在动，地点特征中性。",
+   "media_start_s": 14.0,
+   "dur_s": null
+  },
+  {
+   "file": "compose/assets/clips/c_s11_robot.mp4",
+   "raw": "footage/raw/v_robot.mp4",
+   "source": "https://www.pexels.com/video/industrial-robot-arm-in-high-tech-factory-32386532/",
+   "pexels_id": 32386532,
+   "license": "pexels",
+   "section": "s11_robot_line",
+   "desc": "洁净车间内黄色六轴工业机械臂取放作业中景，白色产线与顶灯在背景。",
+   "media_start_s": 1.5,
+   "dur_s": null
+  },
+  {
+   "file": "compose/assets/clips/c_s15_market.mp4",
+   "raw": "footage/raw/v_super.mp4",
+   "source": "https://www.pexels.com/video/vibrant-market-scene-in-beijing-supermarket-34835384/",
+   "pexels_id": 34835384,
+   "license": "pexels",
+   "section": "s15_supermarket",
+   "desc": "中国超市生鲜区中景，中文价签与「水产」灯箱可辨，顾客推车走过。",
+   "media_start_s": 0.06,
+   "dur_s": null
+  },
+  {
+   "file": "compose/assets/img/i_s06_housing.jpg",
+   "raw": "footage/raw/p_site.jpg",
+   "source": "https://www.pexels.com/photo/9370034/",
+   "pexels_id": 9370034,
+   "license": "pexels",
+   "section": "s06_housing_photo",
+   "desc": "在建高层住宅楼体与塔吊，阴天灰白天空，地点特征中性。",
+   "dur_s": null
+  },
+  {
+   "file": "compose/assets/img/i_s10_containers.jpg",
+   "raw": "footage/raw/p_containers.jpg",
+   "source": "https://www.pexels.com/photo/24244234/",
+   "pexels_id": 24244234,
+   "license": "pexels",
+   "section": "s10_containers_photo",
+   "desc": "集装箱堆场与集卡通道的高空俯拍，成排彩色集装箱，地点特征中性。",
+   "dur_s": null
+  },
+  {
+   "file": "compose/assets/img/i_s12_equipment.jpg",
+   "raw": "footage/raw/p_laser.jpg",
+   "source": "https://www.pexels.com/photo/38487774/",
+   "pexels_id": 38487774,
+   "license": "pexels",
+   "section": "s12_equipment_photo",
+   "desc": "工业激光切割机切割头特写，蓝白机身与蜂窝工作台。",
+   "dur_s": null
+  }
+ ],
+ "gaps": [],
+ "rejected": [
+  {
+   "file": "v_mall.mp4",
+   "pexels_id": 34892172,
+   "reason": "Ankara 商场，拉丁店招与人物特征明显非中国场景——地点错位，见 ledger d016"
+  },
+  {
+   "file": "v_market.mp4",
+   "pexels_id": 10483340,
+   "reason": "越南街市（斗笠），不能承担中国居民物价镜——地点错位，见 ledger d016"
+  }
+ ]
+}

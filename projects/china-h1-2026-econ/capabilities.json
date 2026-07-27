@@ -1,0 +1,13 @@
+{
+  "schema": "capabilities@1",
+  "checked_at": "2026-07-27T06:00:32Z",
+  "minimax_tts": "ready",
+  "apihub_news": "ready",
+  "pexels": "ready",
+  "pixabay": "ready",
+  "kimi_judge": "missing_credentials",
+  "remote_render_http": "missing_credentials",
+  "docker_render": "ready",
+  "ffmpeg": "ready",
+  "film_ir_cli": "ready"
+}

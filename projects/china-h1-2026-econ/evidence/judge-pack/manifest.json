@@ -1,0 +1,285 @@
+{
+  "schema": "judge-pack@1",
+  "generated_at": "2026-07-27T08:53:24+00:00",
+  "title": "《经济半年报》4.7% 背后的两组数字",
+  "style_pack": "whiteboard-generalist",
+  "aspect": "16:9",
+  "duration_s": 82.0,
+  "video_file": "/Users/admin/deeplang/grain-video-pro/.claude/worktrees/finance-video-production-bd1929/projects/china-h1-2026-econ/out/final.mp4",
+  "grid_time_map": {
+    "cols": 8,
+    "interval_s": 2.0,
+    "offset_sheet_offset_s": 1.0,
+    "rule": "行优先；第 n 格(从1数)时间 = 偏移 + (n-1)*interval_s"
+  },
+  "golden": null,
+  "contract_amendments": {},
+  "shots": [
+    {
+      "id": "s01_hook_anchor",
+      "t": [
+        0.0,
+        6.91
+      ],
+      "intent": "钩子：立住『同一张表上有两组方向相反的数字』——+4.7% 与 −5.7% 同屏对置。",
+      "framing": "主播中景 · 右侧双数字组 · 左下标题条",
+      "provider": "avatar"
+    },
+    {
+      "id": "s02_gdp_screen",
+      "t": [
+        6.91,
+        13.65
+      ],
+      "intent": "稳的一面：GDP 近 70 万亿、+4.7%，一/二季度 5.0 与 4.3 的落差同屏可见。",
+      "framing": "全屏数据屏 · 季度柱状 + 目标带",
+      "provider": "hyperframes"
+    },
+    {
+      "id": "s03_city_aerial",
+      "t": [
+        13.65,
+        17.05
+      ],
+      "intent": "把『落在目标区间内』落到具体城市实景上，给数据一次呼吸。",
+      "framing": "城市夜景航拍全景",
+      "provider": "footage"
+    },
+    {
+      "id": "s04_turn_card",
+      "t": [
+        17.05,
+        20.84
+      ],
+      "intent": "叙事转折点：『但翻到投资和消费，情况反过来了』——用版式做 But 的重音。",
+      "framing": "全屏转折字卡 · 大字",
+      "provider": "hyperframes"
+    },
+    {
+      "id": "s05_site_aerial",
+      "t": [
+        20.84,
+        24.46
+      ],
+      "intent": "固定资产投资 −5.7%：实拍在建工地给『投资在缩』一个物证面。",
+      "framing": "工地航拍全景 · 左下数据角标",
+      "provider": "footage"
+    },
+    {
+      "id": "s06_housing_photo",
+      "t": [
+        24.46,
+        27.44
+      ],
+      "intent": "房地产开发投资 −18.0%：从工地全景推到楼体，数字从 −5.7 递进到 −18.0。",
+      "framing": "楼体照片缓推特写 · 大数字",
+      "provider": "image_motion"
+    },
+    {
+      "id": "s07_street_crowd",
+      "t": [
+        27.44,
+        31.68
+      ],
+      "intent": "社会消费品零售总额只涨 1.3%：人流很密，但增速很薄——画面与数字的反差本身是论点。",
+      "framing": "步行街人流平视 · 右下数据角标",
+      "provider": "footage"
+    },
+    {
+      "id": "s08_question_anchor",
+      "t": [
+        31.68,
+        37.24
+      ],
+      "intent": "设问：『那百分之四点七，是谁扛起来的？』——全片唯一一次推近，给设问物理重量。",
+      "framing": "主播近景（全片唯一一次推近）",
+      "provider": "avatar"
+    },
+    {
+      "id": "s09_port_aerial",
+      "t": [
+        37.24,
+        43.75
+      ],
+      "intent": "答案一是外贸：25.47 万亿元、+16.9%，港口作业画面与数据卡同框。",
+      "framing": "港口航拍全景 · 右侧数据卡",
+      "provider": "footage"
+    },
+    {
+      "id": "s10_containers_photo",
+      "t": [
+        43.75,
+        48.52
+      ],
+      "intent": "拆开外贸：出口 +13.4%、进口 +22.1%——进口跑得更快是本节的暗线。",
+      "framing": "集装箱堆场照片缓推 · 出口/进口双条",
+      "provider": "image_motion"
+    },
+    {
+      "id": "s11_robot_line",
+      "t": [
+        48.52,
+        53.36
+      ],
+      "intent": "答案二是制造：高技术制造业增加值 +13.3%，产线在动是这条论断的物证。",
+      "framing": "机械臂产线中景 · 左下数据角标",
+      "provider": "footage"
+    },
+    {
+      "id": "s12_equipment_photo",
+      "t": [
+        53.36,
+        55.93
+      ],
+      "intent": "装备制造业 +9.3%：从产线整体推到单台设备，把『装备』这个词落到具体机器上。",
+      "framing": "激光切割设备特写缓推 · 大数字",
+      "provider": "image_motion"
+    },
+    {
+      "id": "s13_output_bars",
+      "t": [
+        55.93,
+        60.63
+      ],
+      "intent": "新动能产量：机器人 +28.0%、锂电 +39.3%、3D 打印 +48.5%（第三条只上屏不口播）。",
+      "framing": "全屏产量增速条 · 三条",
+      "provider": "hyperframes"
+    },
+    {
+      "id": "s14_overlooked_card",
+      "t": [
+        60.63,
+        63.97
+      ],
+      "intent": "第二次转折：『这份表里还有一行，容易被跳过』——全片唯一带主观色彩的一句。",
+      "framing": "全屏转折字卡 · 大字",
+      "provider": "hyperframes"
+    },
+    {
+      "id": "s15_supermarket",
+      "t": [
+        63.97,
+        69.78
+      ],
+      "intent": "居民人均可支配收入实际 +4.2% vs 经济增速 +4.7%：收入那条短一截，跑输写在画面上。",
+      "framing": "超市生鲜区中景 · 右侧对比条",
+      "provider": "footage"
+    },
+    {
+      "id": "s16_cpi_card",
+      "t": [
+        69.78,
+        74.84
+      ],
+      "intent": "居民消费价格 +1.0%，离全年 2% 目标还差不少——需求端偏冷的第二个证据。",
+      "framing": "全屏物价对照卡 · 实际 vs 目标",
+      "provider": "hyperframes"
+    },
+    {
+      "id": "s17_close_anchor",
+      "t": [
+        74.84,
+        78.4
+      ],
+      "intent": "收束前半句：『外需和制造这一棒已经跑起来了。』",
+      "framing": "主播中景收尾",
+      "provider": "avatar"
+    },
+    {
+      "id": "s18_end_card",
+      "t": [
+        78.4,
+        81.96
+      ],
+      "intent": "落在未决问题上：『下半年要看的，是内需能不能接得住。』并给出判据三指标。",
+      "framing": "全屏结论字卡 · 右侧三指标",
+      "provider": "hyperframes"
+    }
+  ],
+  "frames": [
+    "s01_hook_anchor_0003.46s.jpg",
+    "s02_gdp_screen_0010.28s.jpg",
+    "s03_city_aerial_0015.35s.jpg",
+    "s04_turn_card_0018.95s.jpg",
+    "s05_site_aerial_0022.65s.jpg",
+    "s06_housing_photo_0025.95s.jpg",
+    "s07_street_crowd_0029.56s.jpg",
+    "s08_question_anchor_0034.46s.jpg",
+    "s09_port_aerial_0040.50s.jpg",
+    "s10_containers_photo_0046.14s.jpg",
+    "s11_robot_line_0050.94s.jpg",
+    "s12_equipment_photo_0054.64s.jpg",
+    "s13_output_bars_0058.28s.jpg",
+    "s14_overlooked_card_0062.30s.jpg",
+    "s15_supermarket_0066.88s.jpg",
+    "s16_cpi_card_0072.31s.jpg",
+    "s17_close_anchor_0076.62s.jpg",
+    "s18_end_card_0080.18s.jpg"
+  ],
+  "sections": [
+    {
+      "id": "sec01",
+      "t": [
+        0.0,
+        6.91
+      ],
+      "text": "七月十五号，上半年的经济数据出来了。同一张表上，有两组数字方向正好相反。"
+    },
+    {
+      "id": "sec02",
+      "t": [
+        6.91,
+        17.05
+      ],
+      "text": "先看稳的。上半年国内生产总值接近七十万亿元，同比增长百分之四点七，正好落在全年四点五到五的目标区间里。"
+    },
+    {
+      "id": "sec03",
+      "t": [
+        17.05,
+        31.68
+      ],
+      "text": "但翻到投资和消费，情况反过来了。固定资产投资同比下降百分之五点七，房地产开发投资降了百分之十八。社会消费品零售总额只涨百分之一点三。"
+    },
+    {
+      "id": "sec04",
+      "t": [
+        31.68,
+        37.24
+      ],
+      "text": "投资在缩，消费几乎没动。那百分之四点七，是谁扛起来的？"
+    },
+    {
+      "id": "sec05",
+      "t": [
+        37.24,
+        48.52
+      ],
+      "text": "外贸。上半年货物进出口二十五万四千亿元，增长百分之十六点九。出口涨百分之十三点四，进口涨百分之二十二点一。"
+    },
+    {
+      "id": "sec06",
+      "t": [
+        48.52,
+        60.63
+      ],
+      "text": "还有制造。高技术制造业增加值涨百分之十三点三，装备制造业涨百分之九点三。工业机器人产量多了两成八，锂离子电池多了近四成。"
+    },
+    {
+      "id": "sec07",
+      "t": [
+        60.63,
+        74.84
+      ],
+      "text": "这份表里还有一行，容易被跳过。居民人均可支配收入实际增长百分之四点二，跑输了经济增速。居民消费价格只涨百分之一，离百分之二的目标还差不少。"
+    },
+    {
+      "id": "sec08",
+      "t": [
+        74.84,
+        81.96
+      ],
+      "text": "外需和制造这一棒已经跑起来了。下半年要看的，是内需能不能接得住。"
+    }
+  ]
+}
