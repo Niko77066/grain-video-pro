@@ -101,7 +101,11 @@ def resolve_golden(ref: str) -> tuple[Path | None, str | None, list[str] | None]
             return None, None, None
     else:
         hit = entries[0]                   # primary
-    label = f"{pack} / {hit['project']}" + (f" ({hit['id']})" if hit.get("id") else "")
+    if not hit.get("file"):
+        print(f"警告: 登记册条目「{pack} / {hit.get('project')}」没有 file 路径——补上再取标尺",
+              file=sys.stderr)
+        return None, None, None
+    label = f"{pack} / {hit.get('project')}" + (f" ({hit['id']})" if hit.get("id") else "")
     return Path(hit["file"]).expanduser(), label, hit.get("known_defects")
 
 

@@ -16,6 +16,11 @@
       "spent_usd": 0.0
     },
     "pipeline_version": "m0-v1",
+    "legacy_exemption": {
+      "declared": "2026-07-27",
+      "by": "user",
+      "reason": "m0-v1 手工作坊产物（case-file 首考片，已 delivered）。IR 保留 m0 方言，不按当前门禁重判。"
+    },
     "schema_version": "m1-v1",
     "status": "delivered",
     "brand": {

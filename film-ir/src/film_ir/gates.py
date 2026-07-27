@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, asdict, field
 from pathlib import Path
 
@@ -192,12 +193,29 @@ def slides_risk(ir: FilmIR) -> list[Violation]:
     return v
 
 
+def transition_vocab(transitions: list[str]) -> list[str]:
+    """转场条目 → **词汇种数**（保持首次出现的顺序）。
+
+    上限数的是"全片用了几种转场语法"，不是 transitions 列表有几行。同一种转场
+    带不同用法注记（`硬切（默认）` / `硬切（章节间）`，migrate 从 {type,usage}
+    结构化条目铺平出来的形状）是一种词汇，不是两种；`len()` 会把它数成两种，
+    在贴着上限的合同（anchor-desk 定 3）上直接误判违约。
+    """
+    seen: dict[str, None] = {}
+    for t in transitions:
+        # 括号里的是用法注记，不是词汇本身；全角半角都切
+        key = re.split(r"[（(]", str(t), maxsplit=1)[0].strip().casefold()
+        if key:
+            seen.setdefault(key, None)
+    return list(seen)
+
+
 def edit_transitions(ir: FilmIR) -> list[Violation]:
-    n = len(ir.edit.transitions)
-    if n > TRANSITIONS_MAX:
+    vocab = transition_vocab(ir.edit.transitions)
+    if len(vocab) > TRANSITIONS_MAX:
         return [_err("edit.transitions", "edit.transitions",
-                     f"转场词汇 {n} 种，超上限 {TRANSITIONS_MAX}（转场遮丑是心虚）",
-                     evidence=", ".join(ir.edit.transitions))]
+                     f"转场词汇 {len(vocab)} 种，超上限 {TRANSITIONS_MAX}（转场遮丑是心虚）",
+                     evidence=", ".join(vocab))]
     return []
 
 
@@ -406,11 +424,13 @@ def style_contract_plan(ir: FilmIR, ctx: GateContext | None = None) -> list[Viol
     # 就跑，比 compose 阶段的通用门早：转场词汇是剪辑语法的事前承诺，
     # 不该等到剪完才发现超编。
     tr_max = _eff(c, "plan.transitions_max", amendments, v)
-    if tr_max is not None and len(ir.edit.transitions) > tr_max:
-        v.append(_err("style.contract.plan", "edit.transitions",
-                      f"转场词汇 {len(ir.edit.transitions)} 种 > 本包上限 "
-                      f"{tr_max:g}（G1 通用上限 {TRANSITIONS_MAX}，本包更严）",
-                      evidence=", ".join(ir.edit.transitions)))
+    if tr_max is not None:
+        vocab = transition_vocab(ir.edit.transitions)   # 与 G1 同一把尺：数种数不数行数
+        if len(vocab) > tr_max:
+            v.append(_err("style.contract.plan", "edit.transitions",
+                          f"转场词汇 {len(vocab)} 种 > 本包上限 "
+                          f"{tr_max:g}（G1 通用上限 {TRANSITIONS_MAX}，本包更严）",
+                          evidence=", ".join(vocab)))
 
     # 声明型图形连续时长（MG 段与实拍段交替的可码判投影）
     if plan.get("graphics_run_max_s"):
@@ -546,16 +566,28 @@ def run_gates(ir: FilmIR, stage: str | None = None,
                 ran.append(fn.__name__)
                 violations.extend(fn(ir, ctx))
     downgraded = 0
+    exemption = None
     if (ir.meta.pipeline_version or "").startswith("m0"):
-        kept = []
-        for x in violations:
-            if x.severity == "error" and x.gate not in M0_RETROACTIVE_GATES:
-                kept.append(Violation(x.gate, "warn", x.path,
-                                      x.message + M0_NOTE, x.evidence))
-                downgraded += 1
-            else:
-                kept.append(x)
-        violations = kept
+        exemption = ir.meta.legacy_exemption
+        if exemption is None:
+            # fail-closed：pipeline_version 是个两字符就能改的字段，不能让它单独
+            # 兑换"整片免检"。没有署名申报就不降级，并且**把这次未遂的降级摆出来**。
+            violations.append(_err(
+                "legacy.exemption", "meta.legacy_exemption",
+                f"pipeline_version={ir.meta.pipeline_version!r} 声称 m0 历史片，"
+                "但没有 meta.legacy_exemption 申报——m0 降级执法不给自报豁免。"
+                "真是历史片就补 {declared, by, reason} 三项署名申报；"
+                "是新片就把 pipeline_version 改回当前工艺版本，别拿 m0 躲门"))
+        else:
+            kept = []
+            for x in violations:
+                if x.severity == "error" and x.gate not in M0_RETROACTIVE_GATES:
+                    kept.append(Violation(x.gate, "warn", x.path,
+                                          x.message + M0_NOTE, x.evidence))
+                    downgraded += 1
+                else:
+                    kept.append(x)
+            violations = kept
     errors = [x for x in violations if x.severity == "error"]
     warns = [x for x in violations if x.severity == "warn"]
     # legacy_downgraded 必须出现在摘要里：m0 片降级后 ok=true / errors=0 与
@@ -570,8 +602,11 @@ def run_gates(ir: FilmIR, stage: str | None = None,
     }
     if downgraded:
         report["legacy_downgraded"] = downgraded
+        report["legacy_exemption"] = {"declared": exemption.declared, "by": exemption.by,
+                                      "reason": exemption.reason}
         report["legacy_note"] = (
             f"m0 历史片：{downgraded} 条 error 已降为 warn（本片不参与当前门禁，"
             f"追溯适用的门：{', '.join(sorted(M0_RETROACTIVE_GATES))}）。"
+            f"豁免由 {exemption.by} 于 {exemption.declared} 申报。"
             "ok=true 不等于按当前标准通过。")
     return report

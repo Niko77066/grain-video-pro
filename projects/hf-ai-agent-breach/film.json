@@ -16,6 +16,11 @@
       "note": "未设上限（质量优先，只记账；铁律7不惜成本）"
     },
     "pipeline_version": "m0-v1",
+    "legacy_exemption": {
+      "declared": "2026-07-27",
+      "by": "user",
+      "reason": "m0-v1 手工作坊产物（Codex hf-breach 事故片）。IR 从未迁到 m1，现报的 error 多数是 m0 未建模当年不存在的概念（shot_groups / timeline.sections），不是片子的问题。slides.risk 按 M0_RETROACTIVE_GATES 仍追溯执法——那条正是本片的事故成因，门追认当年的判断。"
+    },
     "schema_version": "m1-v1",
     "status": "review",
     "brand": {

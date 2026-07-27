@@ -14,6 +14,11 @@
       "spent_usd": 0.4985
     },
     "pipeline_version": "m0-v1",
+    "legacy_exemption": {
+      "declared": "2026-07-27",
+      "by": "user",
+      "reason": "m0-v1 手工作坊产物（pixel-chronicle GS-02，已 delivered）。voice_ref/timeline 分节等字段是 m0 未建模概念，报的 error 是建模缺口不是片子缺陷。"
+    },
     "schema_version": "m1-v1",
     "status": "delivered",
     "next_action": "✅ 全部收尾完成（2026-07-20）：评分登记（GS-12 均分4.22）→ 成片恢复+S3备份 → 双平台发布包 out/publish/（标题①提问式，用户拍板；封面账号模板 gen_covers.py 可复用）。⏰ 发布时效窗 ≤2026-07-22（片内'前两天'口径），用户点发布即可。发布后 24-48h 冷启动数据回流走场景 D 归因。成本单价回填仍挂账。"

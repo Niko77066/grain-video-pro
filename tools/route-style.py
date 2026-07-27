@@ -240,6 +240,22 @@ def _as_list(v) -> list[str]:
     return list(v)
 
 
+def _as_duration(v) -> float | None:
+    """duration_s 归一为数字。--features 的 JSON 里写成字符串是常见手滑，
+    不接住就会在打分深处炸 TypeError，报错文案完全指不到输入。"""
+    if v is None or v == "":
+        return None
+    if isinstance(v, bool):
+        raise VocabError(f"路由输入: duration_s={v!r} 不是数字（秒）")
+    try:
+        d = float(v)
+    except (TypeError, ValueError):
+        raise VocabError(f"路由输入: duration_s={v!r} 不是数字（秒）——写 90 或 90.0，不要写 \"90s\"")
+    if d <= 0:
+        raise VocabError(f"路由输入: duration_s={v!r} 必须为正数（秒）")
+    return d
+
+
 def parse_features(d: dict, vocab: dict) -> Features:
     f = Features(
         topic=d.get("topic", "") or "",
@@ -250,7 +266,7 @@ def parse_features(d: dict, vocab: dict) -> Features:
         material=_as_list(d.get("material")),
         sensitivity=d.get("sensitivity") or "none",
         aspect=d.get("aspect") or "",
-        duration_s=d.get("duration_s"),
+        duration_s=_as_duration(d.get("duration_s")),
         pacing=d.get("pacing") or "",
     )
     where = "路由输入"
@@ -689,7 +705,14 @@ def main(argv=None) -> int:
 
     d: dict = {}
     if a.features:
-        d = json.loads(a.features.read_text(encoding="utf-8"))
+        try:
+            d = json.loads(a.features.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"读不了路由输入 {a.features}：{e}", file=sys.stderr)
+            return 2
+        if not isinstance(d, dict):
+            print(f"{a.features} 顶层必须是对象（三层特征的键值表）", file=sys.stderr)
+            return 2
     for k in ("topic", "content_type", "understanding_task", "tone", "audience",
               "material", "sensitivity", "aspect", "duration_s", "pacing"):
         v = getattr(a, k, None)

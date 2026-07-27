@@ -71,7 +71,10 @@ judge.py <pack> --node final --finalize s.json   # 3. 阅卷：规则派生 verd
 
 "新版比旧版好没好""A/B/C 哪个方案更好"——跨会话的绝对分不可比（不同批次、不同评委、不同锚点漂移），所以相对结论只认同席配对。
 
-- **两臂盲化**：`_arm_order()` 用两个 pack 绝对路径的 SHA-256 决定谁是 甲 谁是 乙——确定性可复跑，且与"新/旧""A/C"的调用顺序脱钩。证据文件复制进 `<packA>/judge-paired-<node>/{arm_a,arm_b}/`，路径里不再出现项目名（文件名保留镜头 ID，引用纪律需要）。
+- **两臂盲化**：`_arm_order()` 用两个 pack 绝对路径的 SHA-256 决定谁是 甲 谁是 乙——确定性可复跑，且与"新/旧""A/C"的调用顺序脱钩。证据文件复制进**仓库级中立擂台** `<repo>/.judge-arena/<node>-<hash>/{arm_a,arm_b}/`（目录名只有哈希，`.gitignore` 已排除，可由 `--task` 重建）。共用标尺 Golden 与题面 `task.md` 也复制进擂台。
+  - **擂台不能建在任何一臂的 pack 里。** 早期版本放在 `<packA>/judge-paired-<node>/`，两臂的绝对路径都带着 packA 的项目名——虽然对称、看不出哪臂是哪个，但等于告诉评委「这两件里有一个是 X 片」，帧一眼认得出就穿帮了。
+  - 文件名保留镜头 ID（引用纪律需要）——这是**已知的残余泄漏面**：镜头 ID 带题材词（`s17_roof`）时仍可能被认出来。要更严就在 build_evidence_pack 阶段改用序号文件名，代价是评委引用不到镜头 ID。
+  - 派发 subagent 时用**擂台里的 `task.md`**（`--task` 会把它的路径打到 stderr），不要用 pack 里那份留档副本——文件路径本身会把项目名带进评委上下文。
 - **对照表 `judge-armmap-<node>.json` 不得交给评委**。派发 subagent 时只交任务里逐条列出的文件路径，**不要把 pack 目录整体挂给它**。揭盲在阅卷时由 `judge.py` 做。
 - **配对不产出 pass/fail**：报告的 `verdict` 恒为 `null`，另有 `absolute_verdict` 写明理由。要判出厂另跑 solo。
 - 胜负由规则派生（`|Δoverall| < 0.3 → tie`，否则 overall 高者胜），模型的强制选择只存 `winner_model` 作校准语料——与 `verdict_model` 同源思路。

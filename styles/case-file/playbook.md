@@ -8,7 +8,7 @@
 
 ## 0. 档案
 
-- 状态：**首考通过 2026-07-17**（用户认可「这个风格包应该就没问题了」；首片 `openai-78m-logs` GS-11 · 4.22/5）。替代已淘汰的 `daily-brief`。
+- 状态：**首考通过 2026-07-17**（用户认可「这个风格包应该就没问题了」；首片 `openai-78m-logs` GS-11 · 4.44/5）。替代已淘汰的 `daily-brief`。
 - **路由条件**（机器版在 `capability.json`，规程 `styles/routing.md`）：理解任务 `verify_the_event`（次位 `read_the_official_number`）。
   - **硬前提**（不满足就不是本包）= 有明确事件 + **有可读的文件／法规／数据／报道** + faceless。要主播口播就不是本包（走 `anchor-desk`）；追问「为什么会变成今天这样」的机制题走 `pixel-chronicle`。
   - **原生格式**（不是门槛，偏离只是要适配）= 竖屏 9:16 · 20–150s。横屏或超长版照样能落本包，代价见 `capability.json` 的 `native_format.adaptation`，适配项记 `ledger.decisions`。
@@ -65,7 +65,7 @@
 
 ## 7. Golden 样片
 
-- `openai-78m-logs`（重构版，**首考通过 · GS-11 · 4.22/5 · 用户认可**）。成片归档 `~/kuleshov-archive/golden/case-file__openai-78m-logs.mp4`，登记册 `styles/golden-set.json`（实测 1080×1920 · 65.8s · −14.02 LUFS）。
+- `openai-78m-logs`（重构版，**首考通过 · GS-11 · 4.44/5 · 用户认可**）。成片归档 `~/kuleshov-archive/golden/case-file__openai-78m-logs.mp4`，登记册 `styles/golden-set.json`（实测 1080×1920 · 65.8s · −14.02 LUFS）。
 - 范本镜：`s03d` 手机↔服务器分屏、`s04d` 密态计算标题（居中极简）；4 条拼贴 b-roll（隐喻间奏）。
 - **已知缺陷（并排对照时必须知道，不许照抄）**：真峰 −0.97 dBTP 超出 TP ≤ −1.5 目标；**全片无烧制字幕**，所以「字幕不带标点／无底框」两条 2026-07-27 拍板在这条 Golden 上无从对照——不要据此认为字幕可以省。
 - 反例存档：daily-brief 版 `openai-78m-logs` v1（全军覆没，见其 `review.md` 与本包 §0/§6）。

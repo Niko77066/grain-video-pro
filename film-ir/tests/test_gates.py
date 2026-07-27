@@ -72,6 +72,22 @@ def test_transitions_max():
     assert "edit.transitions" in errs
 
 
+def test_transitions_counts_vocabulary_not_rows():
+    """上限数的是「用了几种转场语法」，不是 transitions 列表有几行。
+
+    migrate 把 {type, usage} 结构化条目铺平成 `硬切（用法）` 之后，同一种转场
+    带不同用法注记会占好几行；len() 会把它数成好几种，在贴着上限的合同上直接误判。
+    """
+    d = minimal_ir(status="compose")
+    d["edit"]["transitions"] = ["硬切（默认）", "硬切（章节间）", "硬切（收尾前）",
+                                "黑场（章节闸门）", "像素溶解（形态转换）"]
+    errs, _ = _gates(d)
+    assert "edit.transitions" not in errs, "3 种词汇 5 行条目，不该判超编"
+    d["edit"]["transitions"] += ["白帧", "色块横扫"]        # 真的第 4、5 种
+    errs2, _ = _gates(d)
+    assert "edit.transitions" in errs2
+
+
 def test_refs_integrity():
     d = _with_timeline(minimal_ir(), 10.0)
     d["shots"] = [shot("s01", 0.0, 10.0, anchor_refs=["a_missing"], voice_ref="sec99")]

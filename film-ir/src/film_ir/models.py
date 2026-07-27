@@ -49,6 +49,18 @@ class Budget(IRModel):
     spent_usd: float = 0
 
 
+class LegacyExemption(IRModel):
+    """m0 历史片降级执法的**显式申报**（gates.M0_RETROACTIVE_GATES 之外的 error → warn）。
+
+    只写 `pipeline_version: "m0-v1"` 不足以拿到豁免：那是一个默认值级别的两字符
+    声明，等于把"整片免检"做成了手滑可达的状态。豁免必须是一次署名、有日期、
+    说得出理由的动作，和它换来的东西对等——这条本身就是铁律 2（留痕与动作同时发生）。
+    """
+    declared: str                        # 申报日期 YYYY-MM-DD
+    by: str                              # 谁申报的（user / ep / 具体人）
+    reason: str                          # 为什么这片不参与当前门禁
+
+
 class Meta(IRModel):
     title: str
     title_display: Optional[str] = None
@@ -64,6 +76,8 @@ class Meta(IRModel):
     pipeline_version: str = "m1-v2"      # 生产工艺版本
     schema_version: str = SCHEMA_VERSION  # 数据格式版本（与工艺版本分离）
     status: MetaStatus = "brief"
+    # m0 降级执法的门票：没有它，pipeline_version 写成 m0 也不给降级（fail-closed）
+    legacy_exemption: Optional[LegacyExemption] = None
     # 风格合同带宽内调整：{"<合同dotted路径>": 数值}，经 ir patch 写入（自动留痕）。
     # 越出 styles/<pack>/contract.json 的 amend 带宽 = 违约（style.contract.amend 门）。
     contract_amendments: dict = Field(default_factory=dict)

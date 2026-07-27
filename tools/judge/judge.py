@@ -14,7 +14,8 @@ subagent 用宿主 harness 的模型完成**，本工具不含任何模型 / 网
 - `paired`（配对，须 `--vs <另一个 pack>`）：两臂同席、同尺、强制选择，回答**相对问题**——
   新版比旧版好没好、A/B 哪个更好。跨会话的绝对分不可比，所以相对结论一律配对。
   **配对不产出 pass/fail**（`verdict` 恒为 null）。两臂经确定性哈希打乱成 甲/乙 并复制到中立
-  目录，抹掉路径里的项目名；对照表 `judge-armmap-<node>.json` **不得交给评委**。
+  擂台 `<repo>/.judge-arena/<node>-<hash>/`（不在任何一臂 pack 内，路径里没有项目名）；
+  派发用擂台里的 `task.md`，对照表 `judge-armmap-<node>.json` **不得交给评委**。
 
 两路都跑时用 `--merge` 合并；方向相反 = 结论不稳，记"无定论"，禁止声称胜负。
 
@@ -208,12 +209,28 @@ def _load(p: Path) -> dict:
 
 # ——————————————————————————— 配对：盲化与落盘 ———————————————————————————
 
+# 中立擂台：配对证据**不能**暂存在任何一臂的 pack 里。放在 packA 下面时，两臂的
+# 绝对路径都带着 packA 的项目名——虽然对称（看不出哪臂是哪个），但等于告诉评委
+# 「这两件里有一个是 urban-wildlife-raccoon」，帧一眼认得出就穿帮了。擂台目录只
+# 用两臂路径的哈希命名，不含任何项目信息。
+ARENA = Path(__file__).resolve().parents[2] / ".judge-arena"
+
+
+def _pair_key(p1: Path, p2: Path) -> str:
+    return "|".join(sorted([str(p1.resolve()), str(p2.resolve())]))
+
+
 def _arm_order(p1: Path, p2: Path) -> list[tuple[str, Path]]:
     """确定性哈希决定谁是甲谁是乙：可复跑，且与"新/旧""A/C"的调用顺序脱钩。"""
-    key = "|".join(sorted([str(p1.resolve()), str(p2.resolve())]))
-    flip = hashlib.sha256(key.encode("utf-8")).digest()[0] % 2
+    flip = hashlib.sha256(_pair_key(p1, p2).encode("utf-8")).digest()[0] % 2
     first, second = (p2, p1) if flip else (p1, p2)
     return [("arm_a", first), ("arm_b", second)]
+
+
+def _arena_dir(p1: Path, p2: Path, node: str) -> Path:
+    """本次配对的中立擂台目录。名字 = node + 两臂路径哈希，确定性、可复跑、无项目名。"""
+    h = hashlib.sha256(f"{node}\n{_pair_key(p1, p2)}".encode("utf-8")).hexdigest()[:10]
+    return ARENA / f"{node}-{h}"
 
 
 def _arm_files(pack: Path, node: str) -> list[tuple[str, Path]]:
@@ -233,12 +250,14 @@ def _arm_files(pack: Path, node: str) -> list[tuple[str, Path]]:
 
 
 def _stage_paired(pack: Path, other: Path, node: str) -> dict:
-    """两臂证据复制进中立目录：路径里不再出现项目名，只留 arm_a/arm_b + 原始文件名
-    （文件名带镜头 ID，引用纪律需要它）。同时落 armmap 对照表——**不交给评委**。"""
-    root = pack / f"judge-paired-{node}"
+    """两臂证据复制进**仓库级中立擂台**（不在任何一臂 pack 内）：路径里不出现任何
+    项目名，只留 arm_a/arm_b + 原始文件名（文件名带镜头 ID，引用纪律需要它）。
+    同时把 armmap 对照表落回 pack——**不交给评委**，只供阅卷揭盲。"""
+    root = _arena_dir(pack, other, node)
     if root.exists():
         shutil.rmtree(root)
     armmap: dict = {"node": node, "schema": "judge-armmap@1",
+                    "arena": str(root.resolve()),
                     "warning": "对照表：不得随证据交给评委 subagent；仅供阅卷揭盲"}
     staged: dict[str, list[tuple[str, Path]]] = {}
     for arm, src in _arm_order(pack, other):
@@ -340,9 +359,14 @@ def _emit_paired(pack: Path, other: Path, node: str) -> str:
         facts[lab] = {"shots": m.get("shots", []),
                       "contract_amendments": m.get("contract_amendments") or {},
                       "grid_time_map": m.get("grid_time_map", {}).get("rule", "")}
-    golden = pack / "golden-contact-sheet.jpg"
-    gold_line = (f"\n### 两臂共用标尺（不打分、不参与比较）\n- Golden 基准 contact sheet: {golden.resolve()}"
-                 if golden.is_file() else "")
+    # 标尺也要进擂台：它原本在 packA 里，直接给路径等于把 packA 的项目名递给评委
+    src_golden = pack / "golden-contact-sheet.jpg"
+    gold_line = ""
+    if src_golden.is_file():
+        golden = Path(armmap["arena"]) / "golden-contact-sheet.jpg"
+        shutil.copy2(src_golden, golden)
+        gold_line = ("\n### 两臂共用标尺（不打分、不参与比较）\n"
+                     f"- Golden 基准 contact sheet: {golden.resolve()}")
 
     return f"""# 隔离评审任务 · node={node} · mode=paired（配对 / 相对判断）
 
@@ -373,10 +397,15 @@ def emit_task(pack: Path, node: str, mode: str = "solo", other: Path | None = No
     if mode == "paired":
         task = _emit_paired(pack, other, node)
         name = f"judge-task-{node}-paired.md"
+        # 题面也落一份进中立擂台：派发 subagent 时给这个路径，别给 pack 里那份——
+        # 文件路径本身会把其中一臂的项目名带进评委上下文。
+        arena_task = _arena_dir(pack, other, node) / "task.md"
+        arena_task.write_text(task, encoding="utf-8")
+        print(f"中立题面（派发用这个）: {arena_task}", file=sys.stderr)
     else:
         task = _emit_solo(pack, node)
         name = f"judge-task-{node}.md"
-    (pack / name).write_text(task, encoding="utf-8")
+    (pack / name).write_text(task, encoding="utf-8")   # pack 内留档
     return task
 
 

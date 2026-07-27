@@ -157,6 +157,26 @@ def test_missing_dates_backfilled_from_own_gates_with_source():
     assert any("回填 2026-07-20" in x for x in log)
 
 
+def test_backfill_date_is_deterministic_when_modes_tie():
+    """众数打平时回填哪个日期必须固定——留痕工具跑两遍要给同一个答案。
+
+    原实现走 max(set(dates), ...)，集合迭代序受 PYTHONHASHSEED 影响，
+    同一个 film.json 在两次迁移里会回填出不同日期。
+    """
+    def run(gate_dates):
+        raw = _minimal_m0()
+        raw["ledger"]["gates"] = [
+            {"id": f"G{i}", "stage": "review", "when": d, "result": "PASS"}
+            for i, d in enumerate(gate_dates, 1)]
+        raw["ledger"]["decisions"] = [{"id": "d1", "stage": "brief", "decision": "x"}]
+        return migrate(raw)[0]["ledger"]["decisions"][0]["date"]
+
+    tie = ["2026-07-09", "2026-07-01"]
+    assert run(tie) == run(tie) == run(list(reversed(tie))) == "2026-07-01"
+    # 打平之外，众数仍然优先
+    assert run(["2026-07-09", "2026-07-01", "2026-07-09"]) == "2026-07-09"
+
+
 def test_no_date_anywhere_is_not_fabricated():
     """全片一个日期都没有就不回填——宁可让它报错，也不编日期。"""
     raw = _minimal_m0()
