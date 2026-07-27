@@ -6,7 +6,7 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 
 ## 当前任务面
 
-独立 Kuleshov 管线已经完成多条横屏知识科普与竖屏新闻调查样片，Film IR、三套风格包、终渲实测层和 G2 隔离评委均已落地。当前主线是把这些经过出片验证的能力收敛为 **Grain 原生 Video step-skill**：保留知识、契约与工具，把常驻编排、provider 调用、凭据和发布封印交给宿主 harness。
+独立 Kuleshov 管线已经完成多条横屏知识科普与竖屏新闻调查样片，Film IR、三套专用风格包 + 一套兜底模板、三层风格路由、终渲实测层和 G2 隔离评委均已落地。当前主线是把这些经过出片验证的能力收敛为 **Grain 原生 Video step-skill**：保留知识、契约与工具，把常驻编排、provider 调用、凭据和发布封印交给宿主 harness。
 
 - 当前生产入口：`.claude/skills/produce/SKILL.md`
 - Grain 集成施工稿：`docs/grain-delivery-plan.md`
@@ -28,7 +28,8 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 - `.claude/skills/produce/` — 十阶段生产管线与导演知识包；按阶段、按镜头来源加载
 - `.claude/skills/rednote-mentor/` — 小红书选题、标题、封面与合规辅助；按需调用，不属于成片交付硬门
 - `film-ir/` — Film IR Python 库与 `kuleshov-ir` CLI：`read / patch / validate / execute`
-- `styles/` — `pixel-chronicle`、`case-file`、`whiteboard-generalist` 三套可用风格包，以及模板、禁用区和进化规程
+- `styles/` — 风格包与**三层路由层**：`case-file`（事实核验型新闻解读）、`pixel-chronicle`（结构化深度知识叙事）、`anchor-desk`（官方口径播报型解读，候选）三套专用包 + `whiteboard-generalist` 生产兜底模板；`routing.md`（路由规程）、`routing-vocab.json`（受控词表）、`routing-cases.json`（路由回归考卷 15 条）、`golden-set.json`（Golden 登记册：路径 + 实测规格 + known_defects，成片在 `~/kuleshov-archive/golden/` 不入库）、各包 `capability.json`（结构化能力卡），以及模板、禁用区和进化规程
+- `tools/route-style.py` — 风格包路由器：硬规则排除 → 能力卡打分 → 置信兜底，出 Top 3 + 理由 + 格式适配施工说明 + 被排除包及原因；`--check` 跑路由回归
 - `projects/<slug>/` — 每条片的 IR、阶段产物、证据与输出；项目脚本不自动等于可复用管线
 - `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用、响度与跨镜头主色漂移，作为 render contract 的证据源
 - `tools/judge/` — G2 隔离评审：生成证据包、出题、阅卷与校准
@@ -48,6 +49,8 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 7. **来源平权，意图优先。** MG 动画、AI 视频、数字人、图片动效、实拍与检索素材都是表达语言。逐镜头选择最能兑现 intent 的来源；成本只记账，不得自动把“更便宜”当成“更合适”。
 8. **拒绝整片式返工。** 单镜问题定位到 prompt、锚点、路由、剪辑或合同，再重跑最小受影响单元。重做一镜可以很便宜，重做一条片不该成为默认动作。
 9. **已经交付不等于已经产品化。** 样片验证了制作能力；接入 Grain、provider 映射、发布封印与运行时凭据托管必须按各自验收状态表述。
+10. **按理解方式路由，不按题材路由。** 选风格包问的是「要让观众如何理解这条内容」，不是「这是什么内容」——场景只缩小候选集，内容特征决定具体包。选包走 `tools/route-style.py`（能力卡 + 硬规则 + 打分 + 兜底，规程 `styles/routing.md`），结果原样进 `ledger.decisions`；置信不足一律落兜底包，**不许改路由输入特征去凑一个专用包**。
+11. **画幅与时长是适配项，不是准入门槛。** 硬规则只管「配方本身是否成立」（必需素材、冲突素材、敏感题材）；**横竖屏与时长按用户需求动态调**，偏离风格包的原生格式只扣分并产出施工说明（改哪块版式、砍哪个槽位、加什么结构），照样能用那个包。但适配不是免费的：适配项进 `ledger.decisions`，被带动的合同阈值走带宽内 amendments 或按 `[单片标定]` 重新观测，**不许假装原带宽还成立**。
 
 ## Taste Constitution
 

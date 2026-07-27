@@ -1,9 +1,18 @@
-# 风格包 · Pixel Chronicle（像素纪事）
+# 风格包 · Pixel Chronicle 像素纪事（结构化深度知识叙事）
+
+> **定位：结构化深度知识叙事。核心任务是把复杂对象讲出结构、历史和情绪落点。**
+> 观众此刻的问题是「这个现象／国家／行业，为什么会变成今天这样」——那就是本包。
+> 叙事骨架：**反差钩子 → 三层结构解释 → 人／现实落点 → 情绪收束**。
+> **签名不是像素，是「把抽象知识做成可感知的世界」**：实物化数据、像素重演与真实影像交替、统一做旧质感。
+> 适合国家志、行业志、历史脉络、生态／社会现象等。
 
 ## 0. 档案
 
 - 状态：**候选**（拉片来源：万物电台《佛得角》4′04″，2026-07-16 全片拆解，登记于视频调优工作簿「对标拆解」第 10 行；规则已入《02-知识解说视频风格规范》v0.4。未考片——首片出厂盲评后转正）
 - 适用片型：`faceless_explainer` 的人文志/国家志/行业志题；M1 知识科普 3 分钟对标赛道
+- **路由条件**（机器版在 `capability.json`，规程 `styles/routing.md`）：理解任务 `explain_the_mechanism`。
+  - **硬前提**（不满足就不是本包）= 需要解释「为什么如此」+ **有三段以上递进（反差事实或因果链）** + **实拍／档案证据可获得**。实拍来源没落实就开拍，必然做成全 MG 幻灯片（≈40% 实拍是声部表硬配方，不是建议）。时效快讯类走 `case-file` 或 `anchor-desk`。
+  - **原生格式**（不是门槛，偏离只是要适配）= 横屏 16:9 · 110–300s。竖屏或 60s 短版照样能落本包，但 §7 的 11 槽位模板要按 `capability.json` 的 `native_format.adaptation` 重排——**不是等比压缩每个槽位**，适配项记 `ledger.decisions`。
 - 交付承诺类型：`hybrid`（MG 主导 ≈50% + 实拍证据 ≈40%，横屏 16:9——对标片实证知识科普赛道横屏在小红书成立）
 - 考片记录：**1 / 3–5 条**。首片《城市里的野生动物 EP01·浣熊》2026-07-24 出厂，G2 单臂盲评 `DELIVER` 4.2/5，已登记为 Golden GS-01（§8）。凑齐 3–5 条并配对赢基线后才转正。
 
@@ -89,11 +98,14 @@
 
 ## 8. Golden 样片
 
-### GS-01 · 城市里的野生动物 EP01·浣熊（2026-07-24 delivered）
+> 本包有**两条** Golden，各锚不同的东西。登记册 `styles/golden-set.json`（成片归档 `~/kuleshov-archive/golden/`，重媒体不入库；`--golden pixel-chronicle` 取 primary，`--golden pixel-chronicle:uk-argentina-feud` 取另一条）。
+> **GS-01 是 primary**——它是唯一过了单臂盲评出厂下限的片，Golden 位默认用它。
+
+### GS-01 · 城市里的野生动物 EP01·浣熊（2026-07-24 delivered）· **primary · 出厂下限标尺**
 
 - **项目**：`projects/urban-wildlife-raccoon/`
-- **成片**：`projects/urban-wildlife-raccoon/out/urban-wildlife-raccoon.mp4`（171.0s / 1280×720 / 30fps）
-  > ⚠️ **成片本身不在 git 里**（`projects/**/*.mp4` 被 gitignore）。回归对照要用它，只能从本机取或按 `compose/` 重渲。`evidence/render-metrics.json` 与 `review.md` 已入库，指标对照不依赖 mp4 在不在。
+- **成片**：`~/kuleshov-archive/golden/pixel-chronicle__urban-wildlife-raccoon.mp4`（实测 171.1s / 1280×720 / 30fps / −14.02 LUFS · TP −1.50 · LRA 3.5）
+  > ⚠️ **成片本身不在 git 里**（`projects/**/*.mp4` 被 gitignore）。2026-07-27 起归档到上面这条稳定路径并登记进 `styles/golden-set.json`——`--golden pixel-chronicle` 走登记册解析，不再依赖项目 `out/` 目录（那里会被剪枝）。`evidence/render-metrics.json` 与 `review.md` 已入库，指标对照不依赖 mp4 在不在。
 - **G2 隔离评委（单臂盲评，9 维评分卡）**：裁决 `DELIVER`，均分 **4.2 / 5**
 
   | D1 信息 | D2 结构 | D3 节奏 | D4 视觉 | D5 音画 | D6 缝合 | D7 钩子 | D8 创意 | D9 网感 |
@@ -104,8 +116,17 @@
 - **终渲实测**（`evidence/render-metrics.json`）：静态持有 **0.355**（合同上限 0.35 的 amend 带宽内）· `<video>` **11** · 响度 **−14.0 LUFS** · 跨镜头主色漂移 max **0.691**（离群 `s17_roof` / `s16_night`，夜戏声部与琥珀编年史世界的色温差，与 G2 D6 缝合 4/5 的判断一致）
 - **它同时是两个指标的绿锚**：`render.static_hold_ratio_max` 与 `render.palette_drift_max` 的带宽都参照本片实测定的（见 `docs/todo-from-ac-experiment.md` P1-3）。**改这两个数之前先确认本片仍然绿**。
 
+### GS-02 · 什么仇什么怨（英阿）· **secondary · 长片上界与定稿工艺来源**
+
+- **项目**：`projects/uk-argentina-feud/`（v1→v6 六版返工定稿，**§9 定稿工艺就是从它蒸馏的**）
+- **成片**：`~/kuleshov-archive/golden/pixel-chronicle__uk-argentina-feud.mp4`（实测 255.7s / 1280×720 / 30fps / −13.93 LUFS · TP −1.46 · LRA 2.8）
+- **它锚住什么**：255.7s 是「2–4 分钟横屏」这一档的**实证上界**；做旧缝合层让像素 MG / 泛黄档案 / 实拍航拍 / 真实新闻画面硬切无痕；MG 段与实拍段严格交替；像素重演承担强叙事位与版权规避；情绪靠剪辑密度不靠音量。
+- 🔴 **已知缺陷（用它当标尺时必须知道，照抄即违规）**：**字幕带标点**（抽帧实证「这两个国家到底多大仇？」带问号、「七十四天后，阿军投降」带逗号）+ **字幕带半透明深色圆角底框**。本片渲于 2026-07-19，早于 2026-07-27 的两条宪法级拍板（机器门 `tools/kuleshov-lint.py` ④⑤）。**2026-07-27 用户拍板不修片、只如实标注**——所以字幕层不要以它为参照，看 GS-01 或 anchor-desk 的 Golden。
+- **未过单臂盲评**，所以是 secondary：它是工艺与结构的参照，不是出厂下限的标尺。
+
 ### 用法
 
+- **默认标尺是 GS-01**（`--golden pixel-chronicle`）。要对长片结构或定稿工艺时才显式取 GS-02（`--golden pixel-chronicle:uk-argentina-feud`）；两条都带 `known_defects`，会随 Golden 进评委上下文。
 - **回归对照**：改本包 playbook / contract / 提示词后，按 `styles/_iteration.md` 的棘轮跑——`judge.py --mode paired --vs` 比新旧，**外加两条单臂**验各自过没过出厂下限。两种模式不得互相顶替（协议见 `tools/judge/README.md`「评审模式协议」）。
 - **考题镜头**：`styles/pixel-chronicle/test-shots.json`，5 个，全部取自 GS-01——
   | | 取自 | 考什么 |
@@ -118,7 +139,7 @@
 
 ### 状态说明
 
-本片是本包**首条出厂片**，不等于本包已考片转正——准入考片制要 3–5 条样片盲评赢基线（`styles/_iteration.md` §50）。§0 的状态维持 `候选`。GS-01 的作用是给棘轮和 G2 校准一个基准，不是准入凭证。
+GS-01 是本包**首条出厂片**，不等于本包已考片转正——准入考片制要 3–5 条样片盲评赢基线（`styles/_iteration.md` §50）。§0 的状态维持 `候选`。**登记两条 Golden 也不改变这一点**：GS-02 未过单臂盲评，考片记录仍是 1 / 3–5 条。Golden 的作用是给棘轮和 G2 校准基准，不是准入凭证。
 
 ## 9. 定稿工艺（英阿《什么仇什么怨》v1→v6 六版实战沉淀，2026-07-19 — 复刻新片直接照此执行）
 

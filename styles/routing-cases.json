@@ -1,0 +1,235 @@
+{
+  "schema": "routing-cases@1",
+  "note": "路由回归考卷。改能力卡、改权重、加新包之后必须 `python3 tools/route-style.py --check` 全绿——防止「修好一个路由弄坏三个」。rc01/rc03/rc05 是用户提路由升级时给的三个示例，rc06/rc07 是仓库已出厂真片的回放。expect 里的 gap=true 表示这条本来就该暴露空位，不是 bug。",
+  "cases": [
+    {
+      "id": "rc01",
+      "why": "用户示例①：突发快讯 + 大众 + 30s + 无人物素材，但有可读报道 → 案卷的签名动作站得住",
+      "features": {
+        "topic": "突发：某平台数据泄露通报",
+        "content_type": "breaking_news",
+        "understanding_task": "verify_the_event",
+        "tone": ["urgent", "authoritative"],
+        "audience": ["general"],
+        "material": ["readable_evidence", "presenter_declined"],
+        "aspect": "9:16",
+        "duration_s": 30
+      },
+      "expect": {"narrative_base": "case-file", "confidence": "high", "gap": false}
+    },
+    {
+      "id": "rc02",
+      "why": "同一条题材，但一份可读材料都没有 → 案卷退化成纯版式卡（daily-brief 死因），必须落兜底而不是硬塞",
+      "features": {
+        "topic": "突发：某平台数据泄露传闻（无通报、无报道原文）",
+        "content_type": "breaking_news",
+        "understanding_task": "verify_the_event",
+        "tone": ["urgent"],
+        "audience": ["general"],
+        "material": ["presenter_declined"],
+        "aspect": "9:16",
+        "duration_s": 30
+      },
+      "expect": {"narrative_base": "whiteboard-generalist", "confidence": "low", "gap": false}
+    },
+    {
+      "id": "rc03",
+      "why": "用户示例②：知识讲解 + 抽象概念 + 新手 + 有图示需求，但 60s 且无实拍/档案 → 像素纪事的硬配方不成立，落兜底（这是「概念拆解型」空位的证据）",
+      "features": {
+        "topic": "什么是同态加密",
+        "content_type": "knowledge_explainer",
+        "understanding_task": "explain_the_mechanism",
+        "tone": ["approachable"],
+        "audience": ["beginner"],
+        "material": ["diagram_need"],
+        "aspect": "16:9",
+        "duration_s": 60
+      },
+      "expect": {"narrative_base": "whiteboard-generalist", "confidence": "low", "gap": false}
+    },
+    {
+      "id": "rc04",
+      "why": "同样是知识讲解，但反差事实 + 因果链 + 档案/实拍到位 + 200s 横屏 → 像素纪事的骨架真正成立",
+      "features": {
+        "topic": "佛得角为什么盛产门将",
+        "content_type": "knowledge_explainer",
+        "understanding_task": "explain_the_mechanism",
+        "tone": ["narrative", "emotional"],
+        "audience": ["general"],
+        "material": ["contrast_fact", "multi_stage_causality", "archival_footage", "location_footage"],
+        "aspect": "16:9",
+        "duration_s": 200
+      },
+      "expect": {"narrative_base": "pixel-chronicle", "confidence": "high", "gap": false}
+    },
+    {
+      "id": "rc05",
+      "why": "用户示例③：人物事件 + 2 分钟 + 有采访素材 → 仓库里没有人物叙事包，必须报空位并落兜底，不许拿像素纪事顶上",
+      "features": {
+        "topic": "一位外卖骑手的三年",
+        "content_type": "profile_story",
+        "understanding_task": "follow_a_person",
+        "tone": ["narrative", "emotional"],
+        "audience": ["general"],
+        "material": ["character_footage", "location_footage"],
+        "aspect": "16:9",
+        "duration_s": 120
+      },
+      "expect": {"narrative_base": "whiteboard-generalist", "confidence": "low", "gap": true}
+    },
+    {
+      "id": "rc06",
+      "why": "真片回放 projects/china-h1-2026-econ：官方数据 + 要主播 + 横屏 82s → anchor-desk",
+      "features": {
+        "topic": "经济半年报 4.7% 背后的两组数字",
+        "content_type": "policy_data_release",
+        "understanding_task": "read_the_official_number",
+        "tone": ["authoritative"],
+        "audience": ["general", "professional"],
+        "material": ["official_dataset", "readable_evidence", "presenter_wanted", "location_footage"],
+        "aspect": "16:9",
+        "duration_s": 82
+      },
+      "expect": {"narrative_base": "anchor-desk", "confidence": "high", "gap": false}
+    },
+    {
+      "id": "rc07",
+      "why": "真片回放 projects/openai-78m-logs：竖屏 faceless + 文件实证 → case-file",
+      "features": {
+        "topic": "OpenAI 被要求交出 7800 万条日志",
+        "content_type": "deep_news",
+        "understanding_task": "verify_the_event",
+        "tone": ["authoritative", "urgent"],
+        "audience": ["general", "professional"],
+        "material": ["readable_evidence", "presenter_declined"],
+        "aspect": "9:16",
+        "duration_s": 75
+      },
+      "expect": {"narrative_base": "case-file", "confidence": "high", "gap": false}
+    },
+    {
+      "id": "rc08",
+      "why": "竖屏播报（2026-07-27 改判）：画幅不再是硬门。case-file 仍被排除——它排斥主播，那是配方前提；anchor-desk 拿下这条，代价是竖屏版式适配（主播锚点要按 9:16 重出、数据/标题分工改上下分区）。置信降到 medium 逼 EP 把适配项记 ledger。",
+      "features": {
+        "topic": "统计局月度数据竖屏播报",
+        "content_type": "policy_data_release",
+        "understanding_task": "read_the_official_number",
+        "tone": ["authoritative"],
+        "audience": ["general"],
+        "material": ["official_dataset", "presenter_wanted"],
+        "aspect": "9:16",
+        "duration_s": 60
+      },
+      "expect": {"narrative_base": "anchor-desk", "confidence": "medium", "gap": false,
+                 "adaptations": ["aspect"]}
+    },
+    {
+      "id": "rc09",
+      "why": "avoid_when 是软扣分不是禁用：伤亡题材仍然路由到 case-file，但置信降到 medium，逼 EP 在 ledger 里写为什么可以这么做",
+      "features": {
+        "topic": "某起事故的调查通报解读",
+        "content_type": "breaking_news",
+        "understanding_task": "verify_the_event",
+        "tone": ["authoritative"],
+        "audience": ["general"],
+        "material": ["readable_evidence"],
+        "sensitivity": "tragedy",
+        "aspect": "9:16",
+        "duration_s": 40
+      },
+      "expect": {"narrative_base": "case-file", "confidence": "medium", "gap": false}
+    },
+    {
+      "id": "rc10",
+      "why": "观点评论：没有任何包认领「weigh_an_argument」→ 报空位 + 兜底",
+      "features": {
+        "topic": "该不该给 AI 生成内容强制打标",
+        "content_type": "opinion_commentary",
+        "understanding_task": "weigh_an_argument",
+        "tone": ["restrained_premium"],
+        "audience": ["professional"],
+        "material": [],
+        "aspect": "16:9",
+        "duration_s": 90
+      },
+      "expect": {"narrative_base": "whiteboard-generalist", "confidence": "low", "gap": true}
+    },
+    {
+      "id": "rc11",
+      "why": "一句话原则的机器编码：素材条件全齐、内容类型也对，但理解任务判不出来 → 一律兜底，不许模型凭内容类型自作主张选专用包",
+      "features": {
+        "topic": "（brief 只说「做条关于芯片管制的片」）",
+        "content_type": "deep_news",
+        "understanding_task": "unknown",
+        "audience": ["general"],
+        "material": ["readable_evidence"],
+        "aspect": "9:16",
+        "duration_s": 60
+      },
+      "expect": {"narrative_base": "whiteboard-generalist", "confidence": "low"}
+    },
+    {
+      "id": "rc12",
+      "why": "横屏案卷（2026-07-27 改判）：同一条题材，画幅从 9:16 换成 16:9 不再把 case-file 踢出局——理解任务主位仍然胜出，横屏只是要重排版式。旧版本这条判给 anchor-desk（因为 case-file 被画幅硬门排除），那是错的。",
+      "features": {
+        "topic": "稀土出口管制这一年",
+        "content_type": "deep_news",
+        "understanding_task": "verify_the_event",
+        "tone": ["authoritative"],
+        "audience": ["general"],
+        "material": ["readable_evidence", "official_dataset", "contrast_fact", "multi_stage_causality", "archival_footage"],
+        "aspect": "16:9",
+        "duration_s": 150
+      },
+      "expect": {"narrative_base": "case-file", "confidence": "medium", "tie": false, "gap": false,
+                 "adaptations": ["aspect"]}
+    },
+    {
+      "id": "rc13",
+      "why": "时长不卡死：240s 的案卷片远超原生上限 150s → 判 far（叙事骨架要重排，不只是收放），扣分更重但仍然是 case-file，输出「加第二处文件精读撑结构，别拉长单镜凑时长」",
+      "features": {
+        "topic": "某平台合规整改三年始末",
+        "content_type": "deep_news",
+        "understanding_task": "verify_the_event",
+        "tone": ["authoritative"],
+        "audience": ["general", "professional"],
+        "material": ["readable_evidence", "presenter_declined"],
+        "aspect": "9:16",
+        "duration_s": 240
+      },
+      "expect": {"narrative_base": "case-file", "confidence": "medium", "gap": false,
+                 "adaptations": ["duration_s"]}
+    },
+    {
+      "id": "rc14",
+      "why": "两项适配叠加：60s 竖屏的机制解释题。pixel-chronicle 素材前提成立，画幅和时长双双偏离原生 → 两条施工说明都要出（三章压两章、章节卡竖排重构），置信 medium",
+      "features": {
+        "topic": "为什么便利店越开越密",
+        "content_type": "knowledge_explainer",
+        "understanding_task": "explain_the_mechanism",
+        "tone": ["narrative"],
+        "audience": ["general"],
+        "material": ["contrast_fact", "multi_stage_causality", "location_footage"],
+        "aspect": "9:16",
+        "duration_s": 60
+      },
+      "expect": {"narrative_base": "pixel-chronicle", "confidence": "medium", "gap": false,
+                 "adaptations": ["aspect", "duration_s"]}
+    },
+    {
+      "id": "rc15",
+      "why": "并列：竖屏 30s 官方数据快报。anchor-desk 拿主位任务但要双适配（换画幅 + 压时长），case-file 只拿次位任务但格式原生 —— 两边咬到 3 分内 → 推第一名并标 tie，理由里必须写出第二名和差在哪",
+      "features": {
+        "topic": "统计局月度数据 30 秒快报",
+        "content_type": "policy_data_release",
+        "understanding_task": "read_the_official_number",
+        "tone": ["authoritative", "urgent"],
+        "audience": ["general"],
+        "material": ["readable_evidence", "official_dataset"],
+        "aspect": "9:16",
+        "duration_s": 30
+      },
+      "expect": {"narrative_base": "anchor-desk", "confidence": "medium", "tie": true, "gap": false}
+    }
+  ]
+}

@@ -297,6 +297,12 @@ def _emit_solo(pack: Path, node: str) -> str:
 
     facts = json.dumps(manifest.get("shots", []), ensure_ascii=False)
     amends = json.dumps(manifest.get("contract_amendments") or {}, ensure_ascii=False)
+    gdef = manifest.get("golden_known_defects") or []
+    if gdef:
+        extra += ("\n## Golden 的已知缺陷（**不是可照抄的语法**）\n"
+                  "作为标尺的 Golden 本身带下列已知违规——它们不构成标准，"
+                  "本片出现同类问题照样扣分，本片**没有**这些问题不算减分项：\n"
+                  + "\n".join(f"- {d}" for d in gdef) + "\n")
     preamble = "" if node == "audio" else SOLO_PREAMBLE + "\n"
     return f"""# 隔离评审任务 · node={node} · mode=solo（单臂 / 绝对判断）
 

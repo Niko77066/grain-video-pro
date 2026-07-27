@@ -1,0 +1,92 @@
+{
+  "schema": "routing-vocab@1",
+  "note": "路由受控词表。能力卡（styles/<pack>/capability.json）与路由输入只能使用本表里的标签——tools/route-style.py 遇到表外标签直接报错，不做模糊匹配。新增标签 = 改本表 + 说明它对应的判断，禁止在能力卡里临时造词。",
+
+  "understanding_task": {
+    "_note": "第一路由键。问的不是「这是什么内容」，而是「观众此刻需要以哪种方式理解它」。",
+    "verify_the_event": "这件事到底发生了什么、证据在哪、和我有什么关系",
+    "explain_the_mechanism": "这个现象／国家／行业，为什么会变成今天这样",
+    "read_the_official_number": "官方刚发布的数字或政策，口径是什么、结论是什么",
+    "follow_a_person": "这个人身上发生了什么、我为什么该在意",
+    "weigh_an_argument": "这件事有几种说法，我该怎么想",
+    "learn_to_do": "我该怎么动手做这件事",
+    "unknown": "判不出来（判不出来就是判不出来，不许猜一个填上）"
+  },
+
+  "content_type": {
+    "_note": "第一层：场景。只负责缩小候选集，不单独决定风格包。",
+    "breaking_news": "新闻快讯",
+    "deep_news": "深度新闻／调查",
+    "policy_data_release": "政策发布、统计数据、财报口径解读",
+    "knowledge_explainer": "知识科普",
+    "opinion_commentary": "观点评论",
+    "case_retrospective": "案例复盘",
+    "profile_story": "人物故事",
+    "product_brand": "产品／品牌",
+    "other": "长尾／混合／说不清"
+  },
+
+  "tone": {
+    "_note": "第二层：表达目标。可多选，是打分修正项不是决定项。",
+    "authoritative": "可信权威",
+    "urgent": "强节奏／时效紧迫",
+    "narrative": "故事化",
+    "restrained_premium": "克制高级",
+    "approachable": "轻松易懂",
+    "emotional": "情绪张力"
+  },
+
+  "pacing": {
+    "fast": "快（快讯体，密度优先）",
+    "medium": "中（解释体）",
+    "slow": "慢（叙事体，允许呼吸）"
+  },
+
+  "audience": {
+    "general": "大众",
+    "professional": "专业／从业者",
+    "beginner": "新手（对该领域零基础）"
+  },
+
+  "material": {
+    "_note": "第三层：素材与条件。true 才写进输入；不确定就不写（不写 = 未知，不等于没有）。",
+    "readable_evidence": "有可读的文件／法规／公告／报道／后台截图",
+    "official_dataset": "有官方发布的数据或统计口径",
+    "character_footage": "有人物采访或出镜素材",
+    "archival_footage": "有档案／历史影像可用",
+    "location_footage": "有实拍空镜可获取（检索或投喂）",
+    "diagram_need": "依赖图示才讲得清（抽象概念）",
+    "contrast_fact": "有能当钩子的反差事实",
+    "multi_stage_causality": "有三段以上递进的因果／历史链条",
+    "presenter_wanted": "要主播／数字人口播",
+    "presenter_declined": "明确不要真人或数字人出镜（faceless）"
+  },
+
+  "sensitivity": {
+    "none": "无特殊约束",
+    "tragedy": "伤亡／灾难／悲剧题材",
+    "regulated_finance": "金融强监管",
+    "regulated_medical": "医疗强监管",
+    "regulated_legal": "法律强监管",
+    "political": "政治敏感"
+  },
+
+  "aspect": {
+    "9:16": "竖屏",
+    "16:9": "横屏",
+    "1:1": "方形"
+  },
+
+  "layer": {
+    "_note": "风格包的两类分工。今天四个包全是 bundled（叙事与美术长在一起），visual_skin 是空位不是已有能力——见 routing.md §6。",
+    "narrative_base": "基础叙事包：决定结构、节奏与镜头语法",
+    "visual_skin": "视觉修饰包：决定美术与包装",
+    "bundled": "叙事与视觉合一（当前四个包都是这类）"
+  },
+
+  "status": {
+    "verified": "已考片（盲评赢过基线）",
+    "candidate": "候选（出过片但未过盲评对照）",
+    "fallback": "兜底模板（不参与竞争打分，保下限）"
+  }
+}

@@ -8,7 +8,7 @@
 
 | 脚本 | 干什么 |
 |---|---|
-| `build_evidence_pack.py <project> [--golden <项目>]` | 出证据包：contact sheet（整点 + 半步错位）+ 逐镜中点帧 + Golden 并排 + L0 报告 + **成片音轨 `audio.mp3`** + 隔离 `manifest.json`（镜头事实 + 旁白分节，**零创作理由**）。ffmpeg 走 PATH（`FFMPEG`/`FFPROBE` 可覆写） |
+| `build_evidence_pack.py <project> [--golden <风格包名[:项目]\|项目dir>]` | 出证据包：contact sheet（整点 + 半步错位）+ 逐镜中点帧 + Golden 标尺 + L0 报告 + **成片音轨 `audio.mp3`** + 隔离 `manifest.json`（镜头事实 + 旁白分节，**零创作理由**）。ffmpeg 走 PATH（`FFMPEG`/`FFPROBE` 可覆写） |
 | `judge.py <pack> --node {hero_frames\|final\|audio} [--mode solo] --task` | **出题**：打印隔离评审任务（rubric + 证据文件绝对路径清单 + 镜头事实 + 引用纪律 + 输出 JSON schema），落 `<pack>/judge-task-<node>.md` |
 | `judge.py <packA> --node ... --mode paired --vs <packB> --task` | **配对出题**：两臂盲化成 甲/乙 + 中立目录 + 强制选择 schema，落 `judge-task-<node>-paired.md` 与 `judge-armmap-<node>.json` |
 | `judge.py <pack> --node ... [--mode ...] --finalize <scores.json>` | **阅卷**：读 subagent 打分 JSON → 规则派生判词 + 引用校验（视觉）/ 字符重合率≥0.95（音频）→ `<pack>/judge-report-<node>[-paired].json` |
@@ -26,6 +26,14 @@ judge.py <pack> --node final --finalize s.json   # 3. 阅卷：规则派生 verd
 
 - **节点**：`hero_frames`（③b 品味门，vs Golden 下限，fail 禁铺开生产）/ `final`（⑨ 成片门，D1–D9 + 反模式）/ `audio`（音频真听：转写回验 + 混音 + BGM + 字幕校对）。
 - **模式**：`--mode solo`（缺省）/ `--mode paired`——见下节，**先定问题类型再定模式**，不许随手选。
+
+### Golden 怎么给（2026-07-27）
+
+`--golden` 优先给**风格包名**（`case-file` / `pixel-chronicle` / `anchor-desk`），走 `styles/golden-set.json` 登记册解析到 `~/kuleshov-archive/golden/` 下的成片。**一个包可以有多条 Golden**（各锚不同的东西：出厂下限 / 时长上界 / 某条合同阈值的绿锚），数组第一条是 primary；要指定某一条用 `--golden <pack>:<project>`（例 `pixel-chronicle:uk-argentina-feud`）。
+
+成片是重媒体不入库，所以**旧式 `--golden <项目dir>`（取 `<dir>/out/final.mp4`）在剪枝后的仓库里基本必然找不到文件**，仅作兼容保留——`projects/china-h1-2026-econ` 三轮 G2 报告里的 `"golden": null` 就是这么来的（全程没有标尺）。给不出 Golden 时脚本打警告并跳过，`manifest.golden` 记 `null`，不静默假装有对照。
+
+🔴 **登记册里的 `known_defects` 会随 Golden 一起进评委上下文**（`manifest.golden_known_defects` → `judge-task-<node>.md` 的专门一节，明确告诉评委「Golden 里的违规不构成标准，本片没有这些问题不算减分」）。Golden 是**固定标尺不是对手**（见下节单臂纪律），也不是逐帧临摹目标——例如 pixel-chronicle 的 GS-02（英阿片）渲于 2026-07-19，字幕带标点且带底框，早于两条宪法级拍板，用户已拍板不修片只标注。
 - **不含凭据**：本工具零 API key。scoring subagent 用的模型由宿主 harness 提供——**评委与导演不同模型家族**（同族自评共享盲区）由宿主在派发时保证。
 - **规则派生判词**（`judge.py` `VERDICT_RULE`）：`overall<3.5 或命中任一反模式 或任一 hero frame 未过 → fail`，不信模型自报（自报存 `verdict_model` 作校准语料）。
 - **引用纪律**：视觉报告 `notes` 里无镜头 ID/时间码引用的维度标 `citations_valid=false`（D9 网感可锚定标题/钩子/推荐流）——这样的报告不作数、整报重评。

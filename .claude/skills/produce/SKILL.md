@@ -12,7 +12,7 @@ description: Kuleshov 十阶段视频生产管线（M0 手工作坊版）——�
 1. **端到端自主，评估机制是评委门**：每阶段产物落盘即自查/过门，直接进下一阶段，**不停下来等人**。品味/质量判断交 G2 评委（隔离 subagent，见 ③b / ⑨）；机械约束交 G1 硬门（`kuleshov-ir validate` / lint / 成片实测层）。**唯三例外必须停下问用户**：① 品味宪法级裁决（改宪法 / 改风格承诺本身）；② 越过 `meta.budget.cap_usd` 的不可逆大额花费；③ 合同越界违约——这条不是"问人"，是带 `contract_violation` 标记**停在 review**（禁 `delivered`、禁合 main，见 ⑩）。其余一切 EP 直接拍板并记 `ledger.decisions`（含备选与理由），**不问选择题**。
 2. **状态从文件读**：开工先查 `projects/` 下有无该片目录。有 `film.json` 就读它续跑（`meta.status` 记录当前阶段），没有才从 brief 开始。
 3. **知识按需加载**：本文件只有骨架。镜头路由到哪个来源，才读对应的 `references/` 知识包；没路由到的不读。
-4. **风格包先行**：没选风格包不开拍。风格包在 `styles/` 下，含开拍提问模板的要执行它的提问；选题超纲 / 低置信 / 混合 → 落 `whiteboard-generalist` 兜底。有 `contract.json` 的包，合同是机器硬门不是参考读物——生产期内合同文件只读，调整只能走带宽内 amendments。
+4. **风格包先行**：没选风格包不开拍。风格包在 `styles/` 下，**选包走三层路由器**（`tools/route-style.py`，规程见 `styles/routing.md`）——不按「这是什么内容」直连映射，按「要让观众如何理解这条内容」路由；置信 `low` 一律落 `whiteboard-generalist` 兜底。选定后执行该包的开拍提问模板。有 `contract.json` 的包，合同是机器硬门不是参考读物——生产期内合同文件只读，调整只能走带宽内 amendments。
 5. **铁律见根目录 CLAUDE.md**：先写 IR 再花钱、留痕、音频先行、禁静默降级（含**表达降级**）。
 6. **回炉重造机制**：G2 评委 fail 或 G1 门 error → **定点回炉**（归属到环节，见 §5 定点重做），不整片重来；到止损上限（§6）仍不过 → 带 DEBT / `contract_violation` 停 review，把明细摆给用户看片时裁决。授权范围与例外停点记 `meta.approval_policy`（如 `{"mode":"autonomous","stop_on":["taste_constitution","budget_cap","contract_violation"]}`）；EP 代决在 ledger 记 `by:"ep"`，**不许写成"用户已批准"**。
 
@@ -22,7 +22,24 @@ description: Kuleshov 十阶段视频生产管线（M0 手工作坊版）——�
 
 1. **选题**是什么？有没有已有素材（文档 / 链接 / 图片 / 录屏）？
 2. **片型**：M0 优先 `faceless_news_recap`（资讯速览）或 `faceless_explainer`（知识讲解）；其他片型提醒用户属超纲试验。
-3. **风格包**：列出 `styles/` 下可用包让用户选——当前 `pixel-chronicle`（像素科普·横屏）/ `case-file`（案卷调查·竖屏）/ `anchor-desk`（**新闻播报·数字人主播台·横屏**，候选包，单片标定）/ `whiteboard-generalist`（公测兜底）；选定后执行该包的开拍提问模板。**新闻播报 / 数据发布解读 / 政策·财报·统计口径类 + 要主播口播 → 落 `anchor-desk`**；选题超出各专用包预期、或低置信/混合输入 → 落 `whiteboard-generalist` 兜底。`_` 前缀目录（`_template` / `_disabled`）不是风格包、不列入。`meme-ledger` 未完成、暂禁用（在 `styles/_disabled/`，完善后再开放）。
+3. **风格包**：**跑路由器选，不要凭题材直连映射**（规程 `styles/routing.md`，能力卡 `styles/<pack>/capability.json`）。
+   先从 brief 抽三层特征，写 `projects/<slug>/routing.json`：
+   - ① **内容类型** `content_type`：快讯 / 深度新闻 / 政策数据发布 / 知识科普 / 观点评论 / 案例复盘 / 人物故事 / 产品品牌 / 其它——只用来缩小候选集；
+   - ② **理解任务** `understanding_task`（第一路由键）+ 语气 `tone`：问的是「观众此刻需要以哪种方式理解它」，不是「这是什么内容」。**判不出来就填 `unknown`，不许猜一个填上**；
+   - ③ **受众与素材条件**：`audience` / `material`（有没有可读证据、官方数据、人物素材、档案实拍、图示需求、反差事实、因果链、要不要主播）/ `aspect` / `duration_s` / `sensitivity`。
+
+   ```bash
+   python3 tools/route-style.py --features projects/<slug>/routing.json --json
+   ```
+
+   路由器出 **Top 3 + 置信 + 一句理由 + 被硬规则排除的包及原因**。EP 默认取第一名，**把整个 JSON 结果原样存进 `ledger.decisions`**（含被排除的包——日后翻案要看的是这个，不是一句「我觉得合适」）。
+   - 置信 `high` → 直接用；
+   - 置信 `medium`（`tie` 并列 / 契合度未到高线 / **需要格式适配**）→ 仍用第一名，但决策记录里必须写出第二名和差在哪、要做哪些适配；
+   - 置信 `low` → **落 `whiteboard-generalist` 兜底**，不许改输入特征去凑一个专用包。低置信的三种成因（专用包配方前提全不成立 / 契合度不足 / 最高分的包不承担这条片的理解任务）都在输出里写明了。**画幅和时长不合不是低置信成因**——见下条；
+   - 输出带 `adaptations`（**画幅或时长偏离该包的原生格式**）→ 照常用这个包，把每条 `todo` 当施工说明执行：换画幅要改的版式、压短要砍的槽位、拉长要加的结构，**原样进 `ledger.decisions`**。**画幅与时长不是硬门**（2026-07-27 用户拍板：格式按用户需求动态调，不许卡死）；但合同阈值是按原生格式标定的，换格式后要么走带宽内 `meta.contract_amendments`，要么按 `[单片标定]` 重新观测——不许假装带宽还成立（这是 §⑤.9 / §⑩ 的口径，不是新例外）；
+   - 输出带 `gap`（理解任务无包认领）→ 照常用兜底出片，并把这条记进 `styles/routing.md` §7 空位表。
+
+   选定后执行该包的开拍提问模板。当前包：`case-file`（事实核验型新闻解读·竖屏 faceless，已考片）/ `pixel-chronicle`（结构化深度知识叙事·横屏 2–4 分钟，候选）/ `anchor-desk`（官方口径播报型解读·横屏数字人主播台，候选·单片标定）/ `whiteboard-generalist`（兜底模板，不是第三个风格 SKU）。`_` 前缀目录（`_template` / `_disabled`）不是风格包、不列入。`meme-ledger` 未完成、暂禁用（在 `styles/_disabled/`，完善后再开放）。
 4. **时长目标（非硬锁）**：给个估值（如 ~60s）用于规划与"宁可短不可水"的内容控制；**时长不设硬门**，最终由音频/内容自然定长（2026-07-16 用户拍板去除"时长锁"）。
 5. **预算上限**（可选）：仅用于记账与熔断，**不影响选源**——五种来源全量可用，按镜头意图自由调配（铁律 7）。用户不设即默认不限。
 
@@ -87,8 +104,8 @@ WebSearch / 用户素材整理出 5–10 条核心事实，**每条带出处 URL
 ### ③b hero-frames 品味门（无条件触发）
 script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺（图便宜，视觉承诺是全片方差最大的决策，必须在沉没成本发生前采样）：
 1. 出 **3 张 hero frame**：钩子镜、核心隐喻镜、产品/结论镜（片型无产品位则取情感高潮镜）——用各自预期来源的真实工艺出图（Seedance 锚点静帧 / 拼贴静帧 / HyperFrames 截帧均可），落 `anchors/hero/`；
-2. 与风格包 **Golden 样片 contact sheet 并排**成一张对比图（文字规则进上下文会退化成抽象知识，视觉并排不会）；
-3. 评审（**G2 隔离评委，默认**）：`tools/judge/build_evidence_pack.py` 出证据 → `judge.py --node hero_frames --task` 出题 → **派发隔离 subagent 打分**（subagent 只见并排图与镜头意图，不含创作理由）→ `judge.py --node hero_frames --finalize <scores>` 阅卷；未达 Golden 下限**禁止铺开全片 storyboard**，换视觉方案回炉重来。本门是**绝对判断 → 单臂**（`--mode solo`，缺省）：证据里除 Golden 标尺外不得放竞争方案，否则分数被对手质量污染（`tools/judge/README.md`「评审模式协议」）。要比 A/B 视觉方案另跑 `--mode paired`，且配对结论不能当出厂判词；
+2. 与风格包 **Golden 样片 contact sheet 并排**成一张对比图（文字规则进上下文会退化成抽象知识，视觉并排不会）。Golden 走登记册：`build_evidence_pack.py <project> --golden <风格包名>`（`styles/golden-set.json` 解析路径，成片在 `~/kuleshov-archive/golden/`，不入库；一个包多条 Golden 时缺省取 primary，要指定用 `<pack>:<project>`）。🔴 **Golden 的 `known_defects` 随并排图一起进评委上下文**——Golden 里存在的违规不是可照抄的语法（例：pixel-chronicle 的 GS-02 英阿片字幕带标点且带底框，早于 2026-07-27 两条拍板，用户拍板不修片只标注）；
+3. 评审（**G2 隔离评委，默认**）：`tools/judge/build_evidence_pack.py` 出证据 → `judge.py --node hero_frames --task` 出题 → **派发隔离 subagent 打分**（subagent 只见并排图与镜头意图，不含创作理由）→ `judge.py --node hero_frames --finalize <scores>` 阅卷；未达 Golden 下限**禁止铺开全片 storyboard**，换视觉方案回炉重来。本门是**绝对判断 → 单臂**（`--mode solo`，缺省）：证据里除 Golden 标尺外不得放竞争方案，否则分数被对手质量污染（`tools/judge/README.md`「评审模式协议」）。**Golden 是固定标尺不是对手**——不给它打分、不评"谁更好"。要比 A/B 视觉方案另跑 `--mode paired`，且配对结论不能当出厂判词；
 4. 结果记 `ledger.gates`（stage: `hero_frames`，带证据文件路径）。
 **不允许以"本片不用生成资产"为由跳过本门**——Codex hf-breach 正是靠"全声明型图形"让品味验证合法蒸发的。
 读 `references/tts-audio.md`（TTS 走 **MiniMax speech-2.8-hd 固定音色 single-pass** + 声纹 gate；不再用火山 seed-audio——分节音色漂移已弃）。音轨定稿后**必读 `references/forced-alignment.md`** 建逐字 timeline（剧本 1:1 强制对齐；禁 whisper 转写比例映射）——字幕/画面 cue/挂载全部由它派生。

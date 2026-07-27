@@ -1,0 +1,66 @@
+{
+  "schema": "style-capability@1",
+  "id": "anchor-desk",
+  "display_name": "主播台",
+  "layer": "bundled",
+  "status": "candidate",
+
+  "positioning": "官方口径播报型解读",
+  "one_liner": "让观众在一条片里拿到官方刚发布的数字、它的口径、和一句能带走的结论。",
+  "signature": "学电视新闻的形式而不学它的腔调——正襟主播、蓝金演播室、数据屏、恒定角标、来源脚注；行文仍走 But/Therefore 与事实回链。",
+  "narrative_skeleton": ["主播报题", "数据屏拆口径", "实拍物证对应", "主播转折设问", "结论卡"],
+
+  "understanding_task": {
+    "primary": ["read_the_official_number"],
+    "secondary": ["verify_the_event"]
+  },
+
+  "applicable_content": ["policy_data_release", "breaking_news", "deep_news"],
+  "audience": ["general", "professional"],
+  "tone": ["authoritative", "urgent", "restrained_premium"],
+  "pacing": "fast",
+  "visual_language": [
+    "数字人主播镜（只在开场／转折／收尾三个关节）",
+    "全屏数据面板（深蓝渐变 + 缓移网格）",
+    "实拍物证 + 右侧无底框数据组",
+    "静帧 Ken Burns + 超大数字",
+    "转折字卡与结论卡（金线压左下三分位）"
+  ],
+
+  "hard_rules": {
+    "requires_any": [
+      ["official_dataset", "readable_evidence"]
+    ],
+    "excluded_material": ["presenter_declined"],
+    "excluded_sensitivity": [],
+    "why": "只有「配方本身不成立」的条件才是硬的：四声部（主播／实拍／数据屏／静帧）一个都不能少是合同硬门，明确不要真人出镜就不是本包；没有可读的官方数据或文件，数据屏声部无内容可放。"
+  },
+
+  "native_format": {
+    "aspect": ["16:9"],
+    "duration_s": [45, 180],
+    "basis": "单片标定 n=1：china-h1-2026-econ 82s 横屏，四声部份额 19.6/34.7/33.2/12.6%。带宽是从这一条片推的，第二、三片出厂后回填。",
+    "adaptation": {
+      "aspect": "改竖屏：主播锚点必须按 9:16 重新生成（§1「按目标画幅构图」是硬规则，不许把 16:9 半身像裁成竖屏）；「数据在右三分位、标题在左下三分位」的分工在竖屏挤不开，改成上下分区（数据在上三分之一、标题压在下三分之一的金线上）；恒定角标位置不变。**注意合同的四声部份额是 16:9 单片标定的，换画幅后按 `[单片标定]` 重新观测，不要假装带宽还成立。**",
+      "duration_shorter": "主播镜只保留开场与收尾两个关节（砍掉中段转折设问），数据屏压到一块面板——但**主播声部一个镜都不能删**，删了就是拆声部（合同硬门）。count-up ≤0.45s 的规矩在快版里更要守：短片没有第二次机会让观众看清数字。",
+      "duration_longer": "加的是第二组「数据屏 + 实拍物证」，主播关节相应加一个转折设问。**无 BGM 是风格判断，长片也不许垫音乐床**——联播体的听感建立在只有播报声上，垫了就立刻变宣传片。"
+    }
+  },
+
+  "material_requirements": {
+    "signature": ["presenter_wanted", "official_dataset"],
+    "prefers": ["location_footage", "readable_evidence"],
+    "can_work_without": ["character_footage", "archival_footage", "contrast_fact"]
+  },
+
+  "avoid_when": ["knowledge_explainer", "tragedy", "profile_story"],
+  "avoid_why": "本包的可信感来自播报形式，用来讲抽象知识会变成念稿；伤亡题材配演播室金蓝会读成冷血。",
+
+  "routing_note": "与 case-file 的分界线是画幅与主播：同样是「这件事发生了什么」，竖屏 faceless 走 case-file，横屏 + 要主播口播走 anchor-desk。合同阈值全部单片标定（n=1），路由命中时按候选包对待。",
+
+  "see_also": {
+    "playbook": "styles/anchor-desk/playbook.md",
+    "contract": "styles/anchor-desk/contract.json",
+    "golden": "projects/china-h1-2026-econ"
+  }
+}
