@@ -313,7 +313,7 @@ def style_contract_plan(ir: FilmIR, ctx: GateContext | None = None) -> list[Viol
                       '要么显式写 "enforced": false（降 warn，交 Judge 兜底）'))
     for k in declared:
         v.append(_warn("style.contract.schema", f"contract.{k}",
-                       f"声明性条款、无机器执法: {k}——由 Judge / 人工兜底"))
+                       f"合同校验器不执法: {k}——归属见该条目 basis（lint / Judge / 人工）"))
     plan = c.get("plan") or {}
     shots = sorted(ir.shots, key=lambda s: s.t[0])
     total = ir.audio.timeline.duration_s if ir.audio.timeline else None
