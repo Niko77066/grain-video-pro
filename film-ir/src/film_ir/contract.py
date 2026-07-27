@@ -121,6 +121,7 @@ ENFORCED_TERMS: frozenset[str] = frozenset({
     "plan.graphics_run_max_s",
     "render.static_hold_ratio_max",
     "render.min_video_elements",
+    "render.palette_drift_max",
 })
 
 

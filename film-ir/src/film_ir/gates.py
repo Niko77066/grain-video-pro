@@ -434,6 +434,28 @@ def style_contract_render(ir: FilmIR, ctx: GateContext | None = None) -> list[Vi
                       f"compose 内 <video> 共 {n_video} 个 < 下限 {video_min:g}"
                       "——烘焙声部无物理存在"))
 
+    # 跨镜头主色漂移：风格包立身之本是跨镜头一致性，而在此之前合同一条跨镜头
+    # 的门都表达不了（docs/todo-from-ac-experiment.md P1）。drift = 某镜主色直方图
+    # 到其余各镜的平均距离；超上限 = 这一镜没被缝进全片那个世界。
+    drift_max = _eff(c, "render.palette_drift_max", amendments, v)
+    if drift_max is not None:
+        pal = ev.get("palette") or {}
+        if not pal:
+            v.append(_warn("style.contract.render", "evidence.palette",
+                           "证据无 palette 段（measure-render 早于主色漂移指标）"
+                           "——重跑 tools/measure-render.py 才能执行此门"))
+        elif not pal.get("measurable"):
+            v.append(_warn("style.contract.render", "evidence.palette",
+                           f"主色漂移不可测：{pal.get('reason', '未说明')}"))
+        elif pal.get("max_drift") is not None and pal["max_drift"] > drift_max:
+            outliers = " ".join(o["id"] for o in pal.get("outlier_shots") or [])
+            v.append(_err("style.contract.render", "evidence.palette.max_drift",
+                          f"最离群镜 {pal.get('max_drift_shot')} 主色漂移 "
+                          f"{pal['max_drift']:.3f} > 上限 {drift_max:g}"
+                          "——该镜未缝进全片的世界（LUT/颗粒/配色统一失败）",
+                          evidence=f"outliers=[{outliers}] "
+                                   f"var={pal.get('pairwise_distance_var')}"))
+
     # 自报 static_class=false 但实测判静的镜头（Goodhart 的直接解毒剂）
     measured = {p.get("id"): p for p in static.get("per_shot") or []}
     mislabeled = [s.id for s in ir.shots

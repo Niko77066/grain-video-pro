@@ -194,14 +194,24 @@ def test_graphics_run_over_limit(project):
 
 # ---------------------------------------------------------------- render 门
 
-def _evidence(hold_ratio=0.75, video_elements=0, per_shot=None) -> dict:
-    return {
+def _evidence(hold_ratio=0.75, video_elements=0, per_shot=None,
+              palette=None) -> dict:
+    ev = {
         "schema": "render-metrics@1",
         "video": {"duration_s": 72.0},
         "static": {"hold_ratio": hold_ratio, "hold_total_s": hold_ratio * 72,
                    "per_shot": per_shot or []},
         "compose": {"video_elements": video_elements},
     }
+    if palette is not None:
+        ev["palette"] = palette
+    return ev
+
+
+def _palette(max_drift, shot_id="s07") -> dict:
+    return {"measurable": True, "max_drift": max_drift, "max_drift_shot": shot_id,
+            "pairwise_distance_var": 0.044, "drift_median": 0.33,
+            "outlier_shots": [{"id": shot_id, "drift": max_drift}]}
 
 
 def test_render_evidence_missing_is_error_in_review(project):
@@ -228,6 +238,73 @@ def test_render_polished_shape_passes(project):
                        evidence=_evidence(0.52, 4))
     report = run_gates(ir, project_dir=pdir)
     assert not _errors(report, "style.contract.render")
+
+
+# ------------------------------------------------- render 门 · 跨镜头主色漂移
+
+def _palette_contract(value=0.8, amend=(0.72, 0.88)) -> dict:
+    c = json.loads(json.dumps(CASE_FILE_CONTRACT))
+    c["render"]["palette_drift_max"] = {"value": value, "amend": list(amend)}
+    return c
+
+
+def test_palette_green_anchor_passes(project):
+    """浣熊片实测绿锚 0.691（delivered / G2 缝合 4-5）不得被回溯判红。
+
+    该镜是夜戏声部与琥珀编年史世界的合理色温差，不是缝合失败。
+    """
+    ir, pdir = project(_palette_contract(), _codex_hf_ir(status="review"),
+                       evidence=_evidence(0.52, 4, palette=_palette(0.6914)))
+    assert not _errors(run_gates(ir, project_dir=pdir), "style.contract.render")
+
+
+def test_palette_red_anchor_fails(project):
+    """负对照红锚 0.974：把另一部片（蓝调新闻棚）未调色镜头切进浣熊时间轴。"""
+    ir, pdir = project(_palette_contract(), _codex_hf_ir(status="review"),
+                       evidence=_evidence(0.52, 4,
+                                          palette=_palette(0.9737, "s17_roof")))
+    msgs = [x["message"] for x in
+            _errors(run_gates(ir, project_dir=pdir), "style.contract.render")]
+    assert any("主色漂移" in m and "s17_roof" in m for m in msgs)
+
+
+def test_palette_red_anchor_still_red_at_amend_ceiling(project):
+    """带宽顶 0.88 仍挡得住红锚——basis 里的这句承诺是可回归的。"""
+    ir_dict = _codex_hf_ir(status="review")
+    ir_dict["meta"]["contract_amendments"] = {"render.palette_drift_max": 0.88}
+    ir, pdir = project(_palette_contract(), ir_dict,
+                       evidence=_evidence(0.52, 4, palette=_palette(0.9737)))
+    assert _errors(run_gates(ir, project_dir=pdir), "style.contract.render")
+
+
+def test_palette_missing_in_legacy_evidence_is_warn(project):
+    """早于本指标的证据文件没有 palette 段：提示重跑，不误判违约。"""
+    ir, pdir = project(_palette_contract(), _codex_hf_ir(status="review"),
+                       evidence=_evidence(0.52, 4))
+    report = run_gates(ir, project_dir=pdir)
+    assert not _errors(report, "style.contract.render")
+    assert any(x["severity"] == "warn" and "palette" in x["path"]
+               for x in report["violations"])
+
+
+def test_palette_unmeasurable_is_warn(project):
+    """单镜片/空帧流的跨镜头指标无定义——降 warn，不假装能判。"""
+    ir, pdir = project(
+        _palette_contract(), _codex_hf_ir(status="review"),
+        evidence=_evidence(0.52, 4,
+                           palette={"measurable": False, "reason": "镜头数 <2"}))
+    report = run_gates(ir, project_dir=pdir)
+    assert not _errors(report, "style.contract.render")
+    assert any(x["severity"] == "warn" and "不可测" in x["message"]
+               for x in report["violations"])
+
+
+def test_palette_term_absent_skips_gate(project):
+    """未写此条目的合同（尚未标定的包）不受此门约束，也不因缺证据报错。"""
+    ir, pdir = project(CASE_FILE_CONTRACT, _codex_hf_ir(status="review"),
+                       evidence=_evidence(0.52, 4))
+    report = run_gates(ir, project_dir=pdir)
+    assert not any("palette" in x["path"] for x in report["violations"])
 
 
 def test_no_contract_pack_skips(project, tmp_path):
