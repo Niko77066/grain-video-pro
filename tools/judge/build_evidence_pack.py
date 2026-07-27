@@ -67,11 +67,39 @@ def shot_frames(video: Path, shots: list[dict], out_dir: Path) -> list[str]:
     return files
 
 
+GOLDEN_SET = Path(__file__).resolve().parents[2] / "styles" / "golden-set.json"
+
+
+def resolve_golden(ref: str) -> tuple[Path | None, str | None, list[str] | None]:
+    """Golden 解析：风格包名 → styles/golden-set.json 登记册；目录 → 旧式 <dir>/out/final.mp4。
+
+    返回 (视频路径, 标注名, known_defects)。**known_defects 必须随 Golden 进评委上下文**——
+    Golden 里存在的违规不是可照抄的语法（登记册 how_to_use 第 2 条）。
+    """
+    d = Path(ref)
+    if d.is_dir():
+        return d / "out" / "final.mp4", d.name, None
+    if not GOLDEN_SET.is_file():
+        print(f"警告: 找不到 Golden 登记册 {GOLDEN_SET}", file=sys.stderr)
+        return None, None, None
+    reg = json.loads(GOLDEN_SET.read_text(encoding="utf-8"))
+    entry = (reg.get("goldens") or {}).get(ref)
+    if not entry:
+        known = sorted(k for k, v in (reg.get("goldens") or {}).items() if v)
+        print(f"警告: 登记册里没有 Golden「{ref}」（已登记：{known}）", file=sys.stderr)
+        return None, None, None
+    return (Path(entry["file"]).expanduser(),
+            f"{ref} / {entry['project']}",
+            entry.get("known_defects"))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("project")
-    ap.add_argument("--golden", help="Golden 样片项目目录（并排对照的关键输入）")
+    ap.add_argument("--golden",
+                    help="Golden：风格包名（走 styles/golden-set.json 登记册解析，推荐）"
+                         "或样片项目目录（旧式，取 <dir>/out/final.mp4）")
     ap.add_argument("--out")
     ap.add_argument("--video", default="out/final.mp4")
     args = ap.parse_args()
@@ -98,15 +126,16 @@ def main() -> int:
                     "-b:a", "96k", str(out / "audio.mp3")], check=False)
 
     golden_note = None
+    golden_defects = None
     if args.golden:
-        gdir = Path(args.golden)
-        gvideo = gdir / "out" / "final.mp4"
-        if gvideo.is_file():
+        gvideo, golden_note, golden_defects = resolve_golden(args.golden)
+        if gvideo and gvideo.is_file():
             ginfo = probe(gvideo)
             contact_sheet(gvideo, out / "golden-contact-sheet.jpg", ginfo["duration_s"])
-            golden_note = gdir.name
         else:
             print(f"警告: Golden 成片不存在，跳过并排: {gvideo}", file=sys.stderr)
+            golden_note = None
+            golden_defects = None
 
     # L0 报告：ffprobe + 已有的成片实测指标（若在）
     l0 = {"probe": info}
@@ -129,6 +158,7 @@ def main() -> int:
                           "offset_sheet_offset_s": SHEET_INTERVAL_S / 2,
                           "rule": "行优先；第 n 格(从1数)时间 = 偏移 + (n-1)*interval_s"},
         "golden": golden_note,
+        "golden_known_defects": golden_defects,
         "contract_amendments": ir["meta"].get("contract_amendments") or {},
         "shots": [{"id": s["id"], "t": s["t"], "intent": s.get("intent"),
                    "framing": s.get("framing"),

@@ -150,6 +150,12 @@ def emit_task(pack: Path, node: str) -> str:
 
     facts = json.dumps(manifest.get("shots", []), ensure_ascii=False)
     amends = json.dumps(manifest.get("contract_amendments") or {}, ensure_ascii=False)
+    gdef = manifest.get("golden_known_defects") or []
+    if gdef:
+        extra += ("\n## Golden 的已知缺陷（**不是可照抄的语法**）\n"
+                  "并排对照的 Golden 本身带下列已知违规——它们不构成标准，"
+                  "本片出现同类问题照样扣分，本片**没有**这些问题不算减分项：\n"
+                  + "\n".join(f"- {d}" for d in gdef) + "\n")
     task = f"""# 隔离评审任务 · node={node}
 
 > 你是 Kuleshov 独立评委（G2），与创作者物理隔离：只看下列证据，不接受、不索取任何创作过程解释。

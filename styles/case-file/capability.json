@@ -1,0 +1,64 @@
+{
+  "schema": "style-capability@1",
+  "id": "case-file",
+  "display_name": "案卷档案",
+  "layer": "bundled",
+  "status": "verified",
+
+  "positioning": "事实核验型新闻解读",
+  "one_liner": "让观众快速相信、看懂一件正在发生的事。",
+  "signature": "带观众读证据——文件高亮、数字压在原始材料上、居中极简的信息密度。不是纸张，也不是红色。",
+  "narrative_skeleton": ["主张", "文件证据", "解释", "结论"],
+
+  "understanding_task": {
+    "primary": ["verify_the_event"],
+    "secondary": ["read_the_official_number"]
+  },
+
+  "applicable_content": ["breaking_news", "deep_news", "policy_data_release", "case_retrospective"],
+  "audience": ["general", "professional"],
+  "tone": ["authoritative", "urgent", "restrained_premium"],
+  "pacing": "fast",
+  "visual_language": [
+    "文件精读（浏览器 chrome + 真实 URL + 逐字真实文本）",
+    "随旁白词级时间的同步高亮",
+    "数字 callout 压在文件图上",
+    "居中极简版式卡（单屏 ≤2 元素）",
+    "AI 纸拼贴 b-roll 作隐喻间奏"
+  ],
+
+  "hard_rules": {
+    "requires_any": [
+      ["readable_evidence", "official_dataset"]
+    ],
+    "excluded_material": ["presenter_wanted"],
+    "excluded_sensitivity": [],
+    "why": "只有「配方本身不成立」的条件才是硬的：没有任何可读证据时，「带观众读文件」这个签名动作无处落地，包就退化成纯版式卡——正是 daily-brief 的死因；三声部里没有 avatar，要主播口播就不是本包（横屏走 anchor-desk）。"
+  },
+
+  "native_format": {
+    "aspect": ["9:16"],
+    "duration_s": [20, 150],
+    "basis": "首片 openai-78m-logs 65.7s 竖屏首考通过；hf-ai-agent-breach 81.9s 同规格复用。",
+    "adaptation": {
+      "aspect": "改横屏：§1.1「视觉重心居中、严禁上堆下空」是针对竖屏视线的，横屏要换成左右分栏（文件占一侧、数字/标题占另一侧）；文件精读的开场特写 scale 从 1.6–1.9 降到 1.3–1.5（横屏画幅本来就宽）；超大标题字号按短边等比缩，别照抄 120–184px。",
+      "duration_shorter": "只留一处文件精读 + 一张结论卡，砍掉全部拼贴间奏——合同 plan.voices.collage_broll.min_shots 要走 amendments 降到带宽下限，降不到就是违约，不许悄悄删声部。",
+      "duration_longer": "加第二处文件精读撑结构（第二份文件、第二个数字组），不要靠拉长单镜或多加拼贴凑时长——那是水片。合同 render.static_hold_ratio_max 0.65 是按 65s 片标的，长片版式段占比更高，要盯实测别盯自报。"
+    }
+  },
+
+  "material_requirements": {
+    "signature": ["readable_evidence"],
+    "prefers": ["official_dataset", "contrast_fact", "presenter_declined"],
+    "can_work_without": ["character_footage", "archival_footage", "location_footage"]
+  },
+
+  "avoid_when": ["profile_story", "tragedy"],
+  "avoid_why": "人物故事该由人物叙事包承担（当前空位）；伤亡题材配快节奏高亮与印刷红会读成消费苦难。两条都是软扣分不是禁用——真要用，理由记 ledger.decisions。",
+
+  "see_also": {
+    "playbook": "styles/case-file/playbook.md",
+    "contract": "styles/case-file/contract.json",
+    "golden": "projects/openai-78m-logs"
+  }
+}

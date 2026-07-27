@@ -1,0 +1,106 @@
+{
+  "schema": "golden-set@1",
+  "note": "Golden 样片登记册。成片是重媒体、不入库（见 .gitignore「成片与媒体走 CDN + 本地归档」），所以这里只登记**路径 + 实测规格 + 它证明了什么 + 它的已知缺陷**。G2 并排对照走 `tools/judge/build_evidence_pack.py <project> --golden <pack>`，按本文件解析路径。",
+  "archive_root": "~/kuleshov-archive/golden",
+  "registered": "2026-07-27（用户交付 Downloads/Golden/{A,B,C}.mp4，一包一条）",
+
+  "how_to_use": [
+    "Golden 是**工艺下限与语法参照**，不是逐帧临摹目标。评委只判「本片是否达到或高于该参照」，不判「像不像」。",
+    "🔴 **known_defects 必须随 Golden 一起进评委上下文。** Golden 里存在的违规不是可以照抄的语法——A 片的带标点字幕与字幕底框都早于 2026-07-27 的两条宪法级拍板，照抄就是把旧债当标准。",
+    "Golden 与被评片的风格包不一致时，只作同仓工艺下限参照（版式密度、文字可读性、层次、色彩克制），并在 manifest 的 golden_note 里写明——不许因为风格不像而扣分。"
+  ],
+
+  "goldens": {
+    "case-file": {
+      "project": "openai-78m-logs",
+      "file": "~/kuleshov-archive/golden/case-file__openai-78m-logs.mp4",
+      "source": "用户 2026-07-27 交付（Downloads/Golden/B.mp4）",
+      "pack_status_at_delivery": "verified —— 首考通过 2026-07-17，GS-11 · 4.22/5，用户认可",
+      "measured": {
+        "resolution": "1080x1920",
+        "aspect": "9:16",
+        "duration_s": 65.8,
+        "fps": 30,
+        "loudness_lufs": -14.02,
+        "true_peak_dbtp": -0.97,
+        "lra": 2.9,
+        "measured_by": "ffprobe + ffmpeg loudnorm print_format=json，2026-07-27"
+      },
+      "proves": [
+        "文件实证卡语法：CASE / SOURCE 等宽字元数据 + 逐字真实文本 + 红章，来源脚注压在卡内极轻一行——「带观众读证据」的签名动作长什么样",
+        "数字压在材料上：78,000,000 / 4,594,907 两个大数字长在卷宗卡里，不是孤立数字卡",
+        "居中极简：单屏 ≤2 信息元素，无左上 kicker + 左下 src 的 PPT 双角标",
+        "拼贴色场轮换（橙 → 紫 → 青绿 → 墨绿）作章节隐喻间奏，与卷宗卡硬切成节奏",
+        "品牌处理：右下 JINGHUA 低透明常驻，不做常驻角标小字堆"
+      ],
+      "known_defects": [
+        "真峰 −0.97 dBTP，超出仓库 loudnorm 目标的 TP ≤ −1.5 —— 不要照抄这条片的响度参数",
+        "**全片无烧制字幕**（底部只有卷宗卡自带的来源脚注）。所以「字幕不带标点 / 字幕无底框」这两条 2026-07-27 拍板在本 Golden 上**无从对照**——评委不要把它当作「字幕可以省」的依据"
+      ]
+    },
+
+    "pixel-chronicle": {
+      "project": "uk-argentina-feud",
+      "file": "~/kuleshov-archive/golden/pixel-chronicle__uk-argentina-feud.mp4",
+      "source": "用户 2026-07-27 交付（Downloads/Golden/A.mp4）",
+      "pack_status_at_delivery": "candidate —— 未过盲评对照；本片是 v1→v6 六版返工的定稿（playbook §9 的由来）",
+      "measured": {
+        "resolution": "1280x720",
+        "aspect": "16:9",
+        "duration_s": 255.7,
+        "fps": 30,
+        "loudness_lufs": -13.93,
+        "true_peak_dbtp": -1.46,
+        "lra": 2.8,
+        "measured_by": "ffprobe + ffmpeg loudnorm print_format=json，2026-07-27"
+      },
+      "proves": [
+        "做旧质感缝合层：像素 MG、泛黄档案、实拍航拍、真实新闻画面盖同一层颗粒与褪色 LUT，硬切无痕——五源平权的技术前提",
+        "MG 段与实拍段严格交替本身就是节奏（§7 模板级硬规则的实证）",
+        "实物化数据 + 体感对比锚（「一千六百人」「一万两千七百公里」这类量级用画面而不是坐标轴讲）",
+        "像素重演承担强叙事位与版权规避（冲突场面不用真画面）",
+        "情绪落点靠剪辑密度而不是音量：口播恒平 −13.93 LUFS / LRA 2.8，蒙太奇段靠切点密度爆发",
+        "原生时长档：255.7s，是「2–4 分钟横屏」这一档的实证上界"
+      ],
+      "known_defects": [
+        "🔴 **字幕带标点**（抽帧实证：「这两个国家到底多大仇？」带问号、「七十四天后，阿军投降」带逗号、「历史学家管这种关系叫「非正式帝国」」带引号）。本片渲于 2026-07-19，早于 2026-07-27「字幕不带标点」拍板 —— **照抄即违规**（机器门 `tools/kuleshov-lint.py` ⑤）",
+        "🔴 **字幕带半透明深色圆角底框**（抽帧实证：「掰了两百二十年的手腕」等条目背后可见圆角深色板）。早于 2026-07-27 无底框铁律 —— **照抄即违规**（机器门 `tools/kuleshov-lint.py` ④）。可读性该由渐变压暗 + 多层 text-shadow + 字重留白承担",
+        "分辨率只有 1280x720（同期渲染档），不是 1080p —— 判画质细节时不要以它为上限"
+      ]
+    },
+
+    "anchor-desk": {
+      "project": "china-h1-2026-econ",
+      "file": "~/kuleshov-archive/golden/anchor-desk__china-h1-2026-econ.mp4",
+      "source": "用户 2026-07-27 交付（Downloads/Golden/C.mp4）",
+      "pack_status_at_delivery": "candidate —— G2 成片门第 3 轮 4.1 分 / 反模式空数组 pass；**未过盲评对照，项目停在 review**，不是 delivered",
+      "measured": {
+        "resolution": "1920x1080",
+        "aspect": "16:9",
+        "duration_s": 82.0,
+        "fps": 30,
+        "loudness_lufs": -14.11,
+        "true_peak_dbtp": -1.34,
+        "lra": 2.1,
+        "measured_by": "ffprobe + ffmpeg loudnorm print_format=json，2026-07-27（与项目 ledger g012 自测数值一致）"
+      },
+      "proves": [
+        "🟢 **当前唯一同时满足两条 2026-07-27 宪法级拍板的 Golden**：字幕不带标点（句中停顿用全角空格，抽帧实证「但翻到投资和消费　情况反过来了」）+ 压在画面上的组件全无底框（可读性由无边缘压暗 + 多层 text-shadow 承担，Contrast 47/47 过 WCAG AA）",
+        "无底框下的版式层级：转折字卡左侧衬线大字 + 一个词高亮金色，右侧涨跌对照行；恒定左上角标是唯一允许带压条的元素",
+        "三色编码不乱：金=增长、红=下行、白=主文",
+        "四声部份额实证：主播 19.6% / 实拍 34.7% / 数据屏 33.2% / 静帧 12.6%",
+        "静态持有比 0.210、逐镜 measured_static 0 镜——「幻灯片伪装成视频」的反面实证",
+        "count-up 是真计数动画（评委正面确认 s02 52.43→69.57、s05→s06 −5.7→−18.0）"
+      ],
+      "known_defects": [
+        "合同阈值全部单片标定 n=1，本片既是 Golden 又是唯一样本 —— 用它校准带宽时要意识到没有第二个观测点",
+        "**文件实证缺位**：引用了统计局发布稿但画面没出现发布稿（`visual-selfcheck` 硬查 3 未满足）。本包缺一个「读发布稿」的镜位模板 —— 不要因为 Golden 没做就认为这条可以免",
+        "**G2 音频门未验**：跑评的会话无音频感知能力，音色听感层是空的（ledger 记 DEBT）。响度/转写重合率有机器证据，人耳听感层没有"
+      ]
+    },
+
+    "whiteboard-generalist": null
+  },
+
+  "fallback_note": "`whiteboard-generalist` 没有 Golden，且不该有——它是兜底模板，不承担用户可感知的风格承诺，「不走考片制上架」（playbook §0）。评这个包出的片时，Golden 位留空或放一条同仓同画幅成片作**工艺下限参照**，并在 manifest.golden_note 里写明「不是本片的风格目标」（做法参 `projects/china-h1-2026-econ/evidence/judge-pack-hero/manifest.json`）。"
+}

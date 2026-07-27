@@ -1,0 +1,66 @@
+{
+  "schema": "style-capability@1",
+  "id": "pixel-chronicle",
+  "display_name": "像素纪事",
+  "layer": "bundled",
+  "status": "candidate",
+
+  "positioning": "结构化深度知识叙事",
+  "one_liner": "把复杂对象讲出结构、历史和情绪落点。",
+  "signature": "把抽象知识做成可感知的世界——实物化数据、像素重演与真实影像交替、统一做旧质感。不是像素本身。",
+  "narrative_skeleton": ["反差钩子", "三层结构解释", "人／现实落点", "情绪收束"],
+
+  "understanding_task": {
+    "primary": ["explain_the_mechanism"],
+    "secondary": []
+  },
+
+  "applicable_content": ["knowledge_explainer", "deep_news", "case_retrospective"],
+  "audience": ["general", "beginner", "professional"],
+  "tone": ["narrative", "emotional", "restrained_premium", "authoritative"],
+  "pacing": "medium",
+  "visual_language": [
+    "像素重演（Seedance 10s 慢组装）",
+    "实物化数据（禁坐标轴图表）",
+    "泛黄档案照 + 轻微运动",
+    "章节卡分隔的三章递进",
+    "纸纹颗粒做旧缝合层（五源平权的技术前提）",
+    "亮黄／金色双色大字卡"
+  ],
+
+  "hard_rules": {
+    "requires_any": [
+      ["multi_stage_causality", "contrast_fact"],
+      ["archival_footage", "location_footage"]
+    ],
+    "excluded_material": ["presenter_wanted"],
+    "excluded_sensitivity": [],
+    "why": "只有「配方本身不成立」的条件才是硬的：没有反差事实或因果链，「三层结构解释」的骨架没有内容可填；实拍/档案占比 ≈40% 是硬配方（§5 声部表），素材来源没落实就开拍必然变成全 MG 幻灯片；数字人在本包声部表里明确不用。"
+  },
+
+  "native_format": {
+    "aspect": ["16:9"],
+    "duration_s": [110, 300],
+    "basis": "拉片对象《佛得角》4′04″；已出厂 uk-argentina-feud 256.7s / dont-set-ac-26 185.6s / urban-wildlife-raccoon 171.0s 全部横屏。",
+    "adaptation": {
+      "aspect": "改竖屏：章节卡的「竖排书名号 + 圆角白边卡片窗」要重排（竖屏窗口更高更窄，实拍素材要按中央安全区重新构图）；§7 秒级模板的 11 个槽位功能不变，但「MG 段与实拍段严格交替」在竖屏更吃紧——单屏元素数要往下砍一档；字幕距底 ≈10% 改按竖屏安全区算。",
+      "duration_shorter": "§7 的 11 槽位模板按「三章 → 两章」重排：删掉 S7 转折铺垫与 S8 情绪峰前站，保住 S1 反差钩子 / 一章解释 / S10 真人特写 / S11 金句收尾。**不是等比压缩每个槽位**——那样每段都讲不完。反差钩子的 0–26s 连击可以压到 12–15s，但不能删。",
+      "duration_longer": "加的是第四章，不是拉长现有章节。先确认实拍素材池够不够——「一素材全片一次」是铁律，池子不够就会开始重复，评委一眼看出来。"
+    }
+  },
+
+  "material_requirements": {
+    "signature": ["contrast_fact", "multi_stage_causality"],
+    "prefers": ["archival_footage", "location_footage", "diagram_need", "presenter_declined"],
+    "can_work_without": ["readable_evidence", "official_dataset", "character_footage"]
+  },
+
+  "avoid_when": ["breaking_news", "policy_data_release", "urgent"],
+  "avoid_why": "时效题材配 2–4 分钟做旧图册是错配——观众要的是「刚发生了什么」，本包给的是「为什么会变成这样」。",
+
+  "see_also": {
+    "playbook": "styles/pixel-chronicle/playbook.md",
+    "contract": "styles/pixel-chronicle/contract.json",
+    "golden": "projects/uk-argentina-feud"
+  }
+}
