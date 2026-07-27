@@ -22,7 +22,7 @@ description: Kuleshov 十阶段视频生产管线（M0 手工作坊版）——�
 
 1. **选题**是什么？有没有已有素材（文档 / 链接 / 图片 / 录屏）？
 2. **片型**：M0 优先 `faceless_news_recap`（资讯速览）或 `faceless_explainer`（知识讲解）；其他片型提醒用户属超纲试验。
-3. **风格包**：列出 `styles/` 下可用包让用户选——当前 `pixel-chronicle`（像素科普·横屏）/ `case-file`（案卷调查·竖屏）/ `whiteboard-generalist`（公测兜底）；选定后执行该包的开拍提问模板。**选题超出前两个专用包预期、或低置信/混合输入 → 落 `whiteboard-generalist` 兜底**。`_` 前缀目录（`_template` / `_disabled`）不是风格包、不列入。`meme-ledger` 未完成、暂禁用（在 `styles/_disabled/`，完善后再开放）。
+3. **风格包**：列出 `styles/` 下可用包让用户选——当前 `pixel-chronicle`（像素科普·横屏）/ `case-file`（案卷调查·竖屏）/ `anchor-desk`（**新闻播报·数字人主播台·横屏**，候选包，单片标定）/ `whiteboard-generalist`（公测兜底）；选定后执行该包的开拍提问模板。**新闻播报 / 数据发布解读 / 政策·财报·统计口径类 + 要主播口播 → 落 `anchor-desk`**；选题超出各专用包预期、或低置信/混合输入 → 落 `whiteboard-generalist` 兜底。`_` 前缀目录（`_template` / `_disabled`）不是风格包、不列入。`meme-ledger` 未完成、暂禁用（在 `styles/_disabled/`，完善后再开放）。
 4. **时长目标（非硬锁）**：给个估值（如 ~60s）用于规划与"宁可短不可水"的内容控制；**时长不设硬门**，最终由音频/内容自然定长（2026-07-16 用户拍板去除"时长锁"）。
 5. **预算上限**（可选）：仅用于记账与熔断，**不影响选源**——五种来源全量可用，按镜头意图自由调配（铁律 7）。用户不设即默认不限。
 
@@ -129,7 +129,10 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 - 声明型镜头与叠加层直接写成组件；烘焙 clip 按 `t` 挂入；
 - **时长调和**（烘焙 clip 超长时按序）：尾部裁切（保动作完成点）→ 变速 ± 5% → 均不可则该镜 fail 重做；**禁止冻结帧补时长**；
 - 混排缝合：统一 LUT（以 style frame 为基准）+ 共享颗粒；剪辑点落句读/节拍，默认 J-cut/L-cut；转场 ≤ 4 种；
-- **字体纪律（硬规则，2026-07-20 起）**：compose 禁 `local("系统字体")` 承担正文/标题，必用自带 woff2（`SansSC/SerifSC`，见 `references/server-render.md`）；`font-weight` 只取 woff2 实有档，别让浏览器 faux-bold。`python3 tools/kuleshov-lint.py projects/<片名>` 先过（woff2/时效词/脚注压边框），error 不清零禁 render。
+- **字体纪律（硬规则，2026-07-20 起）**：compose 禁 `local("系统字体")` 承担正文/标题，必用自带 woff2（`SansSC/SerifSC`，见 `references/server-render.md`）；`font-weight` 只取 woff2 实有档，别让浏览器 faux-bold。
+- 🔴 **无底框铁律（宪法级，2026-07-27 用户拍板）**：压在画面上的**数据卡 / 角标 / 数据条 / 字幕禁带深色底框**——填充 + 边框 + 投影的浮动面板就是 PPT 风格、是 AI 味最直接的来源。可读性只准由『**渐变到透明的压暗层**（无可见边界）+ **多层 text-shadow 等效描边** + 字重留白层级』承担。唯一豁免是角标级信息，须在 CSS 写 `/* lint-allow-panel: 理由 */`。手感坑：脱底板后条形轨道要改**亮色**，中性灰蓝条要改近白，否则会消失在压暗区里。
+- 🔴 **字幕不带标点（宪法级，2026-07-27 用户拍板）**：句末标点删除、句中停顿换全角空格；**切分仍用标点**（断句依据），只在渲染层剥离。参考 `projects/china-h1-2026-econ/scripts/gen_captions.py`。
+- `python3 tools/kuleshov-lint.py projects/<片名>` 先过（①woff2 ②时效词 ③脚注压边框 ④**组件底板** ⑤**字幕标点**），error 不清零禁 render。
 - **渲染默认走渲染机**（2026-07-20 双跑验收过、切默认，记 `ledger.decisions`）：`tools/render-remote.sh <compose> <out> [ver] [quality]`（`RENDER_URL` 指向宿主/开发环境的渲染机、由环境提供，无本机 IP 假设；503 并发满退避重试）；比本地 docker 快 ~2.3×。**本地 `hyperframes render --docker` 降为兜底**（机器宕机/占满时）。`npx hyperframes check` 不过禁 render。新风格包首用 woff2 时仍双跑一次（全片 SSIM + 关键版式帧目检换行/安全区，判据看目检不看全片 SSIM 数字）。
 
 ### ⑨ review

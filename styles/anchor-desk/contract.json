@@ -1,0 +1,156 @@
+{
+  "schema": "style-contract@1",
+  "style_pack": "anchor-desk",
+  "source": "playbook.md §1/§3/§4/§5 散文→机器合同编译（2026-07-27）。数据全部来自单一实证片 projects/china-h1-2026-econ（82s / 16:9 / 18 镜 / G2 第 3 轮 4.1 分反模式空 pass）——所有阈值标 [单片标定]，第二、三片出厂后回填带宽。",
+  "denominators": "一切份额分母 = audio.timeline.duration_s（真实音频总长）。provider 份额按镜头区间时长分区求和（每镜恰一 provider，互斥）；声部按 shots[].source.params.voice 声明计数。",
+  "amend_policy": "数值仅可在各自 amend 带宽内调整：ir patch 写 meta.contract_amendments[\"<dotted.path>\"]（自动记 ledger，评委与用户看片时可见）。四声部一个都不能删。越出带宽 = 合同违约——只能改片，或带 contract_violation 标记停 review（禁 delivered、禁合 main）。本文件生产期内对生产 agent 只读。",
+  "_molly_enforcement": "molly film-ir/gates.py 当前机器执法：plan.provider_share.* / plan.voices.*.min_shots / plan.graphics_run_max_s / render.static_hold_ratio_max / render.min_video_elements。本合同的 plan.no_panel_chrome / plan.caption_no_punctuation 由 **tools/kuleshov-lint.py ④⑤ 执法**（不是 molly，但同样是会开火的机器门，error 禁 render/出厂）；plan.anchor_persona_locked / plan.transitions_max 为声明项，暂由 playbook + Judge 执法。此说明防静默降级：以为在门上，其实还在纸面上。",
+  "incompatible_topics": [
+    "realistic_person_impersonation"
+  ],
+  "_incompatible_note": "本包的数字人是**虚构栏目人设**。硬不兼容项是『用数字人冒充任何真实人物』（真实主播、官员、当事人），以及出现任何真实电视台的台标/栏目名/主播姓名。这是三包共同规则『真人只允许符号化角色/叙事替身』在本包的具体化——本包不是不能用真人形象，是不能冒名。",
+  "plan": {
+    "voices": {
+      "anchor": {
+        "role": "主播——主持/设问/结论，片子的关节；不是全片贴片",
+        "providers": [
+          "avatar"
+        ],
+        "declared_as": "anchor",
+        "min_shots": {
+          "value": 2,
+          "amend": [
+            2,
+            5
+          ],
+          "basis": "至少开场 + 收尾两个关节。实证片 3 镜（开场/设问/收尾）。上限 5 是防『整片单人对镜头』这个反模式——超过就不是本包了。[单片标定]"
+        }
+      },
+      "broll": {
+        "role": "实拍物证——给每个数字一个物理世界的对应物",
+        "providers": [
+          "footage"
+        ],
+        "declared_as": "broll",
+        "min_shots": {
+          "value": 4,
+          "amend": [
+            3,
+            10
+          ],
+          "basis": "新闻质感的来源。实证片 6 镜（城市/工地/街市/港口/产线/超市）。[单片标定]"
+        }
+      },
+      "data_screen": {
+        "role": "数据屏——信息主轨：数据面板、转折字卡、结论卡",
+        "providers": [
+          "hyperframes"
+        ],
+        "declared_as": "data_screen",
+        "min_shots": {
+          "value": 3,
+          "amend": [
+            2,
+            8
+          ],
+          "basis": "实证片 6 镜（GDP 面板/转折卡×2/产量条/物价卡/结论卡）。[单片标定]"
+        }
+      }
+    },
+    "voice_declaration": "声部声明写 shots[].source.params.voice ∈ {anchor, broll, broll_still, data_screen}（storyboard 必填）。broll_still（image_motion 静帧特写）不设下限——它是可选的密度调节声部，但受 provider_share 上限约束。",
+    "provider_share": {
+      "avatar": {
+        "min": {
+          "value": 0.12,
+          "amend": [
+            0.1,
+            0.32
+          ],
+          "basis": "主播声部的时长下限——低于这个数字人就成了点缀，不再是『主播台』。实证片 19.6%。上限 0.32 同样有意义：主播占比过高 = 念稿视频。[单片标定]"
+        },
+        "max": {
+          "value": 0.35,
+          "amend": [
+            0.25,
+            0.45
+          ],
+          "basis": "防整片念稿。实证片 19.6%。[单片标定]"
+        }
+      },
+      "footage": {
+        "min": {
+          "value": 0.22,
+          "amend": [
+            0.18,
+            0.45
+          ],
+          "basis": "实拍物证是本包区别于『纯 MG 数据片』的关键。实证片 34.7%。[单片标定]"
+        }
+      },
+      "hyperframes": {
+        "max": {
+          "value": 0.4,
+          "amend": [
+            0.28,
+            0.42
+          ],
+          "basis": "数据屏是信息主轨但不能变成幻灯片。实证片 33.2%。沿用 whiteboard-generalist 的 40% 口径。[单片标定]"
+        }
+      }
+    },
+    "graphics_run_max_s": {
+      "value": 11.0,
+      "amend": [
+        8.0,
+        13.0
+      ],
+      "basis": "声明型图形（hyperframes + image_motion）连续时长上限——防『连着看三张卡』。实证片最长连续段 **10.61s**（s12 静帧特写 2.57 + s13 产量条 4.70 + s14 转折卡 3.34），已经贴着上限，是这条片子最该改进的一处节奏问题：静帧特写紧接两张全屏卡，中间缺一次实拍换气。11.0 是照实证片现状定的，**不是理想值**；第二片应当把它压到 8–9s 区间并回填带宽。[单片标定]"
+    },
+    "no_panel_chrome": {
+      "value": 1,
+      "basis": "🔴 一票否决：压在画面上的数据卡/角标/数据条/字幕**禁带 background + border + box-shadow 的浮动面板**。可读性只准由『渐变到透明的压暗层 + 多层 text-shadow 等效描边 + 字重留白』承担。唯一豁免是角标级信息，且须在 CSS 写 /* lint-allow-panel: 理由 */。**机器执法：tools/kuleshov-lint.py ④**。宪法出处：CLAUDE.md 品味宪法「我们拒绝 · 压在画面上的组件底板」（2026-07-27 用户拍板）。"
+    },
+    "caption_no_punctuation": {
+      "value": 1,
+      "basis": "🔴 一票否决：字幕不许带任何标点符号。句末标点删除、句中停顿换全角空格；切分仍用标点，只在渲染层剥离。**机器执法：tools/kuleshov-lint.py ⑤**。宪法出处：CLAUDE.md 品味宪法「我们拒绝 · 带标点的字幕」（2026-07-27 用户拍板）。"
+    },
+    "anchor_persona_locked": {
+      "value": 1,
+      "basis": "声明项：主播形象锚点（16:9 半身像）与 TTS 音色档固定配对，跨片跨期不换，两者生成参数全留痕。人设是栏目级资产。[molly 门未覆盖，暂由 playbook §1 + Judge 执法]"
+    },
+    "transitions_max": {
+      "value": 3,
+      "amend": [
+        2,
+        4
+      ],
+      "basis": "声明项：hard_cut / dip_to_navy / gold_wipe。比 G1 通用上限 4 更严——播报体靠硬切的干脆，不靠转场。[molly 只查通用上限 4，本包这条暂由 Judge 执法]"
+    }
+  },
+  "render": {
+    "static_hold_ratio_max": {
+      "value": 0.45,
+      "amend": [
+        0.35,
+        0.58
+      ],
+      "basis": "measure-render@0.0015 阈值实测：实证片去底框版 0.210、回炉后 0.216、初版 0.247。0.45 留了一倍余量，同时明显严于 whiteboard-generalist 的 0.60——本包有主播口播与实拍真运动打底，本就不该靠静帧凑时长。[单片标定]"
+    },
+    "min_video_elements": {
+      "value": 4,
+      "amend": [
+        3,
+        99
+      ],
+      "basis": "compose 内 <video> 计数——主播 ≥2 + 实拍 ≥2 的物理存在证明。实证片 9 个。[单片标定]"
+    }
+  },
+  "inviolable": [
+    "无底框铁律（plan.no_panel_chrome）不可由 agent 解释豁免——它是本包的立身之本，不是审美偏好",
+    "字幕不带标点（plan.caption_no_punctuation）不可豁免",
+    "四声部一个都不能删（anchor / broll / data_screen 的 min_shots 不可低于各自 amend 下限）",
+    "数字人不得冒充任何真实人物，不得出现真实电视台台标/栏目名/主播姓名",
+    "剪辑点必须落在 forced-alignment 的真实字戳间隙——compose 里禁手写脱离 audio.timeline 的秒数",
+    "自报字段（static_class 等）与 evidence/render-metrics.json 实测矛盾时，以实测为准"
+  ]
+}

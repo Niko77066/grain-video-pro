@@ -4,7 +4,7 @@
     "title_display": "经济半年报 · 4.7% 背后的两组数字",
     "slug": "china-h1-2026-econ",
     "format": "anchor_news_recap",
-    "style_pack": "whiteboard-generalist",
+    "style_pack": "anchor-desk",
     "commitment": {
       "type": "structure_readout",
       "duration_s": 80.0,
@@ -1185,6 +1185,13 @@
         "stage": "review",
         "why": "第 2 轮评委把货轮船首当成叠加装饰图形，直接触发规则 fail。本片有大量港口/工地/产线/超市的真实航拍，船体、吊具、货柜、灯箱都是被拍到的东西。这条纪律不是给评委放水——它仍然可以在 note 里记录疑虑并扣分，只是不让一次物体误认单独触发否决。第 3 轮评委确实按这条处理了 s01/s08/s17 主播镜的质感落差（写成『观察，不计分』），机制生效。",
         "by": "ep"
+      },
+      {
+        "id": "d34",
+        "date": "2026-07-27",
+        "decision": "修订门控字段: meta.style_pack",
+        "stage": "review",
+        "why": "风格包从 whiteboard-generalist 改挂 anchor-desk：用户认可本片效果后，把它蒸馏成了独立的新闻播报风格包（styles/anchor-desk/），本片即该包的实证片与参考实现。这不是改写历史——生产期本片确实跑在兜底包上（决策 d002 保留原样不动），新包是事后从本片提炼的，合同阈值也全部按本片实测标定。改挂后 kuleshov-ir validate 用 anchor-desk 合同复跑 0 error 0 warning，负向用例（4 实拍镜+1 主播镜退化成 hyperframes）正确报 6 条 error。"
       }
     ],
     "costs": [
