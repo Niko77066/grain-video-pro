@@ -545,15 +545,22 @@ def run_gates(ir: FilmIR, stage: str | None = None,
             if _STAGE_INDEX[from_stage] <= idx:
                 ran.append(fn.__name__)
                 violations.extend(fn(ir, ctx))
+    downgraded = 0
     if (ir.meta.pipeline_version or "").startswith("m0"):
-        violations = [
-            x if (x.severity != "error" or x.gate in M0_RETROACTIVE_GATES)
-            else Violation(x.gate, "warn", x.path, x.message + M0_NOTE, x.evidence)
-            for x in violations
-        ]
+        kept = []
+        for x in violations:
+            if x.severity == "error" and x.gate not in M0_RETROACTIVE_GATES:
+                kept.append(Violation(x.gate, "warn", x.path,
+                                      x.message + M0_NOTE, x.evidence))
+                downgraded += 1
+            else:
+                kept.append(x)
+        violations = kept
     errors = [x for x in violations if x.severity == "error"]
     warns = [x for x in violations if x.severity == "warn"]
-    return {
+    # legacy_downgraded 必须出现在摘要里：m0 片降级后 ok=true / errors=0 与
+    # 真正干净的片子长得一模一样，不摆出这个数字就是又一次静默降级。
+    report = {
         "ok": not errors,
         "stage": stage,
         "gates_ran": ran,
@@ -561,3 +568,10 @@ def run_gates(ir: FilmIR, stage: str | None = None,
         "warnings": len(warns),
         "violations": [x.to_dict() for x in violations],
     }
+    if downgraded:
+        report["legacy_downgraded"] = downgraded
+        report["legacy_note"] = (
+            f"m0 历史片：{downgraded} 条 error 已降为 warn（本片不参与当前门禁，"
+            f"追溯适用的门：{', '.join(sorted(M0_RETROACTIVE_GATES))}）。"
+            "ok=true 不等于按当前标准通过。")
+    return report
