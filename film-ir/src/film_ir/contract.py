@@ -110,8 +110,11 @@ def unknown_amendments(contract: dict, amendments: dict) -> list[str]:
 # 合同格式是开放词表，校验器是闭合词表：写进 contract.json 却没有执法点的
 # 条目会被静默忽略——那比不写更危险，它让作者、评委和用户都以为那里有一道
 # 门。本表把执法面变成显式清单：新增指标必须同时改 gates.py 的读取点和这里。
-# 确实只想留一条声明、把判断交给 Judge 的条目，在该条目上写
-# "enforced": false，它会降为 warn 而不是 error。
+#
+# **本表只覆盖合同校验器**。kuleshov-lint、measure-render 的其他检查、G2 评委
+# 都是独立的执法层，不在此列。因此 "enforced": false 的准确含义是"合同校验器
+# 不执法这一条"，不等于"这一条没人管"——条目自己的 basis 应写明它归谁管。
+# 在该条目上写 "enforced": false，schema 门降为 warn 而不是 error。
 ENFORCED_TERMS: frozenset[str] = frozenset({
     "plan.voices.*.min_shots",
     "plan.provider_share.*.min",
