@@ -7,7 +7,13 @@
 
 ---
 
-## P0 · G2 评审协议未规定配对还是单臂，而两者能翻转结论
+## ~~P0~~ ✅ 已办（2026-07-27）· G2 评审协议未规定配对还是单臂，而两者能翻转结论
+
+> 落地：`tools/judge/README.md`「评审模式协议」+ `judge.py --mode solo|paired` / `--vs` / `--merge`。
+> 三条规则均已可执行：绝对判断缺省单臂（CLI 拦截混用）、相对判断走盲化配对（配对不产出 pass/fail）、
+> 两路 `--merge` 出 `decisive|weak|tie|inconclusive`（方向相反 → 无定论）。下游 `styles/_iteration.md`
+> 棘轮改判 `ratchet_action`，准入考片制拆成"赢基线走配对 + 过下限走单臂"。用下表数据回放：T1 →
+> `inconclusive`，T2 → `weak`。
 
 **证据**：同一批 hero frame，两种评审模式给出相反胜负。
 
