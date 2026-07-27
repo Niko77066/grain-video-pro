@@ -128,11 +128,17 @@ def main():
         raw = open(capf, encoding="utf-8").read()
         try:
             caps = json.loads(raw.split("=", 1)[1].strip().rstrip(";\n").strip())
-        except Exception:
+            if not isinstance(caps, list) or not all(isinstance(c, dict) for c in caps):
+                raise ValueError("captions_data 不是 [{text,...}] 数组")
+        except Exception as e:
             caps = []
-            warns.append("captions_data.js 解析失败，字幕标点门未执行——请人工确认。")
+            warns.append(f"captions_data.js 解析失败（{e}），字幕标点门未执行——请人工确认。")
+        # 数字内部的 . , : 不是标点，是数值的一部分（5.3% / 1,200 / 00:12 / 9:16）——
+        # 先掏空它们再查。gen_captions.py 的 strip_punct 也只剥标点、不动数字，
+        # 两边口径必须一致，否则这道 error 门会挡住合规产出的字幕。
+        _num_sep = re.compile(r"(?<=\d)[.,:](?=\d)")
         bad = [c.get("text", "") for c in caps
-               if re.search(r"[，。、；：？！,.;:?!]", c.get("text", ""))]
+               if re.search(r"[，。、；：？！,.;:?!]", _num_sep.sub("", c.get("text", "") or ""))]
         if bad:
             errors.append(f"字幕含标点符号（{len(bad)}/{len(caps)} 条），专业视频不在字幕里加标点。"
                           f"示例：{bad[0][:24]!r}。切分可以用标点，渲染不许带——见 scripts/gen_captions.py。")

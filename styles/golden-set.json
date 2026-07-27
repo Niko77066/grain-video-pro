@@ -4,6 +4,7 @@
   "archive_root": "~/kuleshov-archive/golden",
   "registered": "2026-07-27（用户交付 Downloads/Golden/{A,B,C}.mp4 三条；同日并入 main 已登记的 GS-01 浣熊）",
   "resolution": "每个包一个数组，**第一条是 primary**（`--golden <pack>` 取它）。要指定某一条用 `--golden <pack>:<project>`。多条并存是正常的：不同 Golden 各自锚住不同的东西（出厂下限 / 时长上界 / 某条合同阈值的绿锚）。",
+  "id_namespace": "本文件的 `id`（GS-01 / GS-02 …）是**登记册内部编号**，与 `/video-score` 基线打分工作簿的 GS-NN 行号（GS-09 samsung / GS-10 estée / GS-11 openai / GS-12 英阿 / GS-13 空调）**不是同一套**，两边同名不同义。引用时带上包名消歧：`pixel-chronicle / GS-02`。",
   "how_to_use": [
     "Golden 是**工艺下限与语法参照**，不是逐帧临摹目标。评委只判「本片是否达到或高于该参照」，不判「像不像」。",
     "🔴 **known_defects 必须随 Golden 一起进评委上下文。** Golden 里存在的违规不是可以照抄的语法——`uk-argentina-feud` 的带标点字幕与字幕底框都早于 2026-07-27 的两条宪法级拍板，照抄就是把旧债当标准。",
@@ -16,7 +17,7 @@
         "project": "openai-78m-logs",
         "file": "~/kuleshov-archive/golden/case-file__openai-78m-logs.mp4",
         "source": "用户 2026-07-27 交付（Downloads/Golden/B.mp4）",
-        "pack_status_at_delivery": "verified —— 首考通过 2026-07-17，GS-11 · 4.22/5，用户认可",
+        "pack_status_at_delivery": "verified —— 首考通过 2026-07-17，工作簿基线打分 GS-11 · 4.44/5（9 维 5/5/4/4/4/5/5/4/4，见 projects/openai-78m-logs/film.json ledger.gates），用户认可",
         "measured": {
           "resolution": "1080x1920",
           "aspect": "9:16",
@@ -72,6 +73,7 @@
         ]
       },
       {
+        "id": "GS-02",
         "project": "uk-argentina-feud",
         "file": "~/kuleshov-archive/golden/pixel-chronicle__uk-argentina-feud.mp4",
         "source": "用户 2026-07-27 交付（Downloads/Golden/A.mp4）",

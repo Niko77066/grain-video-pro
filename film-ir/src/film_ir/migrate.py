@@ -304,9 +304,12 @@ def _ledger(d: dict, log: list[str]) -> None:
     # decisions / costs 缺 date：模型必填，但**不许凭空编日期**。只用本片自己
     # 记录过的日期回填（gates[].date 的众数），并逐条写 date_source 让这次回填
     # 看得见——声明过的近似好过静默的精确。全片一个日期都没有就不动，让它报错。
-    dates = [g["date"] for g in ledger.get("gates") or [] if g.get("date")]
+    dates = [g["date"] for g in ledger.get("gates") or []
+             if isinstance(g, dict) and g.get("date")]
     if dates:
-        anchor_date = max(set(dates), key=dates.count)
+        # sorted() 而不是 set()：集合迭代序受 PYTHONHASHSEED 影响，众数打平时
+        # 同一个 film.json 会在两次迁移里回填出不同日期——留痕工具必须可复跑。
+        anchor_date = max(sorted(set(dates)), key=dates.count)
         for key in ("decisions", "costs"):
             filled = 0
             for it in ledger.get(key) or []:

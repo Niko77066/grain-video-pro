@@ -37,6 +37,9 @@ projects/**/review_frames/
 projects/**/compose/.hyperframes/
 projects/**/shots/*-res.json
 
+# Python 字节码（tools/ 下的脚本互相 import 时也会生成，不只 film-ir）
+__pycache__/
+
 # film-ir（Python 包）
 film-ir/.venv/
 film-ir/**/__pycache__/
@@ -45,6 +48,9 @@ film-ir/.pytest_cache/
 
 # Film IR 锁文件
 projects/**/film.json.lock
+
+# 配对评审的中立擂台：两臂证据的去项目名副本，可由 judge.py --mode paired --task 重建
+.judge-arena/
 
 # out/ 里的重复副本不进 git（真身在项目根与 evidence/）；out/ 只留 COSTS.md 与 RUNLOG.md 这类独有内容
 projects/**/out/film.json

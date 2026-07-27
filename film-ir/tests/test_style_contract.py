@@ -429,7 +429,10 @@ def test_pack_transitions_amendment_out_of_band_is_violation(project):
 # ------------------------------------------------ m0 历史片降级
 
 def _m0(ir_dict: dict) -> dict:
+    """标成 m0 历史片**并署名申报**——降级要两样都齐，只写版本号不给豁免。"""
     ir_dict["meta"]["pipeline_version"] = "m0-v1"
+    ir_dict["meta"]["legacy_exemption"] = {
+        "declared": "2026-07-27", "by": "user", "reason": "测试用历史片申报"}
     return ir_dict
 
 
@@ -469,12 +472,28 @@ def test_missing_pipeline_version_is_not_exempt(project):
     assert _errors(run_gates(ir, project_dir=pdir), "style.contract.plan")
 
 
+def test_m0_without_exemption_gets_no_downgrade(project):
+    """自报 m0 但没署名申报 → 不降级，还多报一条 legacy.exemption。
+
+    pipeline_version 是两个字符就能改的字段，不能让它单独兑换"整片免检"。
+    """
+    ir_dict = _codex_hf_ir()
+    ir_dict["meta"]["pipeline_version"] = "m0-v1"        # 只改版本号，不申报
+    ir, pdir = project(CASE_FILE_CONTRACT, ir_dict)
+    report = run_gates(ir, project_dir=pdir)
+    assert _errors(report, "legacy.exemption")
+    assert _errors(report, "style.contract.plan"), "没申报就不该降级"
+    assert "legacy_downgraded" not in report
+
+
 def test_m0_downgrade_is_reported_in_summary(project):
     """降级必须出现在摘要里——否则 ok=true 与真正干净的片子无法区分。"""
     ir, pdir = project(CASE_FILE_CONTRACT, _m0(_codex_hf_ir()))
     report = run_gates(ir, project_dir=pdir)
     assert report["legacy_downgraded"] > 0
     assert "不等于按当前标准通过" in report["legacy_note"]
+    assert report["legacy_exemption"]["by"] == "user"      # 豁免是谁签的必须摆出来
+    assert "2026-07-27" in report["legacy_note"]
 
 
 def test_clean_m1_report_has_no_legacy_keys(project):
