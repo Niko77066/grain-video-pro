@@ -153,7 +153,7 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 |---|---|---|---|---|
 | MG 动画（HyperFrames） | ✅ | 信息与图形语言：数据卡、榜单、动态排版、字幕层 | 产出属"幻灯片语法"，不计运动占比 | `references/hyperframes.md` |
 | AI 生成视频（Seedance 2.0） | ✅ | 真运动、氛围、场景再现、hook/hero 镜头 | 单次 4–15s；角色/产品镜头必须挂锚点 | `references/seedance.md` |
-| AI 纸拼贴 b-roll（GPT-Image-2 + Seedance 首尾帧） | ✅ | 概念/观点句/抽象隐喻的氛围 b-roll（半调纸拼贴、从空场组装） | 无文字/数字/logo（要文字 HyperFrames 叠层）；强制三闸门；2026-07-17 冒烟验证 | `references/collage-broll.md` |
+| AI 纸拼贴 b-roll（GPT-Image-2 + Seedance 首尾帧） | ✅ 9:16 / ⚠️ 16:9 未冒烟 | 概念/观点句/抽象隐喻的氛围 b-roll（半调纸拼贴、从空场组装） | 无文字/数字/logo（要文字 HyperFrames 叠层）；强制三闸门；9:16 于 2026-07-17 冒烟验证，**16:9 参数已补齐但未出片验证——首次横屏必须先跑 1 条测试 clip 目检摊散** | `references/collage-broll.md` |
 | 数字人（HeyGen Avatar 4） | ✅ | 口播、主持、结论、人设 IP | 时长=音频时长；aspect_ratio 必填；形象锚点按目标画幅构图 | `references/avatar.md` |
 | 图片 + 动效（GPT-Image-2） | ✅ | 风格化静帧、插画、概念示意、"准运动" | 连续 ≤ 2 镜（防幻灯片化） | `references/image-motion.md` |
 | TTS 音频（MiniMax speech-2.8-hd 固定音色） | ✅ | 一切旁白 | 单 pass 固定音色 + 声纹 gate；对齐必走 forced-alignment；**不用火山 seed-audio** | `references/tts-audio.md` `references/forced-alignment.md` |
