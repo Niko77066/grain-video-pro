@@ -142,14 +142,15 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 按 `references/seedance.md` 的契约逐组生成；每段落地即做**镜头级 QC**：技术检查（实际时长、黑帧、分辨率）+ 语义自查（是否兑现 intent、有无畸变、角色是否对得上锚点），结果写 `shots[].qc`。不合格重试 ≤ 2 次（锁 seed 改 prompt），仍败 = **带 DEBT 停 review**（禁静默降级换路、禁问选择题）。
 
 ### ⑧ compose
-读 `references/hyperframes.md`。IR → HyperFrames composition（`compose/`）：
+读 `references/compose-contract.md`（**产物合同：硬规则/结构/媒体/确定性/字体/字幕/机器门，开工前必读**）+ `references/motion-continuity.md`（**接缝与表演，写任何 scene 边界前必读**）；引擎具体怎么调查 `references/hyperframes.md`。IR → HyperFrames composition（`compose/`）：
 - 声明型镜头与叠加层直接写成组件；烘焙 clip 按 `t` 挂入；
+- **接缝两边一起设计**：全片选一个主方向（写进 `film.json.edit`），默认边界一律 cut-the-curve（镜像 `power4.in/out` + 12% 部分位移 + 淡出提前）；保留矢量（向上/Z 后退/炸开）花掉一个就等于说了句话，进 `ledger.decisions`。**每个 scene 进出场之间必须有一条持续运动路线**（分批揭示 / 有意图的镜头 / 界面自己活着 / 动作序列），空转晃动不算——它的机器面是 `render.static_hold_ratio_max`，欠债会在 ⑨ 被实测抓出来。参数与反模式见 `motion-continuity.md`。
 - **时长调和**（烘焙 clip 超长时按序）：尾部裁切（保动作完成点）→ 变速 ± 5% → 均不可则该镜 fail 重做；**禁止冻结帧补时长**；
 - 混排缝合：统一 LUT（以 style frame 为基准）+ 共享颗粒；剪辑点落句读/节拍，默认 J-cut/L-cut；转场 ≤ 4 种；
 - **字体纪律（硬规则，2026-07-20 起）**：compose 禁 `local("系统字体")` 承担正文/标题，必用自带 woff2（`SansSC/SerifSC`，见 `references/server-render.md`）；`font-weight` 只取 woff2 实有档，别让浏览器 faux-bold。
 - 🔴 **无底框铁律（宪法级，2026-07-27 用户拍板）**：压在画面上的**数据卡 / 角标 / 数据条 / 字幕禁带深色底框**——填充 + 边框 + 投影的浮动面板就是 PPT 风格、是 AI 味最直接的来源。可读性只准由『**渐变到透明的压暗层**（无可见边界）+ **多层 text-shadow 等效描边** + 字重留白层级』承担。唯一豁免是角标级信息，须在 CSS 写 `/* lint-allow-panel: 理由 */`。手感坑：脱底板后条形轨道要改**亮色**，中性灰蓝条要改近白，否则会消失在压暗区里。
-- 🔴 **字幕不带标点（宪法级，2026-07-27 用户拍板）**：句末标点删除、句中停顿换全角空格；**切分仍用标点**（断句依据），只在渲染层剥离。参考 `projects/china-h1-2026-econ/scripts/gen_captions.py`。
-- `python3 tools/kuleshov-lint.py projects/<片名>` 先过（①woff2 ②时效词 ③脚注压边框 ④**组件底板** ⑤**字幕标点**），error 不清零禁 render。
+- 🔴 **字幕外挂不烧、不带标点**（`compose-contract.md` §6）：compose 里不留字幕层，交付 `out/final.mp4` + `out/final.vtt` 两件——跑 `python3 tools/make-vtt.py projects/<片名>`（文本取剧本、时间取强制对齐字戳，自带无标点断言）。不设烧录变体。
+- `python3 tools/kuleshov-lint.py projects/<片名>` 先过（①woff2 ②时效词 ③脚注压边框 ④**组件底板** ⑤**字幕标点** ⑥**GSAP 供给** ⑦**字幕外挂**），error 不清零禁 render。
 - **渲染默认走渲染机**（2026-07-20 双跑验收过、切默认，记 `ledger.decisions`）：`tools/render-remote.sh <compose> <out> [ver] [quality]`（`RENDER_URL` 指向宿主/开发环境的渲染机、由环境提供，无本机 IP 假设；503 并发满退避重试）；比本地 docker 快 ~2.3×。**本地 `hyperframes render --docker` 降为兜底**（机器宕机/占满时）。`npx hyperframes check` 不过禁 render。新风格包首用 woff2 时仍双跑一次（全片 SSIM + 关键版式帧目检换行/安全区，判据看目检不看全片 SSIM 数字）。
 
 ### ⑨ review
@@ -168,7 +169,7 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 
 | Provider | 状态 | 这门语言擅长表达什么 | 关键约束 | 知识包 |
 |---|---|---|---|---|
-| MG 动画（HyperFrames） | ✅ | 信息与图形语言：数据卡、榜单、动态排版、字幕层 | 产出属"幻灯片语法"，不计运动占比 | `references/hyperframes.md` |
+| MG 动画（HyperFrames） | ✅ | 信息与图形语言：数据卡、榜单、动态排版、字幕层 | 产出属"幻灯片语法"，不计运动占比 | `references/compose-contract.md` + `hyperframes.md` |
 | AI 生成视频（Seedance 2.0） | ✅ | 真运动、氛围、场景再现、hook/hero 镜头 | 单次 4–15s；角色/产品镜头必须挂锚点 | `references/seedance.md` |
 | AI 纸拼贴 b-roll（GPT-Image-2 + Seedance 首尾帧） | ✅ 9:16 / ⚠️ 16:9 未冒烟 | 概念/观点句/抽象隐喻的氛围 b-roll（半调纸拼贴、从空场组装） | 无文字/数字/logo（要文字 HyperFrames 叠层）；强制三闸门；9:16 于 2026-07-17 冒烟验证，**16:9 参数已补齐但未出片验证——首次横屏必须先跑 1 条测试 clip 目检摊散** | `references/collage-broll.md` |
 | 数字人（HeyGen Avatar 4） | ✅ | 口播、主持、结论、人设 IP | 时长=音频时长；aspect_ratio 必填；形象锚点按目标画幅构图 | `references/avatar.md` |

@@ -49,7 +49,7 @@
 
 ## 3. 关键事实：渲染器同源（卡点消解的证据）
 
-- 我们 `tools/render-remote.sh` → `http://34.212.107.38:7300/render/hyperframes`（`FFMPEG_RENDER_HTTP_TOKEN`，body `{hyperframesVersion, projectTar.url, quality}`，默认 0.7.3）。
+- 我们 `tools/render-remote.sh` → `http://34.212.107.38:7300/render/hyperframes`（`FFMPEG_RENDER_HTTP_TOKEN`，body `{hyperframesVersion, projectTar.url, quality}`，默认 0.7.77）。
 - grain `packages/ffmpeg-runner/src/runner/http-render.ts` = 同一 `/render/hyperframes`、同端口、同 token；其注释："与 BullMQ hyperframes-render job **共用同一渲染核**（`hyperframes.ts renderPreparedProject`）……只负责传输鉴权外壳，不改渲染逻辑"。我们 `docs/render-http-api.md` 也直接点了这个文件。
 - `runVideoRevisionCycle` → `executeRenderVideoComposition` → `runRemoteHyperframesRender`（队列路径）→ 同一 `renderPreparedProject`。**HTTP 壳和封印工具是同一渲染核的两层薄壳。**
 - **唯一动作**：最终 compose 从"调 HTTP 壳"改成"调 `runVideoRevisionCycle` 工具"拿封印。同引擎、同产物、零 grain 侧渲染改动。
@@ -100,6 +100,14 @@ EXISTS = grain 已有原生工具直接用；GAP/PARTIAL = 需处置。
 > → 发布：`metadata.carrier='Video'`、`contentPath`（content.md + ≥1 可点出处）、`metadata.videoUrl=finalVideoPath`（必须在 trusted channel runs dir 下）、`coverUrl`、`proofPath`+`publishProofSealed=true`、`metadata.subtitles=[{lang,url,format:'vtt',default:true,label}]`、实测 `durationSec/videoWidth/videoHeight`。
 
 我们 compose 当前**不产出**但门要求的（= §6-B / §7 的活）：① grain 形态 `content.md`；② `renderScriptCaptions` 从 `storyboard.json` 生的 same-source VTT；③ 落在 trusted runs dir；④ grain `storyboard.json`。
+
+> **② 已在本仓侧落地（2026-07-28，用户拍板"遵循 grain 口径"）**：`tools/make-vtt.py` 产 same-source
+> VTT（文本取剧本 `audio/narration.txt`、时间取强制对齐字戳），compose 不再烧字幕，规则写进
+> CLAUDE.md Production Invariant #13 与 `compose-contract.md` §6，机器门 `kuleshov-lint.py` ⑦。
+> **仍未闭合的是"谁产的 VTT 门认"**：grain 门只认 `renderScriptCaptions` 的产物，我们自产 VTT 会被判"手写"——
+> 这正是 §7 缺口 1 要谈的那件事（给 grain 加 wav2vec2-zh CTC 原生工具喂时间锚）。在那之前，
+> 我们的 VTT 是**本仓交付物**，接进 grain 时仍要过一次它的字幕工具。存量片（status 已 review/delivered）
+> 按旧政策烧录，不追溯。
 
 ---
 

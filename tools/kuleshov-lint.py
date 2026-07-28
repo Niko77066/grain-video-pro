@@ -2,7 +2,9 @@
 """Kuleshov compose 出厂硬查——把散文铁律固化成会开火的门。
 用法: python3 tools/kuleshov-lint.py projects/<片名>
 检查：① woff2 字体纪律(禁 local 承担正文/标题) ② 时效词(相对时间词，出厂前须复核) ③ docsrc/脚注压容器边框(启发式)
-      ④ 组件底板(压在画面上的数据组件禁深色底框——PPT 味，2026-07-27 用户拍板) ⑤ 字幕标点(专业视频不加)。
+      ④ 组件底板(压在画面上的数据组件禁深色底框——PPT 味，2026-07-27 用户拍板) ⑤ 字幕标点(专业视频不加)
+      ⑥ GSAP 供给(用了 gsap 就必须自带在盘真 gsap.min.js 或全表 shim；顺带禁 CDN 外链)
+      ⑦ 字幕外挂(交付=MP4+VTT 两件，禁烧进画面；存量 review/delivered 只 warn)。
 退出码 1 = 有 error（禁出厂）；warning 不阻断但必须人工确认。
 背景见 docs/postmortem-hf-breach.md。"""
 import sys, os, re, json
@@ -11,6 +13,8 @@ def main():
     proj = sys.argv[1].rstrip("/") if len(sys.argv) > 1 else "."
     html_path = os.path.join(proj, "compose", "index.html")
     errors, warns = [], []
+    # 数字内部的 . , : 是数值的一部分（5.3% / 1,200 / 00:12），不是标点——⑤⑦ 共用
+    _num_sep = re.compile(r"(?<=\d)[.,:](?=\d)")
 
     html = open(html_path, encoding="utf-8").read() if os.path.exists(html_path) else ""
 
@@ -136,12 +140,121 @@ def main():
         # 数字内部的 . , : 不是标点，是数值的一部分（5.3% / 1,200 / 00:12 / 9:16）——
         # 先掏空它们再查。gen_captions.py 的 strip_punct 也只剥标点、不动数字，
         # 两边口径必须一致，否则这道 error 门会挡住合规产出的字幕。
-        _num_sep = re.compile(r"(?<=\d)[.,:](?=\d)")
         bad = [c.get("text", "") for c in caps
                if re.search(r"[，。、；：？！,.;:?!]", _num_sep.sub("", c.get("text", "") or ""))]
         if bad:
             errors.append(f"字幕含标点符号（{len(bad)}/{len(caps)} 条），专业视频不在字幕里加标点。"
                           f"示例：{bad[0][:24]!r}。切分可以用标点，渲染不许带——见 scripts/gen_captions.py。")
+
+    # ⑥ GSAP 供给纪律（2026-07-28 补门；此前只是散文，`tools/lint.py` 那道门在本仓从未存在）：
+    #   compose 用了 gsap / 注册了 __timelines，就必须**要么**自带在盘的真 assets/gsap.min.js，
+    #   **要么**内联 shim 且实现渲染机 seek 驱动会调的生命周期全表。两者皆无、或 shim 漏方法
+    #   → 渲染到 capture 阶段才炸 [Browser:PAGEERROR] …is not a function（浪费一整次渲染）。
+    #   判定是项目级而非单文件：任一 html 供给了，全 compose 就算有（同一页面共享 window）。
+    LIFECYCLE = ["seek", "totalTime", "time", "timeScale", "pause", "paused", "play",
+                 "resume", "restart", "kill", "invalidate", "eventCallback", "progress", "duration"]
+    compose_dir = os.path.join(proj, "compose")
+    pages = []
+    for root, _dirs, files in os.walk(compose_dir):
+        for fn in files:
+            if fn.endswith(".html"):
+                p = os.path.join(root, fn)
+                try: pages.append((p, open(p, encoding="utf-8").read()))
+                except Exception as e: warns.append(f"{p} 读取失败（{e}），GSAP 供给门未覆盖该文件。")
+    uses_gsap = any(re.search(r"\bgsap\s*\.", t) or "__timelines" in t for _p, t in pages)
+    if uses_gsap:
+        real_gsap, shim_texts, cdn, named_cause = None, [], [], False
+        for path, t in pages:
+            for src in re.findall(r"<script[^>]+src\s*=\s*[\"']([^\"']+)[\"']", t):
+                if re.match(r"(https?:)?//", src):
+                    cdn.append((os.path.relpath(path, proj), src))
+                    continue
+                if "gsap" not in src.lower():
+                    continue
+                cand = os.path.normpath(os.path.join(os.path.dirname(path), src.split("?")[0]))
+                if not os.path.exists(cand):
+                    errors.append(f"GSAP 供给违规：`{os.path.relpath(path, proj)}` 引了 `{src}`，"
+                                  f"但该文件不在盘上（渲染机 tar 只带 compose 目录，缺文件=页面直接崩）。")
+                    named_cause = True
+                    continue
+                blob = open(cand, "rb").read()
+                # 真 gsap.min.js ≈72KB 且含生命周期方法名；小文件/假货挡在这里
+                if len(blob) < 40_000 or not all(k.encode() in blob for k in ("timeScale", "invalidate", "eventCallback")):
+                    errors.append(f"GSAP 供给违规：`{os.path.relpath(cand, proj)}` 只有 {len(blob)//1024}KB "
+                                  f"或缺生命周期方法，不是真 gsap.min.js（仓内规范来源 assets/gsap.min.js，3.14.2，72KB）。")
+                    named_cause = True
+                else:
+                    real_gsap = os.path.relpath(cand, proj)
+        for _path, t in pages:
+            for m in re.finditer(r"window\.gsap\s*=", t):
+                shim_texts.append(t[max(0, m.start() - 4000): m.start() + 20000])
+        if cdn:
+            errors.append(f"禁 CDN（硬规则 5）：{cdn[0][0]} 引了外链 `{cdn[0][1]}`"
+                          + (f" 等 {len(cdn)} 处" if len(cdn) > 1 else "")
+                          + "——渲染机 tar 只带 compose 目录且渲染期禁网络请求。拷进 assets/ 用相对路径。")
+            if any("gsap" in s.lower() for _f, s in cdn):
+                named_cause = True                      # CDN 引的就是 gsap，原因已具名，不再叠泛化那条
+        if not real_gsap and not shim_texts and not named_cause:
+            errors.append("GSAP 供给违规：compose 用了 gsap/__timelines，却既没自带在盘的真 "
+                          "`assets/gsap.min.js`，也没有内联 shim——渲染机 seek 驱动会在 capture 阶段炸 "
+                          "PAGEERROR。首选 `cp assets/gsap.min.js <proj>/compose/assets/`，"
+                          "万不得已才整块抄 references/gsap-fallback-shim.md。")
+        elif not real_gsap and shim_texts:
+            missing = [k for k in LIFECYCLE
+                       if not any(re.search(rf"\b{k}\s*[:=]", s) for s in shim_texts)]
+            if missing:
+                errors.append(f"GSAP shim 漏方法 {missing}——渲染机 seek 驱动会调生命周期全表"
+                              f"（{'/'.join(LIFECYCLE[:4])}…），漏哪个就在某个引擎版本上崩。"
+                              f"整块抄 references/gsap-fallback-shim.md §2，别删方法。")
+            else:
+                warns.append("compose 走的是内联 GSAP shim 而非真 gsap.min.js——生命周期全表在，"
+                             "但只覆盖数值/transform 属性；颜色、路径类补间要真 GSAP。能自带就自带。")
+
+    # ⑦ 字幕外挂门（2026-07-28 起，按 grain 发布硬门收口 `carrier-contracts/video.md`）：
+    #   交付物 = MP4 + 外挂 VTT 两件，**compose 里不许有字幕层**（禁烧进画面、禁手写）。
+    #   存量不追溯：status 已到 review/delivered 的片子是旧政策下做完的，只报 warn。
+    #   没有烧录豁免——2026-07-28 用户拍板"默认不烧字幕"，社媒平台是否消费外挂字幕不影响本门。
+    meta = {}
+    fj = os.path.join(proj, "film.json")
+    if os.path.exists(fj):
+        try: meta = (json.load(open(fj, encoding="utf-8")).get("meta") or {})
+        except Exception as e: warns.append(f"film.json 解析失败（{e}），字幕外挂门按新片口径执行。")
+    status = (meta.get("status") or "").lower()
+    legacy = status in ("review", "delivered")          # 旧政策下已完工，不追溯
+
+    burned = []
+    if os.path.exists(capf):
+        burned.append(os.path.relpath(capf, proj))
+    for path, page in pages:                            # pages 由 ⑥ 扫出（compose/**/*.html）
+        if re.search(r"captions_data|window\.__captions", page):
+            rel = os.path.relpath(path, proj)
+            if rel not in burned: burned.append(rel)
+
+    out_dir = os.path.join(proj, "out")
+    vtts = [f for f in os.listdir(out_dir) if f.endswith(".vtt")] if os.path.isdir(out_dir) else []
+    mp4s = [f for f in os.listdir(out_dir) if f.endswith(".mp4")] if os.path.isdir(out_dir) else []
+
+    if burned:
+        msg = (f"字幕烧进了画面（{', '.join(burned[:2])}）——交付物必须是 MP4 + 外挂 VTT 两件，"
+               f"compose 里不留字幕层（grain 发布三件套：禁烧进画面、禁手写）。"
+               f"改法：`python3 tools/make-vtt.py {proj}` 出 out/final.vtt，compose 去掉字幕层。")
+        if legacy:
+            warns.append(f"存量烧录字幕（status={status}，2026-07-28 政策不追溯）：{', '.join(burned[:2])}。"
+                         f"重做或复用这条片的 compose 时必须改成外挂 VTT。")
+        else:
+            errors.append(msg)
+    if mp4s and not vtts:
+        m = (f"out/ 有成片（{mp4s[0]}）却没有外挂字幕 .vtt——发布门要求 "
+             f"metadata.subtitles=[{{format:'vtt'}}]。跑 `python3 tools/make-vtt.py {proj}`。")
+        (warns if legacy else errors).append(m)
+    for v in vtts:
+        cues = re.split(r"\n\s*\n", open(os.path.join(out_dir, v), encoding="utf-8").read())
+        texts = [ln for blk in cues for ln in blk.splitlines()[2:]
+                 if not ln.startswith("WEBVTT") and "-->" not in ln and ln.strip()]
+        bad_v = [x for x in texts if re.search(r"[，。、；：？！,.;:?!]", _num_sep.sub("", x))]
+        if bad_v:
+            errors.append(f"out/{v} 有 {len(bad_v)}/{len(texts)} 条带标点——外挂字幕同样不许带标点"
+                          f"（渲染层剥离，切分仍用标点）。示例：{bad_v[0][:24]!r}")
 
     print(f"=== kuleshov-lint: {proj} ===")
     for w in warns: print(f"  ⚠️  WARN  {w}")

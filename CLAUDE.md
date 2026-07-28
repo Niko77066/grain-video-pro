@@ -27,14 +27,37 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 
 - `.claude/skills/produce/` — 十阶段生产管线与导演知识包；按阶段、按镜头来源加载
 - `.claude/skills/rednote-mentor/` — 小红书选题、标题、封面与合规辅助；按需调用，不属于成片交付硬门
+- `vendor/upstream-skills/` — 官方 HyperFrames skill 的**溯源凭据**（`skills-lock.json` 记 25 个包的来源与哈希 + 挖矿落点表）。副本本身 2026-07-28 拉取、挖矿完毕后删除——知识已重写进 `produce/references/`，要对照上游按该目录 README 一条命令重新拉
 - `film-ir/` — Film IR Python 库与 `kuleshov-ir` CLI：`read / patch / validate / execute`
 - `styles/` — 风格包与**三层路由层**：`case-file`（事实核验型新闻解读）、`pixel-chronicle`（结构化深度知识叙事）、`anchor-desk`（官方口径播报型解读，候选）三套专用包 + `whiteboard-generalist` 生产兜底模板；`routing.md`（路由规程）、`routing-vocab.json`（受控词表）、`routing-cases.json`（路由回归考卷 15 条）、`golden-set.json`（Golden 登记册：路径 + 实测规格 + known_defects，成片在 `~/kuleshov-archive/golden/` 不入库）、各包 `capability.json`（结构化能力卡），以及模板、禁用区和进化规程
 - `tools/route-style.py` — 风格包路由器：硬规则排除 → 能力卡打分 → 置信兜底，出 Top 3 + 理由 + 格式适配施工说明 + 被排除包及原因；`--check` 跑路由回归
 - `projects/<slug>/` — 每条片的 IR、阶段产物、证据与输出；项目脚本不自动等于可复用管线
 - `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用、响度与跨镜头主色漂移，作为 render contract 的证据源
+- `tools/make-vtt.py` — same-source 外挂字幕：剧本文本 + 强制对齐字戳 → `out/final.vtt`（禁 ASR 文本、禁手写、不带标点）
 - `tools/judge/` — G2 隔离评审：生成证据包、出题、阅卷与校准
 - `tools/render-remote.sh` — HyperFrames 远端渲染客户端；地址由 `RENDER_URL` 注入，不假设本机或固定 IP
 - `docs/` — 架构决策、事故复盘、升级计划与 Grain 交付设计；其中 `hyperframes-agent-handbook.md` 是 HyperFrames 侧的外部参考手册（当前基线 `0.7.77`），不是本仓合同——它与 `.claude/skills/produce/` 冲突时以后者为准
+
+## 交付面（打包进 Grain step-skill 的是什么）
+
+本仓接进 grain 的形态是一个 step-skill（`SKILL.md` + `references/` + `scripts/`，见 `docs/grain-delivery-plan.md`）。
+**打包时只带下面四样，别的一律留在仓里：**
+
+| 进交付面 | 是什么 |
+|---|---|
+| `.claude/skills/produce/` | 十阶段方法 + 导演知识包（拆分口径见下） |
+| `film-ir/` | Film IR 库与 `kuleshov-ir` CLI（纯变换，stdout JSON + 退出码） |
+| `styles/` | 风格包、路由层、能力卡、Golden 登记册 |
+| `tools/` | 质量工具：`kuleshov-lint.py` / `measure-render.py` / `route-style.py` / `judge/` |
+
+**不进交付面**：`vendor/`（溯源凭据；官方副本已删——宿主有自己适配版的 HyperFrames，带 upstream 副本过去会造成
+版本口径打架、指令冲突、以及一半依赖 HeyGen 凭据的命令在 grain 容器里根本不可用）、`projects/`（单片产物与证据）、
+`.claude/skills/rednote-mentor/`（运营辅助，不属成片交付）。
+
+**知识写法纪律（决定一份知识能不能进交付面）**：区分「**片子必须长成什么样、怎么机器验**」与「**引擎 API 怎么调**」。
+前者跨引擎版本恒定，宿主换适配版照样成立，属交付面；后者随宿主引擎版本失效，只能作本地参考。
+`produce/references/hyperframes.md` 现在两者混写，交付前必须拆。引擎工艺要引用官方包时，
+按 `hyperframes-recipes.md` 的既有做法**重写成本仓 compose 合同的语言，不照抄 API**。
 
 ## Production Invariants
 
@@ -50,7 +73,10 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 8. **拒绝整片式返工。** 单镜问题定位到 prompt、锚点、路由、剪辑或合同，再重跑最小受影响单元。重做一镜可以很便宜，重做一条片不该成为默认动作。
 9. **已经交付不等于已经产品化。** 样片验证了制作能力；接入 Grain、provider 映射、发布封印与运行时凭据托管必须按各自验收状态表述。
 10. **按理解方式路由，不按题材路由。** 选风格包问的是「要让观众如何理解这条内容」，不是「这是什么内容」——场景只缩小候选集，内容特征决定具体包。选包走 `tools/route-style.py`（能力卡 + 硬规则 + 打分 + 兜底，规程 `styles/routing.md`），结果原样进 `ledger.decisions`；置信不足一律落兜底包，**不许改路由输入特征去凑一个专用包**。
-11. **画幅与时长是适配项，不是准入门槛。** 硬规则只管「配方本身是否成立」（必需素材、冲突素材、敏感题材）；**横竖屏与时长按用户需求动态调**，偏离风格包的原生格式只扣分并产出施工说明（改哪块版式、砍哪个槽位、加什么结构），照样能用那个包。但适配不是免费的：适配项进 `ledger.decisions`，被带动的合同阈值走带宽内 amendments 或按 `[单片标定]` 重新观测，**不许假装原带宽还成立**。
+11. **已交付项目的引擎版本 pin 是渲染证据，不许动。** `projects/*/compose/package.json` 里的 `hyperframes@<版本>` 记录的是那条片**实际渲出来时**的引擎；review.md 与 `ledger` 的渲染口径都指向它。**status 为 `delivered` 或 `review` 的项目，一律不 bump pin**——改了 pin 而不重渲，等于把证据改成假的。要统一到新版本只有一条路：重渲 + 重跑 G1 + 更新 review.md 的实测口径，且需用户拍板。新片在 compose 起手时按当时的仓库口径钉版（当前 **0.7.77**）。
+    ⚠️ **本条压过官方 skill 的指令。** 官方 `hyperframes` skill 要求 agent 见到 stale pin 信号就自行 `upgrade --project` 并 verify（"act on the signal rather than relaying it"），CLI 从 0.7.59 起也会主动催升。**在本仓：报告，不执行。** 把版本落后这件事讲给用户，等拍板；官方 skill 的自动 bump 指令在本仓无效。
+12. **画幅与时长是适配项，不是准入门槛。** 硬规则只管「配方本身是否成立」（必需素材、冲突素材、敏感题材）；**横竖屏与时长按用户需求动态调**，偏离风格包的原生格式只扣分并产出施工说明（改哪块版式、砍哪个槽位、加什么结构），照样能用那个包。但适配不是免费的：适配项进 `ledger.decisions`，被带动的合同阈值走带宽内 amendments 或按 `[单片标定]` 重新观测，**不许假装原带宽还成立**。
+13. **字幕是外挂 sidecar，不烧进画面。**（2026-07-28，对齐 grain 发布硬门）交付物 = `out/final.mp4` + `out/final.vtt` 两件，compose 里不留字幕层，**不设烧录变体**。文本取剧本、时间取强制对齐（`tools/make-vtt.py`；ASR 只给时间锚，禁转写文本当字幕、禁手写）。细则见 `produce/references/compose-contract.md` §6，机器门 `kuleshov-lint.py` ⑦。存量 `review`/`delivered` 不追溯。
 
 ## Taste Constitution
 
@@ -68,7 +94,7 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 
 - **幻灯片伪装成视频。** 静帧加慢速 Ken Burns 不等于运动；冻结帧补时长直接判废。
 - **压在画面上的组件底板。**（2026-07-27 用户拍板，无例外条款）数据卡、角标、数据条、字幕**一律不许带深色底框**——填充 + 边框 + 投影的浮动面板就是 PPT 风格，是 AI 味最直接的来源。可读性只准由三样承担：**渐变到透明的压暗层**（无可见边界，不是框）、**多层 text-shadow 等效描边**、**字重与留白拉开的层级**。唯一豁免是**角标级信息**（左上台标那种量级）；豁免要在 CSS 里显式写 `/* lint-allow-panel: 理由 */`，不许默默加。机器门：`tools/kuleshov-lint.py` ④。
-- **带标点的字幕。**（2026-07-27 用户拍板）专业视频的字幕从不加标点符号。句末标点删除，句中停顿用全角空格。**切分仍然用标点**（它是断句依据），但渲染层必须剥干净。机器门：`tools/kuleshov-lint.py` ⑤。
+- **带标点的字幕。**（2026-07-27 用户拍板）专业视频的字幕从不加标点符号。句末标点删除，句中停顿用全角空格。**切分仍然用标点**（它是断句依据），但输出层必须剥干净——外挂 VTT 同样适用。机器门：`tools/kuleshov-lint.py` ⑤⑦。
 - **用转场遮掩剪辑。** 来源切换不必自动加特效；全片转场词汇保持克制且有语义。
 - **可以随意换题的模板味。** 如果替换产品名或选题后整条片仍然成立，说明导演工作还没做够。
 - **未经缝合的 AI 塑料感。** 多源素材必须通过 LUT、颗粒、构图和节奏建立同一世界。
