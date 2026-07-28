@@ -1,0 +1,27 @@
+{
+  "model": "gpt-image-2",
+  "generated": [
+    {
+      "name": "px_h_first",
+      "file": "projects/_smoke/broll-skills-2026-07-28/anchors/px_h_first_raw.png",
+      "request_id": "202607280621360060271058268d9d6WQQh0elX",
+      "endpoint": "/v1/images/generations",
+      "ref": [],
+      "size": "1280x720",
+      "quality": "medium",
+      "prompt": "Create a finished pixel-art still for a 16:9 horizontal image-to-video shot. Visual proposition: late at night a worn-out office worker is pinned to the desk by a swarm of heavy sleep blocks. Style: crisp retro pixel art on a consistent pixel grid; chunky pixels, hard edges, no anti-aliasing, no gradients; flat color blocks with crisp 1-pixel outlines; strictly limited palette of these colors only: #0b0d1f #141a33 #222a52 #2b3050 #34406f #4a5a96 #6a7396 #6d80c4 #00e5ff #5ffbf1 #9d4edd #e94fd0 #ff5470 #ffa552 #b8c2e0 #f2f5ff. Side-view framing. Scene: a small night desk seen from the side, a desk lamp casting a cone of pale cyan light, a dark window behind, background is a single flat #0b0d1f field. Subject: one tired office worker with short dark hair, a pale cyan hoodie and a light grey face, slumped forward with both arms folded on the desk and the head resting down on the arms, eyes closed. A closed coffee mug in a warm orange tone sits on the right side of the desk, untouched. Six chunky violet sleep blocks of decreasing size hover in a loose cluster above the head, pressing down. Composition: locked poster frame; the worker and desk read as one clear silhouette within the central 60 percent; the outer thirds stay as clean empty dark field. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no photoreal texture, no soft shading, no blur, no anti-aliased edges, no paper texture, no grain, no aged or faded look, no sepia, no halftone dots, no clutter.",
+      "note": "回填：本批第 3 条撞网关 520 退出，当时 state 只在末尾落盘（已修为逐条落盘）"
+    },
+    {
+      "name": "px_v_first",
+      "file": "projects/_smoke/broll-skills-2026-07-28/anchors/px_v_first_raw.png",
+      "request_id": "202607280622354798773378268d9d6qhaJbig5",
+      "endpoint": "/v1/images/generations",
+      "ref": [],
+      "size": "720x1280",
+      "quality": "medium",
+      "prompt": "Create a finished pixel-art still for a 9:16 vertical image-to-video shot. Visual proposition: late at night a worn-out office worker is pinned to the desk by a swarm of heavy sleep blocks. Style: crisp retro pixel art on a consistent pixel grid; chunky pixels, hard edges, no anti-aliasing, no gradients; flat color blocks with crisp 1-pixel outlines; strictly limited palette of these colors only: #0b0d1f #141a33 #222a52 #2b3050 #34406f #4a5a96 #6a7396 #6d80c4 #00e5ff #5ffbf1 #9d4edd #e94fd0 #ff5470 #ffa552 #b8c2e0 #f2f5ff. Side-view framing. Scene: a small night desk seen from the side in the lower half of the frame, a desk lamp casting a tall cone of pale cyan light, a dark window behind, background is a single flat #0b0d1f field. Subject: one tired office worker with short dark hair, a pale cyan hoodie and a light grey face, slumped forward with both arms folded on the desk and the head resting down on the arms, eyes closed. A closed coffee mug in a warm orange tone sits beside the arms, untouched. Six chunky violet sleep blocks of decreasing size stack upward in a tall column above the head, pressing down, filling the upper third. Composition: locked poster frame; the worker and desk read as one clear silhouette within the central 70 percent; generous clean empty dark field around them. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no photoreal texture, no soft shading, no blur, no anti-aliased edges, no paper texture, no grain, no aged or faded look, no sepia, no halftone dots, no clutter.",
+      "note": "回填：本批第 3 条撞网关 520 退出，当时 state 只在末尾落盘（已修为逐条落盘）"
+    }
+  ]
+}

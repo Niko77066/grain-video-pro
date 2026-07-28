@@ -1,0 +1,17 @@
+{
+  "defaults": { "quality": "medium", "output_format": "png" },
+  "jobs": [
+    {
+      "name": "px_h_last",
+      "size": "1280x720",
+      "ref": ["projects/_smoke/broll-skills-2026-07-28/anchors/px_h_first.png"],
+      "prompt": "Keep the reference image exactly: same pixel-art style, same pixel grid and chunky pixel scale, same strictly limited palette, same 16:9 side-view framing, same desk, same chair, same lamp and its pale cyan light cone, same window with the moon, same character with short dark hair and pale cyan hoodie, same flat dark background. Change only the pose and the sleep blocks. New pose: the character has lifted the head fully upright off the desk, back straight, both eyes wide open and bright, holding the warm orange coffee mug up in one hand near the mouth as if having just taken a drink. The violet sleep blocks are no longer pressing down on the head — they have been pushed outward and upward, scattering apart toward the top corners of the frame, some already breaking into smaller fragments. Keep every element inside the central 60 percent as in the reference; outer thirds stay clean empty dark field. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no photoreal texture, no soft shading, no blur, no anti-aliased edges, no paper texture, no grain, no aged or faded look, no sepia, no halftone dots, no new objects."
+    },
+    {
+      "name": "px_v_last",
+      "size": "720x1280",
+      "ref": ["projects/_smoke/broll-skills-2026-07-28/anchors/px_v_first.png"],
+      "prompt": "Keep the reference image exactly: same pixel-art style, same pixel grid and chunky pixel scale, same strictly limited palette, same 9:16 side-view framing, same desk, same chair, same lamp and its pale cyan light cone, same window with the moon, same character with short dark hair and pale cyan hoodie, same flat dark background. Change only the pose and the sleep blocks. New pose: the character has lifted the head fully upright off the desk, back straight, both eyes wide open and bright, holding the warm orange coffee mug up in one hand near the mouth as if having just taken a drink. The violet sleep block column no longer stacks on the head — the blocks have been knocked outward and apart, drifting away toward the upper edges of the frame, some already breaking into smaller fragments. Keep every element inside the central 70 percent as in the reference. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no photoreal texture, no soft shading, no blur, no anti-aliased edges, no paper texture, no grain, no aged or faded look, no sepia, no halftone dots, no new objects."
+    }
+  ]
+}

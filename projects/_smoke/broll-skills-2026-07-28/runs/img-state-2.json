@@ -1,0 +1,25 @@
+{
+  "model": "gpt-image-2",
+  "generated": [
+    {
+      "name": "cl_v_last",
+      "file": "projects/_smoke/broll-skills-2026-07-28/anchors/cl_v_last_raw.png",
+      "request_id": "202607280624104681962998268d9d6TQqb9q49",
+      "endpoint": "/v1/images/generations",
+      "ref": [],
+      "size": "720x1280",
+      "quality": "medium",
+      "prompt": "Create a finished editorial paper-collage still for a 9:16 image-to-video B-roll clip. Visual proposition: a coffee-bean-shaped key has jammed itself into a keyhole first, so the real key labelled with sleep hangs in mid air unable to enter. Scene: perfectly flat deep-green paper field (#1E4438) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs of a large cross-section padlock body and its inner cylinder, with selective cream-white and printed-red (#C8451B) colored cardstock accents. Composition: vertical 9:16 locked poster frame; central subject within the middle 70 percent; generous clean color-field negative space; 3 to 6 large separable paper groups for later assemble-from-empty animation: the lock body, the cut-away cylinder, a fat coffee-bean-shaped key wedged in the keyhole, and a small ring of ordinary keys hanging just above and to the side, not touching the lock. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: it must read at a glance that the bean key got there first and the ordinary key is blocked out. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter."
+    },
+    {
+      "name": "cl_h_last",
+      "file": "projects/_smoke/broll-skills-2026-07-28/anchors/cl_h_last_raw.png",
+      "request_id": "202607280625241888183648268d9d6oqPCiDIx",
+      "endpoint": "/v1/images/generations",
+      "ref": [],
+      "size": "1280x720",
+      "quality": "medium",
+      "prompt": "Create a finished editorial paper-collage still for a 16:9 image-to-video B-roll clip. Visual proposition: a coffee-bean-shaped key has jammed itself into a keyhole first, so the real key labelled with sleep hangs in mid air unable to enter. Scene: perfectly flat deep-green paper field (#1E4438) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs of a large cross-section padlock body and its inner cylinder, with selective cream-white and printed-red (#C8451B) colored cardstock accents. Composition: horizontal 16:9 locked poster frame; central subject clustered within the middle 60 percent of the width, reading as one tight group rather than spread across the frame; the outer thirds stay as clean empty color field; generous clean color-field negative space; 3 to 6 large separable paper groups for later assemble-from-empty animation: the lock body, the cut-away cylinder, a fat coffee-bean-shaped key wedged in the keyhole, and a small ring of ordinary keys hanging just above and to the side, not touching the lock. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: it must read at a glance that the bean key got there first and the ordinary key is blocked out. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter, no elements spread evenly across the full width, no symmetrical left-right filler."
+    }
+  ]
+}

@@ -26,6 +26,8 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 ## 仓库地图
 
 - `.claude/skills/produce/` — 十阶段生产管线与导演知识包；按阶段、按镜头来源加载
+- `.claude/skills/pixel-broll/` — 像素风生成镜头（GPT-Image-2 + Seedance 2.0，2026-07-28 端到端冒烟）：四闸门 + 主调色板锁色 + 栅格归一 + 码判验收；**禁用词表把「做旧」挡在生成层之外**，做旧只归 compose 的 LUT
+- `.claude/skills/collage-broll/` — 半调纸拼贴 b-roll（GPT-Image-2 + Seedance 首尾帧）：三闸门 + 从空场组装 + 死尾码判；9:16 与 16:9 均已冒烟。与 pixel-broll **材质语汇互斥，不许串词**；两者的 prompt 模板**唯一出处在各自 skill**，`produce/references/` 下只留指针
 - `.claude/skills/rednote-mentor/` — 小红书选题、标题、封面与合规辅助；按需调用，不属于成片交付硬门
 - `vendor/upstream-skills/` — 官方 HyperFrames skill 的**溯源凭据**（`skills-lock.json` 记 25 个包的来源与哈希 + 挖矿落点表）。副本本身 2026-07-28 拉取、挖矿完毕后删除——知识已重写进 `produce/references/`，要对照上游按该目录 README 一条命令重新拉
 - `film-ir/` — Film IR Python 库与 `kuleshov-ir` CLI：`read / patch / validate / execute`
@@ -33,6 +35,10 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 - `tools/route-style.py` — 风格包路由器：硬规则排除 → 能力卡打分 → 置信兜底，出 Top 3 + 理由 + 格式适配施工说明 + 被排除包及原因；`--check` 跑路由回归
 - `projects/<slug>/` — 每条片的 IR、阶段产物、证据与输出；项目脚本不自动等于可复用管线
 - `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用、响度与跨镜头主色漂移，作为 render contract 的证据源
+- `tools/gpt-image.py` — GPT-Image-2 静帧批量客户端；带 `ref` 的 job 走 `/v1/images/edits`，角色一致性在便宜的图像阶段解决
+- `tools/seedance.py` — Seedance 2.0 首尾帧批量客户端（submit/poll/下载 + request-id 留痕，逐条落盘可断点续提）；把三条易错契约固化成会报错的形状：`duration` 必须在 `metadata` 内、`ratio` 不许省略、越界时长提交前本地拦截。pixel-broll 与 collage-broll 共用
+- `tools/clip-qa.py` — 生成型 clip 的通用码判：规格 / **死尾**（尾段运动量 / 全片运动量的**相对**判据，宪法红线「禁冻结帧补时长」的码判投影；绝对阈值跨不了内容类型，2026-07-28 实测证伪）/ contact sheet。两条生成链只有这一份死尾判据
+- `tools/check-media-setup.sh` — 生成型镜头链路开工前自检（ffmpeg / Pillow / .env 凭据 / oss-upload）
 - `tools/make-vtt.py` — same-source 外挂字幕：剧本文本 + 强制对齐字戳 → `out/final.vtt`（禁 ASR 文本、禁手写、不带标点）
 - `tools/judge/` — G2 隔离评审：生成证据包、出题、阅卷与校准
 - `tools/render-remote.sh` — HyperFrames 远端渲染客户端；地址由 `RENDER_URL` 注入，不假设本机或固定 IP
