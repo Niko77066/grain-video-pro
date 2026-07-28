@@ -2,7 +2,7 @@
 # 渲染机 HTTP 渲染：HyperFrames composition 目录 → MP4（服务端渲染）。
 # 用法: RENDER_URL=<渲染机端点> tools/render-remote.sh <composition目录> <输出mp4> [hyperframesVersion] [quality]
 #   例:  RENDER_URL=http://<render-host>:7300/render/hyperframes \
-#         tools/render-remote.sh projects/x/compose out/final.mp4 0.7.3 high
+#         tools/render-remote.sh projects/x/compose out/final.mp4 0.7.77 high
 #
 # **渲染机地址由环境提供**——交付到开发环境时指向那边专门的渲染机；本脚本不假设任何特定
 # 出口 IP / 主机（去本机耦合 2026-07-24）。契约见 docs/render-http-api.md。
@@ -20,7 +20,7 @@ here="$(cd "$(dirname "$0")/.." && pwd)"
 
 dir="${1:?用法: render-remote.sh <composition目录> <输出mp4> [version] [quality]}"
 out="${2:?缺输出路径}"
-ver="${3:-0.7.3}"
+ver="${3:-0.7.77}"
 quality="${4:-high}"
 : "${RENDER_URL:?缺 RENDER_URL——设为开发环境渲染机的 /render/hyperframes 端点（如 http://<host>:7300/render/hyperframes）}"
 : "${FFMPEG_RENDER_HTTP_TOKEN:?缺 FFMPEG_RENDER_HTTP_TOKEN（渲染机鉴权 token，由环境注入）}"

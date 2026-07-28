@@ -2,10 +2,12 @@
 
 > 何时读我：compose 阶段被要求"做得更炫酷/更有动效/像发布片"，或不知道某个叙事动作
 > （出现/替换/完成/比较/进入另一个世界/展示并行规模）该用什么 motion 语言时。
-> 本文件是**引擎工艺**（`docs/knowledge-governance.md` §2：引擎工艺→知识包），三套风格包
-> （whiteboard / research-dossier / pixel-explainer）compose 时都可取用——不是某个风格的专属。
+> 本文件是**引擎工艺**，所有风格包 compose 时都可取用——不是某个风格的专属。
 >
 > 资料基线：HyperFrames Agent Handbook 2026-07-23（HyperFrames 0.7.68）的 §13.2 launch
+> （CLI 口径已升 0.7.77。官方 motion 知识已于 2026-07-28 挖矿并进本仓：**接缝法与表演法见
+> `motion-continuity.md`**——写任何 scene 边界前先读那份，本文件是它下面的配方层。
+> 官方原文副本已删，溯源见 `vendor/upstream-skills/README.md`；与本仓 compose 合同冲突一律以本仓为准）
 > few-shot，按**本仓 compose 合同**重写。<!--# 策略@hf-handbook-2026-07-23：配方数值/灵感来源随
 > launch 仓库变化，题面老化即重标；motion grammar 本身稳定。 -->
 
@@ -13,12 +15,12 @@
 
 配方是 **motion grammar（抄结构、时序、参数组织），不是模板（不照抄内容/皮肤）**。遇冲突：
 
-1. **本仓 compose 硬规则**（`../SKILL.md` + `hyperframes.md`）与 `tools/lint.py` compose 门——最高；
+1. **本仓产物合同**（`compose-contract.md` + `../SKILL.md`）与 `tools/kuleshov-lint.py` compose 门——最高；
 2. 本文件配方结构与时序；
 3. 手册/官网/launch 历史源码——最低，仅供灵感，旧语法（`width/top/left/filter/display`
    动画、CDN 引 GSAP、`master.add(child)` 手工嵌套）一律按本仓合同重写，不照抄。
 
-**每次套用配方后必过**：`python3 tools/lint.py projects/<片名>` 无 error；关键时刻 snapshot 肉眼过。
+**每次套用配方后必过**：`python3 tools/kuleshov-lint.py projects/<片名>` 无 error；关键时刻 snapshot 肉眼过。
 
 ## 1. 通用骨架（所有配方共用，先建一次）
 
@@ -45,7 +47,7 @@ window.__timelines[compositionId] = tl;                     // key 精确等于 
 从 `audio.timeline` 派生（VO 词点 / music beat / section 区间）——先按词点/拍点换算 `data-start`
 与各 tween 的起始时刻，再微调 duration 与 stagger。禁手写脱离 audio.timeline 的秒数。
 
-**每个配方都遵守的合同**（否则 lint/render 报废，细节见 `hyperframes.md`）：可视计时 DOM 带
+**每个配方都遵守的合同**（否则 lint/render 报废，细节见 `compose-contract.md`）：可视计时 DOM 带
 `class="clip"` + `data-start/duration/track-index`；`<video>` `muted` 且是 composition 根的直接子节点、
 声音走独立 `<audio>`；ID 全片唯一；禁 `Math.random`/`Date.now`/`requestAnimationFrame`/`repeat:-1`；
 只 tween transform/opacity/color/borderRadius 白名单属性，禁 tween `width/height/top/left`（尤其媒体）。
@@ -118,6 +120,10 @@ tl.to(words,
 
 **可调：** `x:50–100` 定冲入力度；`stagger:.04–.09` 定语速；强调词用颜色 + 一次有限 pulse。
 有精确词点时**不用 stagger**，逐条把 tween 放到对应词的绝对时间。
+
+**要更强的到达感（标题卡 / 章节开场）改用瀑布入场**：`motion-continuity.md` §5.1——透明度**二值
+`tl.set` 不淡入**（淡入会跟"啪"地到位打架）、按元素重量分档给位移与时长、间隔逐个收缩、
+最后一个词可拆碎片延长高潮。注意它和逐词接缝（§4.4）规则相反，别混用。
 **别抄错：** section 外壳不要先 `gsap.set(...opacity:0)` 永久隐藏——外壳可见性由 HyperFrames 的
 `class="clip"` 管，内部词才由 GSAP 管状态。
 
@@ -189,20 +195,33 @@ tl.set(chars, { opacity:0 }, 0)
 
 **叙事动作：** 交互。把"Agent 操作了产品"可视化：光标画外入场→点击时光标与目标同时压缩→恢复。
 
+**适用边界（2026-07-28 挖矿时补）：** 这是产品发布片的房规，前提是画面里**真有一个 UI 在被操作**。
+知识科普 / 新闻调查片型默认不用——在信息图或案卷卡上加光标就是"为了动而动"，模板味专项会打。用了写进
+`ledger.decisions`。房规全文见 `motion-continuity.md` §8。
+
 ```js
-const cursor = root.querySelector('.fx-cursor');
+const cursor = root.querySelector('.fx-cursor');   // ≈134px @1920，尖端对目标，非外框中心
 const target = root.querySelector('.fx-target');
-tl.fromTo(cursor,
-  { x:520, y:360, opacity:0, rotation:-6 },
-  { x:0, y:0, opacity:1, rotation:0, duration:.62, ease:'power3.out' }, .30);
-tl.to(cursor, { scale:.82, duration:.09, ease:'power2.in', transformOrigin:'20% 15%' }, .96);
-tl.to(target, { scale:.96, backgroundColor:'#d97757', duration:.09, ease:'power2.in' }, .96);
-tl.to([cursor,target], { scale:1, duration:.16, ease:'power2.out' }, 1.05);
-tl.to(cursor, { opacity:0, duration:.22 }, 1.35);
+// ① 入场必须物理：从画外下方一条连续减速滑行进来。禁原地淡入、禁遮罩揭示（读作故障）
+tl.fromTo(cursor, { y: 620 }, { y: 0, duration:.85, ease:'power3.out', immediateRender:false }, .25);
+// ② 点击 = 1:2 不对称压缩/回弹，支点在箭头尖
+tl.to(cursor, { scale:.84, duration:.10, ease:'power2.in',  transformOrigin:'21% 14%' }, 1.20);
+tl.to(cursor, { scale:1,   duration:.22, ease:'power2.out', transformOrigin:'21% 14%' }, 1.30);
+// ③ 目标反应是并行 tween，同一时刻起步（纯聚焦输入框这类"只点不响应"的点击不给反应）
+tl.to(target, { scale:.94, backgroundColor:'#d97757', duration:.10, ease:'power2.in' }, 1.20);
+tl.to(target, { scale:1, duration:.22, ease:'power2.out' }, 1.30);
+// ④ 退场也必须物理：加速冲出最近边缘。禁原地淡出
+tl.to(cursor, { y: 640, duration:.60, ease:'power2.in' }, 2.10);
 ```
 
-**对位：** 先在 1920×1080（或本片画幅）设计坐标里算好光标终点，把 cursor SVG 的**尖端**（非外框中心）
-对到按钮；click SFX 的 `data-start` 放在压缩开始的同一时刻（见 F13）。
+**四条硬的：** ① 入场/退场都是物理位移，不许 opacity 淡入淡出；② 命中点是箭头**尖端**，按压支点
+`transformOrigin:'21% 14%'`；③ **每次点击必须同帧引燃下一拍**（morph、打字、窗口变形都不许"自己就开始了"），
+click SFX 的 `data-start` 也放在压缩起点（见 F13）；④ 长拍里光标不拥有的时段要**漂到一边**
+（0.5–0.9s `power2.out`），不冻在动作上面，更不原地晃。
+
+**与官方写法的差异（别照抄）：** 官方示例 tween 的是 `left`/`top` 百分比，**本仓合同禁止 tween
+`top/left/width/height`**（`compose-contract.md` §3 属性白名单）——一律换成 transform `x`/`y`，位移量按本片画幅
+换算成 px。**跨镜交接**（光标当承接物缝接缝）：切点前 ~0.3s 朝下一镜的第一个点击点加速（`power2.in`），走完那条路径的前 1/3；下一镜 `gsap.set` 到交接位姿、以匹配速度 `power2.out` 走完剩下的。退场只有两种合法写法：冲出最近边缘，或这条交接——**不许原地淡出**。
 
 ## F05｜持久聊天栈
 
@@ -459,32 +478,36 @@ tl.to(oldWorld, { scale:1.16, opacity:0, duration:.34, ease:'power3.in' }, 0)
 结束卡不再堆新信息——Logo + 品牌关系 + 一个 CTA 足够。停留时长由 composition 的静态 `data-duration` 提供，
 **禁加空 tween 垫时长**（本仓硬规则：clip/root 用 `data-duration`，不用空 tween 凑时长）。
 
-## F16｜三种 Scene Seam（接缝）
+## F16｜Scene Seam（接缝）
+
+> ⚠️ **接缝的法与参数已经升级到 `motion-continuity.md`**（2026-07-28 从官方 motion-doctrine /
+> cut-the-curve / seam-craft 挖矿重写）：矢量律（轴/方向/速度/相位）、全片主方向与保留矢量、
+> 承接物、五种接缝的参数表、不透明舞台底白闪守卫。**写任何接缝前先读那份**，本条只留配方级要点。
 
 接缝**两边一起设计**：方向、位移、速度、blur、end/start pose 要匹配；别只修一边。转场词汇 ≤4（本仓合同）。
 
-**A. 连续背景硬切：** 相邻 scene 用同一背景视频源，各自 `data-media-start` 对齐到同一全局源时间，边界只换前景。
-**不要把两份背景 crossfade**（中点会变暗）。
-
-**B. 方向接力（tail_relay）：** 前 scene 内容向左 `x:-220, opacity:0` 退出，后 scene 从右 `x:220, opacity:0` 进入，
-时长与 ease 相近，观众读作同一次运动（呼应 generating-shot-motion 的 `tail_relay` seam）。
+**默认边界一律是 cut-the-curve**：出 `power4.in` + 入 `power4.out`（同距同时长，速度在切点精确相接），
+位移只走 ~12% 画幅（1920 ≈ 230px，**不整屏移出**），出场透明度在位移 25–30% 处走完、最后一个淡出元素
+死在切点上。参数见 `motion-continuity.md` §4.1。
 
 ```js
-// 前一 scene 尾部
-tl.to(root.querySelector('.fx-out'), { x:-220, opacity:0, duration:.28, ease:'power3.in' }, 2.72);
-// 后一 scene 头部
-tl.fromTo(root.querySelector('.fx-in'), { x:220, opacity:0 }, { x:0, opacity:1, duration:.34, ease:'power3.out' }, 0);
+// 前一 scene 尾部（切点 = 2.72+0.30）
+tl.to(root.querySelector('.fx-out'), { x:-230, duration:.30, ease:'power4.in' }, 2.72);
+tl.to(root.querySelector('.fx-out'), { opacity:0, duration:.20, ease:'none' }, 2.72);   // 淡出提前、独立线性
+// 后一 scene 头部：半路接手，不从静止起步
+tl.fromTo(root.querySelector('.fx-in'), { x:230, opacity:.35 },
+          { x:0, opacity:1, duration:.34, ease:'power4.out' }, 0);
 ```
 
-**C. Zoom-through：** 前景迅速放大淡出，下一世界从略小/略大 settle 到 1。缩放方向要讲得通：穿过前景→前层放大；
-镜头退出→前层缩小。
+**A. 连续背景硬切（本条是 F16 独有，`motion-continuity.md` 没有）：** 相邻 scene 用同一背景视频源，
+各自 `data-media-start` 对齐到同一全局源时间，边界只换前景。**不要把两份背景 crossfade**（中点会变暗，
+而且 crossfade 没有承接物）。
 
-```js
-tl.to(outgoing, { scale:1.28, opacity:0, duration:.24, ease:'power3.in' }, 3.1);        // 出场
-tl.fromTo(incoming, { scale:.78, opacity:0 }, { scale:1, opacity:1, duration:.42, ease:'expo.out' }, 0); // 入场
-```
+**B. Z 轴两种（zoom-through / inverse zoom）：** 缩放变化率的**符号**必须两边一致，且约束下一镜自己的入场
+动画——最常见的违规是"后退出场 → 从小长大入场"。参数与符号纪律见 `motion-continuity.md` §4.2/4.3。
 
 **验收：** 分别 snapshot 边界前 2 帧 / 边界 / 边界后 2 帧，检查构图中心、运动方向、速度、背景亮度是否连续。
+深色片额外确认切点没有白闪（根因与守卫见 `motion-continuity.md` §9）。
 
 ---
 
