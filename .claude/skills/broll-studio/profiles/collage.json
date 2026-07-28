@@ -1,0 +1,142 @@
+{
+  "schema": "broll-profile@1",
+  "id": "collage",
+  "display_name": "半调纸拼贴 Collage",
+  "core_strength": "概念／观点句的高级编辑风氛围 b-roll",
+  "one_liner": "从空色场逐件组装的定格纸艺：一块按语意选色的强平色场 + 黑白半调剪贴主体 + 服务信息层级的点色纸片。",
+  "best_for": [
+    "抽象隐喻的氛围 b-roll",
+    "观点句",
+    "垫在口播下的间奏",
+    "概念的可感知化"
+  ],
+  "avoid_when": [
+    "精确文字／数字／法条／logo／收尾落款（要文字就用 HyperFrames **叠层在 collage 上**）",
+    "需要可逐层编辑的时间线",
+    "真人产品口播"
+  ],
+  "routing_examples": [
+    "很多人以为 AI 是来替你思考的，其实它更像一面镜子，会把你问题里的漏洞照出来",
+    "咖啡因不给你充电，它只是挡住了困的信号（锁体与钥匙的聚簇隐喻，2026-07-28 横竖屏冒烟题材）"
+  ],
+  "references": [
+    {
+      "title": "上游 skill `gbro-collage-broll`（pyang5166）",
+      "url": "",
+      "why": "本 profile 的美学标准、三闸门纪律、色彩语义与 prompt 骨架都来自它；本仓换掉引擎（→ GPT-Image-2 + Seedance 2.0）、补上 16:9、补上死尾判据、补上缝合纪律与 request-id 留痕"
+    }
+  ],
+  "signature_vocab": [
+    "paper collage",
+    "paper-collage",
+    "halftone",
+    "halftone dots",
+    "cardstock",
+    "cream keylines",
+    "uncoated paper fiber",
+    "paper grain",
+    "paper field",
+    "machine-cut edges",
+    "newsprint"
+  ],
+  "motion_verbs": [
+    "slide in",
+    "snap into place",
+    "assemble",
+    "settle",
+    "lock in"
+  ],
+  "stitching": "与 HyperFrames 版式卡（如 daily-brief 纸白场）混排时，底色可各异，但靠**共享的半调 + 奶油白 keyline + 品牌点色（印刷红 #C8451B）+ 统一纸颗粒**缝成一家；防止「拼贴段」与「版式段」割裂成两部片。",
+  "first_frame": {
+    "kind": "empty_surface",
+    "spec": "同底色的纯空色场（PALETTE_HEX）。首帧近空场即可，边缘轻微提前露片可接受",
+    "ffmpeg": "color=c=0x<PALETTE_HEX>:s=<W>x<H>"
+  },
+  "native": {
+    "aspect": "9:16",
+    "duration_s": 10,
+    "object_groups": [
+      3,
+      6
+    ],
+    "camera": "locked-off，无运镜"
+  },
+  "aspect_16_9": [
+    "16:9 走本 profile 的 `gate2_prompt_16_9` / `gate3_prompt_16_9`（2026-07-28 实测原文），不走替换规则",
+    "横屏**偏前重已被证实**（尾段运动量仅全片 27%，竖屏 54%）：把「末件在最后一秒落位」写得更重，或把该镜槽位缩短",
+    "横屏的聚簇约束句（中央 60% + 外三分之一留空）**不许删**——竖屏靠画幅天然挤，横屏只靠这句挤"
+  ],
+  "variables": [
+    "VISUAL_METAPHOR",
+    "KEY_OBJECTS",
+    "PALETTE",
+    "PALETTE_HEX",
+    "ACCENT",
+    "CONSTRAINT",
+    "ASSEMBLY_ORDER"
+  ],
+  "gate2_prompt": "Create a finished editorial paper-collage still for a 9:16 image-to-video B-roll clip. Visual proposition: [VISUAL_METAPHOR]. Scene: perfectly flat [PALETTE] paper field ([PALETTE_HEX]) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs [KEY_OBJECTS], with selective cream-white and [ACCENT] colored cardstock accents. Composition: vertical 9:16 locked poster frame; central subject within the middle 70 percent; generous clean color-field negative space; 3 to 6 large separable paper groups for later assemble-from-empty animation. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: [CONSTRAINT]. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter.",
+  "gate2_prompt_16_9": "Create a finished editorial paper-collage still for a 16:9 image-to-video B-roll clip. Visual proposition: [VISUAL_METAPHOR]. Scene: perfectly flat [PALETTE] paper field ([PALETTE_HEX]) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs [KEY_OBJECTS], with selective cream-white and [ACCENT] colored cardstock accents. Composition: horizontal 16:9 locked poster frame; central subject clustered within the middle 60 percent of the width, reading as one tight group rather than spread across the frame; the outer thirds stay as clean empty color field; generous clean color-field negative space; 3 to 6 large separable paper groups for later assemble-from-empty animation. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: [CONSTRAINT]. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter, no elements spread evenly across the full width, no symmetrical left-right filler.",
+  "gate3_prompt": "Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat [PALETTE] paper field) and Image 2 as the exact completed last frame. One continuous locked-off vertical shot, no camera movement. Open on the empty [PALETTE] paper field, then assemble the scene piece by piece with crisp physical stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: pieces keep sliding in and snapping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; [ASSEMBLY_ORDER], with the final fragments snapping into place in the last second to complete Image 2. Preserve the 9:16 framing, [PALETTE] color field, cardstock accents, uncoated paper grain, halftone dots, cream keylines, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound.",
+  "gate3_prompt_16_9": "Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat [PALETTE] paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal shot, no camera movement. Open on the empty [PALETTE] paper field, then assemble the scene piece by piece with crisp physical stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: pieces keep sliding in and snapping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; [ASSEMBLY_ORDER], with the final fragments snapping into place in the last second to complete Image 2. Keep every piece inside the central cluster of Image 2 — pieces travel in from off-frame but settle into the middle of the width; do NOT spread the collage across the full width, do NOT add filler pieces in the outer thirds. Preserve the 16:9 framing, [PALETTE] color field, cardstock accents, uncoated paper grain, halftone dots, cream keylines, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound.",
+  "_placeholder_map": {
+    "note": "四段提示词是 2026-07-17 / 2026-07-28 冒烟验证过的原文，**逐字照搬**，只把中文占位符换成引擎的变量名（渲染后的成品文本与冒烟时一致）。这张表让「逐字」这件事可核对。",
+    "[一句话视觉命题]": "VISUAL_METAPHOR",
+    "[颜色]": "PALETTE",
+    "[hex]": "gate2 的 `([hex])` → PALETTE_HEX（冒烟实填 `(#1E4438)`，跟在颜色名后面作补充锁值）；gate3 的 `[hex] color field` → **PALETTE，填自然语言颜色名**（冒烟实填 `the deep-green color field`）。**2026-07-28 用户拍板：模型不认 hex，填色一律写自然语言**——模板里那个 `[hex]` 字段名是错的，不是这里的映射错了。别再把它改回 hex。",
+    "[主体元素]": "KEY_OBJECTS",
+    "[品牌点色]": "ACCENT",
+    "[必须一眼看懂的关系]": "CONSTRAINT",
+    "[按顺序描述 3–6 元素如何滑入/卡位/连接]": "ASSEMBLY_ORDER"
+  },
+  "status": {
+    "gate2_still": "✅",
+    "gate3_video": "✅ 54%",
+    "aspect_16_9": "✅ 27%",
+    "note": "两个画幅端到端都验过：9:16 于 2026-07-17（`openai-78m-logs` / s03b 碎片聚人形，720×1280 / 24fps / 5.04s）；16:9 于 2026-07-28",
+    "known_issues": [
+      "**横屏偏前重**：尾段运动量仅全片 27%（竖屏 54%），刚过 25% 下限。「横向滑入路径更长」这条已知未知**被证实**——排产横屏时把「末件在最后一秒落位」写得更重，或把该镜槽位缩短",
+      "16:9 只跑过 1 条测试 clip（即画幅纪律要求的首验），多镜共用一套底色的批次一致性未验"
+    ],
+    "evidence": "projects/_smoke/broll-skills-2026-07-28/（cl_h / cl_v 的 QA JSON + contact sheet，runs/ 有 x-oneapi-request-id）；9:16 首验见 projects/openai-78m-logs/"
+  },
+  "notes": [
+    "**组装类 `duration` 直接要 10s**——5s 组装被用户打回「过得太快」是必然，定格拼装需要呼吸（`seedance.md`）。旧 5s 库存补救走 `ffmpeg setpts=2.0*PTS`，**不用插帧**（插帧出鬼影，毁纸艺质感）。",
+    "imagegen 的 `size` 必须是 16 的倍数（`image-motion.md`），所以出图走 1280x720 而非 1920x1080；1920x1080 只出现在 ffmpeg 首尾帧（lavfi/crop 不受 16 倍数约束）。",
+    "**尾裁只救「已铺满、只剩很短 hold」**。组装过早完成得重生或缩短槽位，尾裁救不了。",
+    "要文字就用 HyperFrames 叠层在 collage 上（overlays 混合层），兼得质感与信息——不要试图让模型写字。",
+    "🔴 **填色写自然语言**（2026-07-28 用户拍板）：`[PALETTE]` 一律填颜色名（`deep-green`），模型不认 hex。hex 的位置只有两个：gate2 里跟在颜色名后面的那个括号，以及首帧空场的 ffmpeg lavfi。纪律全文见 variables.json 的 color_discipline。"
+  ],
+  "palette_guidance": {
+    "note": "**色彩语义表全仓唯一一份就在这里**（本 profile 是它的出处，popup-book 借的是同一份纪律）。选色规程：一块按语意选的**强烈平坦纯色场** + 黑白半调主体 + 服务信息层级的点色。不要把 cobalt blue 当唯一默认值；一批内做「同设计语言、不同底色」。",
+    "semantics": {
+      "焦橙/红": "时间消耗·劳动·紧迫",
+      "芥末黄": "工具·警示",
+      "墨绿": "认知·系统·重置",
+      "深紫": "规范·沉淀·长期记忆",
+      "青绿": "判断·协作·自动执行"
+    }
+  },
+  "failure_criteria": [
+    "一条里塞了多个隐喻——一句话只表达一个清晰隐喻",
+    "满屏碎片而不是 3–6 个**可分离大组**（可分离是从空场组装的物理前提）",
+    "用漂移／晃动／慢 zoom 冒充组装——动作必须是 assemble-from-empty 的逐件滑入与卡位",
+    "彩色纸片不服务信息层级（为彩色而彩色）；或底色默认落回 cobalt blue",
+    "主体不是黑白半调照片剪贴（半调剪贴是这门语言的骨架）",
+    "纸片缺少清晰裁切边／奶油白 keyline／低透明柔和阴影／纸颗粒中的任一样——四样齐了才有实物感",
+    "出现文字、数字、logo、水印、UI、字幕；或出现光洁 3D 与写实环境",
+    "**横屏摊散**：纸组沿画幅摊平成满屏均匀碎片、外三分之一没保持空色场。修法同源——先补强聚簇句重生**静帧**（便宜），静帧本身就摊了就别进 Gate 3"
+  ],
+  "ir_writeback": {
+    "provider": "collage_broll",
+    "params": {
+      "ai_stylized": true,
+      "background_hex": "<PALETTE_HEX>",
+      "accent_colors": [
+        "<ACCENT>"
+      ]
+    },
+    "note_prefix": "拼贴 b-roll",
+    "why": "沿用历史 provider 名 `collage_broll`（存量 film.json 与合同都按它认），不因为并进 broll-studio 就改——改了等于把已交付项目的 IR 语义改掉"
+  }
+}

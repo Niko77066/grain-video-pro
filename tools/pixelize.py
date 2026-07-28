@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """像素归一：把 GPT-Image-2 静帧 / Seedance clip 压到真实像素栅格 + 主调色板。
 
-这是本 skill 的技术脊柱。扩散模型给不出真像素——它给的是「像素味的软图」：
+这是 `pixel` profile 的技术脊柱（由 `pipeline_extras.post_still` / `post_video` 声明）。
+扩散模型给不出真像素——它给的是「像素味的软图」：
 栅格漂移、抗锯齿边、上万种颜色。归一层把它按物理办法钉回去：
 
   面积降采样到逻辑分辨率 → 对主调色板量化 → 最近邻整数倍放大
 
 三步都是确定性的。归一之后，「一个逻辑像素 = 输出图上一个 N×N 纯色方块」
 和「全片只用主调色板里的颜色」都是可被 verify.py 验证的事实，不是形容词。
+
+抖动默认关：ordered dither 的网点纹理会被读成半调/纸颗粒——那正是 `pixel` 要和
+`collage` 划清界限的东西。
 
 用法:
   pixelize.py still  --in a.png --out b.png --palette p.png --size 1280x720 --grid 4

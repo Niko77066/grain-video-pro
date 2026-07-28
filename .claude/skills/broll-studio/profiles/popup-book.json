@@ -53,6 +53,7 @@
     "pop upright",
     "unfold"
   ],
+  "stitching": "与版式卡靠**共享的强平色场 + 暖白纸 + 唯一点色**缝成一家（配色纪律见 palette_guidance），再加纸的内部透光作为跨段落的统一光线签名。",
   "first_frame": {
     "kind": "closed_book",
     "spec": "🔴 **本风格不许用完全空白首帧**——必须是一本合上的书 / 一张平整的页面 / 一个折叠的平台。空场起手会让整个空间凭空出现，产生不可控变形。",
@@ -78,7 +79,6 @@
     "ASSEMBLY_ORDER"
   ],
   "gate2_prompt": "Create the exact completed final still frame for a vertical 9:16 animated pop-up-book B-roll clip.\nVisual concept: [VISUAL_METAPHOR].\nShow a fully opened handcrafted pop-up book containing a layered miniature world built from 4–6 large paper structures: [KEY_OBJECTS].\nStyle: premium paper-engineered pop-up book, dimensional folded architecture, clean die-cut silhouettes, visible tabs and hinges, layered foreground, middle ground and background, theatrical miniature lighting where the light appears to come from INSIDE the paper structures — pages and cut-outs glowing from within as if projection-mapped, warm light spilling through the die-cut gaps onto the layers behind. COLOUR RULE: one strong flat saturated [PALETTE] field fills the whole background and the book's own surface — a single decisive colour chosen for meaning, not a blend of three. Everything built on it is warm off-white paper, plus exactly ONE accent colour used sparingly on the element that carries the point. No third hue. Deep shadowed surroundings; a dark fairytale, not a children's picture book. Hand-cut paper with visible knife texture and honest fibre.\nThe scene should feel spatial and immersive rather than like a flat collage. Use one clear visual path leading through the composition.\nNo loose paper scraps, no halftone photo collage, no readable book text, no labels, no logo, no excessive layers, no photoreal environment.",
-  "gate2_first_frame_prompt": "Create the exact first frame for a vertical 9:16 pop-up-book B-roll clip: one handcrafted [PALETTE] book lying closed and flat, centred, on a plain matching surface, theatrical miniature lighting, subtle paper fiber, clean die-cut cover with no artwork. Nothing has unfolded yet.\nNo readable book text, no title, no labels, no logo, no photoreal environment, no loose paper.",
   "gate3_prompt": "Handcrafted pop-up-book unfolding animation, using Image 1 as the exact closed book or flat page and Image 2 as the exact completed miniature world.\nIn one locked front-facing three-quarter shot, the book opens and the scene unfolds in this order: [ASSEMBLY_ORDER].\nThe base page opens first. Background structures rise on paper hinges, middle-ground paths extend, foreground elements pop upright, and the central subject appears last. All motion must follow believable paper-folding mechanics.\nPreserve the final layered composition from Image 2 and end with a stable theatrical hold.\nNo loose collage pieces, no objects growing from nowhere, no liquid morphing, no camera fly-through, no page turning after the scene is complete, no text, no sound.",
   "failure_criteria": [
     "结构凭空长出来而不是靠纸铰链翻起——纸艺力学是本风格唯一的可信度来源",
@@ -88,6 +88,19 @@
     "做成明快的儿童立体书——参考《The Icebook》是**投影映射的手切纸暗黑童话**，光从纸structure 内部透出来，四周是深影。明亮均匀的外部打光会把它变成幼儿书",
     "**三色调和的暧昧配色**——2026-07-28 用户判「配色不好看」。改走拼贴的纪律：一块按语意选的强烈平色场 + 暖白纸 + 唯一点色"
   ],
+  "status": {
+    "gate2_still": "✅ 人眼过",
+    "gate3_video": "⚠️ 未验",
+    "aspect_16_9": "⚠️ 未验",
+    "note": "配色改走 collage 的色彩纪律；内部打光；撤回了错误的 hold 改动",
+    "known_issues": [
+      "**Gate 2 要出两张图**（合上的书 + 完成的世界），比别的 profile 多一次出图成本——工序声明在 pipeline_extras.gate2_extra_stills",
+      "死尾判红通常不是缺陷而是剪辑问题（正解是 compose 尾裁，见 notes）",
+      "v2 是死尾判据「中段爆发型」失效模式的样本：尾段绝对 YDIF 0.657 是七条测试片第二高，却因中段爆发抬高分母只得 9%（判据未放松，只加 advisory，见 tools/clip-qa.py 常量处）",
+      "同一条片里多镜共用一套 profile 的一致性未验（每套只出过一条）"
+    ],
+    "evidence": "projects/_smoke/broll-studio-2026-07-28/（runs/ 有 request-id，evidence/ 有逐条 QA JSON）"
+  },
   "notes": [
     "首帧规则与其余五套不同：**本风格 Gate 2 要出两张图**（合上的书 + 完成的世界），比别的风格多一次出图成本。",
     "🔴 **本风格的死尾判红通常不是缺陷，是剪辑问题**（2026-07-28 用户裁决）：书展开完之后的定格是这门语言的收尾语法（`end with a stable theatrical hold` 是故意的）。死尾判据抓的是「组装过早完成 → 只能靠冻结帧凑时长」，而立体书的正解是 **compose 层尾裁**——按有效运动长度给槽位，不是改提示词重生。我曾据机器判红去删这句 hold，反而改坏了收尾语法且判得更红（16%→9%），已撤回。",
@@ -97,12 +110,16 @@
   ],
   "palette_guidance": {
     "note": "配色向 collage-broll 的色彩纪律看齐（2026-07-28 用户拍板：立体书原配色不好看）——**一块强烈平坦的纯色场按语意选色 + 暖白纸 + 唯一一个点色**，不要三色调和。只借色彩纪律，**不许借它的材质语汇**（半调网点／卡纸／纸颗粒属于 collage，串词 lint 会拦）。",
-    "semantics": {
-      "焦橙/红": "时间消耗·劳动·紧迫",
-      "芥末黄": "工具·警示",
-      "墨绿": "认知·系统·重置",
-      "深紫": "规范·沉淀·长期记忆",
-      "青绿": "判断·协作·自动执行"
-    }
+    "semantics_source": "色彩语义表**全仓唯一一份在 `collage.json` 的 palette_guidance.semantics**（本 profile 借的就是那份纪律，不再抄第二份——抄一份就多一个会漂的副本）。`broll-profile.py show collage` 看。"
+  },
+  "pipeline_extras": {
+    "gate2_extra_stills": [
+      {
+        "id": "first_frame",
+        "purpose": "首帧：一本合上的书 / 一张平整页面（本风格不许空场起手，空场会让整个空间凭空出现、产生不可控变形）",
+        "cost": "+1 张 GPT-Image",
+        "prompt": "Create the exact first frame for a vertical 9:16 pop-up-book B-roll clip: one handcrafted [PALETTE] book lying closed and flat, centred, on a plain matching surface, theatrical miniature lighting, subtle paper fiber, clean die-cut cover with no artwork. Nothing has unfolded yet.\nNo readable book text, no title, no labels, no logo, no photoreal environment, no loose paper."
+      }
+    ]
   }
 }

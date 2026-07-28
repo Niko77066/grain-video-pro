@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 生成型镜头 skill（pixel-broll / collage-broll）的开工前自检。
+# 生成型镜头链路（broll-studio 的八套材质语言）的开工前自检。
 # 进 Gate 0 之前跑一次。全绿直接开工，不要把配置信息复述给用户。
 set -uo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"

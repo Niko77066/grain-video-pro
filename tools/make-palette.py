@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """主调色板：把一组 hex 编成 ffmpeg paletteuse 能吃的 16×16 PNG + 人眼看的色卡。
 
-一部片一张主调色板。全片所有像素静帧与所有像素 clip 都对同一张量化，
+一部片一张主调色板（`profiles/pixel.json` 的 `pipeline_extras.film_level_gates`：Gate 0，
+定了就不改）。全片所有像素静帧与所有像素 clip 都对同一张量化，
 于是「跨镜头主色漂移」在生成之前就被物理锁死，而不是靠 compose 层调色补救。
 
 用法:

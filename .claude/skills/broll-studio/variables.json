@@ -1,0 +1,76 @@
+{
+  "schema": "broll-variables@1",
+  "note": "八套材质语言共用的**唯一一套提示词变量**。profile 的 `variables` 只能从这里取名——`broll-profile.py render` 会校验，取了表外的名字直接报错。这道校验是为了防止每套 profile 长出自己的一套同义变量（VISUAL_METAPHOR / visual_proposition / 视觉命题 各写一遍），那是同一份知识多副本的又一种形态。",
+  "history": "collage 链原来在 Gate 2 前写一份结构化 `visual-spec.json`，六套 profile 走的是变量填空。两者是同一件事的两种写法，2026-07-28 统一收敛到变量——理由很物理：`render` 真的读变量，而 visual-spec 没有任何程序读它，它只是给人看的中间文件。visual-spec 的每个字段都在下面的 `visual_spec_mapping` 里有落点，没有信息丢失。",
+  "variables": {
+    "VISUAL_METAPHOR": {
+      "zh": "一句话视觉命题",
+      "use": "Gate 1 的产物：这个镜头用什么画面说这句话。一条只表达一个隐喻。"
+    },
+    "KEY_OBJECTS": {
+      "zh": "3–6 个可分离元素组",
+      "use": "写「是什么 + 扮演什么角色 + 摆在哪」。可分离是硬要求——从空场逐件组装靠它。超过 6 组读不成一句话。"
+    },
+    "PALETTE": {
+      "zh": "底色（按语意选，写颜色名）",
+      "use": "强烈平坦的单一色场。选色规程见 collage.json 的 palette_guidance（色彩语义表全仓唯一一份）。🔴 **提示词里的色彩描述写自然语言颜色名**（`deep-green` / `warm sand`），不写 hex——**模型不认 hex**（2026-07-28 用户拍板）。"
+    },
+    "PALETTE_HEX": {
+      "zh": "底色 hex",
+      "use": "同一个底色的 hex。它的用途是**机器精确性**，不是给模型读的：首帧空场的 ffmpeg lavfi 用它，保证首帧与静帧同色。写进提示词时只能**跟在自然语言颜色名后面作补充锁值**（collage gate2 的 `perfectly flat deep-green paper field (#1E4438)` 就是这个形状），**不许单独承担一个色彩描述槽位**——那等于把色彩交给模型猜。"
+    },
+    "PALETTE_LIST": {
+      "zh": "主调色板全部 hex（逗号分隔）",
+      "use": "只有带片级调色板闸门的 profile 用（见 pipeline_extras.film_level_gates）。把全片锁色写进提示词。这里的 hex 列表是**锁色清单**而不是色彩描述，模型读不准也没关系——归一层会在生成之后把颜色物理量化到这张表上，判据是 verify.py 的锁色项。"
+    },
+    "ACCENT": {
+      "zh": "点色",
+      "use": "服务信息层级的局部彩色，不为彩色而彩色。缝合纪律里的品牌点色也走这里。"
+    },
+    "ASSEMBLY_ORDER": {
+      "zh": "组装顺序",
+      "use": "3–6 个元素**按顺序**如何滑入 / 卡位 / 连接。必须铺满整条 clip——这是死尾判据的正面写法。"
+    },
+    "ACTION": {
+      "zh": "单一主动作",
+      "use": "角色动作型镜头用它替代 ASSEMBLY_ORDER：一个动作连续进行，末拍落在最后一秒。"
+    },
+    "SCENE": {
+      "zh": "场景",
+      "use": "主体所处的环境，一句话。"
+    },
+    "SUBJECT": {
+      "zh": "主体 / 角色外观",
+      "use": "🔴 角色长相**全片只在 Gate 2 描述一次**。Gate 3 只写「Image 2 里的那个角色」，不许复述长相——复述与锚点冲突时模型会自己选，那就是变脸的成因。"
+    },
+    "ELEMENT_PLAN": {
+      "zh": "构图里的元素安排",
+      "use": "Composition 段的收尾句。写什么取决于运动原型（见 profile 的 variants.options[*].variable_guidance）。"
+    },
+    "FRAMING": {
+      "zh": "取景方式",
+      "use": "如 side-view / isometric。属于构图选择，不是材质语汇。"
+    },
+    "CONSTRAINT": {
+      "zh": "必须一眼看懂的关系",
+      "use": "这个镜头如果只有一件事必须读懂，是哪件。写成一句约束交给模型。"
+    }
+  },
+  "visual_spec_mapping": {
+    "note": "collage 旧 visual-spec.json 的每个字段 → 现在落在哪。用来证明收敛是无损的。",
+    "script_meaning": "Gate 1 的口头产物（核心意思），不进提示词，写 gate1 记录与 ledger.decisions",
+    "visual_metaphor": "VISUAL_METAPHOR",
+    "style_signature": "固定文本，已烧进 profile 的 gate2_prompt Style 段（它本来就不该是个变量——它就是材质语言本身）",
+    "aspect_ratio": "引擎的 --aspect（画幅几何只有一份，见 SKILL.md §4）",
+    "color_field.background_hex": "PALETTE + PALETTE_HEX",
+    "color_field.accent_colors": "ACCENT",
+    "color_field.paper_grain": "固定文本，已在 gate2_prompt 的 Materials 段",
+    "elements[].what / role / placement": "KEY_OBJECTS",
+    "elements[].motion": "ASSEMBLY_ORDER",
+    "composition.layout / negative_space": "固定文本，已在 gate2_prompt 的 Composition 段",
+    "composition.final_frame": "CONSTRAINT",
+    "motion_plan": "ASSEMBLY_ORDER（顺序就是 motion_plan）",
+    "avoid": "固定文本，已在 gate2_prompt 末段（禁用项是材质语言的一部分，不该由单镜改写）"
+  },
+  "color_discipline": "**色彩靠自然语言传达，hex 只作补充锁值**（2026-07-28 用户拍板：模型不认 hex）。两处例外都不是反例：① collage gate2 的 hex 跟在颜色名后面，是补充；② pixel gate2 的 `background is a single flat <hex> field` 与紧邻上一句的调色板锁色表连读，且归一层会在生成之后物理锁色——它靠的不是模型读懂那串 hex。这两段都是冒烟验证过的原文，别按本条去改写它们。"
+}

@@ -1,7 +1,7 @@
 # 引擎知识包 · 视觉出厂自查（版式/画面反模式 linter）
 
 > 何时读我：storyboard 自查、compose 自查、**⑨ review 出厂前必过**。
-> 定位：脚本层有 `narration-voice` linter、拼贴层有 `collage-broll` 死尾 QA、技术层有 `hyperframes check`——本文件补上**视觉/版式层**的可执行自查，让出厂前 **agent 自己发现问题、自己指出**，不靠用户逐条挑。
+> 定位：脚本层有 `narration-voice` linter、生成型 b-roll 层有 `clip-qa.py` 死尾判据、技术层有 `hyperframes check`——本文件补上**视觉/版式层**的可执行自查，让出厂前 **agent 自己发现问题、自己指出**，不靠用户逐条挑。
 > 由来：`openai-78m-logs` 的 daily-brief v1「全军覆没」尸检（2026-07-17，用户反馈）+ 品味宪法 + 竖屏官号经验。**每条都是踩过的坑。**
 
 ## 怎么用（可执行，不是建议）

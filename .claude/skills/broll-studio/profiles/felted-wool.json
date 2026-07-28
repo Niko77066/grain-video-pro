@@ -51,6 +51,7 @@
     "tilt",
     "settle"
   ],
+  "stitching": "与版式卡靠**共享的灰调电影感调色 + 羊毛纤维的柔边 + 品牌点色的毛线**缝成一家；温度来自纤维与灰调的组合，compose 层加饱和会立刻把它推成玩偶广告。",
   "first_frame": {
     "kind": "empty_surface",
     "spec": "空毛毡台（PALETTE 主色的毛毡底 + 柔光），无角色无道具",
@@ -87,6 +88,16 @@
     "拿黏土的荒诞动词套毛毡（压扁、膨胀、堵管）——串风格了，回去改隐喻或改走 clay-miniature",
     "场景膨胀成一整间屋子（墙、窗、盆栽）——profile 要的是 one felted character + 2–4 objects 的**小世界**。2026-07-28 实测会自动长出整间房，想要小世界就得在 Composition 段显式压住"
   ],
+  "status": {
+    "gate2_still": "✅ 人眼过",
+    "gate3_video": "⚠️ 未验",
+    "aspect_16_9": "⚠️ 未验",
+    "note": "按 Fuzzy Feelings 重写：角色具体化、灰调电影感、全员从画外进场",
+    "known_issues": [
+      "同一条片里多镜共用一套 profile 的一致性未验（每套只出过一条）"
+    ],
+    "evidence": "projects/_smoke/broll-studio-2026-07-28/（runs/ 有 request-id，evidence/ 有逐条 QA JSON）"
+  },
   "notes": [
     "2026-07-28 冒烟修订两处：① 角色凭空出现 → 全员从画外进场；② 场景自动膨胀成整间屋子 → Composition 段显式压住。",
     "2026-07-28 看参考后补：角色要具体（年龄/衣物构造/绣线五官）、调色要灰、要浅景深与颗粒。"

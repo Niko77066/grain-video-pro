@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """生成型 clip 的通用码判：规格 / 死尾 / contact sheet。
 
-pixel-broll 与 collage-broll 共用。两条链的美术判据不同（像素查栅格锁色、
-拼贴查摊散聚簇），但「交付物是不是一条合格的 clip」是同一套问题，只该有一份实现。
+八套生成型材质语言共用（`broll-studio` 的 profile 层）。各套的美术判据不同
+（像素查栅格锁色、拼贴查摊散聚簇），但「交付物是不是一条合格的 clip」是同一套问题，
+只该有一份实现。批次级的总览三张图在 `tools/clip-batch-sheets.py`。
 
 死尾判据是宪法红线（禁冻结帧补时长）的码判投影：Seedance 默认会把组装塞在前段、
 尾部长时间 hold。判据用 signalstats 的 YDIF，但比的是**尾段与全片自身的运动量之比**，

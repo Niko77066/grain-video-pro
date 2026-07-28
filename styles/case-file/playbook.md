@@ -29,7 +29,7 @@
 | 声部 | 表达什么 | 知识包 |
 |---|---|---|
 | **文件图片 document** | 法规/起诉文件/报道/后台——实证。浏览器 chrome + 同步高亮 | 本文 §5 + samsung 参照 |
-| **AI 纸拼贴 b-roll** | 概念/隐喻/氛围间奏 | `produce/references/collage-broll.md` |
+| **AI 纸拼贴 b-roll** | 概念/隐喻/氛围间奏 | `produce/references/collage-broll.md` → `broll-studio` 的 `collage` profile |
 | **MG 版式 HyperFrames** | 钩子/论点/收尾/大数字 count-up——**居中极简** | `produce/references/hyperframes.md` |
 
 ## 3. 视觉系统

@@ -171,9 +171,7 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 |---|---|---|---|---|
 | MG 动画（HyperFrames） | ✅ | 信息与图形语言：数据卡、榜单、动态排版、字幕层 | 产出属"幻灯片语法"，不计运动占比 | `references/compose-contract.md` + `hyperframes.md` |
 | AI 生成视频（Seedance 2.0） | ✅ | 真运动、氛围、场景再现、hook/hero 镜头 | 单次 4–15s；角色/产品镜头必须挂锚点 | `references/seedance.md` |
-| AI 纸拼贴 b-roll（GPT-Image-2 + Seedance 首尾帧） | ✅ 9:16 + 16:9 | 概念/观点句/抽象隐喻的氛围 b-roll（半调纸拼贴、从空场组装） | 无文字/数字/logo（要文字 HyperFrames 叠层）；强制三闸门；9:16（2026-07-17）与 16:9（2026-07-28）均已冒烟；**横屏偏前重**（尾段运动量仅全片 27%），排产时把「末件在最后一秒落位」写重些 | `references/collage-broll.md` → `.claude/skills/collage-broll/SKILL.md` |
-| AI 像素风镜头（GPT-Image-2 + Seedance 首尾帧 + 归一） | ✅ 端到端已冒烟 | 角色重演（版权规避位）、机制图解、数据实物化、历史重演 | 锚点内禁文字数字（数字走 HTML 角标）；强制四闸门；**禁用词表：paper/halftone/aged/newsprint/grain/sepia 不许进提示词——做旧只能在 compose 层 LUT**；2026-07-28 端到端冒烟（归一前软像素 30–49%，归一后 0%）；换画幅或换模型版本仍先跑 1 条测试 clip 目检 | `.claude/skills/pixel-broll/SKILL.md` |
-| AI 生成 b-roll · 六套材质语言（GPT-Image-2 + Seedance 首尾帧） | ⚠️ 1/6 端到端冒烟（clay-miniature）；另五套静帧已验、视频待验 | 实物桌面剧场（物品隐喻）／技术图解（机制）／黏土（荒诞情绪）／毛毡（温暖叙事）／立体书（路径与世界）／玩具世界（产品质感） | 同片单一 + **不许串别的 profile 的材质语汇**（`tools/broll-profile.py lint` 机器门）；强制三闸门；`popup-book` 不许空场起手（Gate 2 要两张图）；2026-07-28 六套 9:16 冒烟后按参考实图重写了五套提示词（PES / Cash App / Fuzzy Feelings / Vectary+IBM / 拼贴配色），旧成片不再为当前模板背书；首次用当前模板出片先跑 1 条测试 clip | `.claude/skills/broll-studio/SKILL.md` |
+| AI 生成 b-roll · **八套材质语言**（GPT-Image-2 + Seedance 首尾帧） | ⚠️ 逐 profile 不同，看 `python3 tools/broll-profile.py status`（状态唯一出处）：`pixel` / `collage` / `clay-miniature` 端到端已冒烟，另五套静帧已验、视频待验 | 像素风（角色重演、机制图解、数据实物化、历史重演）／半调纸拼贴（抽象隐喻的氛围间奏）／实物桌面剧场（物品隐喻）／技术图解（机制）／黏土（荒诞情绪）／毛毡（温暖叙事）／立体书（路径与世界）／玩具世界（产品质感） | **同片单一** + 不许串别的 profile 的材质语汇（`broll-profile.py lint` 机器门，还查 profile 自己声明的 `banned_vocab`——像素的做旧词表就在那）；强制三闸门；无文字/数字/logo（要文字 HyperFrames 叠层）；额外工序看 `plan <id>`（`pixel` 有主调色板闸门 + 归一层，`popup-book` 的 Gate 2 要两张图）；首次用当前模板出片先跑 1 条测试 clip 目检，结论写回该 profile 的 `status` | `.claude/skills/broll-studio/SKILL.md`（`pixel-broll` / `collage-broll` 是指针壳） |
 | 数字人（HeyGen Avatar 4） | ✅ | 口播、主持、结论、人设 IP | 时长=音频时长；aspect_ratio 必填；形象锚点按目标画幅构图 | `references/avatar.md` |
 | 图片 + 动效（GPT-Image-2） | ✅ | 风格化静帧、插画、概念示意、"准运动" | 连续 ≤ 2 镜（防幻灯片化） | `references/image-motion.md` |
 | TTS 音频（MiniMax speech-2.8-hd 固定音色） | ✅ | 一切旁白 | 单 pass 固定音色 + 声纹 gate；对齐必走 forced-alignment；**不用火山 seed-audio** | `references/tts-audio.md` `references/forced-alignment.md` |
@@ -181,7 +179,7 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 | 实拍 / 检索素材 | ✅ | 空镜氛围（Pexels）、叙事档案（archive.org/Commons）、时事新闻（APIhub） | 一素材全片一次；broadcast-risk ≤3s；来源分层禁顶替 | `references/footage-sourcing.md` |
 | 实拍 / 检索剪辑 | 🔜 检索 API 待接入（用户提供，契约到手即开通） | 纪实感、证据声部、B-roll | provenance/license 硬门照跑；接入前需素材的选人工投喂 | — |
 
-> 上面三条生成链共 **8 套材质语言**（pixel / collage + broll-studio 的六套），**互斥不许串词**——串词的产物就是浣熊片那种"做旧报纸味的假像素"，现在由 `tools/broll-profile.py lint` 机器执法。三者共用 `tools/gpt-image.py`（静帧 + 参考图 edits）、`tools/seedance.py`（首尾帧客户端 + 契约护栏）与 `tools/clip-qa.py`（规格 / 死尾 / contact sheet）。**同片单一**：一条片只准一种生成风格。
+> 这一条抵原来的三条（拼贴 / 像素 / 六套材质）。**8 套材质语言共用一套引擎**——三闸门、画幅几何、引擎绑定、QA 判据与 IR 写回全仓只有一份，profile 只承载会变的东西（材质语汇 / 运动动词 / 首帧规则 / 缝合纪律 / 失败标准 / 额外工序）。八套**互斥不许串词**——串词的产物就是浣熊片那种"做旧报纸味的假像素"，现在由 `tools/broll-profile.py lint` 机器执法。共用 `tools/gpt-image.py`（静帧 + 参考图 edits）、`tools/seedance.py`（首尾帧客户端 + 契约护栏）、`tools/clip-qa.py`（规格 / 死尾 / contact sheet）与 `tools/clip-batch-sheets.py`（批次总览三张图）。**同片单一**：一条片只准一种生成风格。
 
 路由纪律：
 1. **平权 + 意图优先**（铁律 7）：逐镜头问"哪种来源最能表达这个 intent"，成本不进权重；混排是常态不是例外，声部语法（风格包）负责让切换成为叙事信号；
