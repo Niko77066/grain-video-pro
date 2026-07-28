@@ -1,0 +1,272 @@
+{
+  "schema": "broll-profile@1",
+  "id": "pixel",
+  "display_name": "像素风 Pixel",
+  "core_strength": "限定调色板 + 硬边栅格的可感知世界",
+  "one_liner": "扩散模型给不出真像素，它给的是「像素味的软图」。这门语言的可信度来自**归一层**：主调色板锁色 + 栅格归一把它物理钉回真像素。",
+  "best_for": [
+    "角色重演（版权画面规避位）",
+    "机制／因果图解",
+    "数据实物化",
+    "历史事件重演",
+    "抽象概念的可感知化"
+  ],
+  "avoid_when": [
+    "精确文字／数字／法条／logo（数字信息由 HyperFrames 角标叠在像素画上，两层分工）",
+    "需要真实质感的证据位与情感落地位（那是实拍的活）",
+    "真人产品口播"
+  ],
+  "routing_examples": [
+    "浣熊用两只前爪转开垃圾桶的重力锁，盖子在最后弹开（角色重演）",
+    "咖啡因不给你充电，它只是挡住了困的信号（2026-07-28 横竖屏冒烟题材，运动原型 B）"
+  ],
+  "references": [
+    {
+      "title": "上游 skill `gbro-collage-broll`（pyang5166）",
+      "url": "",
+      "why": "沿用它的三闸门纪律、assemble-from-empty 首尾帧机制与 QA 结构；换掉引擎（→ GPT-Image-2 + Seedance 2.0）与美术（→ 像素画），并补上上游没有的归一层"
+    }
+  ],
+  "signature_vocab": [
+    "pixel art",
+    "pixel-art",
+    "chunky pixels",
+    "pixel grid",
+    "dithering",
+    "limited palette",
+    "animate on twos",
+    "no anti-aliasing",
+    "flat color blocks",
+    "hard pixel edges",
+    "sprite",
+    "isometric"
+  ],
+  "_vocab_note": "「isometric」同时挂在 toy-world 与本 profile 名下，是**故意的**——**2026-07-28 用户拍板：它是共有词，两套风格都合法使用，不算串词。**lint 对两套共有的词不判串，这正是共有词机制的用途，不是漏网。（本 profile 的取景就是 side-view 或 isometric 二选一；不补这条，FRAMING 填 isometric 会被误判成串 toy-world。）",
+  "motion_verbs": [
+    "slide in",
+    "snap into place",
+    "step",
+    "stepped motion",
+    "lift",
+    "settle"
+  ],
+  "stitching": "🔴 **缝合不在生成层**。全片五源的统一靠 compose 层的 LUT + 颗粒——它可调、可关、可对全部来源一起做；生成层反过来**禁一切做旧词**（见 banned_vocab），烤进画面就再也剥不掉，还会和缝合层叠成第二遍做旧。跨镜头的主色一致性也不靠 compose 调色补救：主调色板在**生成之前**就把颜色锁死了（对 `pixel-chronicle` 的 `render.palette_drift_max` 是直接收益）。",
+  "banned_vocab": {
+    "why": "① 拼贴风的材质语法混进来就得到杂交产物；② 做旧必须留在 compose 层的 LUT/grain（可调可关可统一五源），一旦烤进生成画面就不可逆",
+    "words": [
+      "paper",
+      "paper-collage",
+      "cardstock",
+      "paper field",
+      "uncoated paper fiber",
+      "paper grain",
+      "halftone",
+      "halftone dots",
+      "printed dots",
+      "newsprint",
+      "newspaper",
+      "cream keylines",
+      "machine-cut edges",
+      "soft paper drop shadows",
+      "aged",
+      "aged-yellow",
+      "yellowed",
+      "faded",
+      "vintage",
+      "sepia",
+      "archival",
+      "weathered",
+      "film grain",
+      "grain",
+      "dust",
+      "scratches",
+      "#C9A876"
+    ],
+    "instead_use": [
+      "chunky pixels",
+      "consistent pixel grid",
+      "hard pixel edges, no anti-aliasing",
+      "limited N-color palette",
+      "flat color blocks",
+      "crisp 1-pixel outlines",
+      "side-view / isometric",
+      "sprite",
+      "animate on twos"
+    ]
+  },
+  "first_frame": {
+    "kind": "empty_surface",
+    "spec": "空色场（主调色板里的底色，纯色）。**运动原型决定首帧规则**——见 variants",
+    "ffmpeg": "color=c=0x<PALETTE_HEX>:s=<W>x<H>"
+  },
+  "native": {
+    "aspect": "9:16",
+    "duration_s": 10,
+    "object_groups": [
+      3,
+      6
+    ],
+    "camera": "locked-off（像素画的运镜靠元素动，不靠相机动）"
+  },
+  "aspect_16_9": [
+    "9:16 vertical → 16:9 horizontal",
+    "central 70 percent → central 60 percent",
+    "locked-off vertical shot → locked-off horizontal shot",
+    "Preserve the 9:16 framing → Preserve the 16:9 framing",
+    "几何按 grid 换：逻辑分辨率 180x320 改成 320x180（grid 4）、首尾帧 1080x1920 改成 1920x1080（grid 6）、归一输出 720x1280 改成 1280x720（grid 4）",
+    "**整数倍是硬约束**：1280 直接放大到 1920 是 1.5 倍，会把栅格糊掉；正确路径是从逻辑图 320x180 用 grid 6 放到 1920x1080。pixelize.py 不是整数倍会直接报错，不静默糊掉"
+  ],
+  "variables": [
+    "VISUAL_METAPHOR",
+    "PALETTE_LIST",
+    "FRAMING",
+    "SCENE",
+    "PALETTE",
+    "PALETTE_HEX",
+    "SUBJECT",
+    "ELEMENT_PLAN",
+    "ASSEMBLY_ORDER",
+    "ACTION"
+  ],
+  "gate2_prompt": "Create a finished pixel-art still for a 9:16 vertical image-to-video shot.\nVisual proposition: [VISUAL_METAPHOR].\nStyle: crisp retro pixel art on a consistent pixel grid; chunky pixels, hard edges, no anti-aliasing,\nno gradients; flat color blocks with crisp 1-pixel outlines; strictly limited palette of these colors\nonly: [PALETTE_LIST]. [FRAMING] framing.\nScene: [SCENE], background is a single flat [PALETTE_HEX] field.\nSubject: [SUBJECT].\nComposition: locked poster frame; subject reads as one clear silhouette within the central 70 percent;\n[ELEMENT_PLAN].\nAvoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles,\nno photoreal texture, no soft shading, no blur, no anti-aliased edges, no paper texture, no grain,\nno aged or faded look, no sepia, no halftone dots, no clutter.",
+  "variants": {
+    "id": "motion_archetype",
+    "label": "运动原型",
+    "required_for_gates": [
+      2,
+      3
+    ],
+    "why": "两种运动的首帧规则与提示词骨架不同，**Gate 1 就得二选一并写进 IR**（`params.motion_archetype`）。拖到出图时才定，首帧就已经出错了。",
+    "options": {
+      "A": {
+        "label": "组装型",
+        "when": "图解、机制、数据实物化、地图——逐件滑入 / 卡位 / 连接，铺满整条 clip",
+        "first_frame": {
+          "kind": "empty_surface",
+          "spec": "空色场（主调色板里的底色，纯色）",
+          "ffmpeg": "color=c=0x<PALETTE_HEX>:s=<W>x<H>"
+        },
+        "variable_guidance": {
+          "ELEMENT_PLAN": "写「3 到 6 个可分离元素组，为后续逐件组装留位」",
+          "PALETTE": "首帧空场的底色（与 PALETTE_HEX 同一个色）"
+        },
+        "gate3_prompt": "Pixel-art animation. Use Image 1 as the exact empty first frame (a flat [PALETTE] field) and Image 2 as the\nexact completed last frame. One continuous locked-off vertical shot, no camera movement.\nOpen on the empty field, then assemble the scene piece by piece with crisp stepped timing, PACED EVENLY\nACROSS THE ENTIRE CLIP: pieces keep sliding in and snapping into place continuously through the whole\nshot — do NOT finish early, do NOT hold a long static frame; [ASSEMBLY_ORDER],\nwith the final pieces snapping into place in the last second to complete Image 2.\nPreserve the 9:16 framing, the exact limited palette, chunky pixels, hard pixel edges and flat\ncolor blocks of Image 2. Animate on twos, stepped motion, no smoothing.\nNo scene cuts, no camera movement, no zoom, no morphing, no new objects, no anti-aliasing, no motion blur,\nno text, no letters, no numbers, no logos, no watermark, no sound."
+      },
+      "B": {
+        "label": "角色动作型",
+        "when": "重演、生活场景、情绪落点——一个主动作连续进行，末拍落在最后一秒",
+        "first_frame": {
+          "kind": "character_start_pose",
+          "spec": "🔴 **本原型不许用空色场首帧**：首帧是「场景 + 角色**起始**姿态」的静帧，尾帧是「动作**完成**姿态」。两张都走 Gate 2 出图",
+          "ffmpeg": "首帧不能用 lavfi 纯色生成：走 Gate 2 出起始姿态静帧，再过归一层"
+        },
+        "variable_guidance": {
+          "ELEMENT_PLAN": "写「起始姿态清晰可读」（外加画幅相关的留空约束）",
+          "SUBJECT": "角色长相**只在这里写一次**；Gate 3 只写 the character shown in Image 2"
+        },
+        "gate3_prompt": "Pixel-art animation. Use Image 1 as the exact first frame and Image 2 as the exact last frame.\nOne continuous locked-off vertical shot, no camera movement.\nThe character shown in Image 2 [ACTION], moving continuously and PACED EVENLY ACROSS THE\nENTIRE CLIP — do NOT finish early, do NOT hold a long static frame; the action completes in the last second\nto match Image 2 exactly.\nPreserve the 9:16 framing, the exact limited palette, chunky pixels, hard pixel edges and flat\ncolor blocks. Animate on twos, stepped motion, no smoothing.\nNo scene cuts, no camera movement, no zoom, no morphing, no new objects, no anti-aliasing, no motion blur,\nno text, no letters, no numbers, no logos, no watermark, no sound."
+      }
+    }
+  },
+  "_placeholder_map": {
+    "note": "三段提示词是 2026-07-28 端到端冒烟验证过的原文，**逐字照搬**（含换行），只做两件不改字的事：① 中文占位符换成引擎变量名；② 把 `[16:9 horizontal|9:16 vertical]` 这类**画幅二选一**在基础模板里定死成 9:16 那一支，16:9 那一支原样进 `aspect_16_9` 的替换规则——两支文本都保留，谁也没被改写。",
+    "[一句话视觉命题]": "VISUAL_METAPHOR",
+    "[列出主调色板 hex]": "PALETTE_LIST",
+    "[side-view|isometric]": "FRAMING（冒烟实填 `Side-view`）",
+    "[场景]": "SCENE",
+    "[底色 hex]": "PALETTE_HEX（gate2）",
+    "[底色]": "PALETTE（gate3 原型 A 的空场底色）",
+    "[主体/角色外观——全片只在这里描述一次]": "SUBJECT",
+    "[3 到 6 个可分离元素组…（原型 A）|起始姿态清晰可读（原型 B）]": "ELEMENT_PLAN（写什么由运动原型决定，见 variants[*].variable_guidance）",
+    "[按顺序描述 3–6 元素如何滑入/卡位/连接]": "ASSEMBLY_ORDER（原型 A）",
+    "[单一主动作，写清怎么动]": "ACTION（原型 B）",
+    "[16:9 horizontal|9:16 vertical] / [70|60] / [horizontal|vertical] / [16:9|9:16]": "画幅二选一 → aspect_16_9 的替换规则"
+  },
+  "pipeline_extras": {
+    "why": "本 profile 的**归一层**不是可选后处理，是这门语言的技术脊柱。它把两件事从形容词变成可验证的事实：一个逻辑像素 = 输出图上一个 N×N 纯色方块；全片只用主调色板里的颜色。少跑一步，交付物就只是「像素味的软图」。",
+    "params": {
+      "palette": "<项目>/palette/master.png",
+      "grid": "4",
+      "grid_frames": "6",
+      "size": "720x1280",
+      "size_frames": "1080x1920"
+    },
+    "film_level_gates": [
+      {
+        "id": "palette",
+        "name": "Gate 0 · 主调色板",
+        "cost": "免费",
+        "ask": "这套颜色是这条片的世界吗？（**一部片一张，定了就不改**）",
+        "cmd": "python3 tools/make-palette.py --hex <16–32 个 hex，逗号分隔> --out {palette} --swatch <项目>/palette/swatch.png",
+        "notes": [
+          "**色数 16–32 是甜区**（脚本带宽 4–64）。太多就不是像素画了，太少表达不了层次。",
+          "**抖动默认关**（`--dither none`）：ordered dither 的网点纹理会被读成半调/纸颗粒——那正是要划清界限的东西。渐变实在压不住时才 `--dither bayer:bayer_scale=4`，并记进 `ledger.decisions`。"
+        ]
+      }
+    ],
+    "post_still": [
+      "python3 tools/pixelize.py still --in <raw>.png --out <anchor>.png --palette {palette} --size {size} --grid {grid}",
+      "python3 tools/pixelize.py still --in <raw>.png --out <anchor>_last.png --palette {palette} --size {size_frames} --grid {grid_frames}  # Seedance 首尾帧：从逻辑图整数倍放大"
+    ],
+    "post_video": [
+      "python3 tools/pixelize.py video --in <raw>.mp4 --out <clip>.mp4 --palette {palette} --size {size} --grid {grid}"
+    ],
+    "extra_checks": [
+      "python3 tools/verify.py <target> --palette {palette} --grid {grid} --json <evidence>.json --contact <sheet>.jpg"
+    ],
+    "check_criteria": {
+      "栅格": "非纯色方块占比 ≤ 0.2% —— 抓 AI 软像素与有损压缩的振铃",
+      "锁色": "到最近调色板项的距离 ≤ 容差（静帧 0 / 视频 3）—— 抓做旧色与模型自己长出来的脏色。视频容差不是 0：x264 哪怕无损也只是 YUV 空间无损，RGB→YUV420p→RGB 的取整让通道漂 ±1~2，这是编码的物理事实",
+      "规格": "尺寸必须是 grid 的整数倍（`verify.py` 顺带查）",
+      "note": "`verify.py` 会自动调 `tools/clip-qa.py` 补上通用项（规格 / 死尾 / contact sheet）——**死尾判据全仓只有那一份**。error 不清零不进人眼环节"
+    },
+    "encode_note": "**`--crf 0`（无损）是默认，别省**。有损压缩会在方块边缘长出振铃，把 32 色打回上千色（实测 crf 10 → 678 色 / 4349 个非纯色方块；crf 0 → 31 色 / 0 个）。像素画本身压得极小，无损中间产物不贵。`-g 12 -sc_threshold 0` 已内置：挂进 HyperFrames `<video>` 后 seek 不冻帧。"
+  },
+  "status": {
+    "gate2_still": "✅",
+    "gate3_video": "✅ 157%",
+    "aspect_16_9": "✅",
+    "note": "端到端已冒烟（2026-07-28，横竖各 1 条 10s，运动原型 B，主调色板 midnight-neon 16 色）；归一层与验收层另有本地正负对照四组",
+    "known_issues": [
+      "**多镜头间的角色一致性未验证**——冒烟每条独立出。同一角色跨 ≥2 镜时必须先跑 1–2 条目检角色是否对得上，再排产其余",
+      "长片里连续多个像素镜的观感疲劳未验",
+      "角色一致性目前靠 `/v1/images/edits` 挂参考图实现（首帧归一图当 ref 出尾帧姿态，横竖两条的角色、桌椅、台灯、窗户全部对得上），但**那段 ref 提示词还没有模板**，只存在于冒烟留痕里：`projects/_smoke/broll-skills-2026-07-28/anchors/imgjobs-last.json`"
+    ],
+    "evidence": "projects/_smoke/broll-skills-2026-07-28/（px_h / px_v 的 QA JSON + contact sheet，runs/ 有 x-oneapi-request-id；实产时长四条全是 10.042s）",
+    "measured": {
+      "归一前": "非纯色方块 30.5%（横）/ 49.0%（竖）、越界色 10 万+",
+      "归一后": "0.0000% / 0 种",
+      "结论": "**归一层是必需的，不是可选后处理**；锁色判据把画面钉死在 16 色内，`#C9A876` 那类做旧色物理上进不来"
+    }
+  },
+  "notes": [
+    "**角色一致性铁律**：角色长相只在 Gate 2 的 imagegen prompt 里描述一次；Seedance prompt 里**不许重复描述长相**，只写 `the character shown in Image 2`——外观描述与锚点冲突时以锚点为准（`seedance.md`）。浣熊片每镜复述一遍全套长相，是这条纪律的反例。",
+    "**像素在动的时候「沸腾」**（方块逐帧乱跳）：先降 `--step-fps` 到 8–10（拍数更慢、抖动更少）；仍沸腾说明 Seedance 生成时就没守住栅格，回 Gate 3 重生并在 prompt 里加重 `stepped motion, no smoothing`。",
+    "**组装提前做完、尾部长 hold**：死尾项会判 fail。修法是重生时强化「铺满整条 clip、末件在最后一秒落位」；**尾裁救不了组装过早**（可用运动短于槽位就得重生或缩短槽位）。",
+    "**归一后主体糊成一坨**：逻辑分辨率承载不了这个构图。别调 grid（会破坏与其他镜的一致），回 Gate 2 简化构图——3–6 个大组，不是满屏碎片。",
+    "**出现假字**：回 Gate 2 重生静帧，不要用视频 prompt 修补。",
+    "锚点内禁一切文字数字（`seedance.md` TAIL 约束）——数字信息由 HTML 角标叠在像素画上，两层分工。"
+  ],
+  "failure_criteria": [
+    "**栅格没守住**：非纯色方块超 0.2%（多半是跳了归一层，或中间产物用了有损压缩）",
+    "**出现调色板外的颜色**：做旧色、模型自己长出来的脏色——锁色判据直接判红",
+    "动作一眼读不懂（脚本查不了，人眼必看）",
+    "角色对不上锚点：变脸、换衣服、桌椅台灯窗户漂移（成因通常是 Seedance prompt 里复述了长相）",
+    "用非整数倍放大凑尺寸——栅格会被糊掉（脚本会报错拦住，但手写 ffmpeg 会绕过）",
+    "生成提示词里出现做旧词或拼贴词（见 banned_vocab，lint 是机器门）"
+  ],
+  "ir_writeback": {
+    "provider": "seedance",
+    "params": {
+      "pixel_narrative": true,
+      "ai_stylized": false,
+      "craft": "pixel-broll",
+      "motion_archetype": "A|B",
+      "palette": "palette/master.png",
+      "grid": 4,
+      "dither": "none"
+    },
+    "note_prefix": "像素叙事",
+    "why": "provider 仍是 `seedance`——合同 `traits.pixel_narrative` 的 fallback 就是按 provider 认的，别新造 provider 把它绕过去。`craft` 沿用历史值 `pixel-broll`（存量 film.json 按它认），不因为并进 broll-studio 就改"
+  }
+}

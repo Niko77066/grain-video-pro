@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """GPT-Image-2 静帧批量客户端（契约见 produce/references/image-motion.md）。
 
-pixel-broll 与 collage-broll 的 Gate 2 共用。把两条易错契约固化成会报错的形状：
+八套生成型材质语言（`broll-studio`）的 Gate 2 共用。把两条易错契约固化成会报错的形状：
 size 必须是 16 的倍数、output_format 禁 webp。响应 b64_json / url 两种形态都处理。
 
 带 "ref" 的 job 走 /v1/images/edits（参考图编辑）——角色一致性问题必须在便宜的图像阶段

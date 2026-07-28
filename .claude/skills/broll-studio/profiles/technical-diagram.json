@@ -49,6 +49,7 @@
     "extends",
     "pulses"
   ],
+  "stitching": "与版式卡靠**共享的单一强平色场 + 同一套线宽与模块圆角 + 品牌点色**缝成一家；图解的标注层与版式卡用同一字号阶，让「图解段」与「数据段」读成一套图形语言。",
   "first_frame": {
     "kind": "empty_surface",
     "spec": "空制图场（warm off-white drafting-paper 底），无任何模块",
@@ -83,6 +84,16 @@
     "微零件堆砌；科幻 UI 光效（把工程可信变成特效炫技）"
   ],
   "_vocab_note": "「rails」technical-diagram 与 toy-world 都在正当使用（导轨），不具区分性，已从签名表移除（2026-07-28 lint 自洽性测试发现，同 modular 的处理）。本风格真正的签名是 exploded-view / axonometric / drafting-paper / navy linework / sockets / engineering axis。",
+  "status": {
+    "gate2_still": "✅ 人眼过",
+    "gate3_video": "⚠️ 未验",
+    "aspect_16_9": "⚠️ 未验",
+    "note": "按 Vectary + IBM 重建，**牛皮纸专利图皮肤已删**",
+    "known_issues": [
+      "同一条片里多镜共用一套 profile 的一致性未验（每套只出过一条）"
+    ],
+    "evidence": "projects/_smoke/broll-studio-2026-07-28/（runs/ 有 request-id，evidence/ 有逐条 QA JSON）"
+  },
   "notes": [
     "2026-07-28 用户拍板：只要 Vectary + IBM，**删除牛皮纸专利图皮肤**（连同 sepia／印刷纹理／宜家说明书参考）。首版冒烟用的是被删掉的那张皮，因此本 profile 的 9:16 状态回落为**未冒烟**。"
   ]

@@ -26,9 +26,8 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 ## 仓库地图
 
 - `.claude/skills/produce/` — 十阶段生产管线与导演知识包；按阶段、按镜头来源加载
-- `.claude/skills/pixel-broll/` — 像素风生成镜头（GPT-Image-2 + Seedance 2.0，2026-07-28 端到端冒烟）：四闸门 + 主调色板锁色 + 栅格归一 + 码判验收；**禁用词表把「做旧」挡在生成层之外**，做旧只归 compose 的 LUT
-- `.claude/skills/collage-broll/` — 半调纸拼贴 b-roll（GPT-Image-2 + Seedance 首尾帧）：三闸门 + 从空场组装 + 死尾码判；9:16 与 16:9 均已冒烟。与 pixel-broll **材质语汇互斥，不许串词**；两者的 prompt 模板**唯一出处在各自 skill**，`produce/references/` 下只留指针
-- `.claude/skills/broll-studio/` — 六套生成型 b-roll 材质语言的**共用引擎** + profile 数据层（实物桌面剧场 / 技术图解 / 黏土 / 毛毡 / 立体书 / 玩具世界）。三闸门、几何、引擎绑定、QA 只有一份；profile 只承载「材质语汇 / 运动动词 / 首帧规则 / 失败标准」。2026-07-28 冒烟后按参考实图重写五套（clay-miniature 端到端已验，其余静帧已验、视频待验）
+- `.claude/skills/broll-studio/` — **八套生成型 b-roll 材质语言的共用引擎 + profile 数据层**（像素风 / 半调纸拼贴 / 实物桌面剧场 / 技术图解 / 黏土 / 毛毡 / 立体书 / 玩具世界）。三闸门、画幅几何、引擎绑定、QA 判据、IR 写回**全仓各只有一份**；profile 只承载「材质语汇 / 运动动词 / 首帧规则 / 缝合纪律 / 失败标准」，外加少数几套的**额外工序** `pipeline_extras`（pixel 的片级主调色板闸门 + 归一层、popup-book 的第二张 Gate 2 图）。**引擎不认识任何 profile 的名字**——差异一律声明式，搜不到 `if pid == "..."`。状态的唯一出处是各 profile 的 `status`（`broll-profile.py status`）
+- `.claude/skills/pixel-broll/`、`.claude/skills/collage-broll/` — **指针壳**，保住 `/pixel-broll`、`/collage-broll` 的触发面；内容在 broll-studio，profile 分别是 `pixel` 与 `collage`。2026-07-28 从独立 skill 收敛进来——那两套长成 skill、六套长成 profile 是迁移顺序留下的痕迹，不是设计判断，而副本一多就会有一份悄悄漂（「做旧报纸风假像素」就是这么来的）
 - `.claude/skills/rednote-mentor/` — 小红书选题、标题、封面与合规辅助；按需调用，不属于成片交付硬门
 - `vendor/upstream-skills/` — 官方 HyperFrames skill 的**溯源凭据**（`skills-lock.json` 记 25 个包的来源与哈希 + 挖矿落点表）。副本本身 2026-07-28 拉取、挖矿完毕后删除——知识已重写进 `produce/references/`，要对照上游按该目录 README 一条命令重新拉
 - `film-ir/` — Film IR Python 库与 `kuleshov-ir` CLI：`read / patch / validate / execute`
@@ -37,9 +36,11 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 - `projects/<slug>/` — 每条片的 IR、阶段产物、证据与输出；项目脚本不自动等于可复用管线
 - `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用、响度与跨镜头主色漂移，作为 render contract 的证据源
 - `tools/gpt-image.py` — GPT-Image-2 静帧批量客户端；带 `ref` 的 job 走 `/v1/images/edits`，角色一致性在便宜的图像阶段解决
-- `tools/seedance.py` — Seedance 2.0 首尾帧批量客户端（submit/poll/下载 + request-id 留痕，逐条落盘可断点续提）；把三条易错契约固化成会报错的形状：`duration` 必须在 `metadata` 内、`ratio` 不许省略、越界时长提交前本地拦截。pixel-broll 与 collage-broll 共用
-- `tools/broll-profile.py` — 八套材质语言的 registry：list / show / render（填变量出提示词）/ **lint（串词机器门，只看肯定描述，否定式约束不算串）**/ route（文稿类型选型）
-- `tools/clip-qa.py` — 生成型 clip 的通用码判：规格 / **死尾**（尾段运动量 / 全片运动量的**相对**判据，宪法红线「禁冻结帧补时长」的码判投影；绝对阈值跨不了内容类型，2026-07-28 实测证伪）/ contact sheet。两条生成链只有这一份死尾判据
+- `tools/seedance.py` — Seedance 2.0 首尾帧批量客户端（submit/poll/下载 + request-id 留痕，逐条落盘可断点续提）；把三条易错契约固化成会报错的形状：`duration` 必须在 `metadata` 内、`ratio` 不许省略、越界时长提交前本地拦截。八套材质语言共用
+- `tools/broll-profile.py` — 八套材质语言的 registry 与引擎入口：list / status（状态唯一出处）/ show / vars（提示词变量的唯一注册表）/ render（填变量出提示词，带 variant 与附加静帧槽位）/ plan（含 `pipeline_extras` 的完整工序清单）/ **lint（串词 + 禁用词机器门，只看肯定描述，否定式约束不算串）**/ route（文稿类型选型）/ selftest（自洽性测试：每套渲一遍并过自己的 lint）
+- `tools/{make-palette,pixelize,verify}.py` — `pixel` profile 的归一层与专属码判（主调色板 / 面积降采样 + 量化 + 最近邻整数倍放大 / 栅格与锁色）。2026-07-28 从 skill 的 `scripts/` 移入——它们已经是引擎的一部分
+- `tools/clip-batch-sheets.py` — **批次级**总览三张图（逐条组装进程 / 全部实际首帧 / 确认静帧 ‖ 视频末帧），八套通用，多条一起做时必出：逐条 QA 看不见批次级问题
+- `tools/clip-qa.py` — 生成型 clip 的通用码判：规格 / **死尾**（尾段运动量 / 全片运动量的**相对**判据，宪法红线「禁冻结帧补时长」的码判投影；绝对阈值跨不了内容类型，2026-07-28 实测证伪）/ contact sheet。**八套材质语言只有这一份死尾判据**
 - `tools/check-media-setup.sh` — 生成型镜头链路开工前自检（ffmpeg / Pillow / .env 凭据 / oss-upload）
 - `tools/make-vtt.py` — same-source 外挂字幕：剧本文本 + 强制对齐字戳 → `out/final.vtt`（禁 ASR 文本、禁手写、不带标点）
 - `tools/judge/` — G2 隔离评审：生成证据包、出题、阅卷与校准

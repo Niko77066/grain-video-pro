@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""像素专属码判：栅格 + 锁色。通用项（规格 / 死尾 / contact sheet）转给 tools/clip-qa.py。
+"""`pixel` profile 专属码判：栅格 + 锁色。通用项（规格 / 死尾 / contact sheet）转给 tools/clip-qa.py。
+
+由 `profiles/pixel.json` 的 `pipeline_extras.extra_checks` 声明调用——引擎照单执行，不认脚本名。
 
   ① 栅格 —— 每个 grid×grid 方块是否纯色（扩散模型的软像素 / 有损压缩的振铃都在这里现形）
   ② 锁色 —— 出现的颜色是否贴合主调色板（做旧色、模型自己长出来的脏色都在这里现形）

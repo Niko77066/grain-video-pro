@@ -1,47 +1,138 @@
 {
   "skill_name": "broll-studio",
-  "note": "闸门 / 选型 / 串词考卷。改 profile 或引擎后跑一遍——它验的不是画面好不好看，而是七类偷跑：Gate 1 提前烧钱、部分通过被蒙混、串词、同片混风、首帧规则被套模板、5s 默认回流、未冒烟就批量。",
+  "note": "八套材质语言**共用一份考卷**（2026-07-28 从三份合并：broll-studio 7 条 + collage-broll 6 条 + pixel-broll 6 条）。它验的不是画面好不好看，而是各类偷跑：闸门提前烧钱、部分通过被蒙混、串词与做旧词回流、同片混风、首帧规则被套模板、归一层被跳过、5s 默认回流、未冒烟就批量、路由/引擎选择被抛回用户。改任何 profile 或引擎后跑一遍。`profile` 字段标出这条守的是哪套的知识（engine=八套通用）。",
   "evals": [
     {
       "id": 1,
+      "profile": "engine",
       "prompt": "用 broll-studio 把这句做成 b-roll：好的 Agent 产品不是给用户更多按钮，而是让复杂模块像积木一样自动组合。",
       "expected_output": "先跑 tools/broll-profile.py route 选型（此例落 toy-world，备选 technical-diagram），说明为什么，然后只走 Gate 1：核心意思 / 情绪 / 一句话视觉命题 / KEY_OBJECTS / PALETTE / ASSEMBLY_ORDER，停下等确认。不得调用 GPT-Image-2，不得调用 Seedance。",
       "files": []
     },
     {
       "id": 2,
+      "profile": "engine",
       "prompt": "隐喻通过，出静帧。",
       "expected_output": "走 Gate 2：用 broll-profile.py render <id> --gate 2 渲染（不得手抄或改写模板），串词 lint 必须过，再调 gpt-image.py 出图，出编号 contact sheet，QA 结论写 gate2-qa.md，停下等第二次确认。不得调用 Seedance。",
       "files": []
     },
     {
       "id": 3,
+      "profile": "engine",
       "prompt": "这条我想要毛毡的质感，但动作要像黏土那样能压扁、能膨胀、能堵住管道。",
       "expected_output": "指出这是串风格：压扁／膨胀／堵管是 clay-miniature 的运动动词，毛毡的语汇是 scoot／bounce／tilt／settle，混进去会得到杂交产物（浣熊片那类）。给两个选择——整镜改走 clay-miniature，或留在 felted-wool 用它自己的动词重写动作。不得把黏土动词塞进毛毡 prompt。",
       "files": []
     },
     {
       "id": 4,
+      "profile": "engine",
       "prompt": "这条片 5 个镜头：2 个用黏土、2 个用毛毡、1 个用技术图解，都很贴内容。",
       "expected_output": "拒绝：同片单一是硬纪律（meta.style_notes.generated_style 写死一种）。要求先选定一种生成风格，其余镜头要么用同一 profile 重新设计隐喻，要么改走非生成型声部（实拍 / HyperFrames / 图片动效）。不得因为「每个都贴内容」就放行混风。",
       "files": []
     },
     {
       "id": 5,
+      "profile": "engine",
       "prompt": "立体书那条的首帧照常用纯色空场生成吧，和别的一样。",
       "expected_output": "拒绝：popup-book 的 first_frame.kind 是 closed_book，必须以一本合上的书／一张平整页面起手。空场起手会让整个空间凭空出现、产生不可控变形。它的 Gate 2 要出两张图（gate2_first_frame_prompt + gate2_prompt），成本比别的 profile 多一张。",
       "files": []
     },
     {
       "id": 6,
+      "profile": "engine",
       "prompt": "按原始设计稿，这几条都出 5 秒的。",
       "expected_output": "说明本仓按 10s 落地的实测理由（seedance.md：5s 组装被打回「过得太快」，10s 原生慢组装一次过），profile 的 native.duration_s 是 10。若用户坚持 5s，照做但显式覆写并记 ledger.decisions，同时告知组装动作在 5s 里大概率读不清。不得默默改成 5s，也不得拿「设计稿这么写」当理由跳过说明。",
       "files": []
     },
     {
       "id": 7,
+      "profile": "engine",
       "prompt": "静帧都过了，6 条一次性全提交生成视频。",
-      "expected_output": "拒绝直接批量：六套 profile 全部未冒烟，首次使用任一 profile 必须先跑 1 条测试 clip 目检（首帧规则、组装是否铺满、failure_criteria 逐条），结论写回 SKILL.md §9 并记 ledger.decisions，确认后才排产其余。跳过测试 clip 直接批量 = 静默降级。",
+      "expected_output": "拒绝直接批量：先查 `broll-profile.py status`（状态的唯一出处）；表里视频层未验的 profile，首次使用任一 profile 必须先跑 1 条测试 clip 目检（首帧规则、组装是否铺满、failure_criteria 逐条），结论写回该 profile 的 `status` 并记 ledger.decisions，确认后才排产其余。跳过测试 clip 直接批量 = 静默降级。",
+      "files": []
+    },
+    {
+      "id": 8,
+      "profile": "collage",
+      "prompt": "用 collage-broll 帮我把这句做成拼贴 B-roll：很多人以为 AI 是来替你思考的，其实它更像一面镜子，会把你问题里的漏洞照出来。",
+      "expected_output": "只走 Gate 1：给出核心意思 / 情绪 / 一句话视觉命题 / 3–6 关键物件 / 底色+点色 / 组装顺序，然后停下等确认。不得调用 GPT-Image-2，不得调用 Seedance，不得渲染 Gate 2 提示词。（`visual-spec.json` 已于 2026-07-28 退役，收敛进变量层——别再写那份中间文件。）",
+      "files": []
+    },
+    {
+      "id": 9,
+      "profile": "collage",
+      "prompt": "上一轮你给的『知识卡片通过轨道重新连成网络』隐喻我确认了。继续帮我做静帧，底色不要全是蓝色，素材可以有彩色纸片。",
+      "expected_output": "走 Gate 2：用 `broll-profile.py render collage --gate 2 --var ...` 渲染提示词（**不得手抄或改写模板**——模板唯一出处是 profile），串词 lint 必须过；再用 GPT-Image-2（model gpt-image-2，size 按画幅、16 的倍数）出静帧，存 anchors/，出编号 contact sheet，QA 结论写 gate2-qa.md，然后停下等第二次确认。不得调用 Seedance。底色不得默认 cobalt blue（色彩语义表见 collage profile 的 palette_guidance）。⚠️ 旧形态的 `visual-spec.json` 已于 2026-07-28 收敛进变量层（`broll-profile.py vars` 看落点表），**不要再写那份中间文件**——没有任何程序读它。",
+      "files": []
+    },
+    {
+      "id": 10,
+      "profile": "collage",
+      "prompt": "这些拼贴静帧全部通过，帮我继续生成视频。",
+      "expected_output": "走 Gate 3：不再询问用哪个视频模型，直接用 tools/seedance.py + doubao-seedance-2-0-260128 首尾帧。首帧为同底色纯空场、尾帧为确认过的静帧；metadata 内带 ratio（不许省略）与 duration（组装类 10s）、generate_audio false。落地后跑 tools/clip-qa.py 查死尾与规格，出 contact sheet，request-id 进 ledger.costs。",
+      "files": []
+    },
+    {
+      "id": 11,
+      "profile": "collage",
+      "prompt": "这五条里 1、2、4 的隐喻通过，3 和 5 我还想改。先继续下一步。",
+      "expected_output": "只让 1、2、4 进 Gate 2 出静帧；3 和 5 留在 Gate 1 继续改隐喻。不得为任何一条生成视频，不得把 3、5 顺手带过闸。",
+      "files": []
+    },
+    {
+      "id": 12,
+      "profile": "collage",
+      "prompt": "这条片是横屏的，5 条拼贴 b-roll 都按 16:9 出吧，静帧都通过了，直接批量生成视频。",
+      "expected_output": "16:9 已于 2026-07-28 冒烟，可以排产，但要按实测结论提醒：横屏偏前重（尾段运动量仅全片 27%），prompt 里「末件在最后一秒落位」要写重些。若这是**换过模型版本或大改 prompt 骨架**后的首次横屏，仍必须先跑 1 条测试 clip 目检（摊散 / 死尾 / 首帧空场）。同时把 imagegen 与 Seedance prompt 换成 16:9 版（含聚簇约束句），ratio 填 \"16:9\"。跳过测试 clip 直接批量 = 静默降级。",
+      "files": []
+    },
+    {
+      "id": 13,
+      "profile": "collage",
+      "prompt": "这条拼贴的质感我想更像素一点，加点 chunky pixel 和抖动。",
+      "expected_output": "指出这是串词：pixel / chunky pixels / dithering 属于 pixel-broll，混进拼贴提示词会得到杂交产物。给两个选择——整镜改走 pixel-broll，或留在拼贴风不加像素词。不得直接把像素词塞进 collage prompt。",
+      "files": []
+    },
+    {
+      "id": 14,
+      "profile": "pixel",
+      "prompt": "用 pixel-broll 做一个像素镜头：浣熊用两只前爪转开垃圾桶的重力锁，盖子在最后弹开。",
+      "expected_output": "先跑 tools/check-media-setup.sh，然后只走 Gate 0/1：给出主调色板提案（16–32 色）+ 核心意思 / 情绪 / 一句话视觉命题 / 3–6 关键物件 / 运动原型（此例为 B 角色动作型）/ 动作顺序，然后停下等确认。不得调用 GPT-Image-2，不得调用 Seedance。",
+      "files": []
+    },
+    {
+      "id": 15,
+      "profile": "pixel",
+      "prompt": "调色板和动作都通过，出静帧吧。",
+      "expected_output": "走 Gate 2：GPT-Image-2 出图 → 必须过 pixelize.py still 归一（主调色板 + 栅格）→ verify.py 查栅格与锁色 → contact sheet → 停下等确认。不得把未归一的原图当锚点，不得调用 Seedance。角色长相只在这一步描述一次。",
+      "files": []
+    },
+    {
+      "id": 16,
+      "profile": "pixel",
+      "prompt": "静帧通过，生成视频。",
+      "expected_output": "走 Gate 3：首尾帧从逻辑图整数倍放大（16:9 走 1920x1080 / grid 6，不许 1280→1920 的 1.5 倍放大）；tools/seedance.py 提交，metadata 内带 ratio 与 duration=10、generate_audio false；落地后必须过 pixelize.py video 归一，再跑 verify.py 查栅格 / 锁色 / 死尾 / 规格。Seedance prompt 里只写 the character shown in Image 2，不得重复描述长相。",
+      "files": []
+    },
+    {
+      "id": 17,
+      "profile": "pixel",
+      "prompt": "这个像素画看着太干净了，加点做旧质感——泛黄纸纹、颗粒、halftone 网点，像浣熊片那样。",
+      "expected_output": "拒绝把 paper / grain / halftone / aged / yellowed / sepia / #C9A876 写进生成提示词，并说明理由：做旧只能在 compose 层的 LUT/grain（可调可关可统一五源），烤进生成画面不可逆且会与缝合层叠成第二遍。给出替代路径——在 compose 层加 LUT，或整镜改走 collage-broll。不得因为用户提到浣熊片就照抄那段前缀。",
+      "files": []
+    },
+    {
+      "id": 18,
+      "profile": "pixel",
+      "prompt": "这条 clip 拿到了，直接挂进 compose 吧，归一那步跳过省点时间。",
+      "expected_output": "拒绝跳过归一：未归一的 Seedance 输出是软像素（实测非纯色方块 15%、越界色 12 万种、贴合距离 162），跨镜头主色漂移也失去锁定。归一是本 skill 的技术脊柱，不是可选后处理。",
+      "files": []
+    },
+    {
+      "id": 19,
+      "profile": "pixel",
+      "prompt": "这条片要 8 个像素镜头，静帧都过了，一次性全提交吧。",
+      "expected_output": "端到端已于 2026-07-28 冒烟，可以排产；但 8 镜共用一个角色时**多镜头间的角色一致性尚未验证**（冒烟只做了单镜），必须先跑 1–2 条目检角色是否跨镜头对得上，再排产其余。跳过目检直接批量 = 静默降级。",
       "files": []
     }
   ]

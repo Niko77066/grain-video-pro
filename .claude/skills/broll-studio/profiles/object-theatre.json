@@ -55,6 +55,7 @@
     "rolling",
     "clicking into place"
   ],
+  "stitching": "与 HyperFrames 版式卡靠**共享的台面主色 + 同一柔和方向实用光 + 品牌点色**缝成一家；物品的磨损、指纹与实拍景深是这门语言的可信度信号，compose 层不许磨平它们，全片统一的颗粒/LUT 加在最外层。",
   "first_frame": {
     "kind": "empty_surface",
     "spec": "空桌面（PALETTE 主色的干净台面），无任何物件",
@@ -89,6 +90,17 @@
     "物品悬浮或无重量；出现人脸；满桌碎物（超过 6 组就读不成一句话）",
     "产品摄影的光洁感：真实定格片有磨损、指纹、实拍景深"
   ],
+  "status": {
+    "gate2_still": "✅ 人眼过",
+    "gate3_video": "⚠️ 未验",
+    "aspect_16_9": "⚠️ 未验",
+    "note": "按 PES 重写：手进画面、物品替身、转换发生在动作里",
+    "known_issues": [
+      "本套要 Seedance 画**真人的手**做精细动作——手是 AI 视频最容易崩的部位，这条风险只有真跑才知道",
+      "同一条片里多镜共用一套 profile 的一致性未验（每套只出过一条）"
+    ],
+    "evidence": "projects/_smoke/broll-studio-2026-07-28/（runs/ 有 request-id，evidence/ 有逐条 QA JSON）"
+  },
   "notes": [
     "2026-07-28 重写：原提示词的 `no human hands` 与 PES 参考直接冲突，产出退化成静物产品照。手是这门语言的动词，已改为「双手在画面中完成动作、末尾退出画面」。",
     "「fingerprints」是 clay-miniature 的签名词（塑形师按在橡皮泥上的指印），本风格改说 scuffs / handling marks——lint 抓出来的。"

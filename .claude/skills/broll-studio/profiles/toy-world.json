@@ -60,6 +60,7 @@
     "settles",
     "glows"
   ],
+  "stitching": "与版式卡靠**共享的哑光塑料/石膏材质 + 同一柔光棚光 + 品牌电光点色的玩具件**缝成一家；统一棚光是它「产品化」观感的来源，切到别的声部时保持同一光位方向。",
   "first_frame": {
     "kind": "empty_surface",
     "spec": "空工作室平台（PALETTE 主色的柔光台面 + 环境阴影），无模块",
@@ -94,6 +95,17 @@
     "没有台座／展柜的陈列逻辑，东西直接摊在地上；没有 hero 物件"
   ],
   "_vocab_note": "「modular」两套共用、不具区分性，已从签名表移除（2026-07-28 lint 自洽性测试发现）",
+  "status": {
+    "gate2_still": "✅ 人眼过",
+    "gate3_video": "⚠️ 未验",
+    "aspect_16_9": "⚠️ 未验",
+    "note": "按 Cash App 重建（第三版才对）",
+    "known_issues": [
+      "v1 尾帧模块没对接而隐喻是「模块自己拼起来」——Gate 2 在这里值回了票价，Image 2 不是完成态时 Gate 3 会朝着「没拼上」组装",
+      "同一条片里多镜共用一套 profile 的一致性未验（每套只出过一条）"
+    ],
+    "evidence": "projects/_smoke/broll-studio-2026-07-28/（runs/ 有 request-id，evidence/ 有逐条 QA JSON）"
+  },
   "notes": [
     "2026-07-28 第三次重写：前两版分别做成「淡雅极简产品渲染」和「木头玩具火车布景」，都不是 Cash App。实看该页图集后重建为「素白舞台 + 单一电光品牌色 + 石膏台座陈列」，并把 Brawlidays 降级为需显式选择的次要风味。"
   ]
