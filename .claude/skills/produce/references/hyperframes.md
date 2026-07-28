@@ -22,7 +22,7 @@
 
 ## 定位
 
-HeyGen 开源（Apache 2.0）的 agent-native 合成框架："写 HTML/CSS/GSAP，渲染视频"。**不产生像素，只做确定性合成**。它是 **MG 动画（motion graphics）/信息图形语言**的主引擎，也是全片叠加层（字幕/角标/数据卡）的宿主——按表达选它，不是按成本选它。
+HeyGen 开源（Apache 2.0）的 agent-native 合成框架："写 HTML/CSS/GSAP，渲染视频"。**不产生像素，只做确定性合成**。它是 **MG 动画（motion graphics）/信息图形语言**的主引擎，也是全片叠加层（角标/数据卡）的宿主——按表达选它，不是按成本选它。**字幕不在叠加层之列**：外挂 VTT sidecar，禁烧进画面（`compose-contract.md` §6，机器门 lint ⑦）。
 
 **类型纪律**：全部产出属"幻灯片语法"，**不计入运动占比**——片型承诺只能写 `typography_led` / `data_explainer`，冒充 `motion_led` 是承诺违约。
 
@@ -70,7 +70,7 @@ Frame Adapter v0：`getDurationFrames()` 返回有限非负整数，`seekFrame(f
 ### 能力地图（用户要"更炫酷"时知道 HyperFrames 能干什么 → 先 `catalog --json` 再 `add <name>`）
 
 HyperFrames/Catalog 覆盖：**转场**（CSS 套件 3D/Blur/Cover/Dissolve/Push/Radial/Scale… + shader Whip Pan/
-Cinematic Zoom/Light Leak/Ripple/Glitch…）、**字幕组件**（Kinetic Slam/Karaoke/Neon/Glitch RGB/Highlight…）、
+Cinematic Zoom/Light Leak/Ripple/Glitch…）、**字幕组件**（Kinetic Slam/Karaoke/Neon/Glitch RGB/Highlight…——⚠️ 本仓成片禁用：字幕外挂 VTT 不烧录，合同 §6）、
 **HTML-in-Canvas/VFX**（iPhone&MacBook 3D、Liquid Glass、Portal、Shatter、Magnetic）、**社交 overlay**
 （IG/TikTok/YouTube/X/Reddit/Spotify）、**lower thirds**、**数据/地图**（Data Chart、choropleth/flow/hex、World Map）、
 **effects/text**（Grain/Vignette/Shimmer/Pixelate/Parallax Zoom/Morph Text/Texture Mask）、**字幕转写/编辑**、
@@ -80,7 +80,7 @@ Catalog 是快变在线表面——**不要背名单**，先 `npx hyperframes ca
 
 ## 渲染纪律
 
-- 渲染一律 `--docker`：同一 composition 逐字节复现——未来 golden-set 回归可做帧级 diff，基线从 M0 第一片就用 Docker 建；
+- **渲染默认走渲染机**（`tools/render-remote.sh`，`RENDER_URL` 注入；2026-07-20 双跑验收后切默认，见 produce SKILL.md ⑧）；本地 `hyperframes render --docker` **降为兜底**（渲染机宕机/占满时），同时仍是确定性基线：同一 composition 逐字节复现，golden-set 回归可做帧级 diff；
 - 逐帧寻位（整数帧时钟），动画时长换算成帧数思考（30fps：0.3s = 9 帧）。
 
 ### 新版本镜像怎么建（2026-07-28 定法，别再让 CLI 自己 build）
@@ -118,7 +118,7 @@ docker run --rm --platform linux/arm64 --shm-size=2g \
 
 ## 典型用途（声部：信息主轨）
 
-榜单卡 / 数据卡 / 大数字卡 / 标题与章节卡 / 引言卡 / 全片字幕层 / 图片动效容器（见 image-motion.md——Ken Burns 在这里做，不预烘焙 mp4，可调且确定性）。
+榜单卡 / 数据卡 / 大数字卡 / 标题与章节卡 / 引言卡 / 图片动效容器（见 image-motion.md——Ken Burns 在这里做，不预烘焙 mp4，可调且确定性）。**「全片字幕层」不是用途**——字幕一律外挂 VTT（合同 §6），catalog 里的字幕组件家族对本仓成片不可用。
 
 ## WebGL/Three.js 集成(2026-07-15 实战教训)
 

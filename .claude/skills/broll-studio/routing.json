@@ -2,16 +2,46 @@
   "schema": "broll-routing@1",
   "note": "文稿类型 → 风格 profile。这是 skill 内的**镜头级**选型，不是 styles/ 那层的风格包路由（那层问的是「要让观众如何理解这条内容」，走 tools/route-style.py）。两层不冲突：风格包定全片世界，本表定单镜的材质语言。",
   "rules": [
-    { "script_type": "反常识、观点反转", "primary": "object-theatre", "alt": "clay-miniature" },
-    { "script_type": "AI 原理、Agent 机制", "primary": "technical-diagram", "alt": "toy-world" },
-    { "script_type": "创作焦虑、职场荒诞", "primary": "clay-miniature", "alt": "object-theatre" },
-    { "script_type": "孤独、陪伴、人本价值", "primary": "felted-wool", "alt": "clay-miniature" },
-    { "script_type": "成长路径、内容生产流程", "primary": "popup-book", "alt": "technical-diagram" },
-    { "script_type": "产品功能、平台生态", "primary": "toy-world", "alt": "technical-diagram" },
-    { "script_type": "历史事件重演、数据实物化", "primary": "pixel", "alt": "object-theatre",
-      "external": true },
-    { "script_type": "抽象概念的氛围间奏", "primary": "collage", "alt": "object-theatre",
-      "external": true }
+    {
+      "script_type": "反常识、观点反转",
+      "primary": "object-theatre",
+      "alt": "clay-miniature"
+    },
+    {
+      "script_type": "AI 原理、Agent 机制",
+      "primary": "technical-diagram",
+      "alt": "toy-world"
+    },
+    {
+      "script_type": "创作焦虑、职场荒诞",
+      "primary": "clay-miniature",
+      "alt": "object-theatre"
+    },
+    {
+      "script_type": "孤独、陪伴、人本价值",
+      "primary": "felted-wool",
+      "alt": "clay-miniature"
+    },
+    {
+      "script_type": "成长路径、内容生产流程",
+      "primary": "popup-book",
+      "alt": "technical-diagram"
+    },
+    {
+      "script_type": "产品功能、平台生态",
+      "primary": "toy-world",
+      "alt": "technical-diagram"
+    },
+    {
+      "script_type": "历史事件重演、数据实物化",
+      "primary": "pixel",
+      "alt": "object-theatre"
+    },
+    {
+      "script_type": "抽象概念的氛围间奏",
+      "primary": "collage",
+      "alt": "object-theatre"
+    }
   ],
   "tie_break": "两个都说得通时，问「这条的说服力来自结构还是来自情绪」——结构走 technical-diagram / toy-world / popup-book，情绪走 clay-miniature / felted-wool / object-theatre。仍判不出就落 object-theatre：它对隐喻的要求最高，做不出好隐喻本身就是「该回去改文案」的信号。",
   "same_film_rule": "**同片单一**（沿用 whiteboard-generalist 的 STYLE_LOCK 纪律）。一条片只准一种生成风格，开工时写死 meta.style_notes.generated_style，逐镜按该风的 signature_vocab 执法。混风就是这套体系最想避免的杂交产物。"

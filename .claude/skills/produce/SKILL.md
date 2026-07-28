@@ -1,9 +1,9 @@
 ---
 name: produce
-description: Kuleshov 十阶段视频生产管线（M0 手工作坊版）——从 brief 到成片：音频先行、锚点先行、逐镜头来源路由，状态机活在 film.json。当用户说"开拍"、"出一条片"、"跑管线"、"继续做某片"、"重做第 N 镜"时使用。
+description: Kuleshov 十阶段视频生产管线——从 brief 到成片：音频先行、锚点先行、逐镜头来源路由，状态机活在 film.json。当用户说"开拍"、"出一条片"、"跑管线"、"继续做某片"、"重做第 N 镜"时使用。
 ---
 
-# Kuleshov 生产管线 · M0 手工作坊版
+# Kuleshov 生产管线
 
 你是这条链路的执行制片人（EP）兼各阶段导演。**默认端到端自主**：从 brief 到 deliver 一气跑完，**不设人工停点**——质量由评估机制把关（G1 代码硬门 + G2 隔离评委），不合格**卡住回炉重造**，不靠人在环点头。
 
@@ -108,9 +108,11 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 3. 评审（**G2 隔离评委，默认**）：`tools/judge/build_evidence_pack.py` 出证据 → `judge.py --node hero_frames --task` 出题 → **派发隔离 subagent 打分**（subagent 只见并排图与镜头意图，不含创作理由）→ `judge.py --node hero_frames --finalize <scores>` 阅卷；未达 Golden 下限**禁止铺开全片 storyboard**，换视觉方案回炉重来。本门是**绝对判断 → 单臂**（`--mode solo`，缺省）：证据里除 Golden 标尺外不得放竞争方案，否则分数被对手质量污染（`tools/judge/README.md`「评审模式协议」）。**Golden 是固定标尺不是对手**——不给它打分、不评"谁更好"。要比 A/B 视觉方案另跑 `--mode paired`，且配对结论不能当出厂判词；
 4. 结果记 `ledger.gates`（stage: `hero_frames`，带证据文件路径）。
 **不允许以"本片不用生成资产"为由跳过本门**——Codex hf-breach 正是靠"全声明型图形"让品味验证合法蒸发的。
+
+### ④ audio（全片时钟）
 读 `references/tts-audio.md`（TTS 走 **MiniMax speech-2.8-hd 固定音色 single-pass** + 声纹 gate；不再用火山 seed-audio——分节音色漂移已弃）。音轨定稿后**必读 `references/forced-alignment.md`** 建逐字 timeline（剧本 1:1 强制对齐；禁 whisper 转写比例映射）——字幕/画面 cue/挂载全部由它派生。
 1. TTS 生成 `audio/voiceover.wav`（分节生成便于重做单节）。
-2. 强制对齐产出 `audio/timeline.json`（逐词时间戳 + 分节区间），回填 `film.json.audio.timeline`。
+2. 强制对齐产出 `audio/timeline_fa.json`（逐词时间戳 + 分节区间，名字对齐 `forced-alignment.md` / `compose-contract.md`），回填 `film.json.audio.timeline`。
 3. **自查（G1 级，不过必须重做）**：回转写与剧本比对准确率 ≥ 95%。（**时长门已取消**——见 §1「时长不设硬门」；只记录实际总时长，不为凑数重做或变速。）
 4. 有音乐需求的选曲并记 BPM / 段落结构。
 
@@ -156,12 +158,12 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 ### ⑨ review
 0. **成片实测（先于一切自查，2026-07-21 起）**：`python3 tools/measure-render.py <project>` 产出 `evidence/render-metrics.json`（逐镜静态持有 / `<video>` 计数 / 时长 / 响度 / 跨镜头主色漂移——从成片反测，不信自报字段），随后 `kuleshov-ir validate` 过 `style.contract.render` 零 error。自报 `static_class` 与实测矛盾时**以实测为准**，回去改片不许改字段。
 1. **L0 手动仪器**（结果与证据写 `review.md`）：`ffprobe` 查时长/分辨率/帧率；blackdetect / freezedetect 查黑帧冻结；响度是否 -14 LUFS；成片音轨回转写 vs 剧本；承诺复验（时长、运动占比、转场数）。出示证据，"我检查过了"不算数。
-2. **视觉出厂自查**（读 `references/visual-selfcheck.md`）：**先跑自动前置门 `python3 tools/kuleshov-lint.py projects/<片名>`**（woff2/时效词/脚注压边框，error 禁出厂），再抽帧逐项过版式反模式硬查（第一批：竖屏视觉重心 / 双角标 PPT 味 / 文件实证 / 死尾 / 幻灯片化 / 模板味 / 三面开钩一致 / 文字拆词；第二批：素材重复 / 时代地点错位 / 暗尾黑闪 / **音画同步(字幕·文字与 TTS，关键观感痛点，评委 D5/D6 必查)** / 时效词复核 / 烘焙镜头拍点 / **元素压容器边框(脚注·角标骑内框线)**），**任一命中必改再出厂**，结果记 `ledger.gates`——agent 出厂前**自己发现并指出问题**的门，不靠用户挑。背景与本次新增门见 `docs/postmortem-hf-breach.md`。
+2. **视觉出厂自查**（读 `references/visual-selfcheck.md`）：**先跑自动前置门 `python3 tools/kuleshov-lint.py projects/<片名>`**（①–⑦ 全套：woff2 / 时效词 / 脚注压边框 / 组件底板 / 字幕标点 / GSAP 供给 / 字幕外挂，error 禁出厂），再抽帧逐项过版式反模式硬查（第一批：竖屏视觉重心 / 双角标 PPT 味 / 文件实证 / 死尾 / 幻灯片化 / 模板味 / 三面开钩一致 / 文字拆词；第二批：素材重复 / 时代地点错位 / 暗尾黑闪 / **音画同步(字幕·文字与 TTS，关键观感痛点，评委 D5/D6 必查)** / 时效词复核 / 烘焙镜头拍点 / **元素压容器边框(脚注·角标骑内框线)**），**任一命中必改再出厂**，结果记 `ledger.gates`——agent 出厂前**自己发现并指出问题**的门，不靠用户挑。背景与本次新增门见 `docs/postmortem-hf-breach.md`。
 3. **G2 成片门（隔离评委，默认）**：`tools/judge/build_evidence_pack.py` 出证据包（contact sheet + Golden 并排 + L0 + 实测指标 + 音轨，隔离创作上下文）→ `judge.py --node final --task` 出题 → **派发隔离 subagent 打分** → `judge.py --node final --finalize <scores>` 阅卷（可同理跑 `--node audio` 音频门），报告记 `ledger.gates`。扣分必须引用镜头 ID/时间码否则判无效；**fail → 回炉（§5），不问人**。评委否决权按"先校准后放权"（`tools/judge/README.md` 校准协议）——校准达标前 fail 记 DEBT 停 review（不阻断出片但禁 delivered）。本门同样是**绝对判断 → 单臂**；与旧版/其它方案比高下要另跑 `--mode paired --vs`，两路都跑时用 `--merge` 合并，非 `decisive` 不得声称胜负。
 4. 出厂后 `/video-score` 登记 9 维分（2026-07-16 起含 D8 创意 / D9 网感）入校准语料；有问题 `/video-triage` 归因到环节。
 
 ### ⑩ deliver
-`out/` 里放齐：成片 + `film.json` + `review.md` + `evidence/render-metrics.json` + 成本小结（`ledger.costs` 汇总）。git commit（一片一提交）。向用户汇报：总成本、总墙钟、各阶段耗时、留下的 DEBT 标记。
+`out/` 里放齐：成片 `final.mp4` + **外挂字幕 `final.vtt`**（两件缺一即违 Invariant #13）+ `film.json` + `review.md` + `evidence/render-metrics.json` + 成本小结（`ledger.costs` 汇总）。git commit（一片一提交）。向用户汇报：总成本、总墙钟、各阶段耗时、留下的 DEBT 标记。
 
 **合同违约出厂规则（2026-07-21 拍板）**：`style.contract.*` 有未清 error 时，端到端可以继续把片子做完出厂，但**只能停在 `review` 带 `contract_violation` DEBT 标记**——禁止置 `delivered`、禁止合 main，违约明细原样摆给用户看片时裁决。带宽内 amendments 不算违约（已留痕）；越界才算。
 
@@ -169,9 +171,9 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 
 | Provider | 状态 | 这门语言擅长表达什么 | 关键约束 | 知识包 |
 |---|---|---|---|---|
-| MG 动画（HyperFrames） | ✅ | 信息与图形语言：数据卡、榜单、动态排版、字幕层 | 产出属"幻灯片语法"，不计运动占比 | `references/compose-contract.md` + `hyperframes.md` |
+| MG 动画（HyperFrames） | ✅ | 信息与图形语言：数据卡、榜单、动态排版（**字幕不属此层**——外挂 VTT sidecar，禁烧录，合同 §6） | 产出属"幻灯片语法"，不计运动占比 | `references/compose-contract.md` + `hyperframes.md` |
 | AI 生成视频（Seedance 2.0） | ✅ | 真运动、氛围、场景再现、hook/hero 镜头 | 单次 4–15s；角色/产品镜头必须挂锚点 | `references/seedance.md` |
-| AI 生成 b-roll · **八套材质语言**（GPT-Image-2 + Seedance 首尾帧） | ⚠️ 逐 profile 不同，看 `python3 tools/broll-profile.py status`（状态唯一出处）：`pixel` / `collage` / `clay-miniature` 端到端已冒烟，另五套静帧已验、视频待验 | 像素风（角色重演、机制图解、数据实物化、历史重演）／半调纸拼贴（抽象隐喻的氛围间奏）／实物桌面剧场（物品隐喻）／技术图解（机制）／黏土（荒诞情绪）／毛毡（温暖叙事）／立体书（路径与世界）／玩具世界（产品质感） | **同片单一** + 不许串别的 profile 的材质语汇（`broll-profile.py lint` 机器门，还查 profile 自己声明的 `banned_vocab`——像素的做旧词表就在那）；强制三闸门；无文字/数字/logo（要文字 HyperFrames 叠层）；额外工序看 `plan <id>`（`pixel` 有主调色板闸门 + 归一层，`popup-book` 的 Gate 2 要两张图）；首次用当前模板出片先跑 1 条测试 clip 目检，结论写回该 profile 的 `status` | `.claude/skills/broll-studio/SKILL.md`（`pixel-broll` / `collage-broll` 是指针壳） |
+| AI 生成 b-roll · **八套材质语言**（GPT-Image-2 + Seedance 首尾帧） | ⚠️ 逐 profile 不同，看 `python3 tools/broll-profile.py status`（状态唯一出处，**不在此抄录**） | 像素风（角色重演、机制图解、数据实物化、历史重演）／半调纸拼贴（抽象隐喻的氛围间奏）／实物桌面剧场（物品隐喻）／技术图解（机制）／黏土（荒诞情绪）／毛毡（温暖叙事）／立体书（路径与世界）／玩具世界（产品质感） | **同片单一** + 不许串别的 profile 的材质语汇（`broll-profile.py lint` 机器门，还查 profile 自己声明的 `banned_vocab`——像素的做旧词表就在那）；强制三闸门；无文字/数字/logo（要文字 HyperFrames 叠层）；额外工序看 `plan <id>`（`pixel` 有主调色板闸门 + 归一层，`popup-book` 的 Gate 2 要两张图）；首次用当前模板出片先跑 1 条测试 clip 目检，结论写回该 profile 的 `status` | `.claude/skills/broll-studio/SKILL.md`（`pixel-broll` / `collage-broll` 是指针壳） |
 | 数字人（HeyGen Avatar 4） | ✅ | 口播、主持、结论、人设 IP | 时长=音频时长；aspect_ratio 必填；形象锚点按目标画幅构图 | `references/avatar.md` |
 | 图片 + 动效（GPT-Image-2） | ✅ | 风格化静帧、插画、概念示意、"准运动" | 连续 ≤ 2 镜（防幻灯片化） | `references/image-motion.md` |
 | TTS 音频（MiniMax speech-2.8-hd 固定音色） | ✅ | 一切旁白 | 单 pass 固定音色 + 声纹 gate；对齐必走 forced-alignment；**不用火山 seed-audio** | `references/tts-audio.md` `references/forced-alignment.md` |

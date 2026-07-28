@@ -1,5 +1,7 @@
 # HyperFrames Agent 使用说明书
 
+> ⚠️ **本仓覆盖声明（2026-07-28）**：这是 HyperFrames 侧的**外部参考手册**，不是本仓合同——与 `.claude/skills/produce/` 冲突时以后者为准（CLAUDE.md 仓库地图）。两条已知冲突必须按本仓规则执行：① 本手册与官方 skill 的「见到 stale pin 就 `upgrade --project` 自行升级」在本仓无效——**报告，不执行**，`delivered`/`review` 项目的版本 pin 是渲染证据（CLAUDE.md Production Invariant #11）；② §0.2 的「Studio preview 须用户批准后才 render」不适用——本仓走端到端自主 + G1/G2 门（produce SKILL.md §0）。字幕组件家族对本仓成片不可用（字幕外挂 VTT 禁烧录，`compose-contract.md` §6）。
+>
 > 面向 AI Agent 的 HyperFrames 理解、创作、检查、渲染与交付手册  
 > 资料基线：2026-07-28；HyperFrames `0.7.77`（npm 发布于 2026-07-28T02:18Z）；主仓库提交 `3c857d768b2eeb6ee97d4cad5d27119b8efa23eb`（`chore: release v0.7.77`）；launch 仓库提交 `f487ef4bddd0736d9103822bb575a4680078f039`（自上一版未变，仍是 16 个项目）。  
 > 上一版基线为 2026-07-23 / `0.7.68`。两版之间的合同级变化集中列在 **0.3 节**，其中两条是**反向变更**（旧手册写反了的规则），请优先读。

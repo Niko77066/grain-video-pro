@@ -91,6 +91,7 @@
 
 **要做**：要么把提问模板抄进包内，要么改成不依赖外部章节号的自包含表述。
 
-## P4 · `collage-broll.md` 全链硬锁 9:16
+## ~~P4 · `collage-broll.md` 全链硬锁 9:16~~（2026-07-28 已过时）
 
-已开独立任务（`.claude` 会话内 chip），此处只登记：imagegen size、ffmpeg 首尾帧 `1080x1920`、Seedance `ratio: "9:16"`、两套 prompt 模板的 "vertical 9:16 locked poster frame"。横屏项目没有拼贴声部。
+~~已开独立任务（`.claude` 会话内 chip），此处只登记：imagegen size、ffmpeg 首尾帧 `1080x1920`、Seedance `ratio: "9:16"`、两套 prompt 模板的 "vertical 9:16 locked poster frame"。横屏项目没有拼贴声部。~~
+被 broll-studio 收敛取代：collage 现为 profile，且横竖屏都有实测原文（`gate2_prompt_16_9` / `gate3_prompt_16_9`，16:9 端到端 2026-07-28 验过）——「硬锁 9:16」与「横屏无拼贴声部」两个前提都不再成立。
