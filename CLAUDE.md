@@ -32,7 +32,7 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 - `.claude/skills/rednote-mentor/` — 小红书选题、标题、封面与合规辅助；按需调用，不属于成片交付硬门
 - `vendor/upstream-skills/` — 官方 HyperFrames skill 的**溯源凭据**（`skills-lock.json` 记 25 个包的来源与哈希 + 挖矿落点表）。副本本身 2026-07-28 拉取、挖矿完毕后删除——知识已重写进 `produce/references/`，要对照上游按该目录 README 一条命令重新拉
 - `film-ir/` — Film IR Python 库与 `kuleshov-ir` CLI：`read / patch / validate / execute`
-- `styles/` — 风格包与**三层路由层**：`case-file`（事实核验型新闻解读）、`pixel-chronicle`（结构化深度知识叙事）、`anchor-desk`（官方口径播报型解读，候选）三套专用包 + `whiteboard-generalist` 生产兜底模板；`routing.md`（路由规程）、`routing-vocab.json`（受控词表）、`routing-cases.json`（路由回归考卷 15 条）、`golden-set.json`（Golden 登记册：路径 + 实测规格 + known_defects，成片在 `~/kuleshov-archive/golden/` 不入库）、各包 `capability.json`（结构化能力卡），以及模板、禁用区和进化规程
+- `styles/` — 风格包与**三层路由层**：`case-file`（事实核验型新闻解读）、`pixel-chronicle`（结构化深度知识叙事）、`anchor-desk`（官方口径播报型解读，候选）、`meme-ledger`（授权频道反差画面驱动的商业机制解说，候选）四套专用包 + `whiteboard-generalist` 生产兜底模板；`routing.md`（路由规程）、`routing-vocab.json`（受控词表）、`routing-cases.json`（路由回归考卷）、`golden-set.json`（Golden 登记册：路径 + 实测规格 + known_defects，成片在 `~/kuleshov-archive/golden/` 不入库）、各包 `capability.json`（结构化能力卡），以及模板、禁用区和进化规程
 - `tools/route-style.py` — 风格包路由器：硬规则排除 → 能力卡打分 → 置信兜底，出 Top 3 + 理由 + 格式适配施工说明 + 被排除包及原因；`--check` 跑路由回归
 - `projects/<slug>/` — 每条片的 IR、阶段产物、证据与输出；项目脚本不自动等于可复用管线
 - `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用、响度与跨镜头主色漂移，作为 render contract 的证据源

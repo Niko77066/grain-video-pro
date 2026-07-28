@@ -1,0 +1,24 @@
+{
+  "schema": "voice-profile@1",
+  "provider": "minimax",
+  "model": "speech-2.8-hd",
+  "voice_id": "project-authorized-minimax-voice",
+  "runtime_voice_id_env": "MINIMAX_MEME_LEDGER_VOICE_ID",
+  "display_name": "Meme Ledger Chinese voice",
+  "language_boost": "Chinese",
+  "generation": {
+    "mode": "single-pass",
+    "response_format": "hex",
+    "audio_setting": {"format": "mp3", "sample_rate": 32000, "bitrate": 128000, "channel": 1},
+    "voice_setting": {"speed": 1.03, "vol": 1, "pitch": 0, "english_normalization": true}
+  },
+  "performance": {
+    "register": "平实、略带不敢置信的停顿；把机制算清，不用角色表演抢走笑点。",
+    "pause": "用中文句读控制；反转前可插入 0.15–0.30 秒停顿。",
+    "forbidden": ["模仿特定真人声音或口癖", "连续笑声、怪叫或角色扮演", "用情绪标签代替文案节奏"]
+  },
+  "verification": {
+    "source": "项目级授权记录。可复现证据见 evidence/audio/banfo-source.m4a 与 evidence/rights/banfo-voice-clone-user-authorized.md；真实 MiniMax 音色 ID 与所有凭据仍只存在于运行环境。",
+    "required_after_generation": ["在项目 rights/ 中登记声音使用或复刻授权，并在 Film IR 写 audio.voiceover.authorization_ref", "独立回转写与冻结剧本比对，准确率至少 95%", "强制对齐生成逐字 timeline", "检查音轨与 compose/assets/voiceover.mp3 同一文件版本"]
+  }
+}

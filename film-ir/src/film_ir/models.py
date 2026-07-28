@@ -130,11 +130,20 @@ class Voiceover(IRModel):
     status: Optional[str] = None
     text_prompt_file: Optional[str] = None  # TTS adapter 的输入指针
     voice_profile: Optional[str] = None
+    authorization_ref: Optional[str] = None # 项目级声音使用/复刻授权引用
     gen: Optional[GenRecord] = None
 
 
 class Music(IRModel):
     file: Optional[str] = None
+    provider: Optional[str] = None
+    track_id: Optional[str] = None
+    title: Optional[str] = None
+    selection_method: Optional[str] = None
+    selection_seed: Optional[int] = None
+    instrumental: Optional[bool] = None
+    loop: Optional[bool] = None
+    license_ref: Optional[str] = None
     role: Optional[str] = None
     type: Optional[str] = None
     mix: Optional[str] = None

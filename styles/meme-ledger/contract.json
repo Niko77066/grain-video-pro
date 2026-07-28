@@ -1,0 +1,77 @@
+{
+  "schema": "style-contract@1",
+  "style_pack": "meme-ledger",
+  "source": "playbook.md §0–§10 散文→机器合同编译（2026-07-28）。横版固定装配预设：项目已授权 UnusualVideos 频道视频、项目授权 MiniMax 声音档与固定 BGM 别名。",
+  "denominators": "所有时长份额的分母 = audio.timeline.duration_s（真实旁白总时长）。每个镜头只计一个 provider。",
+  "amend_policy": "数值仅可在各自 amend 带宽内调整：IR patch 写 meta.contract_amendments[\"<dotted.path>\"]，并在 ledger 记明原因。越界即合同违约；本文件生产期只读。",
+  "plan": {
+    "required_aspect": "16:9",
+    "voices": {
+      "licensed_channel_footage": {
+        "role": "唯一画面声部——从 UnusualVideos 频道已合作授权视频中按语义反差与动作落点选段；不承担事实证据。",
+        "providers": ["footage"],
+        "min_shots": {"value": 6, "amend": [6, 99]}
+      }
+    },
+    "provider_share": {
+      "footage": {
+        "min": {"value": 1, "amend": [1, 1]},
+        "max": {"value": 1, "amend": [1, 1]}
+      }
+    },
+    "footage_source": {
+      "provider": "footage",
+      "channel_url": "https://www.youtube.com/@UnusualVideos",
+      "license_status": "project_documented_creator_collaboration",
+      "required_params": ["channel_url", "source_url", "video_id", "in_s", "out_s", "license_ref"]
+    }
+  },
+  "audio": {
+    "voiceover": {
+      "provider": "minimax",
+      "model": "speech-2.8-hd",
+      "voice_profile_suffix": "meme-ledger/voice-profile.json",
+      "required_fields": ["voice_profile", "authorization_ref"],
+      "authorized_evidence_reference": "evidence/audio/banfo-source.m4a",
+      "authorized_evidence_rights": "evidence/rights/banfo-voice-clone-user-authorized.md"
+    },
+    "music": {
+      "required": true,
+      "fixed_track_id": "meme-ledger-main",
+      "selection_method": "fixed",
+      "instrumental_required": true,
+      "loop_required": true,
+      "required_fields": ["file", "track_id", "selection_seed", "license_ref"],
+      "authorized_evidence_asset": "evidence/audio/roundabout-authorized.webm",
+      "authorized_evidence_rights": "evidence/rights/bgm-roundabout-user-authorized.md",
+      "rights_policy": "频道视频合作授权不自动覆盖音乐。固定曲目别名对应的录音与词曲同步/母带授权证明必须写入 audio.music.license_ref；缺证明不得 deliver。"
+    }
+  },
+  "compose": {
+    "engine": "hyperframes",
+    "mode": "assembly_only",
+    "no_effects": true,
+    "allowed_operations": ["data-media-start/time-window trim", "source-preserving scale/letterbox", "hard cut", "static caption/subtitle", "audio mix and loudness normalization"],
+    "allowed_overlay_types": ["caption", "subtitle"],
+    "caption_terminal_punctuation": "forbidden",
+    "forbidden_source_params": ["effects", "animation", "transition", "filter", "grade", "lut", "grain", "vignette", "zoom", "pan", "parallax", "playback_rate"]
+  },
+  "render": {
+    "static_hold_ratio_max": {"value": 0.12, "amend": [0.08, 0.18], "basis": "画面全部来自真实运动视频；只容忍源片短暂停顿与测量噪声。"},
+    "min_video_elements": {"value": 6, "amend": [6, 99], "basis": "至少六个可追溯的授权频道视频选段；不得以图形卡或静帧补足。"}
+  },
+  "inviolable": [
+    "成片固定横版 16:9；需要其他画幅时另建适配预设，不得静默裁切本配方",
+    "画面只使用 https://www.youtube.com/@UnusualVideos 频道中项目已登记合作授权的视频；每个选段必须登记 source_url、video_id、in_s、out_s 与 license_ref",
+    "频道视频只做语义反差与节奏标点，不得充当事实来源；所有事实主张仍须在 research 中可回链",
+    "HyperFrames 只负责素材时间窗、尺寸适配、硬切、静态字幕和混音；禁止动画、转场、滤镜、调色、颗粒、缩放、平移、变速及其他视觉效果",
+    "TTS 必须使用 MiniMax speech-2.8-hd 与项目级已授权声音档；可使用 evidence/audio/banfo-source.m4a 这份有校验和和授权记录的复刻参考，但不得把真实 MiniMax 音色 ID、API 凭据或未登记的参考音频写入共享风格包",
+    "BGM 固定使用 track_id=meme-ledger-main 的项目授权纯器乐循环版本，并在 IR 登记 seed 与授权引用",
+    "字幕或字幕轨文本不得以 。！？… 或 .!? 结束；句末停顿由时间轴和画面承担",
+    "用户要求结构移植时，TTS 前必须有主母稿、两个被排除母稿、逐段映射、事实槽位与主动偏离说明；不得用通用短模板或上一期母稿替代本期的叙事发动机",
+    "结构移植不得将完整母稿压缩成主题摘要后以通用解释文补齐；必须保留逐段的具体材料—裂缝—下一段接力关系，并通过 references/f-of-x-transplant-design.md §5 的 Anti-Smooth Gate",
+    "文案必须通过 references/human-speech-engine.md §6 的‘人话’六问复核；任意两问无答案即不得进入 TTS",
+    "playbook.md §7 的反模式一票否决清单不可由 agent 解释豁免",
+    "自报字段（static_class 等）与 evidence/render-metrics.json 实测矛盾时，以实测为准"
+  ]
+}

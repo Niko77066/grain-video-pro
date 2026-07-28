@@ -1,0 +1,43 @@
+{
+  "schema": "style-capability@1",
+  "id": "meme-ledger",
+  "display_name": "梗账本",
+  "layer": "bundled",
+  "status": "candidate",
+  "positioning": "授权频道反差画面驱动的商业机制解说",
+  "one_liner": "用固定横版、固定声音和固定 BGM，把一条商业机制讲清，再用合作频道的动作反差让人停住。",
+  "signature": "全片只用已授权频道的真实运动视频做平行隐喻；静态无标点字幕与一本正经的旁白构成唯一包装。",
+  "narrative_skeleton": ["反常识钩子", "利益或风险转移", "机制升级", "反方与普通人成本", "母比喻收束"],
+  "understanding_task": {"primary": ["explain_the_mechanism"], "secondary": ["weigh_an_argument"]},
+  "applicable_content": ["knowledge_explainer", "opinion_commentary", "case_retrospective", "product_brand"],
+  "audience": ["general", "beginner"],
+  "tone": ["approachable", "narrative"],
+  "pacing": "fast",
+  "visual_language": ["合作频道真实运动视频", "动作与口播反差", "静态白字黑描边字幕", "硬切", "固定授权 BGM 循环"],
+  "preset_lock": {"aspect": "16:9", "why": "这是用户已验证的固定横版栏目配方；竖屏需要独立重新标定，不得静默裁切"},
+  "hard_rules": {
+    "requires_any": [["licensed_partner_footage"], ["contrast_fact", "multi_stage_causality"]],
+    "excluded_material": ["presenter_wanted"],
+    "excluded_sensitivity": ["tragedy", "regulated_medical", "regulated_legal"],
+    "why": "没有已登记合作授权的频道素材，固定画面配方无法成立；没有反差事实或机制递进，画面只会退化成无因果的梗片；主播、伤亡和强监管建议与本包的平行隐喻语法冲突。"
+  },
+  "native_format": {
+    "aspect": ["16:9"],
+    "duration_s": [75, 150],
+    "basis": "首轮横版试跑约 98 秒，验证了固定装配链与无效果画面语法；仍待多条独立样片完成 Golden 认证。",
+    "adaptation": {
+      "aspect": "本预设为固定横版栏目，不做静默竖裁。需要竖屏时新建适配预设，并重新标定字幕安全区、镜头比例与 render 阈值。",
+      "duration_shorter": "保住钩子、一次利益转移、一个动作升级和母比喻收束；不要把每一段等比压短，也不要删掉授权选段的动作完成点。",
+      "duration_longer": "添加新的连续机制链或具体案例，不拉长现有选段；每个新增段都要有新的利益/风险转移与动作反差。"
+    }
+  },
+  "material_requirements": {
+    "signature": ["licensed_partner_footage", "contrast_fact"],
+    "prefers": ["multi_stage_causality", "presenter_declined"],
+    "can_work_without": ["readable_evidence", "official_dataset", "character_footage", "archival_footage", "location_footage", "diagram_need"]
+  },
+  "avoid_when": ["breaking_news", "tragedy", "regulated_finance", "regulated_medical", "regulated_legal"],
+  "avoid_why": "快讯和高风险建议需要画面承担证据或权威性；本包明确把频道视频限定为平行隐喻，不能替代证据。",
+  "routing_note": "命中前提是项目已提供合作频道授权。它和 pixel-chronicle 都能解释机制，但后者靠多源结构叙事，本包靠授权频道的高频动作反差与固定栏目包装。",
+  "see_also": {"playbook": "styles/meme-ledger/playbook.md", "contract": "styles/meme-ledger/contract.json"}
+}

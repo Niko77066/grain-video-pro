@@ -350,6 +350,12 @@ def style_contract_plan(ir: FilmIR, ctx: GateContext | None = None) -> list[Viol
     shots = sorted(ir.shots, key=lambda s: s.t[0])
     total = ir.audio.timeline.duration_s if ir.audio.timeline else None
 
+    required_aspect = plan.get("required_aspect")
+    if required_aspect and ir.meta.aspect != required_aspect:
+        v.append(_err("style.contract.plan", "meta.aspect",
+                      f"本固定生产预设只允许 {required_aspect}",
+                      evidence=f"实际 {ir.meta.aspect!r}"))
+
     # 声部在场性（case-file 形）：provider 独占声部按 provider 计，
     # 共享 provider 的声部按 shots[].source.params.voice 声明计——无声明降 warn。
     voices = plan.get("voices") or {}
@@ -390,6 +396,24 @@ def style_contract_plan(ir: FilmIR, ctx: GateContext | None = None) -> list[Viol
             if hi is not None and share > hi:
                 v.append(_err("style.contract.plan", f"plan.provider_share.{prov}",
                               f"{prov} 声明份额 {share:.0%} > 上限 {hi:.0%}"))
+
+    footage_source = plan.get("footage_source") or {}
+    if footage_source:
+        provider = footage_source.get("provider", "footage")
+        required = footage_source.get("required_params") or []
+        expected_channel = footage_source.get("channel_url")
+        for s in (x for x in shots if x.source.provider == provider):
+            params = s.source.params or {}
+            missing = [key for key in required
+                       if params.get(key) is None or params.get(key) == ""]
+            if missing:
+                v.append(_err("style.contract.plan", f"shots[{s.id}].source.params",
+                              "授权素材镜头缺可追溯字段: " + ", ".join(missing)))
+            if expected_channel and params.get("channel_url") != expected_channel:
+                v.append(_err("style.contract.plan",
+                              f"shots[{s.id}].source.params.channel_url",
+                              f"素材频道必须为合同指定源: {expected_channel}",
+                              evidence=f"实际 {params.get('channel_url')!r}"))
 
     # trait 份额（可跨 provider 重叠；分母=音频总长，见合同 denominators）
     traits = plan.get("traits") or {}
@@ -447,6 +471,101 @@ def style_contract_plan(ir: FilmIR, ctx: GateContext | None = None) -> list[Viol
                                   f"声明型图形连续 {run_dur:.1f}s > 上限 {run_max:g}s"
                                   f"（{len(run_ids)} 镜）", evidence=" → ".join(run_ids)))
                 run_dur, run_ids = 0.0, []
+    return v
+
+
+def style_contract_audio(ir: FilmIR, ctx: GateContext | None = None) -> list[Violation]:
+    """audio 起：锁定风格包要求的 TTS 档与固定授权 BGM。"""
+    c, _ = _load_contract(ir, ctx)
+    audio = (c or {}).get("audio") or {}
+    if not audio:
+        return []
+    v: list[Violation] = []
+
+    voice_spec = audio.get("voiceover") or {}
+    if voice_spec:
+        vo = ir.audio.voiceover
+        if vo is None:
+            v.append(_err("style.contract.audio", "audio.voiceover",
+                          "风格包要求旁白音轨，但 Film IR 未声明 voiceover"))
+        else:
+            suffix = voice_spec.get("voice_profile_suffix")
+            if suffix and not (vo.voice_profile or "").endswith(suffix):
+                v.append(_err("style.contract.audio", "audio.voiceover.voice_profile",
+                              f"旁白必须使用风格包声音档: *{suffix}",
+                              evidence=f"实际 {vo.voice_profile!r}"))
+            for key in voice_spec.get("required_fields") or []:
+                value = getattr(vo, key, None)
+                if value is None or value == "":
+                    v.append(_err("style.contract.audio", f"audio.voiceover.{key}",
+                                  f"旁白缺必填留痕字段: {key}"))
+            model = voice_spec.get("model")
+            if model and vo.gen and not (vo.gen.model or "").startswith(model):
+                v.append(_err("style.contract.audio", "audio.voiceover.gen.model",
+                              f"TTS 模型必须为 {model}", evidence=f"实际 {vo.gen.model!r}"))
+
+    music_spec = audio.get("music") or {}
+    music = ir.audio.music
+    if music_spec.get("required") and music is None:
+        v.append(_err("style.contract.audio", "audio.music", "风格包要求固定 BGM"))
+        return v
+    if music is None:
+        return v
+    fixed_track = music_spec.get("fixed_track_id")
+    if fixed_track and music.track_id != fixed_track:
+        v.append(_err("style.contract.audio", "audio.music.track_id",
+                      f"BGM 必须固定为 {fixed_track}", evidence=f"实际 {music.track_id!r}"))
+    method = music_spec.get("selection_method")
+    if method and music.selection_method != method:
+        v.append(_err("style.contract.audio", "audio.music.selection_method",
+                      f"BGM 必须按 {method} 选择并记录结果",
+                      evidence=f"实际 {music.selection_method!r}"))
+    for key in music_spec.get("required_fields") or []:
+        value = getattr(music, key, None)
+        if value is None or value == "":
+            v.append(_err("style.contract.audio", f"audio.music.{key}",
+                          f"BGM 缺必填留痕字段: {key}"))
+    if music_spec.get("instrumental_required") and music.instrumental is not True:
+        v.append(_err("style.contract.audio", "audio.music.instrumental", "BGM 必须使用纯器乐片段"))
+    if music_spec.get("loop_required") and music.loop is not True:
+        v.append(_err("style.contract.audio", "audio.music.loop", "BGM 必须声明循环播放"))
+    return v
+
+
+def style_contract_compose(ir: FilmIR, ctx: GateContext | None = None) -> list[Violation]:
+    """compose 起：执行 assembly-only / no-effects 合同。"""
+    c, _ = _load_contract(ir, ctx)
+    spec = (c or {}).get("compose") or {}
+    if not spec.get("no_effects"):
+        return []
+    v: list[Violation] = []
+    if ir.edit.transitions:
+        v.append(_err("style.contract.compose", "edit.transitions",
+                      "本风格 HyperFrames 只做装配，禁止转场效果",
+                      evidence=", ".join(ir.edit.transitions)))
+    if ir.edit.lut:
+        v.append(_err("style.contract.compose", "edit.lut", "本风格禁止 LUT/调色效果", evidence=ir.edit.lut))
+    if ir.edit.grain:
+        v.append(_err("style.contract.compose", "edit.grain", "本风格禁止颗粒/噪点效果", evidence=ir.edit.grain))
+    forbidden = set(spec.get("forbidden_source_params") or [])
+    for s in ir.shots:
+        hit = sorted(key for key in forbidden if (s.source.params or {}).get(key))
+        if hit:
+            v.append(_err("style.contract.compose", f"shots[{s.id}].source.params",
+                          "本风格禁止 HyperFrames 视觉效果参数: " + ", ".join(hit)))
+    allowed_overlays = set(spec.get("allowed_overlay_types") or [])
+    if allowed_overlays:
+        for o in ir.overlays:
+            if o.type not in allowed_overlays:
+                v.append(_err("style.contract.compose", f"overlays[{o.id}].type",
+                              f"assembly-only 仅允许叠加层 {sorted(allowed_overlays)}",
+                              evidence=f"实际 {o.type!r}"))
+    if spec.get("caption_terminal_punctuation") == "forbidden":
+        terminal = "。！？….!?"
+        for o in ir.overlays:
+            if o.type in {"caption", "subtitle"} and o.text and o.text.rstrip().endswith(tuple(terminal)):
+                v.append(_err("style.contract.compose", f"overlays[{o.id}].text",
+                              "字幕句末不得添加标点；停顿由时间轴与画面承担", evidence=o.text))
     return v
 
 
@@ -541,7 +660,9 @@ REGISTRY: list[tuple] = [
 
 # 需要 GateContext（合同文件 / 成片证据）的门——无 project_dir 时静默跳过
 CONTEXT_REGISTRY: list[tuple] = [
+    (style_contract_audio, "audio"),
     (style_contract_plan, "storyboard"),
+    (style_contract_compose, "compose"),
     (style_contract_render, "review"),
 ]
 

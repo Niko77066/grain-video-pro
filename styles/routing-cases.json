@@ -230,6 +230,51 @@
         "duration_s": 30
       },
       "expect": {"narrative_base": "anchor-desk", "confidence": "medium", "tie": true, "gap": false}
+    },
+    {
+      "id": "rc16",
+      "why": "已授权合作频道素材 + 反差机制题 + 固定横版栏目，命中 meme-ledger；pixel 缺档案/实拍配方，不能抢位。",
+      "features": {
+        "topic": "你家楼下房产中介卖的其实不是房子",
+        "content_type": "knowledge_explainer",
+        "understanding_task": "explain_the_mechanism",
+        "tone": ["approachable", "narrative"],
+        "audience": ["general"],
+        "material": ["licensed_partner_footage", "contrast_fact", "multi_stage_causality", "presenter_declined"],
+        "aspect": "16:9",
+        "duration_s": 98
+      },
+      "expect": {"narrative_base": "meme-ledger", "confidence": "high", "gap": false}
+    },
+    {
+      "id": "rc17",
+      "why": "同类机制题但没有合作频道授权，meme-ledger 的画面配方不成立，且 pixel 缺档案/实拍，必须落兜底。",
+      "features": {
+        "topic": "房产中介的线索生意",
+        "content_type": "knowledge_explainer",
+        "understanding_task": "explain_the_mechanism",
+        "tone": ["approachable"],
+        "audience": ["general"],
+        "material": ["contrast_fact", "presenter_declined"],
+        "aspect": "16:9",
+        "duration_s": 98
+      },
+      "expect": {"narrative_base": "whiteboard-generalist", "confidence": "low", "gap": false}
+    },
+    {
+      "id": "rc18",
+      "why": "合作频道素材齐全也不能把固定横版栏目静默裁成竖屏；preset_lock 排除 meme-ledger，未满足其它专用包配方时落兜底。",
+      "features": {
+        "topic": "为什么中介总在电话里说马上有人看房",
+        "content_type": "knowledge_explainer",
+        "understanding_task": "explain_the_mechanism",
+        "tone": ["approachable"],
+        "audience": ["general"],
+        "material": ["licensed_partner_footage", "contrast_fact", "presenter_declined"],
+        "aspect": "9:16",
+        "duration_s": 98
+      },
+      "expect": {"narrative_base": "whiteboard-generalist", "confidence": "low", "gap": false}
     }
   ]
 }
