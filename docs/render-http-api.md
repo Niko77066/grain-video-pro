@@ -53,7 +53,7 @@ tar -czf project.tar.gz -C <你的项目目录> .
 curl -s --max-time 600 -X POST "$RENDER_URL" \
   -H "Authorization: Bearer $FFMPEG_RENDER_HTTP_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"hyperframesVersion":"0.7.3","projectTar":{"url":"https://<project.tar.gz 地址>"}}' \
+  -d '{"hyperframesVersion":"0.7.77","projectTar":{"url":"https://<project.tar.gz 地址>"}}' \
   -o out.mp4 -D headers.txt
 # 成功：out.mp4 是成片，headers.txt 有 content-type: video/mp4 + x-render-duration-ms
 # 失败：out.mp4 其实是 JSON 错误体，打开看 error/logTail

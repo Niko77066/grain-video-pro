@@ -7,6 +7,8 @@
 
 - **通路 ✅**：A（连通）/B（token）/C（真渲染）三阶段全过；65.7s 竖屏真片服务端 129s 渲完。
 - **版本 ✅**：`hyperframesVersion` 按请求装（0.7.3 / 0.7.57 / 0.7.60 实测均可），与本地版本对齐不是问题。
+  **当前口径 0.7.77**（2026-07-28 升级；脚本默认值已改）——渲染机侧尚未实测 0.7.77，首次远端调用视同新版本首跑，
+  与本地 docker 结果对一次关键版式帧。
 - **切默认 ⏸ 未达帧级一致门**：openai-78m-logs 双跑对比 SSIM All 0.981 / PSNR 35.5（min 30.4）。
   差异根因＝**系统字体依赖**：composition 用 `local("PingFang SC")`/`local("Songti SC")`，Linux 渲染机
   落 font-kit 兜底，字宽微差 → **长标题换行点漂移**（法规卡《办法》标题实证）。这是内容级差异，
@@ -27,7 +29,7 @@
 ## 4. 使用速记
 
 ```bash
-tools/render-remote.sh <compose目录> <输出.mp4> [version默认0.7.3] [quality默认high]
+tools/render-remote.sh <compose目录> <输出.mp4> [version默认0.7.77] [quality默认high]
 # 前提：环境提供 RENDER_URL（渲染机端点，如 http://<host>:7300/render/hyperframes）+ FFMPEG_RENDER_HTTP_TOKEN；无本机 IP 假设
 # 503=并发闸满（并发1），退避重试；422=composition 业务失败看 logTail
 ```
