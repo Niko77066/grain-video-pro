@@ -1,123 +1,16 @@
 # 引擎知识包 · AI 纸拼贴 b-roll（halftone paper-collage）
 
-> 何时读我：storyboard 有镜头路由到 `collage-broll`——把一句 ~5s 口播/观点句/抽象概念压成一个**视觉隐喻**的氛围 b-roll。
-> 来源：内化自开源 skill **`gbro-collage-broll`（pyang5166）**——保留其美学 + 三闸门 + visual-spec + prompt 模板；**引擎从 Gemini Omni Flash + Codex image_gen 重绑到我们的栈（GPT-Image-2 + Seedance 首尾帧）**。2026-07-17 冒烟验证通过（openai-78m-logs / s03b 碎片聚人形：首帧近空场 → 逐件组装 → 定格成品，720×1280/24fps/5.04s）。
+> **本页是指针，不是内容。** 完整链路（美学标准、三闸门、色彩语义、画幅参数、引擎绑定、四条 prompt 模板、QA 判据、写回 IR）在 **`.claude/skills/collage-broll/SKILL.md`**。
 >
-> ⚠️ **画幅状态**：冒烟验证的是 **9:16 竖屏**。**16:9 横屏参数与 prompt 模板已在本文件补齐，但未经冒烟验证**——见 [画幅参数（9:16 / 16:9）](#画幅参数916--169)。横屏首次使用必须先出一条测试 clip 目检再排产。
+> 为什么只留指针：同一套 prompt 模板存两份，就有两个真相源。浣熊片那段 `Retro 16-bit PIXEL-ART paper-collage animation, aged-yellow #C9A876 paper grain…` 之所以能变异成做旧报纸风，正是因为它没有唯一出处、靠抄上一条片的 film.json 传播。**模板唯一出处 = skill。**
 
-## 这门语言擅长 / 不擅长（路由用）
+> 何时读我：storyboard 有镜头路由到 `collage-broll`——把一句 ~5s 口播/观点句/抽象概念压成一个**视觉隐喻**的氛围 b-roll。
+
+## 路由要点（够你决定用不用它；决定用了就去读 skill）
 
 - **擅长**：概念、观点句、抽象隐喻的**氛围 b-roll**；高级编辑风、手作温度；垫在口播下。
-- **不擅长（改用 HyperFrames）**：精确文字 / 数字 / 法条 / logo / 收尾落款；可逐层编辑的时间线；真人产品口播。**collage 明确规避文字数字**——要文字就用 HyperFrames **叠层在 collage 上**（overlays 混合层，兼得质感与信息）。
-
-## 美学成功标准（源 skill，已验证）
-
-- 一句话只表达一个清晰隐喻；画面是 3–6 个**可分离大组**（利于从空场组装），不是满屏碎片
-- 强烈平坦纯色场（按语意选色）；主体黑白 halftone 照片剪贴为骨架
-- 关键卡片/纸张可用红、黄、青、橙、紫、奶油白点色，但服务信息层级、不为彩色而彩色
-- 所有纸片：清晰裁切边、奶油白 keyline、低透明柔和阴影、纸颗粒
-- 动作 = **assemble-from-empty**（从空场逐件滑入、卡位、组装的定格质感），**不是漂移/晃动/慢 zoom**
-- 无字幕、无口播全文、无 logo、无水印、无 UI
-
-## 色彩语义（选底色；一批内"同设计语言、不同底色"）
-
-焦橙/红=时间消耗·劳动·紧迫｜芥末黄=工具·警示｜墨绿=认知·系统·重置｜深紫=规范·沉淀·长期记忆｜青绿=判断·协作·自动执行。
-
-⚠️ **缝合纪律（我们新增）**：collage b-roll 与版式卡（如 daily-brief 纸白场）混排时，底色可各异，但靠**共享的半调 + 奶油白 keyline + 品牌点色（印刷红 #C8451B）+ 统一纸颗粒**缝成一家；防止"拼贴段"与"版式段"割裂成两部片。
-
-## 三闸门（强制——这就是我们"廉价品味注入"的纪律）
-
-- **Gate 1 · 隐喻（免费）**：只输出 核心意思 / 情绪 / 一句话视觉命题 / 3–6 关键物件 / 底色+点色 / 组装顺序 → 停，等用户确认。错隐喻改文字免费。
-- **Gate 2 · 静帧（便宜）**：确认隐喻后才写 visual-spec + imagegen prompt，用 **GPT-Image-2** 出静帧 → contact sheet → 停，等用户确认。错静帧重生一张图，远比重跑一条视频便宜。
-- **Gate 3 · 视频（才烧钱）**：静帧确认后才用 **Seedance 首尾帧**生成。
-- 批量支持**部分通过**：只有确认过的条目进入下一阶段。
-
-## 画幅参数（9:16 / 16:9）
-
-镜头画幅由 storyboard / 风格包决定（`pixel-chronicle` 横屏、`case-file` 竖屏），**不由本文件默认**。下表是全链路唯一需要按画幅切换的量，其余（美学标准、三闸门、色彩语义、死尾 QA 判据）两个画幅通用。
-
-| 环节 | 9:16 竖屏（✅ 2026-07-17 冒烟） | 16:9 横屏（⚠️ 未冒烟） |
-| --- | --- | --- |
-| imagegen `size` | `720x1280` | `1280x720` |
-| 首帧空色场 `-s` | `1080x1920` | `1920x1080` |
-| 尾帧归一 scale/crop | `scale=1080:1920:...,crop=1080:1920` | `scale=1920:1080:...,crop=1920:1080` |
-| Seedance `metadata.ratio` | `"9:16"` | `"16:9"` |
-| imagegen prompt 画幅句 | `vertical 9:16 locked poster frame` | `horizontal 16:9 locked poster frame` |
-| Seedance prompt 镜头句 | `locked-off vertical shot` / `Preserve the 9:16 framing` | `locked-off horizontal shot` / `Preserve the 16:9 framing` |
-| 720p 实产尺寸 | 720×1280 | 1280×720 |
-| contact sheet `scale` | `180:320` | `320:180` |
-
-`size` 必须是 16 的倍数（见 image-motion.md），故 imagegen 走 1280x720 而非 1920x1080；1920x1080 只出现在 ffmpeg 首尾帧（lavfi/crop 不受 16 倍数约束），与竖屏"静帧 720 短边、首尾帧 1080 短边"的既有做法对齐。
-
-### 🚧 16:9 未验证事项（首次使用必做）
-
-横屏参数是竖屏链路的**逐项镜像，尚未出片验证**。已知未知：
-
-- **摊散风险**——竖屏窄画幅天然把 3–6 个纸组挤成一列；宽画幅里模型可能把纸片沿水平方向摊得太散，丢掉"一句话一个隐喻"的聚焦，退化成满屏碎片（违反美学标准第 1 条）。
-- **组装节奏**——横向滑入路径更长，`PACED EVENLY ACROSS THE ENTIRE CLIP` 在宽画幅是否仍能压住"前段做完、尾部长 hold"未知，死尾检查照常执行且**默认它会更容易触发**。
-- **首尾帧角色**——竖屏实测"首帧近空场 → 向 Image2 插值"成立；横屏未复验。
-
-**首次横屏使用流程（强制）**：Gate 3 先只跑 **1 条测试 clip 目检**（看摊散 + 死尾 + 首帧空场），确认后才批量排产。测试结论（通过 / 需调 prompt / 需改用 HyperFrames）写回本节，并在 `ledger.decisions` 记一条。**不许跳过测试 clip 直接批量**——那是静默降级。
-
-## 引擎绑定（我们的栈，9:16 已冒烟验证 2026-07-17）
-
-> 下面命令与模板按 **9:16** 写；做 16:9 时逐项换成上表右列，**其余一字不改**。
-
-### Gate 2 静帧 — GPT-Image-2（契约见 image-motion.md）
-`POST {ARK_VIDEO_API_BASE_URL}/v1/images/generations`，`model: gpt-image-2`，`size` 按画幅（9:16 → `720x1280`；16:9 → `1280x720`；gateway 可能自判尺寸，产出后 ffprobe 记录），`quality: medium`（概念 hero 静帧；纯版式可 low），`output_format: png`。存 `anchors/`。
-
-### Gate 3 视频 — Seedance 首尾帧（契约见 seedance.md）
-1. 首帧 = 空色场：
-   - 9:16 `ffmpeg -y -f lavfi -i color=c=0x<HEX>:s=1080x1920 -frames:v 1 first.png`
-   - 16:9 `ffmpeg -y -f lavfi -i color=c=0x<HEX>:s=1920x1080 -frames:v 1 first.png`
-2. 尾帧 = 归一静帧：
-   - 9:16 `ffmpeg -y -i still.png -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920" last.png`
-   - 16:9 `ffmpeg -y -i still.png -vf "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080" last.png`
-3. 两帧 `tools/oss-upload.sh <file>` 传公网（返回 storage.neodrop.ai URL）。⚠️ worktree 无 .env 时先 `ln -sf <主仓库>/.env .env`。
-4. `POST {base}/v1/videos`（`ratio` 按画幅填 `"9:16"` 或 `"16:9"`，**不许省略**——省略则由上游自判，见 seedance.md）：
-```json
-{ "model": "doubao-seedance-2-0-260128", "prompt": "<组装 prompt>",
-  "metadata": { "content": [
-      { "type": "image_url", "image_url": { "url": "<first url>" }, "role": "first_frame" },
-      { "type": "image_url", "image_url": { "url": "<last url>" },  "role": "last_frame" } ],
-    "resolution": "720p", "ratio": "9:16", "generate_audio": false, "duration": 5 } }
-```
-content[0]=@Image1（空场首帧），content[1]=@Image2（成品尾帧）。**首尾帧角色实测成立（竖屏）**：首帧近空场、模型向 Image2 插值组装、结尾定格；横屏未复验。
-
-### imagegen prompt 模板（9:16 竖屏拼贴静帧 · ✅ 冒烟过）
-```
-Create a finished editorial paper-collage still for a 9:16 image-to-video B-roll clip. Visual proposition: [一句话视觉命题]. Scene: perfectly flat [颜色] paper field ([hex]) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs [主体元素], with selective cream-white and [品牌点色] colored cardstock accents. Composition: vertical 9:16 locked poster frame; central subject within the middle 70 percent; generous clean color-field negative space; 3 to 6 large separable paper groups for later assemble-from-empty animation. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: [必须一眼看懂的关系]. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter.
-```
-
-### imagegen prompt 模板（16:9 横屏拼贴静帧 · ⚠️ 未冒烟）
-差异仅在 Composition 段：画幅句改 horizontal、中央 70% 改为**水平中央 60% 的聚簇约束**（抗摊散），并显式禁止沿画幅摊平；其余与竖屏逐字相同。
-```
-Create a finished editorial paper-collage still for a 16:9 image-to-video B-roll clip. Visual proposition: [一句话视觉命题]. Scene: perfectly flat [颜色] paper field ([hex]) with subtle uncoated paper fiber. Style: premium editorial stop-motion paper collage; black-and-white halftone photographic cut-outs [主体元素], with selective cream-white and [品牌点色] colored cardstock accents. Composition: horizontal 16:9 locked poster frame; central subject clustered within the middle 60 percent of the width, reading as one tight group rather than spread across the frame; the outer thirds stay as clean empty color field; generous clean color-field negative space; 3 to 6 large separable paper groups for later assemble-from-empty animation. Materials: visible printed halftone dots, crisp machine-cut edges, thin warm-cream paper keylines, soft low-opacity physical drop shadows. Constraint: [必须一眼看懂的关系]. Avoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles, no glossy 3D, no photoreal environment, no clutter, no elements spread evenly across the full width, no symmetrical left-right filler.
-```
-
-### Seedance 组装 prompt 模板（9:16 竖屏 · ✅ 冒烟过）
-```
-Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat [颜色] paper field) and Image 2 as the exact completed last frame. One continuous locked-off vertical shot, no camera movement. Open on the empty [颜色] paper field, then assemble the scene piece by piece with crisp physical stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: pieces keep sliding in and snapping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; [按顺序描述 3–6 元素如何滑入/卡位/连接], with the final fragments snapping into place in the last second to complete Image 2. Preserve the 9:16 framing, [hex] color field, cardstock accents, uncoated paper grain, halftone dots, cream keylines, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound.
-```
-
-### Seedance 组装 prompt 模板（16:9 横屏 · ⚠️ 未冒烟）
-差异：`vertical` → `horizontal`、`Preserve the 9:16` → `Preserve the 16:9`，并加一句锁住聚簇（防组装过程把纸片往左右两侧拉开）。
-```
-Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat [颜色] paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal shot, no camera movement. Open on the empty [颜色] paper field, then assemble the scene piece by piece with crisp physical stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: pieces keep sliding in and snapping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; [按顺序描述 3–6 元素如何滑入/卡位/连接], with the final fragments snapping into place in the last second to complete Image 2. Keep every piece inside the central cluster of Image 2 — pieces travel in from off-frame but settle into the middle of the width; do NOT spread the collage across the full width, do NOT add filler pieces in the outer thirds. Preserve the 16:9 framing, [hex] color field, cardstock accents, uncoated paper grain, halftone dots, cream keylines, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound.
-```
-
-## Gate 3 后 QA（看组装进程，不只看尾帧）
-
-- 首帧近空场（边缘轻微提前露片可接受）；中段能看到结构/主体**逐件进入**而非整体淡入；无切镜/zoom/3D 漂移；无假字/logo/水印；尾帧≈确认静帧（轻微姿态/细节漂移不影响隐喻语义即通过，不为此重跑）；720p 下 9:16 → 720×1280、16:9 → 1280×720，24fps/~5s 无声。
-- **横屏加查一项（摊散）**：纸组是否仍读作**一个聚簇**、左右外三分之一是否保持空色场。摊平成"满屏均匀碎片"= fail，修法同源：先补强 prompt 的聚簇句重生静帧（Gate 2，便宜），静帧本身就摊了就别进 Gate 3。
-- **🔴 死尾检查（宪法红线：禁冻结帧补时长）**：Seedance 默认会把组装塞在前段、尾部长时间 hold（实测 s03b v1：~3.0s 就停、留 ~2s 近静止，YDIF<1）。**必须查**：`ffmpeg -i clip.mp4 -vf "select='gte(t,2)',signalstats,metadata=print:file=-" -f null - 2>/dev/null | grep YDIF`——若尾段 >~0.8s 处于 YDIF<1（近静止）即 **fail**。修法：① 重生时 prompt 强制"铺满整条 clip、末件在最后一秒落位、不许提前完成"；② 光尾裁救不了组装过早的情况（可用运动 < 槽位就得重生或缩短该镜槽位）。freezedetect 阈值太死会漏报，以 YDIF 为准。
-- contact sheet：`ffmpeg -y -i clip.mp4 -vf "fps=1,scale=180:320,tile=Nx1" -frames:v 1 contact.jpg`（16:9 换 `scale=320:180`）。
-- 时长：Seedance 实产≈5.04s 常态；compose **尾裁**掉末端残余 hold 到 shot 槽位（前提是组装已铺满、只剩很短 hold；组装过早完成→回上一条重生）。
-
-## 成本 / 留痕
-
-每条 = 1 张 GPT-Image（响应头 `x-oneapi-request-id`）+ 1 条 Seedance（`x-oneapi-request-id`，满价约 $2.7），全进 `ledger.costs`。first/last PNG、payload、response 一并留痕。
-
-## 什么时候不要用
-
-需要精确图层/遮挡/镜头穿越/可编辑时间线 → HyperFrames；只要 prompt 不要成片 → 直接写；真人产品口播 → 不走本流程。
+- **不擅长（改用 HyperFrames）**：精确文字 / 数字 / 法条 / logo / 收尾落款；可逐层编辑的时间线；真人产品口播。要文字就用 HyperFrames **叠层在 collage 上**。
+- **要像素质感**：那是另一条链，走 `.claude/skills/pixel-broll/SKILL.md`。两条链**材质语汇互斥，不许串词**。
+- **状态**：9:16 ✅ 冒烟（2026-07-17，`openai-78m-logs` / s03b）；16:9 ✅ 冒烟（2026-07-28，`_smoke/broll-skills-2026-07-28`）——**未摊散，但尾段运动量只有全片 27%，横屏偏前重**，排产时把「末件在最后一秒落位」写重些。
+- **成本**：每条 = 1 张 GPT-Image + 1 条 Seedance（满价约 $2.7），全进 `ledger.costs`。
+- **IR 写法**：`provider: "collage_broll"`。

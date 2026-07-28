@@ -170,7 +170,10 @@ script 定稿后、铺开全片 storyboard 之前，先花小钱验视觉承诺�
 |---|---|---|---|---|
 | MG 动画（HyperFrames） | ✅ | 信息与图形语言：数据卡、榜单、动态排版、字幕层 | 产出属"幻灯片语法"，不计运动占比 | `references/hyperframes.md` |
 | AI 生成视频（Seedance 2.0） | ✅ | 真运动、氛围、场景再现、hook/hero 镜头 | 单次 4–15s；角色/产品镜头必须挂锚点 | `references/seedance.md` |
-| AI 纸拼贴 b-roll（GPT-Image-2 + Seedance 首尾帧） | ✅ 9:16 / ⚠️ 16:9 未冒烟 | 概念/观点句/抽象隐喻的氛围 b-roll（半调纸拼贴、从空场组装） | 无文字/数字/logo（要文字 HyperFrames 叠层）；强制三闸门；9:16 于 2026-07-17 冒烟验证，**16:9 参数已补齐但未出片验证——首次横屏必须先跑 1 条测试 clip 目检摊散** | `references/collage-broll.md` |
+| AI 纸拼贴 b-roll（GPT-Image-2 + Seedance 首尾帧） | ✅ 9:16 + 16:9 | 概念/观点句/抽象隐喻的氛围 b-roll（半调纸拼贴、从空场组装） | 无文字/数字/logo（要文字 HyperFrames 叠层）；强制三闸门；9:16（2026-07-17）与 16:9（2026-07-28）均已冒烟；**横屏偏前重**（尾段运动量仅全片 27%），排产时把「末件在最后一秒落位」写重些 | `references/collage-broll.md` → `.claude/skills/collage-broll/SKILL.md` |
+| AI 像素风镜头（GPT-Image-2 + Seedance 首尾帧 + 归一） | ✅ 端到端已冒烟 | 角色重演（版权规避位）、机制图解、数据实物化、历史重演 | 锚点内禁文字数字（数字走 HTML 角标）；强制四闸门；**禁用词表：paper/halftone/aged/newsprint/grain/sepia 不许进提示词——做旧只能在 compose 层 LUT**；2026-07-28 端到端冒烟（归一前软像素 30–49%，归一后 0%）；换画幅或换模型版本仍先跑 1 条测试 clip 目检 | `.claude/skills/pixel-broll/SKILL.md` |
+
+> 上面两条生成链**材质语汇互斥，不许串词**——串词的产物就是浣熊片那种"做旧报纸味的假像素"。两者共用 `tools/seedance.py`（首尾帧客户端 + 契约护栏）与 `tools/clip-qa.py`（规格 / 死尾 / contact sheet）。
 | 数字人（HeyGen Avatar 4） | ✅ | 口播、主持、结论、人设 IP | 时长=音频时长；aspect_ratio 必填；形象锚点按目标画幅构图 | `references/avatar.md` |
 | 图片 + 动效（GPT-Image-2） | ✅ | 风格化静帧、插画、概念示意、"准运动" | 连续 ≤ 2 镜（防幻灯片化） | `references/image-motion.md` |
 | TTS 音频（MiniMax speech-2.8-hd 固定音色） | ✅ | 一切旁白 | 单 pass 固定音色 + 声纹 gate；对齐必走 forced-alignment；**不用火山 seed-audio** | `references/tts-audio.md` `references/forced-alignment.md` |

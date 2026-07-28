@@ -1,0 +1,33 @@
+{
+  "defaults": { "resolution": "720p", "duration": 10, "oss_prefix": "kuleshov/_smoke/broll-skills-2026-07-28" },
+  "jobs": [
+    {
+      "name": "px_h",
+      "ratio": "16:9",
+      "first": "projects/_smoke/broll-skills-2026-07-28/anchors/px_h_first_1080.png",
+      "last": "projects/_smoke/broll-skills-2026-07-28/anchors/px_h_last_1080.png",
+      "prompt": "Pixel-art animation. Use Image 1 as the exact first frame and Image 2 as the exact last frame. One continuous locked-off horizontal shot, no camera movement. The character shown in Image 2 slowly lifts their head off the desk, reaches out for the orange mug, raises it to the mouth and drinks, then settles fully upright with both eyes opening wide, while the violet sleep blocks stacked above the head are pushed outward and drift apart into scattered fragments. Everything moves continuously and PACED EVENLY ACROSS THE ENTIRE CLIP — do NOT finish early, do NOT hold a long static frame; the action completes in the last second to match Image 2 exactly. Preserve the 16:9 framing, the exact limited palette, chunky pixels, hard pixel edges and flat color blocks. Animate on twos, stepped motion, no smoothing. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no anti-aliasing, no motion blur, no text, no letters, no numbers, no logos, no watermark, no sound."
+    },
+    {
+      "name": "px_v",
+      "ratio": "9:16",
+      "first": "projects/_smoke/broll-skills-2026-07-28/anchors/px_v_first_1080.png",
+      "last": "projects/_smoke/broll-skills-2026-07-28/anchors/px_v_last_1080.png",
+      "prompt": "Pixel-art animation. Use Image 1 as the exact first frame and Image 2 as the exact last frame. One continuous locked-off vertical shot, no camera movement. The character shown in Image 2 slowly lifts their head off the desk, reaches out for the orange mug, raises it to the mouth and drinks, then settles fully upright with both eyes opening wide, while the tall column of violet sleep blocks above the head is knocked apart and the blocks drift outward into scattered fragments. Everything moves continuously and PACED EVENLY ACROSS THE ENTIRE CLIP — do NOT finish early, do NOT hold a long static frame; the action completes in the last second to match Image 2 exactly. Preserve the 9:16 framing, the exact limited palette, chunky pixels, hard pixel edges and flat color blocks. Animate on twos, stepped motion, no smoothing. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no anti-aliasing, no motion blur, no text, no letters, no numbers, no logos, no watermark, no sound."
+    },
+    {
+      "name": "cl_h",
+      "ratio": "16:9",
+      "first": "projects/_smoke/broll-skills-2026-07-28/anchors/cl_h_first_1080.png",
+      "last": "projects/_smoke/broll-skills-2026-07-28/anchors/cl_h_last_1080.png",
+      "prompt": "Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat deep-green paper field) and Image 2 as the exact completed last frame. One continuous locked-off horizontal shot, no camera movement. Open on the empty deep-green paper field, then assemble the scene piece by piece with crisp physical stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: pieces keep sliding in and snapping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the padlock body slides in from the left and settles, then the cut-away inner cylinder and its row of pins drop into the body one pin at a time, then the ring of ordinary keys swings down from the top right and hangs, then the fat coffee-bean key slides in from the right and wedges itself into the cylinder mouth, with the last ordinary key snapping into place just outside the lock in the final second to complete Image 2. Keep every piece inside the central cluster of Image 2 — pieces travel in from off-frame but settle into the middle of the width; do NOT spread the collage across the full width, do NOT add filler pieces in the outer thirds. Preserve the 16:9 framing, the deep-green color field, cardstock accents, uncoated paper grain, halftone dots, cream keylines, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound."
+    },
+    {
+      "name": "cl_v",
+      "ratio": "9:16",
+      "first": "projects/_smoke/broll-skills-2026-07-28/anchors/cl_v_first_1080.png",
+      "last": "projects/_smoke/broll-skills-2026-07-28/anchors/cl_v_last_1080.png",
+      "prompt": "Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat deep-green paper field) and Image 2 as the exact completed last frame. One continuous locked-off vertical shot, no camera movement. Open on the empty deep-green paper field, then assemble the scene piece by piece with crisp physical stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: pieces keep sliding in and snapping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the padlock body slides up from the bottom and settles, then the red inner lining and the cut-away cylinder with its springs and pins drop into the body one part at a time, then the ring of ordinary keys swings down from the top right and hangs, then the fat coffee-bean key slides in and wedges itself into the cylinder, with the final small parts snapping into place in the last second to complete Image 2. Preserve the 9:16 framing, the deep-green color field, cardstock accents, uncoated paper grain, halftone dots, cream keylines, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound."
+    }
+  ]
+}

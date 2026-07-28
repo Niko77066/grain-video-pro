@@ -61,7 +61,7 @@
 | HyperFrames MG | 主轨（≈50%）：像素插画元素进出、大字卡、实物化数据、章节卡、地图 |
 | 实拍 / 检索素材 | 证据与情感轨（≈40%）：航拍、市井、人像；高潮蒙太奇必须实拍 |
 | 图片动效 | 档案轨：泛黄历史照 + 轻微运动，连续 ≤2 镜 |
-| Seedance 生成视频 | **像素叙事主力**（英阿片修订：像素重演/图解由 Seedance 10s 慢组装承担，不只是替补空镜）；生成后必须过缝合层 |
+| Seedance 生成视频 | **像素叙事主力**（英阿片修订：像素重演/图解由 Seedance 10s 慢组装承担，不只是替补空镜）；**走 `pixel-broll` skill**（主调色板锁色 + 栅格归一），生成后过 compose 缝合层 |
 | GPT-Image 静帧 | 像素场景锚点（首尾帧）+ 人物特写像素化；锚点内禁文字数字 |
 | TTS | 长片（>120s）**MiniMax speech-2.8-hd 官方音色 single-pass**（实证：`Chinese (Mandarin)_Gentle_Senior`，calm/1.0）；短片可 seed-audio 整片一次。旁白恒平；BGM 垫底不抬升 |
 | 数字人 | 本包不用（faceless 片型） |
@@ -146,7 +146,8 @@ GS-01 是本包**首条出厂片**，不等于本包已考片转正——准入�
 > 目标：新片**首版即达 v5 验收质量**，不再靠用户五轮返工教。每条都有引擎知识包对应展开（括号内），本节是风格包视角的汇总。
 
 1. **音频先行链**：MiniMax 官方音色 single-pass 整条 → wav2vec2 强制对齐逐字戳 → 字幕/画面 cue/挂载全部由同一 timeline 派生（`tts-audio.md` `forced-alignment.md`）。compose 生成器里**零手写秒数**——改文案/换音色只重跑链条，版式不用动。
-2. **像素镜头**：Seedance 10s 慢组装（5s 会被打回"太快"）、挂载尾对齐让 payoff 帧落在文案字上、锚点静帧零文字（数字走 HTML 角标）（`seedance.md`）。像素叙事覆盖 ≥40%：钩子事件、历史重演、地图/距离/贸易等**强叙事位优先像素**，检索素材只作证据与氛围。
+2. **像素镜头**：走 `.claude/skills/pixel-broll/SKILL.md`（四闸门 + 主调色板锁色 + 栅格归一）。Seedance 10s 慢组装（5s 会被打回"太快"）、挂载尾对齐让 payoff 帧落在文案字上、锚点静帧零文字（数字走 HTML 角标）（`seedance.md`）。
+   > 🔴 **做旧只在 compose 层**（2026-07-28）：`paper / halftone / aged-yellow / #C9A876 / grain / sepia` 一律**不许进生成提示词**。§3 的纸纹 + 褪色 LUT 是 compose 的缝合层——它可调、可关、可对全片五源统一；烤进生成画面就不可逆，还会和缝合层叠成第二遍做旧。浣熊片 7 镜共用的 `Retro 16-bit PIXEL-ART paper-collage animation, aged-yellow #C9A876 paper grain…` 前缀是这条的反例：它是拼贴模板 find/replace 成像素的杂交产物，靠抄上一条片的 film.json 传播，仓库里没有出处。**模板唯一出处 = pixel-broll skill §7。**像素叙事覆盖 ≥40%：钩子事件、历史重演、地图/距离/贸易等**强叙事位优先像素**，检索素材只作证据与氛围。
 3. **实拍素材分层**：Pexels 只做纯空镜；叙事位走 archive.org/Commons 公域档案；时事位走 APIhub 新闻（broadcast-risk ≤3s 闪切+告知用户）（`footage-sourcing.md`）。
 4. **空镜池五铁律**：一素材全片一次（断言）、关键素材按段 RESERVE、时代/地点错位过滤、素材窗尾留 0.8s 防暗尾、轨道零缝隙（`footage-sourcing.md`）。
 5. **BGM 渲染前挂入** composition 独立轨：纪录片底色 + 轻 chiptune、LRA ≤ 5、比旁白低 ~20 LU（-30 LUFS 素材挂 `data-volume 0.23` 级）、时长按 VO 自适应拼接（交叉淡化 3s）。成片 `loudnorm I=-14:TP=-1.5`。

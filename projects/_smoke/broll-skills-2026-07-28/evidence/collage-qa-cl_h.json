@@ -1,0 +1,29 @@
+{
+  "target": "projects/_smoke/broll-skills-2026-07-28/shots/cl_h_raw.mp4",
+  "spec": {
+    "width": 1280,
+    "height": 720,
+    "fps": 24.0,
+    "duration_s": 10.042,
+    "has_audio": false
+  },
+  "checks": {
+    "audio": {
+      "pass": true,
+      "detail": "无音轨"
+    },
+    "size": {
+      "pass": true,
+      "detail": "1280x720"
+    },
+    "dead_tail": {
+      "pass": true,
+      "detail": "尾 2.0s 运动量为全片的 27%（下限 25%；尾段中位 YDIF 0.569 / 全片 2.088，采样 80 帧）",
+      "tail_ratio": 0.272,
+      "ydif_tail": 0.569,
+      "ydif_all": 2.088
+    }
+  },
+  "verdict": "pass",
+  "contact_sheet": "projects/_smoke/broll-skills-2026-07-28/evidence/cl_h-contact.jpg"
+}

@@ -1,0 +1,70 @@
+{
+  "model": "doubao-seedance-2-0-260128",
+  "submitted": [
+    {
+      "name": "px_h",
+      "task_id": "task_eds7FmXCQJP8RS0p1MX4VVu3xP7FPXHT",
+      "request_id": "202607280631234105246428268d9d606pNnCpT",
+      "ratio": "16:9",
+      "duration_req_s": 10,
+      "note": "回填：submit 中途 SSL 失败前已提交（已修为逐条落盘）",
+      "file": "projects/_smoke/broll-skills-2026-07-28/shots/px_h_raw.mp4",
+      "duration_actual_s": 10.042
+    },
+    {
+      "name": "px_v",
+      "task_id": "task_PiuISyGgCl79ig05L2zJMqWwFG3HBMCE",
+      "request_id": "202607280631353238503208268d9d61perlNYG",
+      "ratio": "9:16",
+      "duration_req_s": 10,
+      "note": "回填：submit 中途 SSL 失败前已提交（已修为逐条落盘）",
+      "file": "projects/_smoke/broll-skills-2026-07-28/shots/px_v_raw.mp4",
+      "duration_actual_s": 10.042
+    },
+    {
+      "name": "cl_h",
+      "task_id": "task_uTU0IOfDA8BFAXI1QDjpleyC0DdRSHEX",
+      "request_id": "202607280631477960303998268d9d61gIAanSr",
+      "ratio": "16:9",
+      "duration_req_s": 10,
+      "note": "回填：submit 中途 SSL 失败前已提交（已修为逐条落盘）",
+      "file": "projects/_smoke/broll-skills-2026-07-28/shots/cl_h_raw.mp4",
+      "duration_actual_s": 10.042
+    },
+    {
+      "name": "cl_v",
+      "task_id": "task_1hQrhVUxiJRPrL4EqFTWgqkgVC5Pe7aV",
+      "request_id": "202607280632493670942318268d9d6stH2qw2x",
+      "ratio": "9:16",
+      "duration_req_s": 10,
+      "payload": {
+        "model": "doubao-seedance-2-0-260128",
+        "prompt": "Paper-collage stop-motion assembly. Use Image 1 as the exact empty first frame (a flat deep-green paper field) and Image 2 as the exact completed last frame. One continuous locked-off vertical shot, no camera movement. Open on the empty deep-green paper field, then assemble the scene piece by piece with crisp physical stop-motion timing, PACED EVENLY ACROSS THE ENTIRE CLIP: pieces keep sliding in and snapping into place continuously through the whole shot — do NOT finish early, do NOT hold a long static frame; first the padlock body slides up from the bottom and settles, then the red inner lining and the cut-away cylinder with its springs and pins drop into the body one part at a time, then the ring of ordinary keys swings down from the top right and hangs, then the fat coffee-bean key slides in and wedges itself into the cylinder, with the final small parts snapping into place in the last second to complete Image 2. Preserve the 9:16 framing, the deep-green color field, cardstock accents, uncoated paper grain, halftone dots, cream keylines, crisp cut edges and soft shadows. Restrained tactile 2D paper craft only. No scene cuts, no camera movement, no zoom, no morphing, no new objects, no text, no letters, no numbers, no logos, no watermark, no UI, no sound.",
+        "metadata": {
+          "content": [
+            {
+              "type": "image_url",
+              "role": "first_frame",
+              "image_url": {
+                "url": "https://storage.neodrop.ai/kuleshov/_smoke/broll-skills-2026-07-28/cl_v_first_1080.png"
+              }
+            },
+            {
+              "type": "image_url",
+              "role": "last_frame",
+              "image_url": {
+                "url": "https://storage.neodrop.ai/kuleshov/_smoke/broll-skills-2026-07-28/cl_v_last_1080.png"
+              }
+            }
+          ],
+          "resolution": "720p",
+          "ratio": "9:16",
+          "generate_audio": false,
+          "duration": 10
+        }
+      },
+      "file": "projects/_smoke/broll-skills-2026-07-28/shots/cl_v_raw.mp4",
+      "duration_actual_s": 10.042
+    }
+  ]
+}

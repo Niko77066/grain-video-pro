@@ -1,0 +1,43 @@
+{
+  "target": "projects/_smoke/broll-skills-2026-07-28/shots/px_h.mp4",
+  "grid": 4,
+  "palette_size": 16,
+  "palette_tolerance": 3,
+  "checks": {
+    "audio": {
+      "pass": true,
+      "detail": "无音轨"
+    },
+    "size": {
+      "pass": true,
+      "detail": "1280x720"
+    },
+    "dead_tail": {
+      "pass": true,
+      "detail": "尾 2.0s 运动量为全片的 101%（下限 25%；尾段中位 YDIF 0.412 / 全片 0.407，采样 81 帧）",
+      "tail_ratio": 1.011,
+      "ydif_tail": 0.412,
+      "ydif_all": 0.407
+    },
+    "grid": {
+      "pass": true,
+      "detail": "抽 6 帧，最差非纯色方块占比 0.0000%",
+      "worst_ratio": 0.0
+    },
+    "palette": {
+      "pass": true,
+      "detail": "超容差(3)色 0 种，最大贴合距离 2",
+      "stray_count": 0,
+      "worst_snap_distance": 2
+    }
+  },
+  "verdict": "pass",
+  "spec": {
+    "width": 1280,
+    "height": 720,
+    "fps": 24.0,
+    "duration_s": 10.083,
+    "has_audio": false
+  },
+  "contact_sheet": "projects/_smoke/broll-skills-2026-07-28/evidence/px_h-contact.jpg"
+}
