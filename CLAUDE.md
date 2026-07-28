@@ -55,9 +55,10 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 | 进交付面 | 是什么 |
 |---|---|
 | `.claude/skills/produce/` | 十阶段方法 + 导演知识包（拆分口径见下） |
+| `.claude/skills/broll-studio/` | 八套生成型 b-roll 材质语言：引擎 + profile 数据层（2026-07-28 用户拍板进交付面）。进的是**知识与机器门**：材质语汇、三闸门、画幅几何、QA 判据、lint；引擎绑定的直连客户端 `gpt-image.py` / `seedance.py` **不进**——接缝后换 grain 的 `generateImage` / `generateImageToVideo`（`docs/grain-delivery-plan.md` §0.5）。`pixel-broll` / `collage-broll` 指针壳是本仓触发面，不进 |
 | `film-ir/` | Film IR 库与 `kuleshov-ir` CLI（纯变换，stdout JSON + 退出码） |
 | `styles/` | 风格包、路由层、能力卡、Golden 登记册 |
-| `tools/` | 质量工具：`kuleshov-lint.py` / `measure-render.py` / `route-style.py` / `judge/` |
+| `tools/` | 质量工具：`kuleshov-lint.py` / `measure-render.py` / `route-style.py` / `judge/`，以及 broll-studio 的纯变换侧：`broll-profile.py`（registry / render / plan / lint）/ `clip-qa.py` / `clip-batch-sheets.py` / `make-palette.py` / `pixelize.py` / `verify.py` |
 
 **不进交付面**：`vendor/`（溯源凭据；官方副本已删——宿主有自己适配版的 HyperFrames，带 upstream 副本过去会造成
 版本口径打架、指令冲突、以及一半依赖 HeyGen 凭据的命令在 grain 容器里根本不可用）、`projects/`（单片产物与证据）、
@@ -65,7 +66,7 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 
 **知识写法纪律（决定一份知识能不能进交付面）**：区分「**片子必须长成什么样、怎么机器验**」与「**引擎 API 怎么调**」。
 前者跨引擎版本恒定，宿主换适配版照样成立，属交付面；后者随宿主引擎版本失效，只能作本地参考。
-`produce/references/hyperframes.md` 现在两者混写，交付前必须拆。引擎工艺要引用官方包时，
+`produce/references/hyperframes.md` 的合同部分已于 2026-07-28 拆出为 `compose-contract.md`（前者剩 API 参考，自标不在交付面）。引擎工艺要引用官方包时，
 按 `hyperframes-recipes.md` 的既有做法**重写成本仓 compose 合同的语言，不照抄 API**。
 
 ## Production Invariants
@@ -85,7 +86,7 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 11. **已交付项目的引擎版本 pin 是渲染证据，不许动。** `projects/*/compose/package.json` 里的 `hyperframes@<版本>` 记录的是那条片**实际渲出来时**的引擎；review.md 与 `ledger` 的渲染口径都指向它。**status 为 `delivered` 或 `review` 的项目，一律不 bump pin**——改了 pin 而不重渲，等于把证据改成假的。要统一到新版本只有一条路：重渲 + 重跑 G1 + 更新 review.md 的实测口径，且需用户拍板。新片在 compose 起手时按当时的仓库口径钉版（当前 **0.7.77**）。
     ⚠️ **本条压过官方 skill 的指令。** 官方 `hyperframes` skill 要求 agent 见到 stale pin 信号就自行 `upgrade --project` 并 verify（"act on the signal rather than relaying it"），CLI 从 0.7.59 起也会主动催升。**在本仓：报告，不执行。** 把版本落后这件事讲给用户，等拍板；官方 skill 的自动 bump 指令在本仓无效。
 12. **画幅与时长是适配项，不是准入门槛。** 硬规则只管「配方本身是否成立」（必需素材、冲突素材、敏感题材）；**横竖屏与时长按用户需求动态调**，偏离风格包的原生格式只扣分并产出施工说明（改哪块版式、砍哪个槽位、加什么结构），照样能用那个包。但适配不是免费的：适配项进 `ledger.decisions`，被带动的合同阈值走带宽内 amendments 或按 `[单片标定]` 重新观测，**不许假装原带宽还成立**。
-13. **字幕是外挂 sidecar，不烧进画面。**（2026-07-28，对齐 grain 发布硬门）交付物 = `out/final.mp4` + `out/final.vtt` 两件，compose 里不留字幕层，**不设烧录变体**。文本取剧本、时间取强制对齐（`tools/make-vtt.py`；ASR 只给时间锚，禁转写文本当字幕、禁手写）。细则见 `produce/references/compose-contract.md` §6，机器门 `kuleshov-lint.py` ⑦。存量 `review`/`delivered` 不追溯。
+13. **字幕是外挂 sidecar，不烧进画面。**（2026-07-28，对齐 grain 发布硬门）交付物 = `out/final.mp4` + `out/final.vtt` 两件，compose 里不留字幕层，**不设烧录变体**。文本取剧本、时间取强制对齐（`tools/make-vtt.py`；ASR 只给时间锚，禁转写文本当字幕、禁手写）。细则见 `produce/references/compose-contract.md` §6，机器门 `kuleshov-lint.py` ⑦。存量 `review`/`delivered` 不追溯。适用范围注（2026-07-28 拍板）：本条管**仓内独立跑**；接入 grain 后发布件 VTT 由 grain 的 storyboard 投影 + `renderScriptCaptions` 产（发布门只认 grain 同源字幕），`make-vtt.py` 转本地 QA 对照——见 `docs/grain-delivery-plan.md` §0.5。
 
 ## Taste Constitution
 

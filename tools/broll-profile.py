@@ -7,7 +7,7 @@ profile 只负责会变的东西：**材质语汇、运动动词、首帧规则�
 
 引擎的一条硬纪律：**它不认识任何 profile 的 id**。
 差异全部由 profile 声明（`pipeline_extras` / `variants` / `first_frame.kind` / `banned_vocab`），
-引擎只知道「有些 profile 带额外步骤」。搜不到 `if pid == "..."` 这种分支就是这条纪律仍然成立。
+引擎只知道「有些 profile 带额外步骤」。搜不到把 pid 与某个具体 profile 名字面量比较的分支，就是这条纪律仍然成立。
 
 `lint` 是这套体系的守门人：它检查一段提示词有没有混入**别的 profile 的签名词汇**。
 浣熊片那段做旧报纸味的假像素，成因就是拼贴模板 find/replace 成像素后
@@ -346,6 +346,21 @@ def cmd_plan(profiles, pid, params, aspect, variant_key):
         print("  专属：见上面「专属码判」")
     print("  批次：python3 tools/clip-batch-sheets.py --clips ... --stills ... --out-dir <evidence>")
     print("  人眼：逐条对 failure_criteria（`show " + pid + "` 看）")
+
+    # pipeline_extras 里 EXTRA_STAGES/params 之外的键照单陈述——静默丢弃过一次
+    # encode_note（--crf 0 是默认），操作性纪律不许隐形。引擎不解释语义，只保证可见。
+    known = {k for k, _ in EXTRA_STAGES} | {"params"}
+    notes = {k: v for k, v in e.items() if k not in known}
+    if notes:
+        print("\n[profile 附注（引擎不执行，原文照录）]")
+        for k, v in notes.items():
+            if isinstance(v, dict):
+                print(f"  · {k}:")
+                for kk, vv in v.items():
+                    print(f"      - {kk}: {vv}")
+            else:
+                print(f"  · {k}: {v if isinstance(v, str) else json.dumps(v, ensure_ascii=False)}")
+
     unfilled = sorted(set(re.findall(r"\{([a-z_]+)\}", json.dumps(e, ensure_ascii=False)))
                       - set(params))
     if unfilled:

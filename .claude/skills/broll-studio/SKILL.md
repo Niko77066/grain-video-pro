@@ -20,7 +20,8 @@ description: 八套生成型 b-roll 材质语言的共用引擎（GPT-Image-2 + 
 | **IR 写回** `ir_writeback` | provider / params / note 前缀（历史 provider 名不因并入本 skill 而改） |
 
 > **引擎不认识任何 profile 的名字。** 差异一律靠 profile 声明，引擎只知道「有些 profile 带额外步骤」。
-> `grep -n 'pid ==\|id ==' tools/broll-profile.py` 搜不到硬编码分支，是这条纪律仍然成立的证据。
+> `grep -nE 'pid *== *"' tools/broll-profile.py` 搜不到硬编码分支，是这条纪律仍然成立的证据。
+> （别用裸的 `pid ==` 当证据——lint 里「跳过自己」的 `oid == pid` 是合法比较，会假阳性。）
 
 ## 1. 八套材质语言
 
@@ -109,7 +110,7 @@ lint 只看**肯定描述**——`No paper collage` 这类否定式约束是在�
 
 `first_frame.kind` 是数据，不是注释；引擎按 kind 分支：
 
-- `empty_surface` —— 六套走这条（`ffmpeg -f lavfi -i color=...`）。
+- `empty_surface` —— 默认路径：六套无变体的走这条，`pixel` 的**组装型原型 A** 也走这条（`ffmpeg -f lavfi -i color=...`；`plan pixel --variant A` 可验证，A 不欠附加静帧）。
 - `closed_book` —— `popup-book`：必须以「一本合上的书 / 一张平整页面」起手，不许空场，否则整个空间凭空出现、产生不可控变形。
 - `character_start_pose` —— `pixel` 的角色动作型原型：首帧是角色**起始**姿态的静帧。
 
@@ -126,6 +127,8 @@ lint 只看**肯定描述**——`No paper collage` 这类否定式约束是在�
 | `post_still` / `post_video` | 静帧 / 视频落地后的必做工序 | `pixel` 的归一层 |
 | `extra_checks` | 该套专属的额外码判（通用项仍走 `clip-qa.py`） | `pixel` 的栅格 + 锁色 |
 | `params` | 上面那些命令里 `{palette}` `{grid}` 这类占位符的默认值 | 同上 |
+
+表外的键（如 `why` / `check_criteria` / `encode_note`）引擎不执行、也不丢弃——`plan` 以「profile 附注」原文照录（操作性纪律不许隐形，`--crf 0` 就吃过静默丢弃的亏）。
 
 ```bash
 python3 tools/broll-profile.py plan pixel --variant B --param palette=projects/<片>/palette/master.png

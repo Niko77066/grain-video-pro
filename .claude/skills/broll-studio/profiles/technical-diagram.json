@@ -66,6 +66,7 @@
   },
   "aspect_16_9": [
     "vertical 9:16 → horizontal 16:9",
+    "locked-off vertical axonometric shot → locked-off horizontal axonometric shot",
     "轴测构图在横屏更宽松，但仍要求主机构聚在中央 60%，外三分之一留白"
   ],
   "variables": [

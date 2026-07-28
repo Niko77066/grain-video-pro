@@ -1,6 +1,6 @@
 ---
 name: collage-broll
-description: 用 GPT-Image-2 + Seedance 2.0 把一句约 5s 口播／观点句／抽象概念做成高级 editorial **半调纸拼贴**（halftone paper-collage）氛围 b-roll——从空色场逐件组装的定格质感。当用户说"拼贴 b-roll""纸拼贴""半调拼贴""拼贴风格配画面""用这段文稿做拼贴动画"，或 storyboard 有镜头路由到 collage-broll 时使用。强制三闸门：视觉隐喻 → 静帧 → 视频，每闸停下等确认，只有确认过的条目进下一闸。**不许串像素词**：pixel / chunky pixels / dithering / limited palette 属于 pixel-broll，混进来就得到杂交产物。
+description: 用 GPT-Image-2 + Seedance 2.0 把一句口播／观点句／抽象概念做成高级 editorial **半调纸拼贴**（halftone paper-collage）氛围 b-roll（clip 原生 10s）——从空色场逐件组装的定格质感。当用户说"拼贴 b-roll""纸拼贴""半调拼贴""拼贴风格配画面""用这段文稿做拼贴动画"，或 storyboard 有镜头路由到 collage-broll 时使用。强制三闸门：视觉隐喻 → 静帧 → 视频，每闸停下等确认，只有确认过的条目进下一闸。**不许串像素词**：pixel / chunky pixels / dithering / limited palette 属于 pixel-broll，混进来就得到杂交产物。
 ---
 
 # Collage B-roll → `broll-studio` 的 `collage` profile

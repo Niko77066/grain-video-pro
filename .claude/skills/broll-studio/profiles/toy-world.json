@@ -77,6 +77,7 @@
   },
   "aspect_16_9": [
     "vertical 9:16 → horizontal 16:9",
+    "locked orthographic or isometric vertical shot → locked orthographic or isometric horizontal shot",
     "等距／正交视图在横屏最自然；但 hero 物件仍要占中央，辅助模块别沿水平铺满一排"
   ],
   "variables": [

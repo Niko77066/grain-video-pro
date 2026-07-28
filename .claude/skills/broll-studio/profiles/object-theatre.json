@@ -72,8 +72,9 @@
   },
   "aspect_16_9": [
     "vertical 9:16 → horizontal 16:9",
-    "central 70 percent → central 60 percent of the width, reading as one tight group（抗摊散，拼贴链 2026-07-28 实测有效）",
-    "结尾加 no elements spread evenly across the full width"
+    "central 70 percent → central 60 percent of the width, reading as one tight group",
+    "结尾加 no elements spread evenly across the full width",
+    "聚簇收紧到中央 60% 是抗摊散措施（拼贴链 2026-07-28 实测有效）——横屏只靠这句挤，不许删"
   ],
   "variables": [
     "VISUAL_METAPHOR",

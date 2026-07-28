@@ -47,15 +47,18 @@ kuleshov-ir execute projects/<slug> shots.s03 --dry-run
 
 | 风格包 | 擅长内容 | 画幅 |
 |---|---|---|
-| `pixel-chronicle` | 知识科普、历史叙事、像素纸拼贴 | 16:9 |
+| `pixel-chronicle` | 知识科普、历史叙事（像素叙事；纸感做旧只在 compose 层 LUT，不进生成提示词） | 16:9 |
 | `case-file` | 新闻调查、隐私与安全议题、案卷拼贴 | 9:16 |
-| `whiteboard-generalist` | 超出专用风格覆盖时的通用叙事 | 自适应 |
+| `anchor-desk` | 官方口径播报型解读、数字人主播台（候选·单片标定） | 16:9 |
+| `whiteboard-generalist` | 超出专用风格覆盖时的生产兜底模板 | 自适应 |
+
+选包走 `tools/route-style.py`（能力卡打分 + 硬规则 + 置信兜底）；画幅与时长是适配项不是准入门槛。
 
 合同在 storyboard 阶段做计划预检，在 review 阶段用终渲实测数据复验。agent 可以在预先授权的带宽内调整，但不能改合同给自己放行。
 
 ### G1 + G2：代码验事实，评委验观感
 
-- **G1 硬门**验证 IR 一致性、时间轴、风格合同、字体、黑帧、冻结、响度与终渲指标。
+- **G1 硬门**验证 IR 一致性、时间轴、风格合同、字体、黑帧、冻结、响度与终渲指标；`kuleshov-lint.py` ①–⑦ 另押组件底板、字幕标点与字幕外挂（交付 = `final.mp4` + `final.vtt` 两件，禁烧录）。
 - **G2 隔离评委**只看证据包和 Golden 对照，不读取创作者的解释；扣分必须落到具体镜头或时间码。
 
 失败不会触发整片重来，而是回到责任阶段做单镜或单环节手术。达到止损上限仍不过的片会带 `DEBT` 或 `contract_violation` 停在 review，不能伪装成 delivered。
@@ -96,6 +99,7 @@ bash tools/preflight.sh projects/<slug>
 | 路径 | 作用 |
 |---|---|
 | `.claude/skills/produce/` | 十阶段生产 SOP 与按来源加载的导演知识包 |
+| `.claude/skills/broll-studio/` | 八套生成型 b-roll 材质语言：一套引擎 + 八个 profile（`pixel-broll` / `collage-broll` 为指针壳） |
 | `film-ir/` | Film IR 模型、CLI、执行适配器与 G1 门套件 |
 | `styles/` | 风格 playbook、机器合同、Golden 基准与进化规程 |
 | `tools/judge/` | G2 证据包、隔离评审与校准工具 |

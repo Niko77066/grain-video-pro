@@ -138,5 +138,22 @@
     },
     "note_prefix": "拼贴 b-roll",
     "why": "沿用历史 provider 名 `collage_broll`（存量 film.json 与合同都按它认），不因为并进 broll-studio 就改——改了等于把已交付项目的 IR 语义改掉"
+  },
+  "banned_vocab": {
+    "why": "像素词属 pixel profile——混进 collage 就是「拼贴模板 find/replace 成像素」那类杂交产物（signature_vocab 交叉检查兜不住裸的 pixel/pixelated，这里单独禁）",
+    "words": [
+      "pixel",
+      "pixels",
+      "pixelated",
+      "pixellated",
+      "8-bit",
+      "16-bit"
+    ],
+    "instead_use": [
+      "torn paper edges",
+      "halftone dots",
+      "flat matte paper shapes",
+      "stop-motion assembly"
+    ]
   }
 }
