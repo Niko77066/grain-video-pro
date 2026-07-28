@@ -1,0 +1,40 @@
+{
+  "model": "doubao-seedance-2-0-260128",
+  "submitted": [
+    {
+      "name": "popup-book-v2",
+      "task_id": "task_2NC6NNYd39yHOkfgYkr0jck3mxUxVKdu",
+      "request_id": "202607280806061740834488268d9d63o8TsjZn",
+      "ratio": "9:16",
+      "duration_req_s": 10,
+      "payload": {
+        "model": "doubao-seedance-2-0-260128",
+        "prompt": "Handcrafted pop-up-book unfolding animation, using Image 1 as the exact closed book or flat page and Image 2 as the exact completed miniature world.\nIn one locked front-facing three-quarter shot, the book opens and the scene unfolds in this order: the base page opens flat, then the background paper mountain ridge rises on its hinges, then the mid-ground valley and the narrow paper bridge extend across it, then the foreground funnel gate pops upright, and finally the small paper figure rises at the start of the path.\nThe base page opens first. Background structures rise on paper hinges, middle-ground paths extend, foreground elements pop upright, and the central subject appears last. All motion must follow believable paper-folding mechanics.\nSpread the unfolding EVENLY ACROSS THE ENTIRE CLIP: each layer keeps rising slowly and sequentially through the whole shot — do NOT finish unfolding early, do NOT hold a long static frame; the central subject rises last, completing Image 2 in the final second. Preserve the final layered composition from Image 2.\nNo loose collage pieces, no objects growing from nowhere, no liquid morphing, no camera fly-through, no page turning after the scene is complete, no text, no sound.",
+        "metadata": {
+          "content": [
+            {
+              "type": "image_url",
+              "role": "first_frame",
+              "image_url": {
+                "url": "https://storage.neodrop.ai/kuleshov/_smoke/broll-studio-2026-07-28/popup-book_first.png"
+              }
+            },
+            {
+              "type": "image_url",
+              "role": "last_frame",
+              "image_url": {
+                "url": "https://storage.neodrop.ai/kuleshov/_smoke/broll-studio-2026-07-28/popup-book_last.png"
+              }
+            }
+          ],
+          "resolution": "720p",
+          "ratio": "9:16",
+          "generate_audio": false,
+          "duration": 10
+        }
+      },
+      "file": "projects/_smoke/broll-studio-2026-07-28/shots/popup-book-v2_raw.mp4",
+      "duration_actual_s": 10.042
+    }
+  ]
+}

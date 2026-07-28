@@ -1,0 +1,25 @@
+{
+  "model": "gpt-image-2",
+  "generated": [
+    {
+      "name": "toy-world_v4_last",
+      "file": "projects/_smoke/broll-studio-2026-07-28/anchors/toy-world_v4_last_raw.png",
+      "request_id": "202607280858149167493368268d9d6p7KPdOBM",
+      "endpoint": "/v1/images/generations",
+      "ref": [],
+      "size": "720x1280",
+      "quality": "high",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 spatial product still-life B-roll clip in the style of the BUCK × Cash App evergreen design system.\nVisual concept: a good product does not hand you more buttons — the complicated parts dock themselves into one calm finished object.\nBuild the idea from 3–6 everyday consumer objects: a chunky game controller in glossy translucent acid-green jelly acrylic as the hero on a tall matte plaster plinth, a soft inflated puffy vinyl pouch in the same green on a lower plinth, a brushed chrome dial resting on a small white cube, and a frosted glass vitrine panel behind them.\nCOLOUR RULE — this is the whole system: the stage is near-monochrome (soft white, pale grey, matte plaster, occasional black), and ONE electric saturated brand colour from acid green as the single electric brand colour on a soft white and pale grey stage carries every meaningful element. The branded objects look internally lit — the colour visibly spills and bounces onto the white surfaces around them. No second bright hue competing.\nMaterials jump deliberately between glossy translucent jelly acrylic, soft inflated puffy vinyl, matte plaster or concrete, brushed chrome and frosted glass — the contrast of finishes is the texture of the system.\nStaging: museum-display logic — objects sit on clean geometric plinths, pedestals or inside a glass vitrine, one clear hero object plus a few supporting pieces, generous empty stage around them.\nLighting: clean bright studio product photography, soft broad key, gentle contact shadows, crisp specular roll-off on the glossy surfaces.\nCamera: locked orthographic or gentle isometric view.\nNo wooden toys, no model-train diorama, no trees or landscape, no pastel washed-out palette, no busy scenery, no photoreal humans, no text, no UI, no logos, no tiny fiddly components."
+    },
+    {
+      "name": "felted-wool_v2_last",
+      "file": "projects/_smoke/broll-studio-2026-07-28/anchors/felted-wool_v2_last_raw.png",
+      "request_id": "202607280859099111482058268d9d6ohUV9T9P",
+      "endpoint": "/v1/images/generations",
+      "ref": [],
+      "size": "720x1280",
+      "quality": "high",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 needle-felted wool stop-motion B-roll clip.\nVisual concept: every tool on the desk is racing to make him faster, and only the small one just sits down beside him and waits.\nBuild a small handcrafted world using one felted character and 2–4 felted objects: one small elderly felted man in a tweed jacket and knitted tie with wire-frame spectacles, slumped at a tiny felted desk, two busy felted gadget characters mid-stride on either side, and a tiny felted mug set quietly by his hand.\nStyle: premium needle-felted wool animation, visible soft wool fibers, rounded handmade silhouettes, tiny embroidered details, carefully crafted miniature props, warm tactile surfaces, gentle cinematic lighting, shallow but controlled miniature depth.\nPalette: dusty olive, faded brick and oatmeal, muted and filmic, kept muted and filmic — dusty and desaturated, never sweet pastel. The mood is intimate, tender and a little melancholy or awkward, never cute.\nThe character must be SPECIFIC, not a generic doll: a particular age and build, real garment construction (visible tweed weave, knitted rib, a wire-frame detail such as spectacles), and facial features made of tiny embroidered stitches rather than painted dots.\nShoot it like a real stop-motion film frame: shallow cinematic depth of field with the background falling soft, and a fine film grain over everything.\nKeep facial features minimal and communicate emotion through posture, distance and composition. Show ONLY the character and the named objects on a plain dusty olive, faded brick and oatmeal, muted and filmic felt ground — this is a small handcrafted vignette, not a full room: no walls, no windows, no furniture beyond what is named.\nNo clay, no plastic surfaces, no photoreal fur, no loose yarn mess, no detailed lip movement, no text, no logos, no clutter."
+    }
+  ]
+}

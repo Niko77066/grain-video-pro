@@ -1,0 +1,43 @@
+{
+  "defaults": {
+    "quality": "medium",
+    "output_format": "png"
+  },
+  "jobs": [
+    {
+      "name": "object-theatre_last",
+      "size": "720x1280",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 stop-motion B-roll clip.\nVisual concept: a magnifying glass does not do the work for you, it only makes the crack underneath impossible to ignore.\nBuild the metaphor entirely from 3–6 familiar physical tabletop objects: a heavy brass magnifying glass, a short stack of wooden blocks with a hairline crack running through them, a small toppled thimble, a widening dark crack on the surface. Use unexpected but instantly understandable object substitution and visual wordplay.\nStyle: premium practical object-theatre stop motion, carefully art-directed overhead tabletop composition, real tactile materials, coherent object scale, matte surfaces, subtle imperfections, crisp contact shadows, soft directional studio lighting.\nBackdrop: a clean warm sand tabletop surface with generous negative space. Keep the main composition inside the central 70 percent of the frame.\nThe objects must look physically separate and capable of rolling, sliding, pivoting and clicking into place.\nNo paper collage, no floating objects, no human hands, no text, no letters, no numbers, no logos, no UI, no clutter, no full room environment."
+    },
+    {
+      "name": "technical-diagram_last",
+      "size": "720x1280",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 technical-diagram B-roll clip.\nVisual concept: an agent is not a prompt wrapped around a model, it is a closed loop of model, memory, tools and feedback.\nRepresent the idea as one clearly engineered system composed of 3–6 modular parts: a central cubic core module, a cylindrical memory drum on a rail, a jointed tool arm with a socket head, a return feedback pipe that loops back into the core.\nStyle: premium editorial technical illustration, precise exploded-view diagram, clean axonometric construction, warm off-white drafting-paper background, fine navy linework, solid simplified mechanical modules, restrained muted amber accent colors, subtle printed texture.\nShow clear structural relationships through alignment, sockets, rails, pipes, cables and connection points. The complete mechanism must be understandable without labels.\nUse large readable components rather than dense micro-details.\nNo readable labels, no letters, no numbers, no measurements, no fake annotations, no software UI, no circuit-board clutter, no glossy sci-fi interface, no logo, no watermark."
+    },
+    {
+      "name": "clay-miniature_last",
+      "size": "720x1280",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 claymation B-roll clip.\nVisual concept: the more tools pile up, the more the person becomes the clogged pipe they were trying to unblock.\nCreate a handcrafted miniature scene containing one simple clay character or central clay object and 2–4 supporting props: one simple clay figure squeezed inside a thick clay pipe, a funnel wedged into the top of the pipe, three chunky clay tool blocks stacked in the funnel.\nStyle: premium clay stop-motion miniature, matte plasticine surfaces, visible fingerprints and hand-shaped imperfections, chunky simplified forms, expressive silhouettes, restrained facial details, warm studio lighting, soft miniature-set shadows.\nPalette: mustard yellow, muted teal and terracotta. Keep the composition bold, compact and readable within one second.\nThe character's emotion must be communicated primarily through pose and object relationships rather than detailed facial acting.\nNo hyperreal skin, no complex facial expressions, no realistic human anatomy, no glossy CGI plastic, no text, no logo, no clutter."
+    },
+    {
+      "name": "felted-wool_last",
+      "size": "720x1280",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 needle-felted wool stop-motion B-roll clip.\nVisual concept: every tool on the desk is racing to make her faster, and only the small one just sits down beside her and waits.\nBuild a small handcrafted world using one felted character and 2–4 felted objects: one small felted person slumped at a tiny felted desk, two busy felted gadget characters mid-stride, a tiny felted mug placed quietly beside her hand.\nStyle: premium needle-felted wool animation, visible soft wool fibers, rounded handmade silhouettes, tiny embroidered details, carefully crafted miniature props, warm tactile surfaces, gentle cinematic lighting, shallow but controlled miniature depth.\nPalette: oatmeal, dusty rose and soft sage. The mood should feel intimate, tender and slightly whimsical rather than childish.\nKeep facial features minimal and communicate emotion through posture, distance and composition.\nNo clay, no plastic surfaces, no photoreal fur, no loose yarn mess, no detailed lip movement, no text, no logos, no clutter."
+    },
+    {
+      "name": "popup-book_last",
+      "size": "720x1280",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 animated pop-up-book B-roll clip.\nVisual concept: an idea travels from spark to audience, and at every layer of the journey some of it is lost along the way.\nShow a fully opened handcrafted pop-up book containing a layered miniature world built from 4–6 large paper structures: a tall background ridge of folded paper mountains, a mid-ground research valley with a narrow paper bridge, a foreground funnel-shaped distribution gate, a single small paper figure walking the path.\nStyle: premium paper-engineered pop-up book, dimensional folded architecture, clean die-cut silhouettes, visible tabs and hinges, layered foreground, middle ground and background, theatrical miniature lighting, subtle paper fiber, elegant deep teal, cream and warm ochre palette.\nThe scene should feel spatial and immersive rather than like a flat collage. Use one clear visual path leading through the composition.\nNo loose paper scraps, no halftone photo collage, no readable book text, no labels, no logo, no excessive layers, no photoreal environment."
+    },
+    {
+      "name": "popup-book_first",
+      "size": "720x1280",
+      "prompt": "Create the exact first frame for a vertical 9:16 pop-up-book B-roll clip: one handcrafted deep teal, cream and warm ochre book lying closed and flat, centred, on a plain matching surface, theatrical miniature lighting, subtle paper fiber, clean die-cut cover with no artwork. Nothing has unfolded yet.\nNo readable book text, no title, no labels, no logo, no photoreal environment, no loose paper."
+    },
+    {
+      "name": "toy-world_last",
+      "size": "720x1280",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 minimal 3D toy-world B-roll clip.\nVisual concept: a good product does not hand you more buttons, it lets the complicated parts dock themselves into one calm object.\nBuild the idea using 3–6 simplified modular toy-like objects: a rounded matte hero console with a single recessed dock, two smaller wedge modules, one cylindrical connector puck.\nStyle: premium spatial illustration, minimalist designer-toy world, soft matte vinyl and painted wood materials, rounded geometric forms, restrained off-white, soft coral and pale slate brand palette, clean studio lighting, soft ambient shadows, coherent miniature scale.\nCamera: locked orthographic or gentle isometric view. The composition should feel like a carefully designed physical product ecosystem, not a large cinematic environment.\nUse one hero object and a small number of supporting modules.\nNo photoreal humans, no glass-heavy materials, no chrome reflections, no dense scenery, no text, no UI, no logos, no tiny components."
+    }
+  ]
+}

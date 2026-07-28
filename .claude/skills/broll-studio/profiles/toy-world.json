@@ -1,0 +1,100 @@
+{
+  "schema": "broll-profile@1",
+  "id": "toy-world",
+  "display_name": "品牌产品静物 Branded Product Still-life（原「极简 3D 玩具世界」）",
+  "core_strength": "高级、统一、产品化",
+  "one_liner": "Cash App 的系统：素白舞台 + 一种电光品牌色。日常消费品被品牌色「附身」，摆在石膏台座与玻璃展柜上。",
+  "best_for": [
+    "产品功能",
+    "App／平台／频道生态",
+    "商业模式",
+    "内容生产模块",
+    "品牌宣传",
+    "不想显得过度技术化的科技概念"
+  ],
+  "avoid_when": [
+    "情绪与人际",
+    "需要手作温度的叙事",
+    "复杂机制的因果解释（那是 technical-diagram 的活）"
+  ],
+  "routing_examples": [
+    "好的 Agent 产品不是给用户更多按钮，而是让复杂模块像积木一样自动组合"
+  ],
+  "references": [
+    {
+      "title": "BUCK × Cash App 空间插画系统",
+      "url": "https://buck.co/work/cash-app-visual-identity",
+      "why": "**实看画面（2026-07-28）**：素白／灰石膏舞台 + 唯一一种电光绿；日常消费品（篮球、羽绒托特、洞洞鞋、游戏手柄、球鞋、耳机）被品牌色附身；石膏台座与玻璃展柜的陈列逻辑；亚克力果冻／充气软胶／哑光石膏／铬之间跳材质；绿色表面自发光并把色溢到白面上"
+    },
+    {
+      "title": "BUCK《Brawlidays》",
+      "url": "https://buck.co/work/brawl-stars-brawlidays",
+      "why": "⚠️ **这是另一套风味，不是本 profile 的默认**：Rankin/Bass 定格 + 模型火车布景 + 搪胶玩具的手作暖调世界。要那个味道再显式选它，别和 Cash App 混"
+    },
+    {
+      "title": "BUCK 3D 项目集合",
+      "url": "https://buck.co/work/tag/3d",
+      "why": "继续筛简洁品牌 3D 与微缩世界参考"
+    }
+  ],
+  "signature_vocab": [
+    "product still-life",
+    "plinth",
+    "pedestal",
+    "vitrine",
+    "electric brand colour",
+    "jelly acrylic",
+    "inflated vinyl",
+    "matte plaster",
+    "chrome",
+    "colour spill",
+    "orthographic",
+    "isometric",
+    "spatial illustration"
+  ],
+  "motion_verbs": [
+    "lowers onto the plinth",
+    "rotates on the pedestal",
+    "docks",
+    "inflates",
+    "settles",
+    "glows"
+  ],
+  "first_frame": {
+    "kind": "empty_surface",
+    "spec": "空工作室平台（PALETTE 主色的柔光台面 + 环境阴影），无模块",
+    "ffmpeg": "color=c=0x<PALETTE主色>:s=<W>x<H>"
+  },
+  "native": {
+    "aspect": "9:16",
+    "duration_s": 10,
+    "object_groups": [
+      3,
+      6
+    ],
+    "camera": "locked orthographic or gentle isometric"
+  },
+  "aspect_16_9": [
+    "vertical 9:16 → horizontal 16:9",
+    "等距／正交视图在横屏最自然；但 hero 物件仍要占中央，辅助模块别沿水平铺满一排"
+  ],
+  "variables": [
+    "VISUAL_METAPHOR",
+    "KEY_OBJECTS",
+    "PALETTE",
+    "ASSEMBLY_ORDER"
+  ],
+  "gate2_prompt": "Create the exact completed final still frame for a vertical 9:16 spatial product still-life B-roll clip in the style of the BUCK × Cash App evergreen design system.\nVisual concept: [VISUAL_METAPHOR].\nBuild the idea from 3–6 everyday consumer objects: [KEY_OBJECTS].\nCOLOUR RULE — this is the whole system: the stage is near-monochrome (soft white, pale grey, matte plaster, occasional black), and ONE electric saturated brand colour from [PALETTE] carries every meaningful element. The branded objects look internally lit — the colour visibly spills and bounces onto the white surfaces around them. No second bright hue competing.\nMaterials jump deliberately between glossy translucent jelly acrylic, soft inflated puffy vinyl, matte plaster or concrete, brushed chrome and frosted glass — the contrast of finishes is the texture of the system.\nStaging: museum-display logic — objects sit on clean geometric plinths, pedestals or inside a glass vitrine, one clear hero object plus a few supporting pieces, generous empty stage around them.\nLighting: clean bright studio product photography, soft broad key, gentle contact shadows, crisp specular roll-off on the glossy surfaces.\nCamera: locked orthographic or gentle isometric view.\nNo wooden toys, no model-train diorama, no trees or landscape, no pastel washed-out palette, no busy scenery, no photoreal humans, no text, no UI, no logos, no tiny fiddly components.",
+  "gate3_prompt": "Spatial product still-life assembly in the style of the BUCK × Cash App system, using Image 1 as the exact empty white stage and Image 2 as the exact completed composition.\nIn one locked orthographic or isometric vertical shot, build the display in this order: [ASSEMBLY_ORDER].\nPlinths rise from the stage, objects lower onto them and settle with weighty easing, glossy pieces give a small elastic wobble as they land, and the branded colour spill grows on the white surfaces as each coloured object arrives. End with one restrained beat — a lid seating, a pedestal completing a quarter turn, the colour spill blooming once.\nPreserve the exact geometry, the near-monochrome stage, the single electric brand colour, the jelly / inflated-vinyl / matte-plaster / chrome material mix, the lighting and the final arrangement from Image 2.\nNo camera orbit, no dramatic zoom, no floating particles, no objects appearing from nowhere, no morphing, no new objects, no scene cuts, no text, no sound.",
+  "failure_criteria": [
+    "**做成木头玩具／模型火车布景**——那是 BUCK 的 Brawlidays，不是 Cash App。2026-07-28 连错两版都栽在这里",
+    "**多种彩色竞争**：系统的立身之本是「素白舞台 + 唯一一种电光色」。第二种亮色一进来，高级感立刻塌成儿童玩具",
+    "淡雅化／洗白：品牌色必须是电光级饱和，且要在白面上留下明显色溢",
+    "材质单一：亚克力果冻 / 充气软胶 / 哑光石膏 / 铬之间的**跳变**就是这套的质感，全做成同一种哑光就没了",
+    "没有台座／展柜的陈列逻辑，东西直接摊在地上；没有 hero 物件"
+  ],
+  "_vocab_note": "「modular」两套共用、不具区分性，已从签名表移除（2026-07-28 lint 自洽性测试发现）",
+  "notes": [
+    "2026-07-28 第三次重写：前两版分别做成「淡雅极简产品渲染」和「木头玩具火车布景」，都不是 Cash App。实看该页图集后重建为「素白舞台 + 单一电光品牌色 + 石膏台座陈列」，并把 Brawlidays 降级为需显式选择的次要风味。"
+  ]
+}

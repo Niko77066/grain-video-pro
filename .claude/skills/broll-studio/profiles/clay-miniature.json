@@ -1,0 +1,45 @@
+{
+  "schema": "broll-profile@1",
+  "id": "clay-miniature",
+  "display_name": "黏土微缩风 Clay Miniature",
+  "core_strength": "荒诞、幽默、可变形",
+  "one_liner": "黏土能被压扁、拉长、堆积、膨胀、堵住管道、重新捏合——变形本身就是论点。",
+
+  "best_for": ["创作焦虑、压力、疲惫", "人与工具之间的荒诞关系", "观点中的冲突／阻塞／拉扯", "轻松、讽刺、略带黑色幽默"],
+  "avoid_when": ["需要精确信息结构", "多人表演", "严肃权威口径"],
+  "routing_examples": ["工具越多，人越像被工具堵住的那根管子"],
+
+  "references": [
+    { "title": "Aardman《Creature Comforts》", "url": "https://www.aardman.com/film-tv-games/creature-comforts/",
+      "why": "黏土角色如何承接口述、幽默与真实生活情绪" },
+    { "title": "Aardman × LEGO「Boop」", "url": "https://www.aardman.com/latest-news/2025/august/aardman-and-the-lego-group-partner-to-inspire-creativity-in-young-builders-through-stop-motion/",
+      "why": "黏土主体进入积木世界——材料对比参考" },
+    { "title": "LAIKA《Coraline》", "url": "https://www.laika.com/our-films/coraline",
+      "why": "更电影化、精致的微缩布景参考" }
+  ],
+
+  "signature_vocab": ["claymation", "plasticine", "fingerprints", "squash-and-stretch", "hand-shaped imperfections",
+                      "miniature stage", "chunky simplified forms"],
+  "motion_verbs": ["roll", "hop", "press", "settle", "squash", "stretch"],
+
+  "first_frame": { "kind": "empty_surface",
+    "spec": "空微缩舞台（PALETTE 主色的台面 + 微缩布景灯光），无角色无道具",
+    "ffmpeg": "color=c=0x<PALETTE主色>:s=<W>x<H>" },
+
+  "native": { "aspect": "9:16", "duration_s": 10, "object_groups": [3, 5], "camera": "locked" },
+  "aspect_16_9": ["vertical 9:16 → horizontal 16:9",
+                  "单角色 + 2–4 道具在横屏容易左右摊开，加一句 keep the character and props clustered in the central 60 percent"],
+
+  "variables": ["VISUAL_METAPHOR", "KEY_OBJECTS", "PALETTE", "ASSEMBLY_ORDER"],
+
+  "gate2_prompt": "Create the exact completed final still frame for a vertical 9:16 claymation B-roll clip.\nVisual concept: [VISUAL_METAPHOR].\nCreate a handcrafted miniature scene containing one simple clay character or central clay object and 2–4 supporting props: [KEY_OBJECTS].\nStyle: premium clay stop-motion miniature, matte plasticine surfaces, visible fingerprints and hand-shaped imperfections, chunky simplified forms, expressive silhouettes, restrained facial details, warm studio lighting, soft miniature-set shadows.\nPalette: [PALETTE]. Keep the composition bold, compact and readable within one second.\nThe character's emotion must be communicated primarily through pose and object relationships rather than detailed facial acting.\nNo hyperreal skin, no complex facial expressions, no realistic human anatomy, no glossy CGI plastic, no text, no logo, no clutter.",
+
+  "gate3_prompt": "Handcrafted clay stop-motion assembly, using Image 1 as the exact empty miniature stage and Image 2 as the exact completed final frame.\nAssemble the clay scene in this order: [ASSEMBLY_ORDER].\nClay objects roll, hop, press or settle into place with stepped frame-by-frame timing. Allow only small controlled squash-and-stretch moments that support the metaphor. End with one simple readable character action and hold the completed composition.\nPreserve the character identity, clay color, scale and final pose from Image 2.\nNo melting, no uncontrolled deformation, no changing faces, no extra limbs, no liquid clay, no walking cycle, no camera movement, no scene cuts, no text, no sound.",
+
+  "failure_criteria": [
+    "角色变脸／多长出肢体——黏土最容易在这里失控，出现即重生",
+    "不受控的融化与流动：squash-and-stretch 必须服务隐喻，不是材质自嗨",
+    "试图做多人表演：一条只准一个角色 + 2–4 道具",
+    "细致的面部表演：情绪必须靠姿态和物件关系，脸做细了反而假"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "target": "projects/_smoke/broll-studio-2026-07-28/shots/popup-book-v2_raw.mp4",
+  "spec": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24.0,
+    "duration_s": 10.042,
+    "has_audio": false
+  },
+  "checks": {
+    "audio": {
+      "pass": true,
+      "detail": "无音轨"
+    },
+    "size": {
+      "pass": true,
+      "detail": "720x1280"
+    },
+    "dead_tail": {
+      "pass": false,
+      "detail": "尾 2.0s 运动量为全片的 9%（下限 25%；尾段中位 YDIF 0.657 / 全片 7.026，采样 80 帧）　ℹ️ 但尾段绝对量 0.657 ≥ 0.5，疑似中段爆发型误报——人眼复核 contact sheet 后可带理由放行，理由写进 gate3-qa.md",
+      "tail_ratio": 0.094,
+      "ydif_tail": 0.657,
+      "ydif_all": 7.026,
+      "burst_advisory": true
+    }
+  },
+  "verdict": "fail"
+}

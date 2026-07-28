@@ -1,0 +1,97 @@
+{
+  "schema": "broll-profile@1",
+  "id": "object-theatre",
+  "display_name": "实物桌面剧场 Object Theatre",
+  "core_strength": "熟悉物品形成意外隐喻",
+  "one_liner": "PES 的语法：一件日常物**替身**成另一件，并在**被使用的动作里**完成转换。手在画面里，手就是动词。",
+  "best_for": [
+    "一句话观点与认知反转",
+    "效率／时间／机会／选择",
+    "职场、组织协作、创作流程",
+    "视觉双关"
+  ],
+  "avoid_when": [
+    "复杂系统",
+    "多人关系",
+    "需要精确信息结构的内容"
+  ],
+  "routing_examples": [
+    "AI 不是一位替你工作的员工，而是一面会放大问题的镜子（放大镜 → 破裂镜片 → 问题积木 → 越来越大的裂缝）"
+  ],
+  "references": [
+    {
+      "title": "PES《Fresh Guacamole》",
+      "url": "https://pesfilm.com/pages/fresh-guacamole",
+      "why": "用手榴弹、棒球、骰子替代真实食材：棒球切开变成一堆骰子（dice/骰子的双关）。**转换发生在切开的那一刀上**，不是摆在一起。真人的手全程在画面里，只露手不露脸"
+    },
+    {
+      "title": "PES 作品体系",
+      "url": "https://pesfilm.com/pages/about",
+      "why": "《Western Spaghetti》《Submarine Sandwich》《Game Over》——视觉双关的语法库"
+    },
+    {
+      "title": "BUCK × University of Phoenix",
+      "url": "https://buck.co/work/u-of-phoenix-tortoise-and-hare",
+      "why": "实拍微缩布景、办公道具与小镇模型的材质与灯光"
+    }
+  ],
+  "signature_vocab": [
+    "tabletop",
+    "object substitution",
+    "visual wordplay",
+    "practical object-theatre",
+    "overhead tabletop",
+    "familiar physical objects",
+    "bare hands",
+    "transformation on use"
+  ],
+  "motion_verbs": [
+    "picks up",
+    "cuts open",
+    "twists",
+    "presses",
+    "pours",
+    "sets down",
+    "rolling",
+    "clicking into place"
+  ],
+  "first_frame": {
+    "kind": "empty_surface",
+    "spec": "空桌面（PALETTE 主色的干净台面），无任何物件",
+    "ffmpeg": "color=c=0x<PALETTE主色>:s=<W>x<H>"
+  },
+  "native": {
+    "aspect": "9:16",
+    "duration_s": 10,
+    "object_groups": [
+      3,
+      6
+    ],
+    "camera": "locked top-down"
+  },
+  "aspect_16_9": [
+    "vertical 9:16 → horizontal 16:9",
+    "central 70 percent → central 60 percent of the width, reading as one tight group（抗摊散，拼贴链 2026-07-28 实测有效）",
+    "结尾加 no elements spread evenly across the full width"
+  ],
+  "variables": [
+    "VISUAL_METAPHOR",
+    "KEY_OBJECTS",
+    "PALETTE",
+    "ASSEMBLY_ORDER"
+  ],
+  "gate2_prompt": "Create the exact completed final still frame for a vertical 9:16 practical stop-motion B-roll clip in the style of PES (Fresh Guacamole / Western Spaghetti).\nVisual concept: [VISUAL_METAPHOR].\nThe core device is OBJECT SUBSTITUTION: build the idea from 3–6 familiar physical objects that stand in for something else entirely — [KEY_OBJECTS] — so that a viewer reads both the real object and what it stands for at the same time. The substitution must be instantly legible, deadpan and slightly witty, never a literal illustration of the sentence.\nA pair of bare human hands is mid-action in frame, caught in the middle of using the objects — only hands and forearms, no face, no body. The hands are the verb of the shot.\nStyle: real practical stop motion shot on a physical tabletop, overhead camera, genuine materials with honest wear, scuffs and handling marks, coherent real-world object scale, matte surfaces, crisp contact shadows, soft directional practical lighting, shallow but real depth of field.\nBackdrop: a plain [PALETTE] tabletop surface, uncluttered, with generous negative space. Keep the action inside the central 70 percent of the frame.\nNo CGI look, no floating objects, no paper collage, no text, no letters, no numbers, no logos, no UI, no full room environment, no faces, no product-photography gloss.",
+  "gate3_prompt": "Practical tabletop object stop-motion in the style of PES, using Image 1 as the exact empty tabletop and Image 2 as the exact completed final composition.\nOne locked top-down shot. A pair of bare human hands enters from the edge of frame and performs the substitution in this order: [ASSEMBLY_ORDER].\nObjects are carried in, set down, cut, twisted or pressed by the hands with believable physical weight and crisp frame-by-frame stop-motion timing. The payoff is ONE clear moment where an ordinary object is used as the thing it stands for, and reads as that thing — this beat lands in the final second.\nThe hands withdraw from frame at the very end, leaving exactly the arrangement in Image 2.\nPreserve the exact objects, scale, lighting and surface texture from Image 2.\nNo morphing, no levitation, no objects appearing from nowhere, no new objects, no faces, no camera movement, no zoom, no scene cuts, no text, no sound.",
+  "failure_criteria": [
+    "**没有替身，只有摆拍**——画面里都是「本来就该在那儿的东西」，就没有 PES。物品必须替身成别的东西",
+    "手不在画面里或只在旁边：手是动词，动作必须由手完成（原提示词那句 no human hands 是 2026-07-28 定位到的错误，已删）",
+    "转换不在动作里发生，而是靠并置暗示——那是拼贴的活，不是本风格",
+    "物品悬浮或无重量；出现人脸；满桌碎物（超过 6 组就读不成一句话）",
+    "产品摄影的光洁感：真实定格片有磨损、指纹、实拍景深"
+  ],
+  "notes": [
+    "2026-07-28 重写：原提示词的 `no human hands` 与 PES 参考直接冲突，产出退化成静物产品照。手是这门语言的动词，已改为「双手在画面中完成动作、末尾退出画面」。",
+    "「fingerprints」是 clay-miniature 的签名词（塑形师按在橡皮泥上的指印），本风格改说 scuffs / handling marks——lint 抓出来的。"
+  ],
+  "_vocab_note": "「contact shadows」是通用摄影词，多套都会正当使用，不具区分性，已从签名表移除（2026-07-28，同 modular / rails 的处理）。本风格真正的签名是 object substitution / transformation on use / bare hands / overhead tabletop。"
+}

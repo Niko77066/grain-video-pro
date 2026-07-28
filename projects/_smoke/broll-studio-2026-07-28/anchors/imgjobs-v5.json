@@ -1,0 +1,18 @@
+{
+  "defaults": {
+    "quality": "high",
+    "output_format": "png"
+  },
+  "jobs": [
+    {
+      "name": "technical-diagram_v2_last",
+      "size": "720x1280",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 animated 3D exploded-view B-roll clip, in the style of a Vectary product exploded view rendered with IBM Design Language graphic discipline.\nVisual concept: an agent is not a prompt wrapped around a model, it is a closed loop of model, memory, tools and feedback.\nRepresent the idea as ONE clearly engineered object separated into 3–6 modular parts held apart along their assembly axes: a central cubic core unit, a cylindrical memory drum, a jointed tool arm with a socket head, and a return feedback conduit that loops back into the core.\nStyle: clean product-grade 3D render — real dimensional volumes with matte industrial surfaces (anodised metal, moulded polymer, machined edges), soft studio lighting, gentle contact shadows, no photographic clutter.\nGraphic layer: the whole scene sits on ONE flat saturated a single strong IBM blue field carrying a faint regular white grid. Hairline white guide lines run along each part's assembly axis to the socket it belongs in, so the whole mechanism is understandable without a single label. Keep the linework thin, even and quiet.\nUse a few large readable components rather than dense micro-detail; parts float in precise alignment, evenly spaced, reading as one exploded object rather than scattered pieces.\nNo drafting paper, no beige or sepia, no patent-drawing crosshatch, no printed paper texture, no readable labels, no letters, no numbers, no measurements, no software UI, no circuit-board clutter, no glossy sci-fi interface, no logo, no watermark."
+    },
+    {
+      "name": "popup-book_v2_last",
+      "size": "720x1280",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 animated pop-up-book B-roll clip.\nVisual concept: an idea travels from spark to audience, and at every layer of the journey some of it is lost along the way.\nShow a fully opened handcrafted pop-up book containing a layered miniature world built from 4–6 large paper structures: a tall background ridge of folded paper peaks, a mid-ground valley crossed by a narrow paper bridge, a foreground funnel-shaped distribution gate, and a single small paper figure on the path.\nStyle: premium paper-engineered pop-up book, dimensional folded architecture, clean die-cut silhouettes, visible tabs and hinges, layered foreground, middle ground and background, theatrical miniature lighting where the light appears to come from INSIDE the paper structures — pages and cut-outs glowing from within as if projection-mapped, warm light spilling through the die-cut gaps onto the layers behind. COLOUR RULE: one strong flat saturated deep ink green as the single flat field colour, warm off-white paper, and burnt orange as the only accent on the funnel field fills the whole background and the book's own surface — a single decisive colour chosen for meaning, not a blend of three. Everything built on it is warm off-white paper, plus exactly ONE accent colour used sparingly on the element that carries the point. No third hue. Deep shadowed surroundings; a dark fairytale, not a children's picture book. Hand-cut paper with visible knife texture and honest fibre.\nThe scene should feel spatial and immersive rather than like a flat collage. Use one clear visual path leading through the composition.\nNo loose paper scraps, no halftone photo collage, no readable book text, no labels, no logo, no excessive layers, no photoreal environment."
+    }
+  ]
+}
