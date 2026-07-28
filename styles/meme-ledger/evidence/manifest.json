@@ -1,0 +1,31 @@
+{
+  "schema": "meme-ledger-evidence@1",
+  "scope": "已授权的稳定生产预设复现与审计证据；不含运行凭据、Cookie 或真实 MiniMax 音色 ID。",
+  "assets": [
+    {
+      "path": "video/realestate-agency-landscape-banfo-no-punct.mp4",
+      "role": "validated_final_render",
+      "sha256": "23e67c10946a4cd2138a1a33b5fbda482914ff2da07ef000d057abd8a42939f9",
+      "format": "h264/aac mp4",
+      "duration_s": 97.877333,
+      "dimensions": "1920x1080",
+      "rights_ref": "rights/unusual-videos-collaboration-user-confirmed.md"
+    },
+    {
+      "path": "audio/banfo-source.m4a",
+      "role": "authorized_voice_clone_reference",
+      "sha256": "c44b1ea8e2737481e1cd61ff722d7857ecd3a36d7d43811f2ad5602d7a0ee5e2",
+      "format": "aac m4a",
+      "duration_s": 243.498333,
+      "rights_ref": "rights/banfo-voice-clone-user-authorized.md"
+    },
+    {
+      "path": "audio/roundabout-authorized.webm",
+      "role": "fixed_authorized_bgm",
+      "sha256": "4e8df10737049ace81d1487c5a18703c5dba6e65611b07b87843482332ed1f9c",
+      "format": "opus webm",
+      "duration_s": 42.461,
+      "rights_ref": "rights/bgm-roundabout-user-authorized.md"
+    }
+  ]
+}

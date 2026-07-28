@@ -1,0 +1,24 @@
+{
+  "schema": "golden-mother-index@1",
+  "purpose": "Golden selection index; full user-provided ASR source assets are registered in golden-source-library.json.",
+  "source_library": "golden-source-library.json",
+  "selection_required": true,
+  "minimum_rejected_candidates": 2,
+  "quality_gate": {
+    "rubric": "golden-mother-cards.md#golden-质量评分",
+    "minimum_total": 21,
+    "minimum_per_dimension": 3
+  },
+  "mothers": [
+    {"id": "G01", "title": "营养工厂", "bvid": "BV1QjhWzmEcC", "geometry": "industry_mechanism", "full_text_asset": "G01", "tags": ["supply_chain", "transparency", "challenger"]},
+    {"id": "G02", "title": "活着就是熬着", "bvid": "BV1yB4y1Q7ZN", "geometry": "scale_spiral", "full_text_asset": "G02", "tags": ["long_term", "ordinary_people", "minimum_action"]},
+    {"id": "G03", "title": "瑞幸咖啡", "bvid": "BV1T7411W7ca", "geometry": "interest_ledger", "full_text_asset": "G03", "tags": ["capital", "subsidy", "multi_stakeholder"]},
+    {"id": "G04", "title": "5本好书", "bvid": "BV1eZ4y1j7kw", "geometry": "cognitive_ladder", "full_text_asset": "G04", "tags": ["list", "definition_power", "synthesis"]},
+    {"id": "G05", "title": "奶茶加盟", "bvid": "BV1UJ41157Lw", "geometry": "lifecycle_line", "full_text_asset": "G05", "tags": ["payment_chain", "sunk_cost", "consumer_defense"]},
+    {"id": "G06", "title": "奢侈品", "bvid": "BV1x7411i7au", "geometry": "identity_pricing", "full_text_asset": "G06", "tags": ["consumerism", "identity", "choice"]},
+    {"id": "G07", "title": "为何漠视人命", "bvid": "BV1cC4y1x7TA", "geometry": "incentive_causal_chain", "full_text_asset": "G07", "tags": ["organization", "long_term_assets", "cost_transfer"]},
+    {"id": "G08", "title": "热点事件谁是赢家", "bvid": "BV1gE41147rZ", "geometry": "winner_ladder", "full_text_asset": "G08", "tags": ["hot_event", "platform", "closed_loop"]},
+    {"id": "G09", "title": "为什么操控者屡屡得手", "bvid": "BV1jE41137PK", "geometry": "conversion_funnel", "full_text_asset": "G09", "tags": ["psychology", "manipulation", "defense"]},
+    {"id": "G10", "title": "东方众神", "bvid": "BV1t7411b7F7", "geometry": "ensemble_battle", "full_text_asset": "G10", "tags": ["complex_system", "multiple_cases", "recurring_trigger"]}
+  ]
+}
