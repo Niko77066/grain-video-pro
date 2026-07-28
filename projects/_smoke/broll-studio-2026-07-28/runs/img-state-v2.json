@@ -1,0 +1,15 @@
+{
+  "model": "gpt-image-2",
+  "generated": [
+    {
+      "name": "toy-world_last_v2",
+      "file": "projects/_smoke/broll-studio-2026-07-28/anchors/toy-world_last_v2_raw.png",
+      "request_id": "202607280748240151213118268d9d6yVzIyG0G",
+      "endpoint": "/v1/images/generations",
+      "ref": [],
+      "size": "720x1280",
+      "quality": "medium",
+      "prompt": "Create the exact completed final still frame for a vertical 9:16 minimal 3D toy-world B-roll clip.\nVisual concept: a good product does not hand you more buttons, the complicated parts have docked themselves into one calm finished object.\nBuild the idea using 3–6 simplified modular toy-like objects: a rounded matte hero console with two wedge modules already docked flush against its left and right faces and a cylindrical connector puck seated flush in its recessed top dock, reading as one single finished object.\nStyle: premium spatial illustration, minimalist designer-toy world, soft matte vinyl and painted wood materials, rounded geometric forms, restrained off-white, soft coral and pale slate brand palette, clean studio lighting, soft ambient shadows, coherent miniature scale.\nCamera: locked orthographic or gentle isometric view. The composition should feel like a carefully designed physical product ecosystem, not a large cinematic environment.\nUse one hero object and a small number of supporting modules.\nNo photoreal humans, no glass-heavy materials, no chrome reflections, no dense scenery, no text, no UI, no logos, no tiny components."
+    }
+  ]
+}

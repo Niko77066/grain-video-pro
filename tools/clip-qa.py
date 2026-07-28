@@ -30,6 +30,14 @@ SAMPLE_FPS = 8             # YDIF 采样率
 # 相对判据与内容亮度无关，且在负对照上仍然开火（真冻尾 0.00、全程动 1.57）。
 TAIL_RATIO_MIN = 0.25      # 尾段运动量不得低于全片中位的 25%
 TAIL_ABS_FLOOR = 0.10      # 兜底：尾段中位 YDIF 低于此值 = 真冻帧，无论比值多少都判红
+# ⚠️ 已知失效模式（2026-07-28 broll-studio 冒烟发现，**未修，故意的**）：
+# 「中段爆发型」会被误判红。popup-book v2 的尾段绝对 YDIF 0.657 是七条测试片里第二高的
+# （toy-world 只有 0.194 却以 29% 通过），但它中段书本翻开的爆发把全片中位抬到 7.03，
+# 比值只剩 9%。试过换分母（前段 p60、截尾中位 p75）都救不回来——比值家族分离不了这个案例。
+# 唯一能分离的是加一条「尾段绝对量」的或门，但可用样本只有 2 条（0.291 判红 / 0.657 判绿），
+# 按这个校准阈值等于拟合噪声，而且绝对量会被颗粒/闪烁抬高，等于把门放松。
+# 因此：判红照旧，但绝对量偏高时附 advisory，提示人眼复核。等样本够了再走棘轮。
+TAIL_ABS_ADVISORY = 0.50   # 尾段绝对 YDIF 高于此值而比值判红 → 疑似中段爆发型误报
 
 
 def probe(path):
@@ -98,11 +106,18 @@ def run(target, expect_size=None, tail_ratio_min=TAIL_RATIO_MIN, contact=None):
 
     ratio, m_tail, m_all, n = tail_motion(target)
     frozen = m_tail < TAIL_ABS_FLOOR
-    mark("dead_tail", ratio >= tail_ratio_min and not frozen,
+    passed = ratio >= tail_ratio_min and not frozen
+    # 判红但尾段绝对量不低 → 大概率是「中段爆发型」误报（见常量处的已知失效模式）。
+    # 仍判红（不放松门），但把线索给出来，让人眼有据可依。
+    advisory = (not passed) and (not frozen) and m_tail >= TAIL_ABS_ADVISORY
+    mark("dead_tail", passed,
          f"尾 {TAIL_WINDOW_S}s 运动量为全片的 {ratio:.0%}"
          f"（下限 {tail_ratio_min:.0%}；尾段中位 YDIF {m_tail} / 全片 {m_all}，采样 {n} 帧）"
-         + ("　⚠️ 尾段近乎完全冻结" if frozen else ""),
-         tail_ratio=ratio, ydif_tail=m_tail, ydif_all=m_all)
+         + ("　⚠️ 尾段近乎完全冻结" if frozen else "")
+         + (f"　ℹ️ 但尾段绝对量 {m_tail} ≥ {TAIL_ABS_ADVISORY}，疑似中段爆发型误报——人眼复核 "
+            f"contact sheet 后可带理由放行，理由写进 gate3-qa.md" if advisory else ""),
+         tail_ratio=ratio, ydif_tail=m_tail, ydif_all=m_all,
+         burst_advisory=advisory)
 
     if contact:
         Path(contact).parent.mkdir(parents=True, exist_ok=True)

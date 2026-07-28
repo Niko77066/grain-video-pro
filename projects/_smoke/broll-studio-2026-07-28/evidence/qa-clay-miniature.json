@@ -1,0 +1,29 @@
+{
+  "target": "projects/_smoke/broll-studio-2026-07-28/shots/clay-miniature_raw.mp4",
+  "spec": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24.0,
+    "duration_s": 10.042,
+    "has_audio": false
+  },
+  "checks": {
+    "audio": {
+      "pass": true,
+      "detail": "无音轨"
+    },
+    "size": {
+      "pass": true,
+      "detail": "720x1280"
+    },
+    "dead_tail": {
+      "pass": true,
+      "detail": "尾 2.0s 运动量为全片的 32%（下限 25%；尾段中位 YDIF 0.298 / 全片 0.918，采样 80 帧）",
+      "tail_ratio": 0.325,
+      "ydif_tail": 0.298,
+      "ydif_all": 0.918
+    }
+  },
+  "verdict": "pass",
+  "contact_sheet": "projects/_smoke/broll-studio-2026-07-28/evidence/clay-miniature-contact.jpg"
+}

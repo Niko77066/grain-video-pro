@@ -1,0 +1,89 @@
+{
+  "schema": "broll-profile@1",
+  "id": "technical-diagram",
+  "display_name": "技术图解风 Technical Exploded Diagram",
+  "core_strength": "把抽象机制讲清楚",
+  "one_liner": "Vectary 的真实 3D 爆炸视图 + IBM 的图形纪律：部件沿轴分离在单一强色场上，发丝白线连着装配关系。",
+  "best_for": [
+    "AI／Agent 机制",
+    "工作流与 Agent 循环",
+    "内容生产／审核／分发系统",
+    "组织机制与业务流程",
+    "一个系统为什么失效"
+  ],
+  "avoid_when": [
+    "情绪表达",
+    "人际关系",
+    "需要温度的品牌叙事"
+  ],
+  "routing_examples": [
+    "Agent 不是模型外面套一个提示词，而是模型、记忆、工具和反馈共同构成的循环"
+  ],
+  "references": [
+    {
+      "title": "Vectary Exploded View",
+      "url": "https://www.vectary.com/3d-modeling-blog/animated-3d-exploded-view-product-design/",
+      "why": "**主参考**（2026-07-28 实读）：真实产品的动画爆炸视图——部件沿装配轴分离、可旋转观察、热点标注；干净的产品级 3D，不是 2D 编辑插画"
+    },
+    {
+      "title": "BUCK × IBM Design Language",
+      "url": "https://buck.co/work/ibm-design-language",
+      "why": "**图形纪律**（2026-07-28 实看）：单一强色满底 + 发丝白细线 + 可见网格 + 极简几何；运动分 productive（高效克制）与 expressive 两类，本风格只用 productive"
+    }
+  ],
+  "signature_vocab": [
+    "exploded-view",
+    "axonometric",
+    "hairline white linework",
+    "grid field",
+    "sockets",
+    "engineering axis",
+    "alignment guides",
+    "matte industrial",
+    "technical illustration"
+  ],
+  "motion_verbs": [
+    "travels along a straight engineering axis",
+    "aligns",
+    "clicks into place",
+    "extends",
+    "pulses"
+  ],
+  "first_frame": {
+    "kind": "empty_surface",
+    "spec": "空制图场（warm off-white drafting-paper 底），无任何模块",
+    "ffmpeg": "color=c=0xF2EDE3:s=<W>x<H>"
+  },
+  "native": {
+    "aspect": "9:16",
+    "duration_s": 10,
+    "object_groups": [
+      3,
+      6
+    ],
+    "camera": "locked axonometric"
+  },
+  "aspect_16_9": [
+    "vertical 9:16 → horizontal 16:9",
+    "轴测构图在横屏更宽松，但仍要求主机构聚在中央 60%，外三分之一留白"
+  ],
+  "variables": [
+    "VISUAL_METAPHOR",
+    "KEY_OBJECTS",
+    "PALETTE",
+    "ASSEMBLY_ORDER"
+  ],
+  "gate2_prompt": "Create the exact completed final still frame for a vertical 9:16 animated 3D exploded-view B-roll clip, in the style of a Vectary product exploded view rendered with IBM Design Language graphic discipline.\nVisual concept: [VISUAL_METAPHOR].\nRepresent the idea as ONE clearly engineered object separated into 3–6 modular parts held apart along their assembly axes: [KEY_OBJECTS].\nStyle: clean product-grade 3D render — real dimensional volumes with matte industrial surfaces (anodised metal, moulded polymer, machined edges), soft studio lighting, gentle contact shadows, no photographic clutter.\nGraphic layer: the whole scene sits on ONE flat saturated [PALETTE] field carrying a faint regular white grid. Hairline white guide lines run along each part's assembly axis to the socket it belongs in, so the whole mechanism is understandable without a single label. Keep the linework thin, even and quiet.\nUse a few large readable components rather than dense micro-detail; parts float in precise alignment, evenly spaced, reading as one exploded object rather than scattered pieces.\nNo drafting paper, no beige or sepia, no patent-drawing crosshatch, no printed paper texture, no readable labels, no letters, no numbers, no measurements, no software UI, no circuit-board clutter, no glossy sci-fi interface, no logo, no watermark.",
+  "gate3_prompt": "Animated 3D exploded-view assembly, using Image 1 as the exact empty [PALETTE] grid field and Image 2 as the exact completed exploded arrangement.\nIn one locked-off vertical axonometric shot, build the mechanism in this order: [ASSEMBLY_ORDER].\nThe base structure arrives first. Each module then travels in along a straight assembly axis and comes to rest in precise alignment; its hairline white guide line draws itself only after that module is in place. Motion is productive and restrained — even speed, clean deceleration, no overshoot, no flourish. End with one quiet pulse along the guide lines showing the system reads as a whole.\nPreserve the exact geometry, matte industrial materials, the flat [PALETTE] field with its white grid, the hairline linework and the final arrangement from Image 2.\nNo random rotation, no floating debris, no morphing, no labels, no new parts, no camera orbit, no zoom, no scene cuts, no text, no sound.",
+  "failure_criteria": [
+    "**做成牛皮纸／专利图／做旧插画**——2026-07-28 用户明确否掉这条路线。要的是真实 3D 爆炸视图 + 平色网格场",
+    "出现可读标注／数字／假注释——本风格靠结构与引导线说话，一有字就变成 PPT 示意图",
+    "引导线先于对应模块出现（因果颠倒，机制就讲错了）",
+    "部件散落而不是沿轴对齐：爆炸视图的可读性全靠「still reads as one object」",
+    "微零件堆砌；科幻 UI 光效（把工程可信变成特效炫技）"
+  ],
+  "_vocab_note": "「rails」technical-diagram 与 toy-world 都在正当使用（导轨），不具区分性，已从签名表移除（2026-07-28 lint 自洽性测试发现，同 modular 的处理）。本风格真正的签名是 exploded-view / axonometric / drafting-paper / navy linework / sockets / engineering axis。",
+  "notes": [
+    "2026-07-28 用户拍板：只要 Vectary + IBM，**删除牛皮纸专利图皮肤**（连同 sepia／印刷纹理／宜家说明书参考）。首版冒烟用的是被删掉的那张皮，因此本 profile 的 9:16 状态回落为**未冒烟**。"
+  ]
+}

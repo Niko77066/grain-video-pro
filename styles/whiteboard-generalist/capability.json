@@ -4,54 +4,72 @@
   "display_name": "公用白板",
   "layer": "bundled",
   "status": "fallback",
-
   "positioning": "生产兜底模板（不是第三个风格 SKU）",
   "one_liner": "当选题不满足任何专用包的叙事前提、或路由置信度不足时用它——它保下限，不承担清晰的用户可感知风格承诺。",
   "signature": "没有签名动作，这是设计意图。给你一块空白画布 + 一套与画面外观无关的生产纪律（单一传播意图／参考资产／连续性／统一手柄／实测验收）。",
-  "narrative_skeleton": ["由本片 brief 决定（钩子 → 核心承诺 → 每 15–30s 一个小高潮 → 收尾）"],
-
+  "narrative_skeleton": [
+    "由本片 brief 决定（钩子 → 核心承诺 → 每 15–30s 一个小高潮 → 收尾）"
+  ],
   "understanding_task": {
     "primary": [],
     "secondary": []
   },
-
-  "applicable_content": ["other"],
-  "audience": ["general", "professional", "beginner"],
-  "tone": ["authoritative", "urgent", "narrative", "restrained_premium", "approachable", "emotional"],
+  "applicable_content": [
+    "other"
+  ],
+  "audience": [
+    "general",
+    "professional",
+    "beginner"
+  ],
+  "tone": [
+    "authoritative",
+    "urgent",
+    "narrative",
+    "restrained_premium",
+    "approachable",
+    "emotional"
+  ],
   "pacing": "medium",
   "visual_language": [
-    "由选题决定（生成风格二选一：拼贴 collage / 像素 pixel，同片单一）",
+    "由选题决定（生成风格八选一：pixel / collage / object-theatre / technical-diagram / clay-miniature / felted-wool / popup-book / toy-world，同片单一）",
     "实拍视频 + 图片动效 + 数字人 + HTML 版式自由混排",
     "全片统一的色彩／字体／节奏或重复视觉手柄（写进 meta.style_notes.visual_handle）"
   ],
-
   "hard_rules": {
     "requires_any": [],
     "excluded_material": [],
     "excluded_sensitivity": [],
     "why": "兜底包不设准入条件——它的职责就是接住其它包接不住的。唯一硬不兼容是写实真人重演（三包共同规则），这条不进路由、由合同与 Judge 执法。"
   },
-
   "native_format": {
-    "aspect": ["9:16", "16:9", "1:1"],
-    "duration_s": [0, 100000],
+    "aspect": [
+      "9:16",
+      "16:9",
+      "1:1"
+    ],
+    "duration_s": [
+      0,
+      100000
+    ],
     "basis": "兜底包没有原生格式——画面外观完全由选题决定（playbook §2）。全画幅全时长零适配代价，这是它保下限的方式。"
   },
-
   "material_requirements": {
     "signature": [],
     "prefers": [],
     "can_work_without": [
-      "readable_evidence", "official_dataset", "character_footage",
-      "archival_footage", "location_footage", "contrast_fact", "multi_stage_causality"
+      "readable_evidence",
+      "official_dataset",
+      "character_footage",
+      "archival_footage",
+      "location_footage",
+      "contrast_fact",
+      "multi_stage_causality"
     ]
   },
-
   "avoid_when": [],
   "avoid_why": "",
-
   "routing_note": "status=fallback 的包不参与打分竞争——它不会因为「什么都沾一点」而挤掉专用包，也不会因为分低而被漏掉。路由器永远把它作为最后一行兜底候选输出；只有当所有专用包被硬规则排除、或最高分没有命中理解任务时，它才成为推荐项。",
-
   "see_also": {
     "playbook": "styles/whiteboard-generalist/playbook.md",
     "contract": "styles/whiteboard-generalist/contract.json"

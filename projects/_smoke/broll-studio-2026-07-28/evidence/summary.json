@@ -1,0 +1,44 @@
+[
+  {
+    "profile": "object-theatre",
+    "verdict": "pass",
+    "duration": "10.042s",
+    "size": "720x1280",
+    "tail_ratio": "43%"
+  },
+  {
+    "profile": "technical-diagram",
+    "verdict": "pass",
+    "duration": "10.042s",
+    "size": "720x1280",
+    "tail_ratio": "36%"
+  },
+  {
+    "profile": "clay-miniature",
+    "verdict": "pass",
+    "duration": "10.042s",
+    "size": "720x1280",
+    "tail_ratio": "32%"
+  },
+  {
+    "profile": "felted-wool",
+    "verdict": "pass",
+    "duration": "10.042s",
+    "size": "720x1280",
+    "tail_ratio": "27%"
+  },
+  {
+    "profile": "popup-book",
+    "verdict": "fail",
+    "duration": "10.042s",
+    "size": "720x1280",
+    "tail_ratio": "16%"
+  },
+  {
+    "profile": "toy-world",
+    "verdict": "pass",
+    "duration": "10.042s",
+    "size": "720x1280",
+    "tail_ratio": "29%"
+  }
+]

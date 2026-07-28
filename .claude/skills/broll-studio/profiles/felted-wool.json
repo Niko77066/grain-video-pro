@@ -1,0 +1,94 @@
+{
+  "schema": "broll-profile@1",
+  "id": "felted-wool",
+  "display_name": "毛毡动画风 Felted Wool Animation",
+  "core_strength": "柔软、温暖、有人情味",
+  "one_liner": "毛毡不是换个材质的黏土——黏土偏荒诞与喜剧，毛毡偏温暖、孤独与关怀。",
+  "best_for": [
+    "人与人之间的距离",
+    "陪伴、孤独、同理心",
+    "工作与生活平衡",
+    "创作者故事",
+    "教育／儿童／宠物／家庭",
+    "给科技内容降温"
+  ],
+  "avoid_when": [
+    "讽刺与黑色幽默（那是黏土的活）",
+    "机制解释",
+    "强节奏快讯"
+  ],
+  "routing_examples": [
+    "当所有工具都在帮你提高效率时，很少有工具问你是不是已经累了"
+  ],
+  "references": [
+    {
+      "title": "Apple《Fuzzy Feelings》（Passion Animation）",
+      "url": "https://www.passion-animation.com/project/apple-fuzzy-feelings/",
+      "why": "**实看画面（2026-07-28）**：戴细金属丝眼镜的具体老人、绣线五官、真织物构造的斜纹外套与针织领带；灰调降饱和、浅景深、film grain——像一格真实定格胶片"
+    },
+    {
+      "title": "导演 Anna Mantzaris",
+      "url": "https://www.annamantzaris.se/apple",
+      "why": "柔软媒介如何表达孤独、讽刺与同理心"
+    },
+    {
+      "title": "Andrea Love",
+      "url": "https://www.instagram.com/andreaanimates/",
+      "why": "毛毡食物／人物／自然物／生活场景的定格动画量产参考"
+    }
+  ],
+  "signature_vocab": [
+    "needle-felted",
+    "wool fibers",
+    "embroidered details",
+    "felt stage",
+    "tactile surfaces",
+    "rounded handmade silhouettes"
+  ],
+  "motion_verbs": [
+    "scoot",
+    "bounce",
+    "tilt",
+    "settle"
+  ],
+  "first_frame": {
+    "kind": "empty_surface",
+    "spec": "空毛毡台（PALETTE 主色的毛毡底 + 柔光），无角色无道具",
+    "ffmpeg": "color=c=0x<PALETTE主色>:s=<W>x<H>"
+  },
+  "native": {
+    "aspect": "9:16",
+    "duration_s": 10,
+    "object_groups": [
+      3,
+      5
+    ],
+    "camera": "locked"
+  },
+  "aspect_16_9": [
+    "vertical 9:16 → horizontal 16:9",
+    "「距离感」在横屏是靠左右留白建立的，别把角色推到画面中央填满——保留一侧大面积空毛毡场"
+  ],
+  "variables": [
+    "VISUAL_METAPHOR",
+    "KEY_OBJECTS",
+    "PALETTE",
+    "ASSEMBLY_ORDER"
+  ],
+  "gate2_prompt": "Create the exact completed final still frame for a vertical 9:16 needle-felted wool stop-motion B-roll clip.\nVisual concept: [VISUAL_METAPHOR].\nBuild a small handcrafted world using one felted character and 2–4 felted objects: [KEY_OBJECTS].\nStyle: premium needle-felted wool animation, visible soft wool fibers, rounded handmade silhouettes, tiny embroidered details, carefully crafted miniature props, warm tactile surfaces, gentle cinematic lighting, shallow but controlled miniature depth.\nPalette: [PALETTE], kept muted and filmic — dusty and desaturated, never sweet pastel. The mood is intimate, tender and a little melancholy or awkward, never cute.\nThe character must be SPECIFIC, not a generic doll: a particular age and build, real garment construction (visible tweed weave, knitted rib, a wire-frame detail such as spectacles), and facial features made of tiny embroidered stitches rather than painted dots.\nShoot it like a real stop-motion film frame: shallow cinematic depth of field with the background falling soft, and a fine film grain over everything.\nKeep facial features minimal and communicate emotion through posture, distance and composition. Show ONLY the character and the named objects on a plain [PALETTE] felt ground — this is a small handcrafted vignette, not a full room: no walls, no windows, no furniture beyond what is named.\nNo clay, no plastic surfaces, no photoreal fur, no loose yarn mess, no detailed lip movement, no text, no logos, no clutter.",
+  "gate3_prompt": "Needle-felted wool stop-motion assembly, using Image 1 as the exact empty felt stage and Image 2 as the exact completed composition.\nAssemble the scene in this order: [ASSEMBLY_ORDER].\nEVERY element, the character included, must travel in from off-frame and settle — nothing may fade in, pop into existence or assemble itself in place. Felt objects gently scoot, bounce, tilt or settle into place with delicate frame-by-frame timing. The character performs one small emotional gesture only. Preserve the soft tactile weight and visible wool fibers throughout.\nEnd by holding the supplied completed composition.\nNo fibers growing or unraveling, no melting, no morphing between objects, no changing character design, no complex walking, no characters materialising in place, no camera movement, no scene cuts, no text, no sound.",
+  "failure_criteria": [
+    "**角色凭空出现在座位上**——2026-07-28 冒烟实测的主要 bug：桌子滑入后人直接「长」在桌前。毛毡是实体材料，一切元素必须从画外进场，不许淡入或原地生成",
+    "**通用可爱娃娃**——Fuzzy Feelings 的角色是有年龄、有具体衣物构造（斜纹呢、针织、金属丝眼镜）、五官是绣线的。做成圆头圆脑的通用毛毡玩偶就丢了这门语言的全部情绪",
+    "甜柔粉彩 + 全景深：参考是**灰调降饱和 + 电影感浅景深 + 颗粒**，看起来像被拍下来的，不是渲染的",
+    "做成儿童向：本风格要的是 intimate／tender，不是幼稚",
+    "毛纤维生长或散开——毛毡最容易在这里穿帮",
+    "角色做了不止一个情绪动作：一条只准一个小动作，多了就变成表演",
+    "拿黏土的荒诞动词套毛毡（压扁、膨胀、堵管）——串风格了，回去改隐喻或改走 clay-miniature",
+    "场景膨胀成一整间屋子（墙、窗、盆栽）——profile 要的是 one felted character + 2–4 objects 的**小世界**。2026-07-28 实测会自动长出整间房，想要小世界就得在 Composition 段显式压住"
+  ],
+  "notes": [
+    "2026-07-28 冒烟修订两处：① 角色凭空出现 → 全员从画外进场；② 场景自动膨胀成整间屋子 → Composition 段显式压住。",
+    "2026-07-28 看参考后补：角色要具体（年龄/衣物构造/绣线五官）、调色要灰、要浅景深与颗粒。"
+  ]
+}

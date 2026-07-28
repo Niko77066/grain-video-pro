@@ -1,0 +1,56 @@
+{
+  "defaults": {
+    "resolution": "720p",
+    "oss_prefix": "kuleshov/_smoke/broll-studio-2026-07-28"
+  },
+  "jobs": [
+    {
+      "name": "object-theatre",
+      "ratio": "9:16",
+      "duration": 10,
+      "prompt": "Practical tabletop object stop-motion assembly, using Image 1 as the exact empty tabletop and Image 2 as the exact completed final composition.\nIn one locked top-down vertical shot, assemble the metaphor in this order: the wooden blocks roll in and stack up one by one, then the thimble slides in and topples against them, then the brass magnifying glass swings down and settles above the stack, and finally the hairline crack widens visibly under the lens.\nEach object enters with believable physical weight: rolling, sliding, pivoting, dropping or clicking into place. Use crisp frame-by-frame stop-motion timing and one clear final cause-and-effect action.\nPreserve the exact objects, scale, lighting, surface texture and final arrangement from Image 2.\nNo morphing, no levitation, no new objects, no human hands, no camera movement, no zoom, no scene cuts, no text, no sound.",
+      "first": "projects/_smoke/broll-studio-2026-07-28/anchors/object-theatre_first.png",
+      "last": "projects/_smoke/broll-studio-2026-07-28/anchors/object-theatre_last.png"
+    },
+    {
+      "name": "technical-diagram",
+      "ratio": "9:16",
+      "duration": 10,
+      "prompt": "Technical exploded-view assembly animation, using Image 1 as the exact empty drafting field and Image 2 as the exact completed system.\nIn one locked-off vertical axonometric shot, assemble the mechanism in this order: the base plate and its rails appear first, then the central core module lowers onto the plate and clicks in, then the memory drum slides along its rail and seats into the left socket, then the tool arm descends and locks into the right socket, and finally the feedback pipe extends from the tool arm back into the core.\nThe base structure appears first. Each module then travels along a straight engineering axis, aligns precisely with its socket and clicks into place. Connection lines and pipes extend only after the corresponding components are installed. End with one restrained signal pulse showing that the system is operational.\nMovement must feel precise, functional and deliberately engineered.\nNo random rotation, no floating debris, no morphing, no tiny labels, no new parts, no camera orbit, no zoom, no scene cuts, no text, no sound.",
+      "first": "projects/_smoke/broll-studio-2026-07-28/anchors/technical-diagram_first.png",
+      "last": "projects/_smoke/broll-studio-2026-07-28/anchors/technical-diagram_last.png"
+    },
+    {
+      "name": "clay-miniature",
+      "ratio": "9:16",
+      "duration": 10,
+      "prompt": "Handcrafted clay stop-motion assembly, using Image 1 as the exact empty miniature stage and Image 2 as the exact completed final frame.\nAssemble the clay scene in this order: the thick clay pipe rolls in and settles upright, then the clay figure hops in and presses itself into the pipe opening, then the funnel drops onto the top of the pipe, then the three tool blocks fall into the funnel one by one, and finally the figure squashes slightly as the last block lands.\nClay objects roll, hop, press or settle into place with stepped frame-by-frame timing. Allow only small controlled squash-and-stretch moments that support the metaphor. End with one simple readable character action and hold the completed composition.\nPreserve the character identity, clay color, scale and final pose from Image 2.\nNo melting, no uncontrolled deformation, no changing faces, no extra limbs, no liquid clay, no walking cycle, no camera movement, no scene cuts, no text, no sound.",
+      "first": "projects/_smoke/broll-studio-2026-07-28/anchors/clay-miniature_first.png",
+      "last": "projects/_smoke/broll-studio-2026-07-28/anchors/clay-miniature_last.png"
+    },
+    {
+      "name": "felted-wool",
+      "ratio": "9:16",
+      "duration": 10,
+      "prompt": "Needle-felted wool stop-motion assembly, using Image 1 as the exact empty felt stage and Image 2 as the exact completed composition.\nAssemble the scene in this order: the felted desk scoots in and settles, then the felted person tilts into place slumped over the desk, then the two gadget characters bounce in and lean forward busily on either side, and finally the small mug scoots in and settles quietly beside her hand while she tilts her head a little toward it.\nFelt objects gently scoot, bounce, tilt or settle into place with delicate frame-by-frame timing. The character performs one small emotional gesture only. Preserve the soft tactile weight and visible wool fibers throughout.\nEnd by holding the supplied completed composition.\nNo fibers growing or unraveling, no melting, no morphing between objects, no changing character design, no complex walking, no camera movement, no scene cuts, no text, no sound.",
+      "first": "projects/_smoke/broll-studio-2026-07-28/anchors/felted-wool_first.png",
+      "last": "projects/_smoke/broll-studio-2026-07-28/anchors/felted-wool_last.png"
+    },
+    {
+      "name": "popup-book",
+      "ratio": "9:16",
+      "duration": 10,
+      "prompt": "Handcrafted pop-up-book unfolding animation, using Image 1 as the exact closed book or flat page and Image 2 as the exact completed miniature world.\nIn one locked front-facing three-quarter shot, the book opens and the scene unfolds in this order: the base page opens flat, then the background paper mountain ridge rises on its hinges, then the mid-ground valley and the narrow paper bridge extend across it, then the foreground funnel gate pops upright, and finally the small paper figure rises at the start of the path.\nThe base page opens first. Background structures rise on paper hinges, middle-ground paths extend, foreground elements pop upright, and the central subject appears last. All motion must follow believable paper-folding mechanics.\nPreserve the final layered composition from Image 2 and end with a stable theatrical hold.\nNo loose collage pieces, no objects growing from nowhere, no liquid morphing, no camera fly-through, no page turning after the scene is complete, no text, no sound.",
+      "first": "projects/_smoke/broll-studio-2026-07-28/anchors/popup-book_first.png",
+      "last": "projects/_smoke/broll-studio-2026-07-28/anchors/popup-book_last.png"
+    },
+    {
+      "name": "toy-world",
+      "ratio": "9:16",
+      "duration": 10,
+      "prompt": "Minimal 3D toy-world assembly, using Image 1 as the exact empty studio platform and Image 2 as the exact completed composition.\nIn one locked orthographic or isometric vertical shot, assemble the toy system in this order: the hero console drops onto the platform and settles, then the first wedge module slides in and magnetically docks to its left face, then the second wedge rotates ninety degrees and docks to the right, then the connector puck drops into the recessed dock, and finally a single soft indicator on the hero console lights once.\nModules drop, slide, rotate no more than 90 degrees and magnetically dock into precise positions. Use gentle physical easing, clear contact and believable miniature weight. End with one restrained functional action showing that the system is complete.\nPreserve the exact geometry, material, lighting and final arrangement from Image 2.\nNo camera orbit, no dramatic zoom, no floating particles, no elastic deformation, no morphing, no glossy sci-fi interface, no new objects, no scene cuts, no text, no sound.",
+      "first": "projects/_smoke/broll-studio-2026-07-28/anchors/toy-world_first.png",
+      "last": "projects/_smoke/broll-studio-2026-07-28/anchors/toy-world_last.png"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "note": "Gate 1 · 六套 profile 各一条隐喻。每条都按该 profile 的 best_for / routing_examples 选题，不是随便找个句子套六遍——冒烟要验的是「这套材质在它擅长的内容上成不成立」。",
+  "aspect": "9:16",
+  "duration_s": 10,
+  "shots": [
+    {
+      "profile": "object-theatre",
+      "core": "AI 不是替你工作的员工，是放大问题的镜子",
+      "mood": "冷静的反转",
+      "backdrop_hex": "D9C7A8",
+      "vars": {
+        "VISUAL_METAPHOR": "a magnifying glass does not do the work for you, it only makes the crack underneath impossible to ignore",
+        "KEY_OBJECTS": "a heavy brass magnifying glass, a short stack of wooden blocks with a hairline crack running through them, a small toppled thimble, a widening dark crack on the surface",
+        "PALETTE": "warm sand",
+        "ASSEMBLY_ORDER": "the wooden blocks roll in and stack up one by one, then the thimble slides in and topples against them, then the brass magnifying glass swings down and settles above the stack, and finally the hairline crack widens visibly under the lens"
+      }
+    },
+    {
+      "profile": "technical-diagram",
+      "core": "Agent 不是模型外面套个提示词，是模型 / 记忆 / 工具 / 反馈的循环",
+      "mood": "克制的工程感",
+      "backdrop_hex": "F2EDE3",
+      "vars": {
+        "VISUAL_METAPHOR": "an agent is not a prompt wrapped around a model, it is a closed loop of model, memory, tools and feedback",
+        "KEY_OBJECTS": "a central cubic core module, a cylindrical memory drum on a rail, a jointed tool arm with a socket head, a return feedback pipe that loops back into the core",
+        "PALETTE": "muted amber",
+        "ASSEMBLY_ORDER": "the base plate and its rails appear first, then the central core module lowers onto the plate and clicks in, then the memory drum slides along its rail and seats into the left socket, then the tool arm descends and locks into the right socket, and finally the feedback pipe extends from the tool arm back into the core"
+      }
+    },
+    {
+      "profile": "clay-miniature",
+      "core": "工具越堆越多，人成了被自己工具堵住的那根管子",
+      "mood": "荒诞、疲惫、带点自嘲",
+      "backdrop_hex": "2E6E6A",
+      "vars": {
+        "VISUAL_METAPHOR": "the more tools pile up, the more the person becomes the clogged pipe they were trying to unblock",
+        "KEY_OBJECTS": "one simple clay figure squeezed inside a thick clay pipe, a funnel wedged into the top of the pipe, three chunky clay tool blocks stacked in the funnel",
+        "PALETTE": "mustard yellow, muted teal and terracotta",
+        "ASSEMBLY_ORDER": "the thick clay pipe rolls in and settles upright, then the clay figure hops in and presses itself into the pipe opening, then the funnel drops onto the top of the pipe, then the three tool blocks fall into the funnel one by one, and finally the figure squashes slightly as the last block lands"
+      }
+    },
+    {
+      "profile": "felted-wool",
+      "core": "所有工具都在帮你更快，没有一个问你累不累",
+      "mood": "温柔、克制的关怀",
+      "backdrop_hex": "E3D9C6",
+      "vars": {
+        "VISUAL_METAPHOR": "every tool on the desk is racing to make her faster, and only the small one just sits down beside her and waits",
+        "KEY_OBJECTS": "one small felted person slumped at a tiny felted desk, two busy felted gadget characters mid-stride, a tiny felted mug placed quietly beside her hand",
+        "PALETTE": "oatmeal, dusty rose and soft sage",
+        "ASSEMBLY_ORDER": "the felted desk scoots in and settles, then the felted person tilts into place slumped over the desk, then the two gadget characters bounce in and lean forward busily on either side, and finally the small mug scoots in and settles quietly beside her hand while she tilts her head a little toward it"
+      }
+    },
+    {
+      "profile": "popup-book",
+      "core": "一条选题从灵感走到分发，每一层都会掉人",
+      "mood": "旅程感、带一点失落",
+      "backdrop_hex": null,
+      "vars": {
+        "VISUAL_METAPHOR": "an idea travels from spark to audience, and at every layer of the journey some of it is lost along the way",
+        "KEY_OBJECTS": "a tall background ridge of folded paper mountains, a mid-ground research valley with a narrow paper bridge, a foreground funnel-shaped distribution gate, a single small paper figure walking the path",
+        "PALETTE": "deep teal, cream and warm ochre",
+        "ASSEMBLY_ORDER": "the base page opens flat, then the background paper mountain ridge rises on its hinges, then the mid-ground valley and the narrow paper bridge extend across it, then the foreground funnel gate pops upright, and finally the small paper figure rises at the start of the path"
+      }
+    },
+    {
+      "profile": "toy-world",
+      "core": "好产品不是给更多按钮，是让复杂模块自己拼起来",
+      "mood": "高级、克制、产品化",
+      "backdrop_hex": "EFEAE3",
+      "vars": {
+        "VISUAL_METAPHOR": "a good product does not hand you more buttons, the complicated parts have docked themselves into one calm finished object",
+        "KEY_OBJECTS": "a rounded matte hero console with two wedge modules already docked flush against its left and right faces and a cylindrical connector puck seated flush in its recessed top dock, reading as one single finished object",
+        "PALETTE": "off-white, soft coral and pale slate",
+        "ASSEMBLY_ORDER": "the hero console drops onto the platform and settles, then the first wedge module slides in and magnetically docks to its left face, then the second wedge rotates ninety degrees and docks to the right, then the connector puck drops into the recessed dock, and finally a single soft indicator on the hero console lights once"
+      },
+      "_gate2_note": "v1 尾帧模块未对接，与隐喻「自己拼起来」矛盾——Image 2 必须是**完成态**，否则 Gate 3 会朝着「没拼上」组装。2026-07-28 Gate 2 拦下，重生 v2。"
+    }
+  ]
+}

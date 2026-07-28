@@ -16,11 +16,27 @@
 
 ## 1. 链路配方（硬 · 三链路架构 2026-07-24）
 
-**空白链路** = **生成风格二选一（拼贴 collage / 像素 pixel，同片单一）+ 实拍视频 + HTML + 图片 + 数字人**，元素可自由组合，唯一铁律是**生成镜风格一片一种、不得混**。
+**空白链路** = **生成风格八选一（同片单一）+ 实拍视频 + HTML + 图片 + 数字人**，元素可自由组合，唯一铁律是**生成镜风格一片一种、不得混**。
 
-- 开工 / 分镜阶段先在 `meta.style_notes.generated_style` 写死 `pixel` 或 `collage`——选定后逐镜按该风词表执法（选 pixel 就禁 collage 词、反之亦然），保证同片单一风。
-  > ⚠️ `STYLE_LOCK` 机器门 molly 暂未覆盖（见 `contract.json` 的 `_molly_enforcement`）——当前由本纪律 + Judge 执法，不是自动拦截。
-- 选 pixel 走图先行像素锚点组装；选 collage 走空色场首尾帧拼贴组装——工艺随所选风。**选 pixel 即禁用 collage b-roll 声部**（其工艺就是拼贴）。两种风格下 seedance 镜均**图先行**（≥1 静帧锚 + ≥10s 慢组装，见 `contract.json` 的 `traits.craft`）。
+### 生成风格 registry（2026-07-28 从二选一扩到八选一）
+
+| profile | 核心优势 | 最适合 | 出处 | 状态 |
+|---|---|---|---|---|
+| `pixel` 像素风 | 限定调色板 + 硬边栅格 | 角色重演、数据实物化、历史重演 | `.claude/skills/pixel-broll/` | ✅ 已冒烟 |
+| `collage` 半调纸拼贴 | 高级编辑风氛围 b-roll | 抽象隐喻的口播间奏 | `.claude/skills/collage-broll/` | ✅ 已冒烟 |
+| `object-theatre` 实物桌面剧场 | 熟悉物品形成意外隐喻 | 观点、反转、效率、职场、人性 | `.claude/skills/broll-studio/` | ⚠️ 静帧已验/视频未验 |
+| `technical-diagram` 技术图解 | 把抽象机制讲清楚 | AI、Agent、工作流、系统机制 | 同上 | ⚠️ 静帧已验/视频未验 |
+| `clay-miniature` 黏土微缩 | 荒诞、幽默、可变形 | 情绪、焦虑、冲突、轻观点 | 同上 | ✅ 已冒烟 |
+| `felted-wool` 毛毡动画 | 柔软、温暖、有人情味 | 关系、陪伴、生活、品牌价值 | 同上 | ⚠️ 静帧已验/视频未验 |
+| `popup-book` 立体书／分层景观 | 擅长展示路径与世界 | 成长、旅程、生态、流程 | 同上 | ⚠️ 静帧已验/视频未验 |
+| `toy-world` 品牌产品静物 | 高级、统一、产品化 | 产品功能、平台、商业与科技 | 同上 | ⚠️ 静帧已验/视频未验 |
+
+**这八套是材质语言，不是八个风格 SKU**——它们共用同一套三闸门、几何、引擎绑定与 QA，profile 只承载「材质语汇 / 运动动词 / 首帧规则 / 失败标准」四样。选型走 `python3 tools/broll-profile.py route "<文稿类型>"`（表在 `.claude/skills/broll-studio/routing.json`）。
+
+- 开工 / 分镜阶段先在 `meta.style_notes.generated_style` 写死 profile id——选定后逐镜按该风词表执法，保证同片单一风。
+  > ⚠️ `STYLE_LOCK` 机器门 molly 暂未覆盖（见 `contract.json` 的 `_molly_enforcement`）——**但串词现在有机器门**：`python3 tools/broll-profile.py lint <id> --file prompt.txt` 检查提示词有没有混入别的 profile 的签名词汇（否定式约束如 `No paper collage` 不算串词，那是主动划界）。「同片只有一种」仍靠纪律 + Judge。
+- 各 profile 的工艺随风而变（pixel 走图先行像素锚点 + 归一层；collage 与其余五套走空色场首尾帧组装；**`popup-book` 例外，必须以合上的书起手**，空场会让空间凭空出现）。**选 pixel 即禁用 collage b-roll 声部**（其工艺就是拼贴）。所有 seedance 镜均**图先行**（≥1 静帧锚 + ≥10s 慢组装，见 `contract.json` 的 `traits.craft`）。
+- **换画幅 / 换模型版本 / 大改 prompt 骨架后**：Gate 3 先只跑 1 条测试 clip 目检再排产，结论写回该 skill 的状态节。跳过 = 静默降级。**pixel / collage / clay-miniature 三套端到端已冒烟**；broll-studio 另五套 2026-07-28 按参考实图重写过提示词，静帧人眼已验、**视频层待验**（旧成片对应旧模板，不再背书）。16:9 只有 collage 验过。
 - 实拍视频（`footage`）、静态图片（`gpt_image`）、数字人（`avatar`，须挂 portrait 锚点 + 音频先行）都可用；HTML 做简单排版，版式经 compose 门。
 
 ## 2. 定位（先读这段，防包名误导）

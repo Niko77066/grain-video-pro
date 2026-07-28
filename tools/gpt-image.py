@@ -128,8 +128,14 @@ def main():
         if sp:
             sp.write_text(json.dumps(state, ensure_ascii=False, indent=2))
 
+    # 断点续跑：已在 state 里的条目不重复出图（重复出图 = 重复计费）
+    done = {g["name"] for g in state.get("generated", [])}
+
     for job in spec["jobs"]:
         name = job["name"]
+        if name in done and not a.dry_run:
+            print(f"skip {name}（state 里已有，跳过以免重复计费）")
+            continue
         size = job.get("size", dft.get("size"))
         quality = job.get("quality", dft.get("quality", "medium"))
         fmt = job.get("output_format", dft.get("output_format", "png"))

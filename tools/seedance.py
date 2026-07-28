@@ -91,15 +91,23 @@ def http(url, key, data=None, timeout=120, soft_fail=False):
 
 
 def upload(root, path, key_prefix):
-    out = subprocess.run([str(root / "tools" / "oss-upload.sh"), str(path),
-                          f"{key_prefix}/{Path(path).name}"],
-                         capture_output=True, text=True, cwd=root)
-    if out.returncode:
-        sys.exit(f"oss-upload 失败: {out.stderr[-600:]}")
-    url = out.stdout.strip().splitlines()[-1]
-    if not url.startswith("http"):
-        sys.exit(f"oss-upload 没返回 URL: {out.stdout[-400:]}")
-    return url
+    # 上传也要重试：2026-07-28 两次实测撞到 curl (35) LibreSSL SSL_ERROR_SYSCALL，
+    # 都是瞬时的。这里不重试就会在「已提交若干条、正准备下一条」时整批中断。
+    for attempt in range(HTTP_RETRIES):
+        out = subprocess.run([str(root / "tools" / "oss-upload.sh"), str(path),
+                              f"{key_prefix}/{Path(path).name}"],
+                             capture_output=True, text=True, cwd=root)
+        if out.returncode == 0:
+            url = out.stdout.strip().splitlines()[-1]
+            if url.startswith("http"):
+                return url
+            err = f"没返回 URL: {out.stdout[-400:]}"
+        else:
+            err = out.stderr[-400:]
+        if attempt < HTTP_RETRIES - 1:
+            print(f"  oss-upload 失败（{err.strip()[:80]}），{2 ** attempt * 5}s 后重试", flush=True)
+            time.sleep(2 ** attempt * 5)
+    sys.exit(f"oss-upload 连续 {HTTP_RETRIES} 次失败: {err}")
 
 
 def do_submit(a):

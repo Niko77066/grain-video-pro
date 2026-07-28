@@ -1,0 +1,29 @@
+{
+  "target": "projects/_smoke/broll-studio-2026-07-28/shots/popup-book_raw.mp4",
+  "spec": {
+    "width": 720,
+    "height": 1280,
+    "fps": 24.0,
+    "duration_s": 10.042,
+    "has_audio": false
+  },
+  "checks": {
+    "audio": {
+      "pass": true,
+      "detail": "无音轨"
+    },
+    "size": {
+      "pass": true,
+      "detail": "720x1280"
+    },
+    "dead_tail": {
+      "pass": false,
+      "detail": "尾 2.0s 运动量为全片的 16%（下限 25%；尾段中位 YDIF 0.291 / 全片 1.762，采样 80 帧）",
+      "tail_ratio": 0.165,
+      "ydif_tail": 0.291,
+      "ydif_all": 1.762
+    }
+  },
+  "verdict": "fail",
+  "contact_sheet": "projects/_smoke/broll-studio-2026-07-28/evidence/popup-book-contact.jpg"
+}

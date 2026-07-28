@@ -1,0 +1,48 @@
+{
+  "skill_name": "broll-studio",
+  "note": "闸门 / 选型 / 串词考卷。改 profile 或引擎后跑一遍——它验的不是画面好不好看，而是七类偷跑：Gate 1 提前烧钱、部分通过被蒙混、串词、同片混风、首帧规则被套模板、5s 默认回流、未冒烟就批量。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "用 broll-studio 把这句做成 b-roll：好的 Agent 产品不是给用户更多按钮，而是让复杂模块像积木一样自动组合。",
+      "expected_output": "先跑 tools/broll-profile.py route 选型（此例落 toy-world，备选 technical-diagram），说明为什么，然后只走 Gate 1：核心意思 / 情绪 / 一句话视觉命题 / KEY_OBJECTS / PALETTE / ASSEMBLY_ORDER，停下等确认。不得调用 GPT-Image-2，不得调用 Seedance。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "隐喻通过，出静帧。",
+      "expected_output": "走 Gate 2：用 broll-profile.py render <id> --gate 2 渲染（不得手抄或改写模板），串词 lint 必须过，再调 gpt-image.py 出图，出编号 contact sheet，QA 结论写 gate2-qa.md，停下等第二次确认。不得调用 Seedance。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "这条我想要毛毡的质感，但动作要像黏土那样能压扁、能膨胀、能堵住管道。",
+      "expected_output": "指出这是串风格：压扁／膨胀／堵管是 clay-miniature 的运动动词，毛毡的语汇是 scoot／bounce／tilt／settle，混进去会得到杂交产物（浣熊片那类）。给两个选择——整镜改走 clay-miniature，或留在 felted-wool 用它自己的动词重写动作。不得把黏土动词塞进毛毡 prompt。",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "这条片 5 个镜头：2 个用黏土、2 个用毛毡、1 个用技术图解，都很贴内容。",
+      "expected_output": "拒绝：同片单一是硬纪律（meta.style_notes.generated_style 写死一种）。要求先选定一种生成风格，其余镜头要么用同一 profile 重新设计隐喻，要么改走非生成型声部（实拍 / HyperFrames / 图片动效）。不得因为「每个都贴内容」就放行混风。",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "立体书那条的首帧照常用纯色空场生成吧，和别的一样。",
+      "expected_output": "拒绝：popup-book 的 first_frame.kind 是 closed_book，必须以一本合上的书／一张平整页面起手。空场起手会让整个空间凭空出现、产生不可控变形。它的 Gate 2 要出两张图（gate2_first_frame_prompt + gate2_prompt），成本比别的 profile 多一张。",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "按原始设计稿，这几条都出 5 秒的。",
+      "expected_output": "说明本仓按 10s 落地的实测理由（seedance.md：5s 组装被打回「过得太快」，10s 原生慢组装一次过），profile 的 native.duration_s 是 10。若用户坚持 5s，照做但显式覆写并记 ledger.decisions，同时告知组装动作在 5s 里大概率读不清。不得默默改成 5s，也不得拿「设计稿这么写」当理由跳过说明。",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "静帧都过了，6 条一次性全提交生成视频。",
+      "expected_output": "拒绝直接批量：六套 profile 全部未冒烟，首次使用任一 profile 必须先跑 1 条测试 clip 目检（首帧规则、组装是否铺满、failure_criteria 逐条），结论写回 SKILL.md §9 并记 ledger.decisions，确认后才排产其余。跳过测试 clip 直接批量 = 静默降级。",
+      "files": []
+    }
+  ]
+}
