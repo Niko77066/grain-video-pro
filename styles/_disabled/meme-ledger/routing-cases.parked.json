@@ -1,0 +1,36 @@
+{
+  "schema": "routing-cases-parked@1",
+  "note": "meme-ledger 移回 styles/_disabled/ 时（2026-07-28）从 styles/routing-cases.json 摘下来的考题原文。复活这个包时把 cases 原样贴回 routing-cases.json，再跑 `python3 tools/route-style.py --check`。live 考卷里现存的 rc16 保留了同一份输入特征，但期望改成落兜底 whiteboard-generalist（gap=false：explain_the_mechanism 仍有包认领，缺的只是画面配方）；复活时把它改回下面的 rc16，并把 rc18 整条贴回。",
+  "cases": [
+    {
+      "id": "rc16",
+      "why": "已授权合作频道素材 + 反差机制题 + 固定横版栏目，命中 meme-ledger；pixel 缺档案/实拍配方，不能抢位。",
+      "features": {
+        "topic": "你家楼下房产中介卖的其实不是房子",
+        "content_type": "knowledge_explainer",
+        "understanding_task": "explain_the_mechanism",
+        "tone": ["approachable", "narrative"],
+        "audience": ["general"],
+        "material": ["licensed_partner_footage", "contrast_fact", "multi_stage_causality", "presenter_declined"],
+        "aspect": "16:9",
+        "duration_s": 98
+      },
+      "expect": {"narrative_base": "meme-ledger", "confidence": "high", "gap": false}
+    },
+    {
+      "id": "rc18",
+      "why": "合作频道素材齐全也不能把固定横版栏目静默裁成竖屏；preset_lock 排除 meme-ledger，未满足其它专用包配方时落兜底。",
+      "features": {
+        "topic": "为什么中介总在电话里说马上有人看房",
+        "content_type": "knowledge_explainer",
+        "understanding_task": "explain_the_mechanism",
+        "tone": ["approachable"],
+        "audience": ["general"],
+        "material": ["licensed_partner_footage", "contrast_fact", "presenter_declined"],
+        "aspect": "9:16",
+        "duration_s": 98
+      },
+      "expect": {"narrative_base": "whiteboard-generalist", "confidence": "low", "gap": false}
+    }
+  ]
+}

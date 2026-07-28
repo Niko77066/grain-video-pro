@@ -50,7 +50,6 @@ kuleshov-ir execute projects/<slug> shots.s03 --dry-run
 | `pixel-chronicle` | 知识科普、历史叙事、像素纸拼贴 | 16:9 |
 | `case-file` | 新闻调查、隐私与安全议题、案卷拼贴 | 9:16 |
 | `whiteboard-generalist` | 超出专用风格覆盖时的通用叙事 | 自适应 |
-| `meme-ledger` | 授权频道反差画面驱动的商业机制解说 | 固定 16:9 |
 
 合同在 storyboard 阶段做计划预检，在 review 阶段用终渲实测数据复验。agent 可以在预先授权的带宽内调整，但不能改合同给自己放行。
 
@@ -117,7 +116,7 @@ Grain Video Pro 的边界刻意保持清晰：
 
 ## 当前边界
 
-- `meme-ledger` 已是可投产的固定横版预设，质量状态仍为 candidate；它只在项目登记了合作频道、声音和 BGM 授权引用时参与自动选型。
+- `meme-ledger`（授权频道反差画面驱动的商业机制解说·固定 16:9）2026-07-28 退回 [`styles/_disabled/`](styles/_disabled/)：包还没打磨完，不参与自动选型，也不 offer 给生产。复活规程见该目录 README。
 - `projects/*` 是样片与校准资产，不是可复用管线本身；个别早期项目保留了只用于复盘的脚本。
 - Grain 原生工具映射、发布三件套与 provider 凭据托管仍在集成阶段；当前仓库不把“规划完成”写成“产品已上线”。
 
