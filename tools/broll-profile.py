@@ -71,14 +71,28 @@ def extras(p):
     return p.get("pipeline_extras") or {}
 
 
+def gate2_slots(p, variant_key=None):
+    """Gate 2 的附加静帧槽位。槽位可以用 `when_variant` 把自己限定在某些变体下——
+    不写就是所有变体都要。变体已定时按它过滤（不适用的槽位根本不该被提起，否则就是
+    「先命令你出图、再在括号里说不适用」那种自相矛盾的祈使句）；变体未定（list 这类
+    全局视图）返回全部。判据是槽位自己声明的数据，不是 profile 名字。"""
+    slots = extras(p).get("gate2_extra_stills", [])
+    if variant_key is None:
+        return slots
+    return [s for s in slots if variant_key in (s.get("when_variant") or [variant_key])]
+
+
 def extras_tags(p):
     """一行摘要：这套 profile 比基础三闸门多了什么。"""
     e = extras(p)
     tags = []
     if e.get("film_level_gates"):
         tags.append(f"片级闸门×{len(e['film_level_gates'])}")
-    if e.get("gate2_extra_stills"):
-        tags.append(f"Gate2 多 {len(e['gate2_extra_stills'])} 张图")
+    slots = e.get("gate2_extra_stills") or []
+    if slots:
+        cond = sum(1 for s in slots if s.get("when_variant"))
+        tags.append(f"Gate2 多 {len(slots)} 张图"
+                    + (f"（其中 {cond} 张限定变体）" if cond else ""))
     if e.get("post_still") or e.get("post_video"):
         tags.append("落地后置工序")
     if e.get("extra_checks"):
@@ -220,11 +234,19 @@ def apply_aspect(p, text, field, aspect):
 
 def render(p, gate, variables, aspect, variant_key=None, slot=None):
     if slot:
-        slots = {s["id"]: s for s in extras(p).get("gate2_extra_stills", [])}
-        if slot not in slots:
+        v = p.get("variants")
+        if v and gate in v.get("required_for_gates", []):
+            variant_option(p, variant_key)      # 槽位可能限定变体，先把变体逼出来
+        avail = {s["id"]: s for s in gate2_slots(p, variant_key)}
+        if slot not in avail:
+            every = {s["id"]: s for s in gate2_slots(p)}
+            if slot in every:
+                sys.exit(f"{p['id']} 的槽位 {slot!r} 只在 {v['label']} "
+                         f"{'/'.join(every[slot]['when_variant'])} 下成立，当前选的是 {variant_key!r}"
+                         f"——这一张不用出。")
             sys.exit(f"{p['id']} 没有 Gate 2 附加静帧槽位 {slot!r}"
-                     f"（有 {', '.join(slots) or '（无）'}）")
-        text, field, opt = slots[slot]["prompt"], f"slot_{slot}", {}
+                     f"（当前变体下有 {', '.join(avail) or '（无）'}）")
+        text, field, opt = avail[slot]["prompt"], f"slot_{slot}", {}
     else:
         text, opt = pick_template(p, gate, variant_key)
         field = GATE_FIELD[gate]
@@ -253,7 +275,7 @@ def cmd_render(profiles, pid, gate, variables, aspect, variant_key, slot):
         print(f"  ⚠️ --var 里有变量表外的名字（会被忽略）：{bogus}", file=sys.stderr)
 
     if gate == 2 and not slot:
-        for s in extras(p).get("gate2_extra_stills", []):
+        for s in gate2_slots(p, variant_key):
             print(f"  ❗ 本 profile 的 Gate 2 还有一张附加静帧要出："
                   f"`--slot {s['id']}`（{s['purpose']}，{s.get('cost', '成本 +1 张图')}）", file=sys.stderr)
     for g in extras(p).get("film_level_gates", []):
@@ -295,7 +317,8 @@ def cmd_plan(profiles, pid, params, aspect, variant_key):
         print(f"[Gate 1] {p['variants']['label']}：{variant_key}（{opt['label']}）— {opt.get('when', '')}\n")
 
     for key, title in EXTRA_STAGES:
-        items = e.get(key) or []
+        items = (gate2_slots(p, variant_key) if key == "gate2_extra_stills"
+                 else (e.get(key) or []))
         if not items:
             continue
         print(f"[{title}]")
@@ -420,8 +443,9 @@ def cmd_selftest(profiles):
         keys = list(v["options"]) if v else [None]
         jobs = [(g, k, None) for g in (2, 3)
                 for k in (keys if v and g in v.get("required_for_gates", []) else [None])]
-        jobs += [(2, keys[0] if v else None, s["id"])
-                 for s in extras(p).get("gate2_extra_stills", [])]
+        jobs += [(2, vk, s["id"])
+                 for s in extras(p).get("gate2_extra_stills", [])
+                 for vk in (s.get("when_variant") or keys)]
         for gate, vk, slot in jobs:
             for aspect in ("9:16", "16:9"):
                 n += 1
