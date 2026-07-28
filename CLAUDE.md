@@ -34,7 +34,7 @@ Grain Video Pro 是一套 **agent-native 多源视频生产系统**。内部制�
 - `tools/measure-render.py` — 从终渲视频反测静态持有、媒体使用、响度与跨镜头主色漂移，作为 render contract 的证据源
 - `tools/judge/` — G2 隔离评审：生成证据包、出题、阅卷与校准
 - `tools/render-remote.sh` — HyperFrames 远端渲染客户端；地址由 `RENDER_URL` 注入，不假设本机或固定 IP
-- `docs/` — 架构决策、事故复盘、升级计划与 Grain 交付设计
+- `docs/` — 架构决策、事故复盘、升级计划与 Grain 交付设计；其中 `hyperframes-agent-handbook.md` 是 HyperFrames 侧的外部参考手册（当前基线 `0.7.77`），不是本仓合同——它与 `.claude/skills/produce/` 冲突时以后者为准
 
 ## Production Invariants
 
