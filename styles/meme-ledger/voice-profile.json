@@ -18,7 +18,7 @@
     "forbidden": ["模仿特定真人声音或口癖", "连续笑声、怪叫或角色扮演", "用情绪标签代替文案节奏"]
   },
   "verification": {
-    "source": "项目级授权记录；共享风格包不登记真人身份、真实音色 ID 或参考音频。",
+    "source": "项目级授权记录。可复现证据见 evidence/audio/banfo-source.m4a 与 evidence/rights/banfo-voice-clone-user-authorized.md；真实 MiniMax 音色 ID 与所有凭据仍只存在于运行环境。",
     "required_after_generation": ["在项目 rights/ 中登记声音使用或复刻授权，并在 Film IR 写 audio.voiceover.authorization_ref", "独立回转写与冻结剧本比对，准确率至少 95%", "强制对齐生成逐字 timeline", "检查音轨与 compose/assets/voiceover.mp3 同一文件版本"]
   }
 }
