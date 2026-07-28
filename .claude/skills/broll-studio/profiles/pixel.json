@@ -110,6 +110,8 @@
   },
   "aspect_16_9": [
     "9:16 vertical → 16:9 horizontal",
+    "same 9:16 [FRAMING] framing → same 16:9 [FRAMING] framing",
+    "central 70 percent as in the reference. → central 60 percent as in the reference; outer thirds stay clean empty [PALETTE] field.",
     "central 70 percent → central 60 percent",
     "locked-off vertical shot → locked-off horizontal shot",
     "Preserve the 9:16 framing → Preserve the 16:9 framing",
@@ -126,7 +128,8 @@
     "SUBJECT",
     "ELEMENT_PLAN",
     "ASSEMBLY_ORDER",
-    "ACTION"
+    "ACTION",
+    "END_POSE"
   ],
   "gate2_prompt": "Create a finished pixel-art still for a 9:16 vertical image-to-video shot.\nVisual proposition: [VISUAL_METAPHOR].\nStyle: crisp retro pixel art on a consistent pixel grid; chunky pixels, hard edges, no anti-aliasing,\nno gradients; flat color blocks with crisp 1-pixel outlines; strictly limited palette of these colors\nonly: [PALETTE_LIST]. [FRAMING] framing.\nScene: [SCENE], background is a single flat [PALETTE_HEX] field.\nSubject: [SUBJECT].\nComposition: locked poster frame; subject reads as one clear silhouette within the central 70 percent;\n[ELEMENT_PLAN].\nAvoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles,\nno photoreal texture, no soft shading, no blur, no anti-aliased edges, no paper texture, no grain,\nno aged or faded look, no sepia, no halftone dots, no clutter.",
   "variants": {
@@ -169,7 +172,8 @@
     }
   },
   "_placeholder_map": {
-    "note": "三段提示词是 2026-07-28 端到端冒烟验证过的原文，**逐字照搬**（含换行），只做两件不改字的事：① 中文占位符换成引擎变量名；② 把 `[16:9 horizontal|9:16 vertical]` 这类**画幅二选一**在基础模板里定死成 9:16 那一支，16:9 那一支原样进 `aspect_16_9` 的替换规则——两支文本都保留，谁也没被改写。",
+    "note": "三段提示词（`gate2_prompt` + 两个原型的 `gate3_prompt`）是 2026-07-28 端到端冒烟验证过的原文，**逐字照搬**（含换行），只做两件不改字的事：① 中文占位符换成引擎变量名；② 把 `[16:9 horizontal|9:16 vertical]` 这类**画幅二选一**在基础模板里定死成 9:16 那一支，16:9 那一支原样进 `aspect_16_9` 的替换规则——两支文本都保留，谁也没被改写。**第四段（`gate2_extra_stills[last_frame_ref]`）不在这三段之内**：它是从冒烟的 ref job 原文（`anchors/imgjobs-last.json`）**提炼**的，做过类目化取舍，见 notes 里「ref 模板与冒烟原文的差异」。",
+    "[完成姿态 + 被动作带动的元素的新状态]": "END_POSE（last_frame_ref 槽位专用；ACTION 是它在 Gate 3 的对偶）",
     "[一句话视觉命题]": "VISUAL_METAPHOR",
     "[列出主调色板 hex]": "PALETTE_LIST",
     "[side-view|isometric]": "FRAMING（冒烟实填 `Side-view`）",
@@ -204,6 +208,18 @@
         ]
       }
     ],
+    "gate2_extra_stills": [
+      {
+        "id": "last_frame_ref",
+        "when_variant": [
+          "B"
+        ],
+        "purpose": "尾帧「动作完成姿态」。走 `/v1/images/edits`，把**归一后的首帧**当参考图（`tools/gpt-image.py` 的 job 里挂 `ref`）——角色一致性在便宜的图像阶段解决，不是靠在 Seedance 提示词里复述长相",
+        "cost": "+1 张 GPT-Image（原型 B 每条 2 张图；原型 A 仍是 1 张）",
+        "ref": "归一后的首帧（`post_still` 第一条的产物 `<anchor>.png`）。出图后这张尾帧仍要过 `post_still` 第二条归一成 `<anchor>_last.png` 才能交给 Seedance",
+        "prompt": "Keep the reference image exactly: same pixel-art style, same pixel grid and chunky pixel scale, same strictly\nlimited palette, same 9:16 [FRAMING] framing, same scene, same props and furniture, same lighting and light\ncones, same background, same character, same clothing.\nChange only the character's pose and the elements the action moves; everything else stays exactly as in the\nreference.\nNew pose: [END_POSE].\nKeep every element inside the central 70 percent as in the reference.\nAvoid: no typography, no readable letters, no numerals, no logos, no watermark, no UI, no subtitles,\nno photoreal texture, no soft shading, no blur, no anti-aliased edges, no paper texture, no grain,\nno aged or faded look, no sepia, no halftone dots, no new objects."
+      }
+    ],
     "post_still": [
       "python3 tools/pixelize.py still --in <raw>.png --out <anchor>.png --palette {palette} --size {size} --grid {grid}",
       "python3 tools/pixelize.py still --in <raw>.png --out <anchor>_last.png --palette {palette} --size {size_frames} --grid {grid_frames}  # Seedance 首尾帧：从逻辑图整数倍放大"
@@ -230,7 +246,8 @@
     "known_issues": [
       "**多镜头间的角色一致性未验证**——冒烟每条独立出。同一角色跨 ≥2 镜时必须先跑 1–2 条目检角色是否对得上，再排产其余",
       "长片里连续多个像素镜的观感疲劳未验",
-      "角色一致性目前靠 `/v1/images/edits` 挂参考图实现（首帧归一图当 ref 出尾帧姿态，横竖两条的角色、桌椅、台灯、窗户全部对得上），但**那段 ref 提示词还没有模板**，只存在于冒烟留痕里：`projects/_smoke/broll-skills-2026-07-28/anchors/imgjobs-last.json`"
+      "角色一致性靠 `/v1/images/edits` 挂参考图实现（首帧归一图当 ref 出尾帧姿态，2026-07-28 横竖两条的角色、桌椅、台灯、窗户全部对得上）。**这段 ref 提示词现在有模板了**：`pipeline_extras.gate2_extra_stills[last_frame_ref]`，渲法 `render pixel --gate 2 --slot last_frame_ref --variant B`。模板是从冒烟原文提炼的，**不是逐字照搬**——见 notes 里「ref 模板与冒烟原文的差异」那条，首次用它出 B 型镜要目检一次",
+      "**`last_frame_ref` 只在运动原型 B 下成立，这条现在是机器门**：槽位自己声明 `when_variant: [\"B\"]`，引擎按当前 `--variant` 过滤——原型 A 下 `render` / `plan` 不再提起它，硬点 `--slot last_frame_ref --variant A` 会直接报错说「这一张不用出」。（`when_variant` 是通用的声明式字段，不写就是所有变体都要，`popup-book` 的槽位就不写。）"
     ],
     "evidence": "projects/_smoke/broll-skills-2026-07-28/（px_h / px_v 的 QA JSON + contact sheet，runs/ 有 x-oneapi-request-id；实产时长四条全是 10.042s）",
     "measured": {
@@ -241,6 +258,8 @@
   },
   "notes": [
     "**角色一致性铁律**：角色长相只在 Gate 2 的 imagegen prompt 里描述一次；Seedance prompt 里**不许重复描述长相**，只写 `the character shown in Image 2`——外观描述与锚点冲突时以锚点为准（`seedance.md`）。浣熊片每镜复述一遍全套长相，是这条纪律的反例。",
+    "**运动原型 B 的两张 Gate 2 图分工**：base `gate2_prompt` 出**首帧**（起始姿态，`SUBJECT` 是全片唯一一次写长相的地方）；`--slot last_frame_ref` 出**尾帧**（完成姿态），它把归一后的首帧当参考图，所以**不再写一遍长相**——长相由参考图本身继承。两个变量按这条分工：`END_POSE` 写「动完是什么样」给这张尾帧图，`ACTION` 写「怎么动」给 Seedance。顺序是硬的：首帧出图 → 归一成 `<anchor>.png` → 拿它当 ref 出尾帧 → 尾帧再归一成 `<anchor>_last.png`。拿**未归一**的原始首帧当 ref，等于让软像素当锚点。",
+    "**ref 模板与冒烟原文的差异**（提炼时的取舍，别当成 bug）。冒烟原文逐件点名了单镜内容（`same desk, same chair, same lamp and its pale cyan light cone, same window with the moon`）并短提了一次长相（`same character with short dark hair and pale cyan hoodie`）。三处改动：\n① 点名清单换成**类目词**（`same scene, same props and furniture, same lighting and light cones, same character, same clothing`）——点名单镜内容就是把首帧的描述抄第二遍，正是「同一份知识多副本」；长相全片只写一次，短提也算写。\n② `Change only the pose and the sleep blocks` 换成 `Change only the character's pose and the elements the action moves; everything else stays exactly as in the reference`——**后半句那个兜底子句是模板新加的，冒烟原文没有**：点名清单一撤，就需要它来接住「其余一律不变」。\n③ 16:9 替换规则把冒烟的 `clean empty dark field` 改成 `clean empty [PALETTE] field`——按填色写自然语言的纪律（`variables.json` 的 `color_discipline`），这一处是有意的。\n所以模板**不是冒烟那段的逐字复现**：那两条实拍片为「带点名的版本」背书，不为当前模板背书。**首次用模板出 B 型镜，尾帧要人眼比一次**——角色、道具、灯光、窗户有没有跟着参考图。真发现类目词压不住漂移，就在 `END_POSE` 里补一句「其余保持参考图」级别的约束，而不是把单镜清单塞回模板。",
     "**像素在动的时候「沸腾」**（方块逐帧乱跳）：先降 `--step-fps` 到 8–10（拍数更慢、抖动更少）；仍沸腾说明 Seedance 生成时就没守住栅格，回 Gate 3 重生并在 prompt 里加重 `stepped motion, no smoothing`。",
     "**组装提前做完、尾部长 hold**：死尾项会判 fail。修法是重生时强化「铺满整条 clip、末件在最后一秒落位」；**尾裁救不了组装过早**（可用运动短于槽位就得重生或缩短槽位）。",
     "**归一后主体糊成一坨**：逻辑分辨率承载不了这个构图。别调 grid（会破坏与其他镜的一致），回 Gate 2 简化构图——3–6 个大组，不是满屏碎片。",

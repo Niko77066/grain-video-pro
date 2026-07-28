@@ -113,7 +113,7 @@ lint 只看**肯定描述**——`No paper collage` 这类否定式约束是在�
 - `closed_book` —— `popup-book`：必须以「一本合上的书 / 一张平整页面」起手，不许空场，否则整个空间凭空出现、产生不可控变形。
 - `character_start_pose` —— `pixel` 的角色动作型原型：首帧是角色**起始**姿态的静帧。
 
-**首帧要出图的 profile，Gate 2 就要多出一张**——这条工序差异声明在 `pipeline_extras.gate2_extra_stills`，不是散在注释里。`render --gate 2` 会主动提醒还有几个槽位没出。
+**首尾帧里有哪一张要出图，Gate 2 就要多出一张**——`popup-book` 多的是首帧（合上的书），`pixel` 原型 B 多的是尾帧（完成姿态，走 ref）。这条工序差异声明在 `pipeline_extras.gate2_extra_stills`，不是散在注释里；`render --gate 2` 会主动提醒还有几个槽位没出。细节见 §5。
 
 ## 5. 额外工序（`pipeline_extras`）
 
@@ -122,7 +122,7 @@ lint 只看**肯定描述**——`No paper collage` 这类否定式约束是在�
 | 键 | 是什么 | 谁在用 |
 |---|---|---|
 | `film_level_gates` | 片级前置闸门（一部片一次，定了就不改） | `pixel` 的 Gate 0 主调色板 |
-| `gate2_extra_stills` | Gate 2 的附加静帧槽位，每个 +1 张图成本 | `popup-book` 的「合上的书」首帧 |
+| `gate2_extra_stills` | Gate 2 的附加静帧槽位，每个 +1 张图成本。槽位可用 **`when_variant`** 把自己限定在某些变体下（不写 = 所有变体都要） | `popup-book` 的「合上的书」首帧（无条件）；`pixel` 的 `last_frame_ref` 尾帧（`when_variant: ["B"]`） |
 | `post_still` / `post_video` | 静帧 / 视频落地后的必做工序 | `pixel` 的归一层 |
 | `extra_checks` | 该套专属的额外码判（通用项仍走 `clip-qa.py`） | `pixel` 的栅格 + 锁色 |
 | `params` | 上面那些命令里 `{palette}` `{grid}` 这类占位符的默认值 | 同上 |
@@ -130,9 +130,24 @@ lint 只看**肯定描述**——`No paper collage` 这类否定式约束是在�
 ```bash
 python3 tools/broll-profile.py plan pixel --variant B --param palette=projects/<片>/palette/master.png
 python3 tools/broll-profile.py render popup-book --gate 2 --slot first_frame --var PALETTE=deep-green
+python3 tools/broll-profile.py render pixel --gate 2 --slot last_frame_ref --variant B \
+  --var FRAMING=side-view --var END_POSE="<动完是什么样，含被动作带动的元素>"
 ```
 
 新 profile 要加工序时，**先看能不能用现成的键表达**。表达不了就停下来问——那说明它不只是一套材质语言，可能真该独立成 skill。
+
+### 两个附加槽位的额外工序（这两套比别人多一张图）
+
+| profile | 槽位 | 出的是哪一张 | 机制 | 什么时候要 |
+|---|---|---|---|---|
+| `popup-book` | `first_frame` | **首帧**：一本合上的书 | 普通出图（空场起手会让空间凭空出现） | 每条都要 |
+| `pixel` | `last_frame_ref` | **尾帧**：动作完成姿态 | `/v1/images/edits` 挂 **ref**（归一后的首帧当参考图） | **只有运动原型 B** |
+
+`pixel` 的 ref 槽位是**角色一致性**的解法：把一致性放在便宜的图像阶段解决，而不是在 Seedance 提示词里复述长相（复述与锚点冲突时模型自己选，那就是变脸的成因）。工序顺序是硬的——首帧出图 → 归一 → 拿归一图当 ref 出尾帧 → 尾帧再归一。
+
+**「哪些变体要这张」是机器门，不是文本约束**：槽位自己声明 `when_variant`，引擎按当前 `--variant` 过滤——`pixel` 原型 A 下 `render` / `plan` 根本不会提起 `last_frame_ref`，硬点 `--slot last_frame_ref --variant A` 直接报错说「这一张不用出」；带槽位却不给 `--variant` 会被逼着先选变体（那本来就是 Gate 1 的决定）。`when_variant` 是通用声明式字段，`popup-book` 的槽位不写它，行为一如从前。
+
+> 第一版曾把这个条件写在槽位 `purpose` 的第一句，于是引擎在原型 A 下先命令你出图、再在括号里说不适用——一句自相矛盾的祈使句。**条件能声明就别写成叮嘱**：这跟本次重构的主线是同一条理由。
 
 ## 6. 提示词变量（全仓唯一一套）
 
@@ -227,7 +242,7 @@ python3 tools/clip-batch-sheets.py --out-dir $P/evidence \
     "note": "<note_prefix>·<一句话隐喻>" } }
 ```
 
-留痕：`gen` 记 model / 完整 prompt / seed / 首尾帧 / `x-oneapi-request-id` / 实测时长；`qc` 挂 `evidence/<链>-qa-<镜>.json`；成本进 `ledger.costs`（1 张 GPT-Image + 1 条 Seedance ≈ $2.7；带附加静帧槽位的多算一张图）。选 profile、选运动原型、选底色、部分通过、带瑕疵放行都进 `ledger.decisions`。
+留痕：`gen` 记 model / 完整 prompt / seed / 首尾帧 / `x-oneapi-request-id` / 实测时长；`qc` 挂 `evidence/<链>-qa-<镜>.json`；成本进 `ledger.costs`（1 张 GPT-Image + 1 条 Seedance ≈ $2.7；带附加静帧槽位的多算一张图——`popup-book` 每条都多一张，`pixel` **只有运动原型 B** 每条多一张，原型 A 仍是 1 张）。选 profile、选运动原型、选底色、部分通过、带瑕疵放行都进 `ledger.decisions`。
 
 ## 10. 什么时候不要用
 
