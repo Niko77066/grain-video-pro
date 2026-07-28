@@ -11,7 +11,7 @@
 - **外挂的最终形态不是"一个可移植仓库 + README"，而是 grain 里的一个 In-house Video「生产方法」step-skill**：`producing-kuleshov-video/`（`SKILL.md` 编号 10 阶段 prose + `scripts/` 放 `kuleshov-ir`/produce 纯变换 CLI + `references/`），在 Video carrier 路由表加一行。驱动它的是 grain 的**单 agent tool-loop**（lite 链路），不是我们的 EP loop——这印证了"编排层丢给 harness"。
 - **渲染证明卡点已消解。** 我们线上服务器渲染器 = grain 渲染核包了层 HTTP；把最终 compose 走 grain 的 `runVideoRevisionCycle` 拿 `publishProofSealed` 不需要 grain 改任何渲染代码，只是从"HTTP 壳"换到"工具/队列壳"，同引擎同产物。
 - **绝大多数花钱动作 grain 已有对应原生工具**（出图/Seedance 视频/数字人/音乐/长音 TTS/Pexels/下载/渲染都 EXISTS），真正的缺口只有 4 处（字幕 CTC 对齐、archive.org 公域素材、youtube 搜索、Volc 短音），每处有明确处置。
-- **重塑工作几乎全在我们这侧**，有现成模板可抄（`compiling-podcast-episode` 的纯变换 Python、`producing-hyperframes-video` 的 pipeline-as-one-skill）。需要 grain 团队点头的只剩"字幕 CTC 原生工具要不要加"这类**加法**，不是"改它的门"。
+- **重塑工作几乎全在我们这侧**，有现成模板可抄（`compiling-podcast-episode` 的纯变换 Python、`producing-hyperframes-video` 的 pipeline-as-one-skill）。~~需要 grain 团队点头的只剩"字幕 CTC 原生工具要不要加"~~ **（2026-07-28 已谈定：字幕默认走我们自产的 VTT，此项作废）**——需要 grain 点头的都是**加法**，不是"改它的门"。
 - 采用 **A1（first-party In-house skill，走 grain PR）**：因为要在 Video 路由表加行、要补原生工具、要 same-source 字幕——A2（用户 skill）做不到这些。
 
 ---
@@ -104,9 +104,9 @@ EXISTS = grain 已有原生工具直接用；GAP/PARTIAL = 需处置。
 > **② 已在本仓侧落地（2026-07-28，用户拍板"遵循 grain 口径"）**：`tools/make-vtt.py` 产 same-source
 > VTT（文本取剧本 `audio/narration.txt`、时间取强制对齐字戳），compose 不再烧字幕，规则写进
 > CLAUDE.md Production Invariant #13 与 `compose-contract.md` §6，机器门 `kuleshov-lint.py` ⑦。
-> **仍未闭合的是"谁产的 VTT 门认"**：grain 门只认 `renderScriptCaptions` 的产物，我们自产 VTT 会被判"手写"——
-> 这正是 §7 缺口 1 要谈的那件事（给 grain 加 wav2vec2-zh CTC 原生工具喂时间锚）。在那之前，
-> 我们的 VTT 是**本仓交付物**，接进 grain 时仍要过一次它的字幕工具。存量片（status 已 review/delivered）
+> **"谁产的 VTT" 已谈定（2026-07-28 用户确认）：默认走我们自产的 VTT，不必绕 `renderScriptCaptions`。**
+> 于是 §7 缺口 1 从**发布门阻塞项**降级为**可选质量升级**——给 grain 加 wav2vec2-zh CTC 原生工具仍然
+> 值得做（对 grain 全部中文字幕都是普惠提升），但它不再卡我们接入。存量片（status 已 review/delivered）
 > 按旧政策烧录，不追溯。
 
 ---
@@ -158,13 +158,13 @@ EP 主循环 / AgentRuntime 双实现 / toolface 派发 + hook 布线 / ledger a
 
 | # | 缺口 | 处置选项 | 建议 |
 |---|---|---|---|
-| 1 | **字幕 CTC 对齐**：grain 用 Whisper-ASR+LCS，正是我们为中文否掉的方法（数字/同音字漂移）；且门只认 `renderScriptCaptions` 产的 VTT，我们自产 wav2vec2 VTT 会被判"手写"拒收 | (a) 给 grain 加 wav2vec2-zh CTC 原生工具，喂 `renderScriptCaptions` 时间锚（A1 PR，顺带提升 grain 全部中文字幕质量，好卖）；(b) 接受 grain 方法 + 对我们中文内容重验；(c) v1 先用 grain 法、CTC 列 fast-follow | **(a)** ——干净的加法，对 grain 团队是普惠升级 |
+| 1 | ~~**字幕 CTC 对齐**~~ **（2026-07-28 已谈定：默认用我们自产 VTT，本项降级为可选升级，不再是接入阻塞）**：grain 用 Whisper-ASR+LCS，正是我们为中文否掉的方法（数字/同音字漂移）；且门只认 `renderScriptCaptions` 产的 VTT，我们自产 wav2vec2 VTT 会被判"手写"拒收 | (a) 给 grain 加 wav2vec2-zh CTC 原生工具，喂 `renderScriptCaptions` 时间锚（A1 PR，顺带提升 grain 全部中文字幕质量，好卖）；(b) 接受 grain 方法 + 对我们中文内容重验；(c) v1 先用 grain 法、CTC 列 fast-follow | **(a)** ——干净的加法，对 grain 团队是普惠升级 |
 | 2 | **archive.org/Wikimedia 公域素材**：grain 无此工具（只有 Pexels/Pixabay） | (a) 加原生工具（A1）；(b) v1 砍掉公域层，靠 Pexels/Pixabay+Seedance+`downloadVideoClip`；(c) APIhub 走 MCP | **(b) 做 v1，(a) 按需 fast-follow** |
 | 3 | **content.md 发布件**：门硬要求（≥1 可点出处）；我们曾取消"发布包" | 注意：取消的是小红书/抖音**文案+封面包**（另一个东西），grain 的 content.md 是视频描述+出处，是**不同 artifact** → 在 deliver 阶段从 research 出处生成一份最小 content.md | **补最小 content.md**（不与"取消发布包"矛盾） |
 | 4 | **storyboard.json / runs-dir / film.json 并存** | film.json 留作内部 SoT；加投影器出 grain storyboard.json + 落 run 级 dir + 锚点写 channel-canon | **加映射适配层，不重写 SoT** |
 | — | **A1 vs A2** | A1（first-party PR，能加原生工具/改路由表/same-source 字幕）vs A2（用户 skill，做不到上述） | **A1**（缺口 1、路由行、字幕都要求 A1） |
 
-**唯一真需要 grain 团队拍板的**：缺口 1 的 (a) —— 在 grain 加一个 wav2vec2-zh CTC 字幕原生工具。其余都是我们这侧的活或可 v1 绕过。
+~~**唯一真需要 grain 团队拍板的**：缺口 1 的 (a)~~ —— **2026-07-28 作废：字幕已谈定走我们自产 VTT**。目前没有卡在 grain 团队侧的拍板项；wav2vec2-zh CTC 原生工具作为可选升级另行提。
 
 ---
 
