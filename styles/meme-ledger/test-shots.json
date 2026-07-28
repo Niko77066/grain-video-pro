@@ -1,0 +1,11 @@
+{
+  "schema": "style-test-shots@1",
+  "style_pack": "meme-ledger",
+  "status": "production_preset_ready",
+  "source_policy": {"channel_url": "https://www.youtube.com/@UnusualVideos", "license_status": "project_documented_creator_collaboration", "effects": "none", "overlay": "static captions only"},
+  "shots": [
+    {"id": "ts01_hook_mismatch", "brief": "口播给出一个反常识商业结论；选一个正常动作突然失控或结果跑偏的授权频道选段作为开场。", "expect": "3 秒内完成动作与结论的第一次错配；源视频原色原速；只有静态字幕，句末无标点；硬切。"},
+    {"id": "ts02_three_step_escalation", "brief": "口播连续列举三个逐级离谱的机制后果；从授权频道选择三个动作强度逐级上升的选段。", "expect": "三镜都在动作落点切出，画面不被当作事实现场；无卡片、无贴纸、无转场、无缩放或变速。"},
+    {"id": "ts03_quiet_reversal", "brief": "口播替商业反方说话后落到普通人成本；选一个动作完整、节奏较松但结尾有反转的授权频道选段。", "expect": "允许 2.5–4 秒完整动作呼吸；固定 BGM 在旁白下 18–22 LU；结尾只硬切或自然淡出音频，画面不加效果。"}
+  ]
+}

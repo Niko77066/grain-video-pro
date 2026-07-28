@@ -10,6 +10,7 @@ import json
 
 import pytest
 
+from film_ir.contract import load_contract
 from film_ir.gates import run_gates
 from film_ir.models import FilmIR
 
@@ -41,6 +42,37 @@ PIXEL_CONTRACT = {
             "pixel_narrative": {"share_min": {"value": 0.4, "amend": [0.3, 0.5]}},
         },
         "graphics_run_max_s": {"value": 26, "amend": [22, 34]},
+    },
+}
+
+MEME_CONTRACT = {
+    "schema": "style-contract@1",
+    "style_pack": "meme-ledger",
+    "plan": {
+        "required_aspect": "16:9",
+        "voices": {"licensed_channel_footage": {
+            "providers": ["footage"], "min_shots": {"value": 2, "amend": [2, 99]},
+        }},
+        "provider_share": {"footage": {
+            "min": {"value": 1, "amend": [1, 1]},
+            "max": {"value": 1, "amend": [1, 1]},
+        }},
+        "footage_source": {
+            "provider": "footage", "channel_url": "https://www.youtube.com/@UnusualVideos",
+            "required_params": ["channel_url", "source_url", "video_id", "in_s", "out_s", "license_ref"],
+        },
+    },
+    "audio": {
+        "voiceover": {"model": "speech-2.8-hd", "voice_profile_suffix": "meme-ledger/voice-profile.json",
+                      "required_fields": ["voice_profile", "authorization_ref"]},
+        "music": {"required": True, "fixed_track_id": "meme-ledger-main", "selection_method": "fixed",
+                  "instrumental_required": True, "loop_required": True,
+                  "required_fields": ["file", "track_id", "selection_seed", "license_ref"]},
+    },
+    "compose": {
+        "no_effects": True, "allowed_overlay_types": ["caption", "subtitle"],
+        "caption_terminal_punctuation": "forbidden",
+        "forbidden_source_params": ["effects", "animation", "filter", "lut", "grain", "zoom", "pan"],
     },
 }
 
@@ -79,6 +111,15 @@ def _codex_hf_ir(status="storyboard", **meta_over) -> dict:
 def _errors(report, gate):
     return [x for x in report["violations"]
             if x["gate"] == gate and x["severity"] == "error"]
+
+
+def test_active_meme_pack_loads_normally(tmp_path):
+    pack_dir = tmp_path / "styles" / "meme-ledger"
+    pack_dir.mkdir(parents=True)
+    (pack_dir / "contract.json").write_text(json.dumps(MEME_CONTRACT), encoding="utf-8")
+    pdir = tmp_path / "projects" / "p"
+    pdir.mkdir(parents=True)
+    assert load_contract("meme-ledger", pdir) == MEME_CONTRACT
 
 
 # ---------------------------------------------------------------- plan 门
@@ -190,6 +231,87 @@ def test_graphics_run_over_limit(project):
     report = run_gates(ir, project_dir=pdir)
     msgs = [x["message"] for x in _errors(report, "style.contract.plan")]
     assert any("连续" in m for m in msgs)
+
+
+def _meme_ir(status="storyboard") -> dict:
+    ir = minimal_ir(style_pack="meme-ledger", status=status)
+    ir["meta"]["commitment"]["duration_s"] = 10
+    ir["audio"] = {
+        "timeline": {"duration_s": 10, "sections": []},
+        "voiceover": {
+            "voice_profile": "styles/meme-ledger/voice-profile.json",
+            "authorization_ref": "rights/voice-authorized.md",
+            "gen": {"model": "speech-2.8-hd (delegated)"},
+        },
+        "music": {
+            "file": "audio/bgm.mp3", "track_id": "meme-ledger-main",
+            "selection_method": "fixed", "selection_seed": 17,
+            "instrumental": True, "loop": True, "license_ref": "rights/bgm-license.pdf",
+        },
+    }
+    params = {
+        "channel_url": "https://www.youtube.com/@UnusualVideos",
+        "source_url": "https://www.youtube.com/watch?v=abc", "video_id": "abc",
+        "in_s": 1.2, "out_s": 5.8, "license_ref": "rights/channel-license.pdf",
+    }
+    ir["shots"] = [
+        shot("s01", 0, 5, provider="footage", source={"provider": "footage", "params": params}),
+        shot("s02", 5, 10, provider="footage", source={"provider": "footage", "params": params}),
+    ]
+    return ir
+
+
+def test_meme_contract_passes_with_fixed_assets(project):
+    ir, pdir = project(MEME_CONTRACT, _meme_ir(status="compose"))
+    report = run_gates(ir, project_dir=pdir)
+    assert not [x for x in report["violations"]
+                if x["severity"] == "error" and x["gate"].startswith("style.contract")]
+
+
+def test_meme_contract_rejects_wrong_aspect_and_untraced_source(project):
+    ir_dict = _meme_ir()
+    ir_dict["meta"]["aspect"] = "9:16"
+    params = ir_dict["shots"][0]["source"]["params"]
+    params["channel_url"] = "https://www.youtube.com/@Other"
+    params.pop("out_s")
+    ir, pdir = project(MEME_CONTRACT, ir_dict)
+    msgs = [x["message"] for x in _errors(run_gates(ir, project_dir=pdir), "style.contract.plan")]
+    assert any("只允许 16:9" in m for m in msgs)
+    assert any("out_s" in m for m in msgs)
+    assert any("频道" in m for m in msgs)
+
+
+def test_meme_contract_rejects_unfixed_or_unlicensed_audio(project):
+    ir_dict = _meme_ir(status="audio")
+    ir_dict["audio"]["voiceover"].pop("authorization_ref")
+    ir_dict["audio"]["music"].update({
+        "track_id": "other", "selection_method": "random", "instrumental": False,
+        "loop": False, "license_ref": "",
+    })
+    ir, pdir = project(MEME_CONTRACT, ir_dict)
+    msgs = [x["message"] for x in _errors(run_gates(ir, project_dir=pdir), "style.contract.audio")]
+    assert any("authorization_ref" in m for m in msgs)
+    assert any("必须固定" in m for m in msgs)
+    assert any("纯器乐" in m for m in msgs)
+    assert any("循环" in m for m in msgs)
+    assert any("license_ref" in m for m in msgs)
+
+
+def test_meme_contract_rejects_effects_and_caption_punctuation(project):
+    ir_dict = _meme_ir(status="compose")
+    ir_dict["edit"].update({"transitions": ["crossfade"], "lut": "warm.cube", "grain": "8%"})
+    ir_dict["shots"][0]["source"]["params"]["zoom"] = 1.1
+    ir_dict["overlays"] = [
+        {"id": "o1", "type": "thesis_card", "scope": "global"},
+        {"id": "o2", "type": "caption", "text": "银行还在旁边抱着计算器。"},
+    ]
+    ir, pdir = project(MEME_CONTRACT, ir_dict)
+    msgs = [x["message"] for x in _errors(run_gates(ir, project_dir=pdir), "style.contract.compose")]
+    assert any("转场" in m for m in msgs)
+    assert any("LUT" in m for m in msgs)
+    assert any("zoom" in m for m in msgs)
+    assert any("叠加层" in m for m in msgs)
+    assert any("句末不得添加标点" in m for m in msgs)
 
 
 # ---------------------------------------------------------------- render 门

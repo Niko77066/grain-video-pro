@@ -190,6 +190,13 @@ def validate_card(c: Card, vocab: dict) -> None:
             raise VocabError(
                 f"{w} hard_rules.{k}: 画幅与时长不是硬门（2026-07-27 拍板）——"
                 f"挪到 native_format 并在 native_format.adaptation.{k} 写清换格式要改什么")
+    # 默认所有风格包把画幅当适配成本；只有用户明确要求“固定栏目配方”的
+    # preset_lock 才能锁画幅，防止已承诺的成品配方被静默改形。
+    lock = r.get("preset_lock") or {}
+    if lock.get("aspect"):
+        _check_tags([lock["aspect"]], "aspect", vocab, f"{w} preset_lock.aspect")
+        if not lock.get("why"):
+            raise VocabError(f"{w} preset_lock 需要写 why，说明为什么不能做格式适配")
     adapt = c.native.get("adaptation", {}) or {}
     need = ("aspect", "duration_shorter", "duration_longer")
     if not c.is_fallback and not all(adapt.get(k) for k in need):
@@ -296,6 +303,9 @@ def hard_gate(c: Card, f: Features) -> list[str]:
     out: list[str] = []
     h = c.hard
     have = set(f.material)
+    lock = c.raw.get("preset_lock") or {}
+    if lock.get("aspect") and f.aspect and f.aspect != lock["aspect"]:
+        out.append(f"固定生产预设只接受 {lock['aspect']}（{lock.get('why')}）")
     for grp in h.get("requires_any", []):
         if not (have & set(grp)):
             out.append(f"缺必需素材：{' 或 '.join(grp)} 至少要有一项")
@@ -609,8 +619,13 @@ def render_list(cards: list[Card], vocab: dict) -> str:
         L.append(f"  {c.id}  [{c.raw.get('layer')} · {c.status}]  {c.raw.get('positioning')}")
         L.append(f"    理解任务 主{c.task('primary') or '—'} 次{c.task('secondary') or '—'}")
         L.append(f"    硬规则   必需{h.get('requires_any') or '—'} 排斥{h.get('excluded_material') or '—'}")
+        lock = c.raw.get("preset_lock") or {}
+        if lock.get("aspect"):
+            aspect_note = f"（固定预设锁定 {lock['aspect']}，不匹配即排除）"
+        else:
+            aspect_note = "（偏离只扣分 + 出施工说明，不排除）"
         L.append(f"    原生格式 画幅{n.get('aspect')} 时长{n.get('duration_s')}"
-                 f"（偏离只扣分 + 出施工说明，不排除）")
+                 f"{aspect_note}")
         L.append("")
     L.append("理解任务覆盖矩阵（空位 = 未来该补的包）：")
     for task in _ordered_keys(vocab, "understanding_task"):
